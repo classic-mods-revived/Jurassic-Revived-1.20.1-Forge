@@ -24,14 +24,14 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 
-public class CeratosaurusEntity extends Animal implements GeoEntity {
+public class DilophosaurusEntity extends Animal implements GeoEntity {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
     private static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT =
@@ -42,7 +42,7 @@ public class CeratosaurusEntity extends Animal implements GeoEntity {
     private float tailSwayVelocity; // Internal velocity for spring-damper
     private float tailSwayPrev;     // Previous frame value for interpolation
 
-    public CeratosaurusEntity(EntityType<? extends Animal> pEntityType, Level pLevel) {
+    public DilophosaurusEntity(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
@@ -72,7 +72,7 @@ public class CeratosaurusEntity extends Animal implements GeoEntity {
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
-        return ModEntities.CERATOSAURUS.get().create(pLevel);
+        return ModEntities.DILOPHOSAURUS.get().create(pLevel);
     }
 
     @Override
@@ -85,12 +85,12 @@ public class CeratosaurusEntity extends Animal implements GeoEntity {
 
         if (state.isMoving()) {
             state.getController().setAnimation(
-                    RawAnimation.begin().then("anim.ceratosaurus.walk", Animation.LoopType.LOOP)
+                    RawAnimation.begin().then("anim.dilophosaurus.walk", Animation.LoopType.LOOP)
             );
             return PlayState.CONTINUE;
         }
         state.getController().setAnimation(
-                RawAnimation.begin().then("anim.ceratosaurus.idle", Animation.LoopType.LOOP)
+                RawAnimation.begin().then("anim.dilophosaurus.idle", Animation.LoopType.LOOP)
         );
 
         return PlayState.CONTINUE;
@@ -172,7 +172,7 @@ public class CeratosaurusEntity extends Animal implements GeoEntity {
     @Override
     public boolean canMate(Animal other) {
         if (!super.canMate(other)) return false;
-        if (!(other instanceof CeratosaurusEntity that)) return false;
+        if (!(other instanceof DilophosaurusEntity that)) return false;
         return this.getVariant() != that.getVariant();
     }
 

@@ -19,6 +19,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
+        this.dropSelf(ModBlocks.CAT_PLUSHIE.get());
     }
 
     @Override

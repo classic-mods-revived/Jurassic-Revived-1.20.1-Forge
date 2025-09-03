@@ -1,7 +1,7 @@
 package net.jurassicrevived.jurassicrevived.entity.custom;
 
 import net.jurassicrevived.jurassicrevived.entity.ModEntities;
-import net.jurassicrevived.jurassicrevived.entity.variant.CeratosaurusVariant;
+import net.jurassicrevived.jurassicrevived.entity.variant.BrachiosaurusVariant;
 import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -24,25 +24,25 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 
-public class CeratosaurusEntity extends Animal implements GeoEntity {
+public class BrachiosaurusEntity extends Animal implements GeoEntity {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
     private static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT =
-            SynchedEntityData.defineId(CeratosaurusEntity.class, EntityDataSerializers.INT);
+            SynchedEntityData.defineId(BrachiosaurusEntity.class, EntityDataSerializers.INT);
 
     // Procedural tail sway state (client-side use for rendering)
     private float tailSwayOffset;   // Smoothed offset in range roughly [-1, 1]
     private float tailSwayVelocity; // Internal velocity for spring-damper
     private float tailSwayPrev;     // Previous frame value for interpolation
 
-    public CeratosaurusEntity(EntityType<? extends Animal> pEntityType, Level pLevel) {
+    public BrachiosaurusEntity(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
@@ -66,13 +66,13 @@ public class CeratosaurusEntity extends Animal implements GeoEntity {
 
     @Override
     public boolean isFood(ItemStack pStack) {
-        return pStack.is(Items.BEEF);
+        return pStack.is(Items.KELP);
     }
 
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
-        return ModEntities.CERATOSAURUS.get().create(pLevel);
+        return ModEntities.BRACHIOSAURUS.get().create(pLevel);
     }
 
     @Override
@@ -85,12 +85,12 @@ public class CeratosaurusEntity extends Animal implements GeoEntity {
 
         if (state.isMoving()) {
             state.getController().setAnimation(
-                    RawAnimation.begin().then("anim.ceratosaurus.walk", Animation.LoopType.LOOP)
+                    RawAnimation.begin().then("anim.brachiosaurus.walk", Animation.LoopType.LOOP)
             );
             return PlayState.CONTINUE;
         }
         state.getController().setAnimation(
-                RawAnimation.begin().then("anim.ceratosaurus.idle", Animation.LoopType.LOOP)
+                RawAnimation.begin().then("anim.brachiosaurus.idle", Animation.LoopType.LOOP)
         );
 
         return PlayState.CONTINUE;
@@ -158,27 +158,27 @@ public class CeratosaurusEntity extends Animal implements GeoEntity {
         this.entityData.define(DATA_ID_TYPE_VARIANT, 0);
     }
 
-    public CeratosaurusVariant getVariant() {
-        return CeratosaurusVariant.byId(this.getTypeVariant() & 255);
+    public BrachiosaurusVariant getVariant() {
+        return BrachiosaurusVariant.byId(this.getTypeVariant() & 255);
     }
     public int getTypeVariant() {
         return this.entityData.get(DATA_ID_TYPE_VARIANT);
     }
 
-    private void setVariant(CeratosaurusVariant variant) {
+    private void setVariant(BrachiosaurusVariant variant) {
         this.entityData.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255);
     }
 
     @Override
     public boolean canMate(Animal other) {
         if (!super.canMate(other)) return false;
-        if (!(other instanceof CeratosaurusEntity that)) return false;
+        if (!(other instanceof BrachiosaurusEntity that)) return false;
         return this.getVariant() != that.getVariant();
     }
 
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
-        CeratosaurusVariant variant = Util.getRandom(CeratosaurusVariant.values(), this.random);
+        BrachiosaurusVariant variant = Util.getRandom(BrachiosaurusVariant.values(), this.random);
         this.setVariant(variant);
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
     }

@@ -3,7 +3,11 @@
 
   "item.jurassicrevived.achillobator_spawn_egg": "Achillobator Spawn Egg",
   "item.jurassicrevived.ceratosaurus_spawn_egg": "Ceratosaurus Spawn Egg",
+  "item.jurassicrevived.brachiosaurus_spawn_egg": "Brachiosaurus Spawn Egg",
+  "item.jurassicrevived.dilophosaurus_spawn_egg": "Dilophosaurus Spawn Egg",
 
   "entity.jurassicrevived.achillobator": "Achillobator",
-  "entity.jurassicrevived.ceratosaurus": "Ceratosaurus"
+  "entity.jurassicrevived.ceratosaurus": "Ceratosaurus",
+  "entity.jurassicrevived.brachiosaurus": "Brachiosaurus",
+  "entity.jurassicrevived.dilophosaurus": "Dilophosaurus"
 }

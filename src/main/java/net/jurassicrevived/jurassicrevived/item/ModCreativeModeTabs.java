@@ -15,11 +15,14 @@ public class ModCreativeModeTabs {
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, JRMod.MOD_ID);
 
     public static final RegistryObject<CreativeModeTab> COURSE_TAB = CREATIVE_MODE_TABS.register("jr_item_tab",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.ACHILLOBATOR_SPAWN_EGG.get()))
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.JR_TAB_ICON.get()))
                     .title(Component.translatable("creativetab.jurassicrevived_items_tab"))
                     .displayItems((displayParameters, output) -> {
                         output.accept(ModItems.ACHILLOBATOR_SPAWN_EGG.get());
                         output.accept(ModItems.CERATOSAURUS_SPAWN_EGG.get());
+                        output.accept(ModItems.BRACHIOSAURUS_SPAWN_EGG.get());
+                        output.accept(ModItems.DILOPHOSARUS_SPAWN_EGG.get());
+                        output.accept(ModBlocks.CAT_PLUSHIE.get());
                     }).build());
 
 

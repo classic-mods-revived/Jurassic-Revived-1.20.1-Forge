@@ -4,7 +4,9 @@ import com.mojang.logging.LogUtils;
 import net.jurassicrevived.jurassicrevived.block.ModBlocks;
 import net.jurassicrevived.jurassicrevived.entity.ModEntities;
 import net.jurassicrevived.jurassicrevived.entity.client.AchillobatorRenderer;
+import net.jurassicrevived.jurassicrevived.entity.client.BrachiosaurusRenderer;
 import net.jurassicrevived.jurassicrevived.entity.client.CeratosaurusRenderer;
+import net.jurassicrevived.jurassicrevived.entity.client.DilophosaurusRenderer;
 import net.jurassicrevived.jurassicrevived.item.ModCreativeModeTabs;
 import net.jurassicrevived.jurassicrevived.item.ModItems;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -72,6 +74,8 @@ public class JRMod {
         public static void onClientSetup(FMLClientSetupEvent event) {
             EntityRenderers.register(ModEntities.ACHILLOBATOR.get(), AchillobatorRenderer::new);
             EntityRenderers.register(ModEntities.CERATOSAURUS.get(), CeratosaurusRenderer::new);
+            EntityRenderers.register(ModEntities.BRACHIOSAURUS.get(), BrachiosaurusRenderer::new);
+            EntityRenderers.register(ModEntities.DILOPHOSAURUS.get(), DilophosaurusRenderer::new);
             event.enqueueWork(() -> {
 
             });

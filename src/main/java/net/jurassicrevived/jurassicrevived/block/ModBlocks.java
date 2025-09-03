@@ -1,10 +1,12 @@
 package net.jurassicrevived.jurassicrevived.block;
 
 import net.jurassicrevived.jurassicrevived.JRMod;
+import net.jurassicrevived.jurassicrevived.block.custom.DecoBlock;
 import net.jurassicrevived.jurassicrevived.item.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -15,6 +17,9 @@ import java.util.function.Supplier;
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, JRMod.MOD_ID);
+
+    public static final RegistryObject<Block> CAT_PLUSHIE = registerBlock("cat_plushie",
+            () -> new DecoBlock(BlockBehaviour.Properties.of().noOcclusion()));
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
