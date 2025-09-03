@@ -1,7 +1,10 @@
 package net.jurassicrevived.jurassicrevived.entity.client;
 
+import com.google.common.collect.Maps;
 import net.jurassicrevived.jurassicrevived.JRMod;
 import net.jurassicrevived.jurassicrevived.entity.custom.CeratosaurusEntity;
+import net.jurassicrevived.jurassicrevived.entity.variant.CeratosaurusVariant;
+import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import software.bernie.geckolib.core.animation.AnimationState;
@@ -9,7 +12,16 @@ import software.bernie.geckolib.cache.object.GeoBone;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.model.GeoModel;
 
+import java.util.Map;
+
 public class CeratosaurusModel extends GeoModel<CeratosaurusEntity> {
+
+    private static final Map<CeratosaurusVariant, ResourceLocation> LOCATION_BY_VARIANT =
+            Util.make(Maps.newEnumMap(CeratosaurusVariant.class), map -> {
+                map.put(CeratosaurusVariant.MALE, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/entity/ceratosaurus.png"));
+                map.put(CeratosaurusVariant.FEMALE, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/entity/ceratosaurus_female.png"));
+            });
+
     // Model-local "currently applied" offsets; cleared before each entity render
     private float[] appliedYaw = null;
     private float[] appliedRoll = null;
@@ -21,7 +33,7 @@ public class CeratosaurusModel extends GeoModel<CeratosaurusEntity> {
 
     @Override
     public ResourceLocation getTextureResource(CeratosaurusEntity animatable) {
-        return ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/entity/ceratosaurus.png");
+        return LOCATION_BY_VARIANT.get(animatable.getVariant());
     }
 
     @Override
