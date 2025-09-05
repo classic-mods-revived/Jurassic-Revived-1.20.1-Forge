@@ -20,10 +20,39 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        withExistingParent(ModItems.ACHILLOBATOR_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.VELOCIRAPTOR_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.CERATOSAURUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.BRACHIOSAURUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.DILOPHOSARUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.DILOPHOSAURUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+
+        basicItem(ModItems.AMPOULE.get());
+        basicItem(ModItems.SYRINGE.get());
+        basicItem(ModItems.VELOCIRAPTORDNA.get());
+        basicItem(ModItems.TYRANNOSAURUSDNA.get());
+        basicItem(ModItems.TRICERATOPSDNA.get());
+        basicItem(ModItems.SPINOSAURUSDNA.get());
+        basicItem(ModItems.PTERANODONDNA.get());
+        basicItem(ModItems.PARASAUROLOPHUSDNA.get());
+        basicItem(ModItems.INDOMINUSDNA.get());
+        basicItem(ModItems.GALLIMIMUSDNA.get());
+        basicItem(ModItems.DIPLODOCUSDNA.get());
+        basicItem(ModItems.DILOPHOSAURUSDNA.get());
+        basicItem(ModItems.COMPSOGNATHUSDNA.get());
+        basicItem(ModItems.CERATOSAURUSDNA.get());
+        basicItem(ModItems.BRACHIOSAURUSDNA.get());
+        basicItem(ModItems.VELOCIRAPTORSYRINGE.get());
+        basicItem(ModItems.TYRANNOSAURUSSYRINGE.get());
+        basicItem(ModItems.TRICERATOPSSYRINGE.get());
+        basicItem(ModItems.SPINOSAURUSSYRINGE.get());
+        basicItem(ModItems.PTERANODONSYRINGE.get());
+        basicItem(ModItems.PARASAUROLOPHUSSYRINGE.get());
+        basicItem(ModItems.INDOMINUSSYRINGE.get());
+        basicItem(ModItems.GALLIMIMUSSYRINGE.get());
+        basicItem(ModItems.DIPLODOCUSSYRINGE.get());
+        basicItem(ModItems.DILOPHOSAURUSSYRINGE.get());
+        basicItem(ModItems.COMPSOGNATHUSSYRINGE.get());
+        basicItem(ModItems.CERATOSAURUSSYRINGE.get());
+        basicItem(ModItems.BRACHIOSAURUSSYRINGE.get());
     }
 
     private ItemModelBuilder saplingItem(RegistryObject<Block> item) {

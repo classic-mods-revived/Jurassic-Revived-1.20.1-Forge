@@ -1,7 +1,7 @@
 package net.jurassicrevived.jurassicrevived.entity;
 
 import net.jurassicrevived.jurassicrevived.JRMod;
-import net.jurassicrevived.jurassicrevived.entity.custom.AchillobatorEntity;
+import net.jurassicrevived.jurassicrevived.entity.custom.VelociraptorEntity;
 import net.jurassicrevived.jurassicrevived.entity.custom.BrachiosaurusEntity;
 import net.jurassicrevived.jurassicrevived.entity.custom.CeratosaurusEntity;
 import net.jurassicrevived.jurassicrevived.entity.custom.DilophosaurusEntity;
@@ -17,11 +17,11 @@ public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
             DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, JRMod.MOD_ID);
 
-    public static final RegistryObject<EntityType<AchillobatorEntity>> ACHILLOBATOR =
-            ENTITY_TYPES.register("achillobator",
-                    () -> EntityType.Builder.of(AchillobatorEntity::new, MobCategory.CREATURE)
+    public static final RegistryObject<EntityType<VelociraptorEntity>> VELOCIRAPTOR =
+            ENTITY_TYPES.register("velociraptor",
+                    () -> EntityType.Builder.of(VelociraptorEntity::new, MobCategory.CREATURE)
                             .sized(1.5f, 1.75f)
-                            .build(new ResourceLocation(JRMod.MOD_ID, "achillobator").toString()));
+                            .build(new ResourceLocation(JRMod.MOD_ID, "velociraptor").toString()));
 
     public static final RegistryObject<EntityType<CeratosaurusEntity>> CERATOSAURUS =
             ENTITY_TYPES.register("ceratosaurus",

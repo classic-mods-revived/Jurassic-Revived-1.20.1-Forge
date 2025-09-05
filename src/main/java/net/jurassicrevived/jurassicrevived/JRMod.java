@@ -3,7 +3,7 @@ package net.jurassicrevived.jurassicrevived;
 import com.mojang.logging.LogUtils;
 import net.jurassicrevived.jurassicrevived.block.ModBlocks;
 import net.jurassicrevived.jurassicrevived.entity.ModEntities;
-import net.jurassicrevived.jurassicrevived.entity.client.AchillobatorRenderer;
+import net.jurassicrevived.jurassicrevived.entity.client.VelociraptorRenderer;
 import net.jurassicrevived.jurassicrevived.entity.client.BrachiosaurusRenderer;
 import net.jurassicrevived.jurassicrevived.entity.client.CeratosaurusRenderer;
 import net.jurassicrevived.jurassicrevived.entity.client.DilophosaurusRenderer;
@@ -72,7 +72,7 @@ public class JRMod {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            EntityRenderers.register(ModEntities.ACHILLOBATOR.get(), AchillobatorRenderer::new);
+            EntityRenderers.register(ModEntities.VELOCIRAPTOR.get(), VelociraptorRenderer::new);
             EntityRenderers.register(ModEntities.CERATOSAURUS.get(), CeratosaurusRenderer::new);
             EntityRenderers.register(ModEntities.BRACHIOSAURUS.get(), BrachiosaurusRenderer::new);
             EntityRenderers.register(ModEntities.DILOPHOSAURUS.get(), DilophosaurusRenderer::new);
