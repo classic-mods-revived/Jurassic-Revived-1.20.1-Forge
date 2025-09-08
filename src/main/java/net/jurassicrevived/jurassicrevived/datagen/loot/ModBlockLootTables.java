@@ -20,6 +20,16 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     @Override
     protected void generate() {
         this.dropSelf(ModBlocks.CAT_PLUSHIE.get());
+        this.dropSelf(ModBlocks.GYPSUM_STONE_BRICKS.get());
+
+        this.dropSelf(ModBlocks.ROYAL_FERN.get());
+        this.add(ModBlocks.POTTED_ROYAL_FERN.get(), createPotFlowerItemTable(ModBlocks.ROYAL_FERN.get()));
+
+        this.dropSelf(ModBlocks.HORSETAIL_FERN.get());
+        this.add(ModBlocks.POTTED_HORSETAIL_FERN.get(), createPotFlowerItemTable(ModBlocks.HORSETAIL_FERN.get()));
+
+        this.dropSelf(ModBlocks.WESTERN_SWORD_FERN.get());
+        this.add(ModBlocks.POTTED_WESTERN_SWORD_FERN.get(), createPotFlowerItemTable(ModBlocks.WESTERN_SWORD_FERN.get()));
     }
 
     @Override

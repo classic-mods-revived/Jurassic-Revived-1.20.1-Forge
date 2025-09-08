@@ -1,35 +1,59 @@
 {
-  "creativetab.jurassicrevived_block_tab": "JR Blocks",
-  "creativetab.jurassicrevived_dino_tab": "JR Dinos",
-  "creativetab.jurassicrevived_dna_tab": "JR DNA Items",
+  "creativetab.jurassicrevived_item_tab": "Items and Tools",
+  "creativetab.jurassicrevived_block_tab": "Blocks and Machines",
+  "creativetab.jurassicrevived_plant_tab": "Prehistoric Plants",
+  "creativetab.jurassicrevived_fossil_tab": "Fossils",
+  "creativetab.jurassicrevived_dna_tab": "Genetic Material",
+  "creativetab.jurassicrevived_dino_tab": "Dinosuar Spawn Eggs",
 
   "item.jurassicrevived.velociraptor_spawn_egg": "Velociraptor Spawn Egg",
   "item.jurassicrevived.ceratosaurus_spawn_egg": "Ceratosaurus Spawn Egg",
   "item.jurassicrevived.brachiosaurus_spawn_egg": "Brachiosaurus Spawn Egg",
   "item.jurassicrevived.dilophosaurus_spawn_egg": "Dilophosaurus Spawn Egg",
 
-  "item.jurassicrevived.ampoule": "Ampoule",
-  "item.jurassicrevived.syringe": "Syringe",
+  "entity.jurassicrevived.velociraptor": "Velociraptor",
+  "entity.jurassicrevived.ceratosaurus": "Ceratosaurus",
+  "entity.jurassicrevived.brachiosaurus": "Brachiosaurus",
+  "entity.jurassicrevived.dilophosaurus": "Dilophosaurus",
+
   "item.jurassicrevived.velociraptor_dna": "Velociraptor DNA",
-  "item.jurassicrevived.tyrannosaurus_dna": "Tyrannosaurus DNA",
+  "item.jurassicrevived.tyrannosaurus_rex_dna": "Tyrannosaurus Rex DNA",
   "item.jurassicrevived.triceratops_dna": "Triceratops DNA",
   "item.jurassicrevived.spinosaurus_dna": "Spinosaurus DNA",
   "item.jurassicrevived.pteranodon_dna": "Pteranodon DNA",
   "item.jurassicrevived.parasaurolophus_dna": "Parasaurolophus DNA",
-  "item.jurassicrevived.indominus_dna": "Indominus DNA",
+  "item.jurassicrevived.indominus_rex_dna": "Indominus Rex DNA",
   "item.jurassicrevived.gallimimus_dna": "Gallimimus DNA",
   "item.jurassicrevived.diplodocus_dna": "Diplodocus DNA",
   "item.jurassicrevived.dilophosaurus_dna": "Dilophosaurus DNA",
   "item.jurassicrevived.compsognathus_dna": "Compsognathus DNA",
   "item.jurassicrevived.ceratosaurus_dna": "Ceratosaurus DNA",
   "item.jurassicrevived.brachiosaurus_dna": "Brachiosaurus DNA",
+
+
+  "block.jurassicrevived.cat_plushie": "Cat Plushie",
+  "block.jurassicrevived.gypsum_stone_bricks": "Gypsum Stone Bricks",
+
+  "block.jurassicrevived.royal_fern": "Royal Fern",
+  "block.jurassicrevived.poted_royal_fern": "Potted Royal Fern",
+  "block.jurassicrevived.horse_tail_fern": "Horsetail Fern",
+  "block.jurassicrevived.poted_horse_tail_fern": "Potted Horsetail Fern",
+  "block.jurassicrevived.western_sword_fern": "Western Sword Fern",
+  "block.jurassicrevived.poted_western_sword_fern": "Potted Western Sword Fern",
+
+  "item,jurassicrevived.tyrannosaurus_rex_skull_fossil": "Tyrannosaurus Rex Skull Fossil",
+
+  "item.jurassicrevived.ampoule": "Ampoule",
+  "item.jurassicrevived.syringe": "Syringe",
+  "item.jurassicrevived.mosquito_in_amber": "Mosquito in Amber",
+
   "item.jurassicrevived.velociraptor_syringe": "Velociraptor Syringe",
-  "item.jurassicrevived.tyrannosaurus_syringe": "Tyrannosaurus Syringe",
+  "item.jurassicrevived.tyrannosaurus_syringe": "Tyrannosaurus Rex Syringe",
   "item.jurassicrevived.triceratops_syringe": "Triceratops Syringe",
   "item.jurassicrevived.spinosaurus_syringe": "Spinosaurus Syringe",
   "item.jurassicrevived.pteranodon_syringe": "Pteranodon Syringe",
   "item.jurassicrevived.parasaurolophus_syringe": "Parasaurolophus Syringe",
-  "item.jurassicrevived.indominus_syringe": "Indominus Syringe",
+  "item.jurassicrevived.indominus_syringe": "Indominus Rex Syringe",
   "item.jurassicrevived.gallimimus_syringe": "Gallimimus Syringe",
   "item.jurassicrevived.diplodocus_syringe": "Diplodocus Syringe",
   "item.jurassicrevived.dilophosaurus_syringe": "Dilophosaurus Syringe",
@@ -37,10 +61,6 @@
   "item.jurassicrevived.ceratosaurus_syringe": "Ceratosaurus Syringe",
   "item.jurassicrevived.brachiosaurus_syringe": "Brachiosaurus Syringe",
 
-  "block.jurassicrevived.cat_plushie": "Cat Plushie",
-
-  "entity.jurassicrevived.velociraptor": "Velociraptor",
-  "entity.jurassicrevived.ceratosaurus": "Ceratosaurus",
-  "entity.jurassicrevived.brachiosaurus": "Brachiosaurus",
-  "entity.jurassicrevived.dilophosaurus": "Dilophosaurus"
+  "tooltip.jurassicrevived.gender": "Gender: %s",
+  "tooltip.jurassicrevived.gender.hint": "Hint: %s to change"
 }

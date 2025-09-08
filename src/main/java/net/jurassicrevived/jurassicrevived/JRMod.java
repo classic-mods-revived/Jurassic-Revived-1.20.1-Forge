@@ -11,6 +11,8 @@ import net.jurassicrevived.jurassicrevived.item.ModCreativeModeTabs;
 import net.jurassicrevived.jurassicrevived.item.ModItems;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -47,7 +49,9 @@ public class JRMod {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.ROYAL_FERN.getId(), ModBlocks.POTTED_ROYAL_FERN);
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.HORSETAIL_FERN.getId(), ModBlocks.POTTED_HORSETAIL_FERN);
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.WESTERN_SWORD_FERN.getId(), ModBlocks.POTTED_WESTERN_SWORD_FERN);
         });
     }
 

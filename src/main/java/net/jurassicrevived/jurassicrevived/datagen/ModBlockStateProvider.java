@@ -22,7 +22,22 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
+        simpleBlock(ModBlocks.ROYAL_FERN.get(),
+                models().cross(blockTexture(ModBlocks.ROYAL_FERN.get()).getPath(), blockTexture(ModBlocks.ROYAL_FERN.get())).renderType("cutout"));
+        simpleBlock(ModBlocks.POTTED_ROYAL_FERN.get(), models().singleTexture("potted_royal_fern", ResourceLocation.parse("flower_pot_cross"), "plant",
+                blockTexture(ModBlocks.ROYAL_FERN.get())).renderType("cutout"));
 
+        simpleBlock(ModBlocks.HORSETAIL_FERN.get(),
+                models().cross(blockTexture(ModBlocks.HORSETAIL_FERN.get()).getPath(), blockTexture(ModBlocks.HORSETAIL_FERN.get())).renderType("cutout"));
+        simpleBlock(ModBlocks.POTTED_HORSETAIL_FERN.get(), models().singleTexture("potted_horsetail_fern", ResourceLocation.parse("flower_pot_cross"), "plant",
+                blockTexture(ModBlocks.HORSETAIL_FERN.get())).renderType("cutout"));
+
+        simpleBlock(ModBlocks.WESTERN_SWORD_FERN.get(),
+                models().cross(blockTexture(ModBlocks.WESTERN_SWORD_FERN.get()).getPath(), blockTexture(ModBlocks.WESTERN_SWORD_FERN.get())).renderType("cutout"));
+        simpleBlock(ModBlocks.POTTED_WESTERN_SWORD_FERN.get(), models().singleTexture("potted_western_sword_fern", ResourceLocation.parse("flower_pot_cross"), "plant",
+                blockTexture(ModBlocks.WESTERN_SWORD_FERN.get())).renderType("cutout"));
+
+        blockWithItem(ModBlocks.GYPSUM_STONE_BRICKS);
     }
 
     public void hangingSignBlock(Block signBlock, Block wallSignBlock, ResourceLocation texture) {
