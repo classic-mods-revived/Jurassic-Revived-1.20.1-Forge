@@ -16,6 +16,22 @@
   "entity.jurassicrevived.brachiosaurus": "Brachiosaurus",
   "entity.jurassicrevived.dilophosaurus": "Dilophosaurus",
 
+  "block.jurassicrevived.cat_plushie": "Cat Plushie",
+  "block.jurassicrevived.gypsum_stone_bricks": "Gypsum Stone Bricks",
+
+  "block.jurassicrevived.royal_fern": "Royal Fern",
+  "block.jurassicrevived.potted_royal_fern": "Potted Royal Fern",
+  "block.jurassicrevived.horsetail_fern": "Horsetail Fern",
+  "block.jurassicrevived.potted_horse_tail_fern": "Potted Horsetail Fern",
+  "block.jurassicrevived.western_sword_fern": "Western Sword Fern",
+  "block.jurassicrevived.potted_western_sword_fern": "Potted Western Sword Fern",
+
+  "item.jurassicrevived.tyrannosaurus_rex_skull_fossil": "Tyrannosaurus Rex Skull Fossil",
+
+  "item.jurassicrevived.ampoule": "Ampoule",
+  "item.jurassicrevived.syringe": "Syringe",
+  "item.jurassicrevived.mosquito_in_amber": "Mosquito in Amber",
+
   "item.jurassicrevived.velociraptor_dna": "Velociraptor DNA",
   "item.jurassicrevived.tyrannosaurus_rex_dna": "Tyrannosaurus Rex DNA",
   "item.jurassicrevived.triceratops_dna": "Triceratops DNA",
@@ -30,30 +46,13 @@
   "item.jurassicrevived.ceratosaurus_dna": "Ceratosaurus DNA",
   "item.jurassicrevived.brachiosaurus_dna": "Brachiosaurus DNA",
 
-
-  "block.jurassicrevived.cat_plushie": "Cat Plushie",
-  "block.jurassicrevived.gypsum_stone_bricks": "Gypsum Stone Bricks",
-
-  "block.jurassicrevived.royal_fern": "Royal Fern",
-  "block.jurassicrevived.poted_royal_fern": "Potted Royal Fern",
-  "block.jurassicrevived.horse_tail_fern": "Horsetail Fern",
-  "block.jurassicrevived.poted_horse_tail_fern": "Potted Horsetail Fern",
-  "block.jurassicrevived.western_sword_fern": "Western Sword Fern",
-  "block.jurassicrevived.poted_western_sword_fern": "Potted Western Sword Fern",
-
-  "item,jurassicrevived.tyrannosaurus_rex_skull_fossil": "Tyrannosaurus Rex Skull Fossil",
-
-  "item.jurassicrevived.ampoule": "Ampoule",
-  "item.jurassicrevived.syringe": "Syringe",
-  "item.jurassicrevived.mosquito_in_amber": "Mosquito in Amber",
-
   "item.jurassicrevived.velociraptor_syringe": "Velociraptor Syringe",
-  "item.jurassicrevived.tyrannosaurus_syringe": "Tyrannosaurus Rex Syringe",
+  "item.jurassicrevived.tyrannosaurus_rex_syringe": "Tyrannosaurus Rex Syringe",
   "item.jurassicrevived.triceratops_syringe": "Triceratops Syringe",
   "item.jurassicrevived.spinosaurus_syringe": "Spinosaurus Syringe",
   "item.jurassicrevived.pteranodon_syringe": "Pteranodon Syringe",
   "item.jurassicrevived.parasaurolophus_syringe": "Parasaurolophus Syringe",
-  "item.jurassicrevived.indominus_syringe": "Indominus Rex Syringe",
+  "item.jurassicrevived.indominus_rex_syringe": "Indominus Rex Syringe",
   "item.jurassicrevived.gallimimus_syringe": "Gallimimus Syringe",
   "item.jurassicrevived.diplodocus_syringe": "Diplodocus Syringe",
   "item.jurassicrevived.dilophosaurus_syringe": "Dilophosaurus Syringe",
