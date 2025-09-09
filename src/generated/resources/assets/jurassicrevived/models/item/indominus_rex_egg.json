@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "jurassicrevived:item/indominus_rex_egg"
+  }
+}

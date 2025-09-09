@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:copper_ingot"
+    },
+    "B": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "pattern": [
+    " BA",
+    "BAB",
+    "AB "
+  ],
+  "result": {
+    "count": 4,
+    "item": "jurassicrevived:cable"
+  },
+  "show_notification": true
+}

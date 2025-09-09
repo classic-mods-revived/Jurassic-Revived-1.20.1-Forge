@@ -38,6 +38,13 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 blockTexture(ModBlocks.WESTERN_SWORD_FERN.get())).renderType("cutout"));
 
         blockWithItem(ModBlocks.GYPSUM_STONE_BRICKS);
+
+        horizontalFacingWithItem(ModBlocks.CAT_PLUSHIE);
+
+        eggLike(ModBlocks.HATCHED_VELOCIRAPTOR_EGG);
+        eggLike(ModBlocks.HATCHED_DILOPHOSAURUS_EGG);
+        eggLike(ModBlocks.HATCHED_CERATOSAURUS_EGG);
+        eggLike(ModBlocks.HATCHED_BRACHIOSAURUS_EGG);
     }
 
     public void hangingSignBlock(Block signBlock, Block wallSignBlock, ResourceLocation texture) {
@@ -91,5 +98,16 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {
         simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));
+    }
+
+    private void horizontalFacingWithItem(RegistryObject<Block> block) {
+        ModelFile model = new ModelFile.UncheckedModelFile(modLoc("block/" + block.getId().getPath()));
+        horizontalBlock(block.get(), model);
+        simpleBlockItem(block.get(), model);
+    }
+
+    private void eggLike(RegistryObject<Block> block) {
+        ModelFile eggModel = new ModelFile.UncheckedModelFile(modLoc("block/egg"));
+        simpleBlock(block.get(), eggModel);
     }
 }

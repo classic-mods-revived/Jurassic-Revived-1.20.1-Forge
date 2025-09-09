@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "A A",
+    " A ",
+    "A A"
+  ],
+  "result": {
+    "count": 4,
+    "item": "jurassicrevived:cutting_blades"
+  },
+  "show_notification": true
+}
