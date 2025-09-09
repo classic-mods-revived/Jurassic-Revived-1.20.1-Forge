@@ -8,6 +8,7 @@ import net.jurassicrevived.jurassicrevived.item.ModItems;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -20,6 +21,7 @@ import java.util.function.Supplier;
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, JRMod.MOD_ID);
+
 
     public static final RegistryObject<Block> CAT_PLUSHIE = registerBlock("cat_plushie",
             () -> new DecoBlock(BlockBehaviour.Properties.of().noOcclusion().sound(SoundType.WOOL)));
@@ -89,7 +91,13 @@ public class ModBlocks {
     }
 
     private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block) {
-        return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+        return ModItems.ITEMS.register(name, () -> {
+            Item.Properties props = new Item.Properties();
+            if (block.get() instanceof EggBlock) {
+                props = props.rarity(Rarity.RARE).stacksTo(1);
+            }
+            return new BlockItem(block.get(), props);
+        });
     }
 
     public static void register(IEventBus eventBus) {
