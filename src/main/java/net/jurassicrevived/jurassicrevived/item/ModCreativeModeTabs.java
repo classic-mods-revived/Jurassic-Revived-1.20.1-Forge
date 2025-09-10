@@ -37,7 +37,17 @@ public class ModCreativeModeTabs {
                     .title(Component.translatable("creativetab.jurassicrevived_block_tab"))
                     .displayItems((displayParameters, output) -> {
                         output.accept(ModBlocks.CAT_PLUSHIE.get());
+                        output.accept(ModBlocks.GYPSUM_STONE.get());
+                        output.accept(ModBlocks.GYPSUM_COBBLESTONE.get());
                         output.accept(ModBlocks.GYPSUM_STONE_BRICKS.get());
+
+                        output.accept(ModBlocks.REINFORCED_STONE.get());
+                        output.accept(ModBlocks.REINFORCED_STONE_BRICKS.get());
+
+                        output.accept(ModBlocks.STONE_FOSSIL.get());
+                        output.accept(ModBlocks.DEEPSLATE_FOSSIL.get());
+                        output.accept(ModBlocks.AMBER_ORE.get());
+                        output.accept(ModBlocks.DEEPSLATE_ICE_SHARD_ORE.get());
                     }).build());
 
     public static final RegistryObject<CreativeModeTab> JR_PLANT_TAB = CREATIVE_MODE_TABS.register("jurassicrevived_plant_tab",

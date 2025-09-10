@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class ModRecipeProvider extends RecipeProvider implements IConditionBuilder {
+    private static final List<ItemLike> GYPSUM_SMELTABLES = List.of(ModBlocks.GYPSUM_COBBLESTONE.get());
 
     public ModRecipeProvider(PackOutput pOutput) {
         super(pOutput);
@@ -26,6 +27,9 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pWriter) {
 
+        oreSmelting(pWriter, GYPSUM_SMELTABLES, RecipeCategory.MISC, ModBlocks.GYPSUM_STONE.get(), 0.25f, 200, "gypsum_stone");
+        oreBlasting(pWriter, GYPSUM_SMELTABLES, RecipeCategory.MISC, ModBlocks.GYPSUM_STONE.get(), 0.25f, 100, "gypsum_stone");
+        
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.AMPOULE.get(), 3)
                 .pattern("  A")
                 .pattern(" B ")
@@ -90,6 +94,29 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('A', Items.IRON_INGOT)
                 .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(Items.IRON_INGOT).build())).save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.GYPSUM_STONE_BRICKS.get(), 4)
+                .pattern("AA")
+                .pattern("AA")
+                .define('A', ModBlocks.GYPSUM_STONE.get())
+                .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                        of(ModBlocks.GYPSUM_STONE.get()).build())).save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.REINFORCED_STONE.get(), 4)
+                .pattern("AAA")
+                .pattern("AAA")
+                .pattern("AAA")
+                .define('A', Blocks.STONE)
+                .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                        of(Blocks.STONE).build())).save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.REINFORCED_STONE_BRICKS.get(), 4)
+                .pattern("AAA")
+                .pattern("AAA")
+                .pattern("AAA")
+                .define('A', Blocks.STONE_BRICKS)
+                .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                        of(Blocks.STONE_BRICKS).build())).save(pWriter);
     }
 
     protected static void oreSmelting(Consumer<FinishedRecipe> pFinishedRecipeConsumer, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult,

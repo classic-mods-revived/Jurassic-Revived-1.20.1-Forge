@@ -18,14 +18,31 @@ public class ModItems {
     public static final RegistryObject<Item> JR_DNA_TAB_ICON = ITEMS.register("jr_dna_tab_icon", () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> VELOCIRAPTOR_SPAWN_EGG = ITEMS.register("velociraptor_spawn_egg",
-            () -> new CustomGenderedSpawnEggItem(ModEntities.VELOCIRAPTOR, 0xA6957D, 0x4D3425, new Item.Properties()));
-    public static final RegistryObject<Item> CERATOSAURUS_SPAWN_EGG = ITEMS.register("ceratosaurus_spawn_egg",
-            () -> new CustomGenderedSpawnEggItem(ModEntities.CERATOSAURUS, 0x37302E, 0xB05453, new Item.Properties()));
-    public static final RegistryObject<Item> BRACHIOSAURUS_SPAWN_EGG = ITEMS.register("brachiosaurus_spawn_egg",
-            () -> new CustomGenderedSpawnEggItem(ModEntities.BRACHIOSAURUS, 0xB6A386, 0x504638, new Item.Properties()));
+            () -> new CustomGenderedSpawnEggItem(ModEntities.VELOCIRAPTOR, 0x8A5837, 0x45220D, new Item.Properties()));
+    //public static final RegistryObject<Item> TYRANNOSAURUS_REX_SPAWN_EGG = ITEMS.register("tyrannosaurus_rex_spawn_egg",
+    //        () -> new CustomGenderedSpawnEggItem(ModEntities.TYRANNOSAURUS_REX, 0x4C3C2D, 0x241F1E, new Item.Properties()));
+    //public static final RegistryObject<Item> TRICERATOPS_SPAWN_EGG = ITEMS.register("triceratops_spawn_egg",
+    //        () -> new CustomGenderedSpawnEggItem(ModEntities.TRICERATOPS, 0x353A30, 0x121212, new Item.Properties()));
+    //public static final RegistryObject<Item> SPINOSAURUS_SPAWN_EGG = ITEMS.register("spinosaurus_spawn_egg",
+    //        () -> new CustomGenderedSpawnEggItem(ModEntities.SPINOSAURUS, 0x685E5A, 0x5D3831, new Item.Properties()));
+    //public static final RegistryObject<Item> PTERANODON_SPAWN_EGG = ITEMS.register("pteranodon_spawn_egg",
+    //        () -> new CustomGenderedSpawnEggItem(ModEntities.PTERANODON, 0x25231F, 0x594325, new Item.Properties()));
+    //public static final RegistryObject<Item> PARASAUROLOPHUS_SPAWN_EGG = ITEMS.register("parasaurolophus_spawn_egg",
+    //        () -> new CustomGenderedSpawnEggItem(ModEntities.PARASAUROLOPHUS, 0x856836, 0x442911, new Item.Properties()));
+    //public static final RegistryObject<Item> INDOMINUS_REX_SPAWN_EGG = ITEMS.register("indominus_rex_spawn_egg",
+    //        () -> new CustomGenderedSpawnEggItem(ModEntities.INDOMINUX_REX, 0x9C9B99, 0x60605F, new Item.Properties()));
+    //public static final RegistryObject<Item> GALLIMIMUS_SPAWN_EGG = ITEMS.register("gallimimus_spawn_egg",
+    //        () -> new CustomGenderedSpawnEggItem(ModEntities.GALLIMIMUX, 0xAD7341, 0x5C3925, new Item.Properties()));
+    //public static final RegistryObject<Item> DIPLODOCUS_SPAWN_EGG = ITEMS.register("diplodocus_spawn_egg",
+    //        () -> new CustomGenderedSpawnEggItem(ModEntities.DIPLODOCUS, 0x, 0x, new Item.Properties()));
     public static final RegistryObject<Item> DILOPHOSAURUS_SPAWN_EGG = ITEMS.register("dilophosaurus_spawn_egg",
-            () -> new CustomGenderedSpawnEggItem(ModEntities.DILOPHOSAURUS, 0xA8A581, 0x6b7936,
-                    new Item.Properties()));
+            () -> new CustomGenderedSpawnEggItem(ModEntities.DILOPHOSAURUS, 0x575D32, 0x16191C, new Item.Properties()));
+    //public static final RegistryObject<Item> COMPSOGNATHUS_SPAWN_EGG = ITEMS.register("compsognathus_spawn_egg",
+    //        () -> new CustomGenderedSpawnEggItem(ModEntities.COMPSOGNATHUS, 0x676D24, 0x373E16, new Item.Properties()));
+    public static final RegistryObject<Item> CERATOSAURUS_SPAWN_EGG = ITEMS.register("ceratosaurus_spawn_egg",
+            () -> new CustomGenderedSpawnEggItem(ModEntities.CERATOSAURUS, 0x954846, 0x221F1D, new Item.Properties()));
+    public static final RegistryObject<Item> BRACHIOSAURUS_SPAWN_EGG = ITEMS.register("brachiosaurus_spawn_egg",
+            () -> new CustomGenderedSpawnEggItem(ModEntities.BRACHIOSAURUS, 0x95846D, 0x4B4236, new Item.Properties()));
 
     public static final RegistryObject<Item> AMPOULE = ITEMS.register("ampoule", () -> new Item(new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> SYRINGE = ITEMS.register("syringe", () -> new Item(new Item.Properties().stacksTo(16)));

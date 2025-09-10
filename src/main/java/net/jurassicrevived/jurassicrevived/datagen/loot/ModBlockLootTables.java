@@ -20,7 +20,20 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     @Override
     protected void generate() {
         this.dropSelf(ModBlocks.CAT_PLUSHIE.get());
+        this.dropSelf(ModBlocks.GYPSUM_COBBLESTONE.get());
         this.dropSelf(ModBlocks.GYPSUM_STONE_BRICKS.get());
+        this.dropSelf(ModBlocks.STONE_FOSSIL.get());
+        this.dropSelf(ModBlocks.DEEPSLATE_FOSSIL.get());
+
+        this.add(ModBlocks.GYPSUM_STONE.get(),
+                block -> createOreDrop(ModBlocks.GYPSUM_STONE.get(), ModBlocks.GYPSUM_COBBLESTONE.get().asItem()));
+        this.add(ModBlocks.AMBER_ORE.get(),
+                block -> createOreDrop(ModBlocks.AMBER_ORE.get(), ModItems.MOSQUITO_IN_AMBER.get()));
+        this.add(ModBlocks.DEEPSLATE_ICE_SHARD_ORE.get(),
+                block -> createOreDrop(ModBlocks.DEEPSLATE_FOSSIL.get(), ModItems.FROZEN_LEECH.get()));
+
+        this.dropSelf(ModBlocks.REINFORCED_STONE.get());
+        this.dropSelf(ModBlocks.REINFORCED_STONE_BRICKS.get());
 
         this.dropSelf(ModBlocks.HATCHED_VELOCIRAPTOR_EGG.get());
         //this.dropSelf(ModBlocks.HATCHED_TYRANNOSAURUS_REX_EGG.get());

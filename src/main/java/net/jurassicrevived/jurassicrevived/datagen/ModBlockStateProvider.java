@@ -37,12 +37,31 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlock(ModBlocks.POTTED_WESTERN_SWORD_FERN.get(), models().singleTexture("potted_western_sword_fern", ResourceLocation.parse("flower_pot_cross"), "plant",
                 blockTexture(ModBlocks.WESTERN_SWORD_FERN.get())).renderType("cutout"));
 
+        blockWithItem(ModBlocks.GYPSUM_STONE);
+        blockWithItem(ModBlocks.GYPSUM_COBBLESTONE);
         blockWithItem(ModBlocks.GYPSUM_STONE_BRICKS);
+
+        blockWithItem(ModBlocks.STONE_FOSSIL);
+        blockWithItem(ModBlocks.DEEPSLATE_FOSSIL);
+        blockWithItem(ModBlocks.AMBER_ORE);
+        blockWithItem(ModBlocks.DEEPSLATE_ICE_SHARD_ORE);
+
+        blockWithItem(ModBlocks.REINFORCED_STONE);
+        blockWithItem(ModBlocks.REINFORCED_STONE_BRICKS);
 
         horizontalFacingWithItem(ModBlocks.CAT_PLUSHIE);
 
         eggLike(ModBlocks.HATCHED_VELOCIRAPTOR_EGG);
+        //eggLike(ModBlocks.HATCHED_TYRANNOSAURUS_REX_EGG);
+        //eggLike(ModBlocks.HATCHED_TRICERATOPS_EGG);
+        //eggLike(ModBlocks.HATCHED_SPINOSAURUS_EGG);
+        //eggLike(ModBlocks.HATCHED_PTERANODON_EGG);
+        //eggLike(ModBlocks.HATCHED_PARASAUROLOPHUS_EGG);
+        //eggLike(ModBlocks.HATCHED_INDOMINUS_REX_EGG);
+        //eggLike(ModBlocks.HATCHED_GALLIMIMUS_EGG);
+        //eggLike(ModBlocks.HATCHED_DIPLODOCUS_EGG);
         eggLike(ModBlocks.HATCHED_DILOPHOSAURUS_EGG);
+        //eggLike(ModBlocks.HATCHED_COMPSOGNATHUS_EGG);
         eggLike(ModBlocks.HATCHED_CERATOSAURUS_EGG);
         eggLike(ModBlocks.HATCHED_BRACHIOSAURUS_EGG);
     }
