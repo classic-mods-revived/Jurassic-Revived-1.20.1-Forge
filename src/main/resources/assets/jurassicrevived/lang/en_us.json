@@ -146,5 +146,8 @@
   "block.jurassicrevived.hatched_brachiosaurus_egg": "§aHatched Brachiosaurus Egg",
 
   "tooltip.jurassicrevived.gender": "Gender: %s",
-  "tooltip.jurassicrevived.gender.hint": "Hint: %s to change"
+  "tooltip.jurassicrevived.gender.hint": "Hint: %s to change",
+
+  "item.jurassicrevived.jr_dino_tab_icon": "§c(You Shouldn't have this, it has no use)§r Dinosaur Spawn Eggs §b[Creative Tab Icon]",
+  "item.jurassicrevived.jr_dna_tab_icon": "§c(You Shouldn't have this, it has no use)§r Genetic Material §b[Creative Tab Icon]"
 }
