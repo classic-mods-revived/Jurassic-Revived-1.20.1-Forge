@@ -7,6 +7,7 @@ import net.jurassicrevived.jurassicrevived.entity.client.VelociraptorRenderer;
 import net.jurassicrevived.jurassicrevived.entity.client.BrachiosaurusRenderer;
 import net.jurassicrevived.jurassicrevived.entity.client.CeratosaurusRenderer;
 import net.jurassicrevived.jurassicrevived.entity.client.DilophosaurusRenderer;
+import net.jurassicrevived.jurassicrevived.event.FenceDiagonalUpdateHandler;
 import net.jurassicrevived.jurassicrevived.item.ModCreativeModeTabs;
 import net.jurassicrevived.jurassicrevived.item.ModItems;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -45,6 +46,10 @@ public class JRMod {
 
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
+
+        MinecraftForge.EVENT_BUS.addListener(FenceDiagonalUpdateHandler::onNeighborNotify);
+        MinecraftForge.EVENT_BUS.addListener(FenceDiagonalUpdateHandler::onEntityPlace);
+        MinecraftForge.EVENT_BUS.addListener(FenceDiagonalUpdateHandler::onBreak);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
