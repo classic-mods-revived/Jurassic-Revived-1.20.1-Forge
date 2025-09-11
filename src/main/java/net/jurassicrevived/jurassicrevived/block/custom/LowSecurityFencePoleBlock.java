@@ -4,9 +4,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -19,20 +20,29 @@ public class LowSecurityFencePoleBlock extends Block {
     public static final BooleanProperty EAST  = BooleanProperty.create("east");
     public static final BooleanProperty SOUTH = BooleanProperty.create("south");
     public static final BooleanProperty WEST  = BooleanProperty.create("west");
+    // Diagonals
+    public static final BooleanProperty NE = BooleanProperty.create("ne");
+    public static final BooleanProperty SE = BooleanProperty.create("se");
+    public static final BooleanProperty SW = BooleanProperty.create("sw");
+    public static final BooleanProperty NW = BooleanProperty.create("nw");
 
-    public LowSecurityFencePoleBlock(Properties properties) {
+    public LowSecurityFencePoleBlock(BlockBehaviour.Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(NORTH, false)
                 .setValue(EAST,  false)
                 .setValue(SOUTH, false)
                 .setValue(WEST,  false)
+                .setValue(NE, false)
+                .setValue(SE, false)
+                .setValue(SW, false)
+                .setValue(NW, false)
         );
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(NORTH, EAST, SOUTH, WEST);
+        builder.add(NORTH, EAST, SOUTH, WEST, NE, SE, SW, NW);
     }
 
     @Override
@@ -43,7 +53,11 @@ public class LowSecurityFencePoleBlock extends Block {
                 .setValue(NORTH, connectsTo(level.getBlockState(pos.north())))
                 .setValue(EAST,  connectsTo(level.getBlockState(pos.east())))
                 .setValue(SOUTH, connectsTo(level.getBlockState(pos.south())))
-                .setValue(WEST,  connectsTo(level.getBlockState(pos.west())));
+                .setValue(WEST,  connectsTo(level.getBlockState(pos.west())))
+                .setValue(NE,    LowSecurityFenceWireBlock.canConnectDiagonally(level, pos, Direction.NORTH, Direction.EAST))
+                .setValue(SE,    LowSecurityFenceWireBlock.canConnectDiagonally(level, pos, Direction.SOUTH, Direction.EAST))
+                .setValue(SW,    LowSecurityFenceWireBlock.canConnectDiagonally(level, pos, Direction.SOUTH, Direction.WEST))
+                .setValue(NW,    LowSecurityFenceWireBlock.canConnectDiagonally(level, pos, Direction.NORTH, Direction.WEST));
     }
 
     @Override
@@ -51,9 +65,111 @@ public class LowSecurityFencePoleBlock extends Block {
     public BlockState updateShape(BlockState state, Direction dir, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
         if (dir.getAxis().isHorizontal()) {
             boolean connect = connectsTo(neighborState);
-            return state.setValue(propertyFor(dir), connect);
+            state = state.setValue(propertyFor(dir), connect);
         }
         return state;
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
+        BlockState updated = state
+                .setValue(NE, LowSecurityFenceWireBlock.canConnectDiagonally(level, pos, Direction.NORTH, Direction.EAST))
+                .setValue(SE, LowSecurityFenceWireBlock.canConnectDiagonally(level, pos, Direction.SOUTH, Direction.EAST))
+                .setValue(SW, LowSecurityFenceWireBlock.canConnectDiagonally(level, pos, Direction.SOUTH, Direction.WEST))
+                .setValue(NW, LowSecurityFenceWireBlock.canConnectDiagonally(level, pos, Direction.NORTH, Direction.WEST));
+        if (updated != state) {
+            level.setBlock(pos, updated, Block.UPDATE_ALL);
+        }
+        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
+    }
+
+    // Reentrancy guard like the wire’s (separate guard per class to keep concerns local)
+    private static final ThreadLocal<Boolean> DIAGONAL_UPDATE_GUARD = ThreadLocal.withInitial(() -> false);
+
+    private static boolean beginGuard() {
+        if (Boolean.TRUE.equals(DIAGONAL_UPDATE_GUARD.get())) return false;
+        DIAGONAL_UPDATE_GUARD.set(true);
+        return true;
+    }
+
+    private static void endGuard() {
+        DIAGONAL_UPDATE_GUARD.set(false);
+    }
+
+    @Override
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
+        super.onPlace(state, level, pos, oldState, isMoving);
+        if (!beginGuard()) return;
+        try {
+            recomputeSelfDiagonals(level, pos, state);
+            updateDiagonalsAround(level, pos);
+        } finally {
+            endGuard();
+        }
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (!state.is(newState.getBlock())) {
+            if (beginGuard()) {
+                try {
+                    updateDiagonalsAround(level, pos);
+                } finally {
+                    endGuard();
+                }
+            }
+        }
+        super.onRemove(state, level, pos, newState, isMoving);
+    }
+
+    private void recomputeSelfDiagonals(Level level, BlockPos pos, BlockState state) {
+        BlockState updated = state
+                .setValue(NE, LowSecurityFenceWireBlock.canConnectDiagonally(level, pos, Direction.NORTH, Direction.EAST))
+                .setValue(SE, LowSecurityFenceWireBlock.canConnectDiagonally(level, pos, Direction.SOUTH, Direction.EAST))
+                .setValue(SW, LowSecurityFenceWireBlock.canConnectDiagonally(level, pos, Direction.SOUTH, Direction.WEST))
+                .setValue(NW, LowSecurityFenceWireBlock.canConnectDiagonally(level, pos, Direction.NORTH, Direction.WEST));
+        if (updated != state) {
+            level.setBlock(pos, updated, Block.UPDATE_ALL);
+        }
+    }
+
+    private void updateDiagonalsAround(Level level, BlockPos pos) {
+        BlockPos[] diags = new BlockPos[] {
+                pos.north().east(), pos.south().east(), pos.south().west(), pos.north().west()
+        };
+        for (BlockPos p : diags) {
+            BlockState bs = level.getBlockState(p);
+            Block b = bs.getBlock();
+            if (b instanceof LowSecurityFencePoleBlock) {
+                boolean ne = connectsTo(level.getBlockState(p.north().east()));
+                boolean se = connectsTo(level.getBlockState(p.south().east()));
+                boolean sw = connectsTo(level.getBlockState(p.south().west()));
+                boolean nw = connectsTo(level.getBlockState(p.north().west()));
+                BlockState updated = bs
+                        .setValue(LowSecurityFencePoleBlock.NE, ne)
+                        .setValue(LowSecurityFencePoleBlock.SE, se)
+                        .setValue(LowSecurityFencePoleBlock.SW, sw)
+                        .setValue(LowSecurityFencePoleBlock.NW, nw);
+                if (updated != bs) {
+                    level.setBlock(p, updated, Block.UPDATE_ALL);
+                }
+            } else if (b instanceof LowSecurityFenceWireBlock) {
+                boolean ne = LowSecurityFenceWireBlock.canConnectDiagonally(level, p, Direction.NORTH, Direction.EAST);
+                boolean se = LowSecurityFenceWireBlock.canConnectDiagonally(level, p, Direction.SOUTH, Direction.EAST);
+                boolean sw = LowSecurityFenceWireBlock.canConnectDiagonally(level, p, Direction.SOUTH, Direction.WEST);
+                boolean nw = LowSecurityFenceWireBlock.canConnectDiagonally(level, p, Direction.NORTH, Direction.WEST);
+                BlockState updated = bs
+                        .setValue(LowSecurityFenceWireBlock.NE, ne)
+                        .setValue(LowSecurityFenceWireBlock.SE, se)
+                        .setValue(LowSecurityFenceWireBlock.SW, sw)
+                        .setValue(LowSecurityFenceWireBlock.NW, nw);
+                if (updated != bs) {
+                    level.setBlock(p, updated, Block.UPDATE_ALL);
+                }
+            }
+        }
     }
 
     private boolean connectsTo(BlockState neighbor) {
