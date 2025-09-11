@@ -2,10 +2,14 @@ package net.jurassicrevived.jurassicrevived.datagen;
 
 import net.jurassicrevived.jurassicrevived.JRMod;
 import net.jurassicrevived.jurassicrevived.block.ModBlocks;
+import net.jurassicrevived.jurassicrevived.block.custom.LowSecurityFencePoleBlock;
+import net.jurassicrevived.jurassicrevived.block.custom.LowSecurityFenceWireBlock;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -64,6 +68,28 @@ public class ModBlockStateProvider extends BlockStateProvider {
         //eggLike(ModBlocks.HATCHED_COMPSOGNATHUS_EGG);
         eggLike(ModBlocks.HATCHED_CERATOSAURUS_EGG);
         eggLike(ModBlocks.HATCHED_BRACHIOSAURUS_EGG);
+
+        customFenceMultipart(
+                ModBlocks.LOW_SECURITY_FENCE_POLE,
+                "low_security_fence_pole",
+                "low_security_fence_pole_part",
+                "low_security_fence_pole_diagonal_part",
+                LowSecurityFencePoleBlock.NE,
+                LowSecurityFencePoleBlock.SE,
+                LowSecurityFencePoleBlock.SW,
+                LowSecurityFencePoleBlock.NW
+        );
+
+        customFenceMultipart(
+                ModBlocks.LOW_SECURITY_FENCE_WIRE,
+                "low_security_fence_wire",
+                "low_security_fence_wire_part",
+                "low_security_fence_wire_diagonal_part",
+                LowSecurityFenceWireBlock.NE,
+                LowSecurityFenceWireBlock.SE,
+                LowSecurityFenceWireBlock.SW,
+                LowSecurityFenceWireBlock.NW
+        );
     }
 
     public void hangingSignBlock(Block signBlock, Block wallSignBlock, ResourceLocation texture) {
@@ -128,5 +154,79 @@ public class ModBlockStateProvider extends BlockStateProvider {
     private void eggLike(RegistryObject<Block> block) {
         ModelFile eggModel = new ModelFile.UncheckedModelFile(modLoc("block/egg"));
         simpleBlock(block.get(), eggModel);
+    }
+
+    private void customFenceMultipart(
+            RegistryObject<? extends Block> block,
+            String baseModelName,
+            String straightArmModelName,
+            String diagonalArmModelName,
+            BooleanProperty neProp,
+            BooleanProperty seProp,
+            BooleanProperty swProp,
+            BooleanProperty nwProp
+    ) {
+        var multipart = getMultipartBuilder(block.get());
+
+        multipart.part()
+                .modelFile(models().getExistingFile(modLoc("block/" + baseModelName)))
+                .addModel()
+                .end();
+
+        multipart.part()
+                .modelFile(models().getExistingFile(modLoc("block/" + straightArmModelName)))
+                .rotationY(0)
+                .addModel()
+                .condition(BlockStateProperties.NORTH, true)
+                .end();
+
+        multipart.part()
+                .modelFile(models().getExistingFile(modLoc("block/" + straightArmModelName)))
+                .rotationY(90)
+                .addModel()
+                .condition(BlockStateProperties.EAST, true)
+                .end();
+
+        multipart.part()
+                .modelFile(models().getExistingFile(modLoc("block/" + straightArmModelName)))
+                .rotationY(180)
+                .addModel()
+                .condition(BlockStateProperties.SOUTH, true)
+                .end();
+
+        multipart.part()
+                .modelFile(models().getExistingFile(modLoc("block/" + straightArmModelName)))
+                .rotationY(270)
+                .addModel()
+                .condition(BlockStateProperties.WEST, true)
+                .end();
+
+        multipart.part()
+                .modelFile(models().getExistingFile(modLoc("block/" + diagonalArmModelName)))
+                .rotationY(90)
+                .addModel()
+                .condition(neProp, true)
+                .end();
+
+        multipart.part()
+                .modelFile(models().getExistingFile(modLoc("block/" + diagonalArmModelName)))
+                .rotationY(180)
+                .addModel()
+                .condition(seProp, true)
+                .end();
+
+        multipart.part()
+                .modelFile(models().getExistingFile(modLoc("block/" + diagonalArmModelName)))
+                .rotationY(270)
+                .addModel()
+                .condition(swProp, true)
+                .end();
+
+        multipart.part()
+                .modelFile(models().getExistingFile(modLoc("block/" + diagonalArmModelName)))
+                .rotationY(0)
+                .addModel()
+                .condition(nwProp, true)
+                .end();
     }
 }

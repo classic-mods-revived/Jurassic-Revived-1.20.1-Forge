@@ -1,0 +1,79 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "jurassicrevived:block/low_security_fence_pole"
+      }
+    },
+    {
+      "apply": {
+        "model": "jurassicrevived:block/low_security_fence_pole_part"
+      },
+      "when": {
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "jurassicrevived:block/low_security_fence_pole_part",
+        "y": 90
+      },
+      "when": {
+        "east": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "jurassicrevived:block/low_security_fence_pole_part",
+        "y": 180
+      },
+      "when": {
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "jurassicrevived:block/low_security_fence_pole_part",
+        "y": 270
+      },
+      "when": {
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "jurassicrevived:block/low_security_fence_pole_diagonal_part",
+        "y": 90
+      },
+      "when": {
+        "ne": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "jurassicrevived:block/low_security_fence_pole_diagonal_part",
+        "y": 180
+      },
+      "when": {
+        "se": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "jurassicrevived:block/low_security_fence_pole_diagonal_part",
+        "y": 270
+      },
+      "when": {
+        "sw": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "jurassicrevived:block/low_security_fence_pole_diagonal_part"
+      },
+      "when": {
+        "nw": "true"
+      }
+    }
+  ]
+}
