@@ -371,6 +371,30 @@ public class LowSecurityFenceWireBlock extends Block {
     private static final VoxelShape ARM_WEST  = Block.box(0.0, 3.5, 7.5, 8.0, 12.5, 8.5);
     private static final VoxelShape ARM_EAST  = Block.box(8.0, 3.5, 7.5, 16.0, 12.5, 8.5);
 
+    // Build a stepped diagonal band going from a corner toward the center.
+    // 'east'/'south' indicate the corner (NE = east && !south, SE = east && south, etc.)
+    private static VoxelShape buildDiagonal(boolean east, boolean south) {
+        VoxelShape shape = Shapes.empty();
+        // Band thickness (wire width): 1 block unit (1/16th of a block)
+        double y1 = 3.5, y2 = 12.5;
+        // Create 8 steps from edge to center. Each step is 1-wide and moves along the diagonal.
+        for (int i = 0; i < 8; i++) {
+            double off = i; // 0..7
+            double x1 = east ? 16 - (off + 1) : 0 + off;
+            double x2 = x1 + 1;
+            double z1 = south ? 16 - (off + 1) : 0 + off;
+            double z2 = z1 + 1;
+            shape = Shapes.or(shape, Block.box(x1, y1, z1, x2, y2, z2));
+        }
+        return shape;
+    }
+
+    // Diagonal stepped volumes (approximate 45° connection)
+    private static final VoxelShape DIAG_NE = buildDiagonal(true,  false);
+    private static final VoxelShape DIAG_SE = buildDiagonal(true,  true);
+    private static final VoxelShape DIAG_SW = buildDiagonal(false, true);
+    private static final VoxelShape DIAG_NW = buildDiagonal(false, false);
+
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext ctx) {
         VoxelShape shape = CENTER;
@@ -380,13 +404,19 @@ public class LowSecurityFenceWireBlock extends Block {
         if (state.getValue(WEST))  shape = Shapes.or(shape, ARM_WEST);
         if (state.getValue(EAST))  shape = Shapes.or(shape, ARM_EAST);
 
+        if (state.getValue(NE)) shape = Shapes.or(shape, DIAG_NE);
+        if (state.getValue(SE)) shape = Shapes.or(shape, DIAG_SE);
+        if (state.getValue(SW)) shape = Shapes.or(shape, DIAG_SW);
+        if (state.getValue(NW)) shape = Shapes.or(shape, DIAG_NW);
+
         return shape;
     }
 
+    // Always climbable: covers center, cardinal arms, and diagonal arms without tags
+    @Override
     public boolean isLadder(BlockState state, LevelReader world, BlockPos pos, LivingEntity entity) {
         return true;
     }
-
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
         super.onPlace(state, level, pos, oldState, isMoving);

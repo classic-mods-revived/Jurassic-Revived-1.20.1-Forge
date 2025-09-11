@@ -4,7 +4,8 @@
 	"ambientocclusion": false,
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "jurassicrevived:block/low_security_fence"
+		"0": "jurassicrevived:block/low_security_fence",
+        "particle": "jurassicrevived:block/low_security_fence"
 	},
 	"elements": [
 		{

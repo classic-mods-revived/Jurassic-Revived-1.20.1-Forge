@@ -3,10 +3,12 @@ package net.jurassicrevived.jurassicrevived.block.custom;
 import net.jurassicrevived.jurassicrevived.util.FenceUpdateGuard;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -240,6 +242,26 @@ public class LowSecurityFencePoleBlock extends Block {
     private static final VoxelShape ARM_WEST  = Block.box(0.0, 3.5, 7.5, 8.0, 12.5, 8.5);
     private static final VoxelShape ARM_EAST  = Block.box(8.0, 3.5, 7.5, 16.0, 12.5, 8.5);
 
+    private static VoxelShape buildDiagonal(boolean east, boolean south) {
+        VoxelShape shape = Shapes.empty();
+        double y1 = 3.5, y2 = 12.5;
+        for (int i = 0; i < 8; i++) {
+            double off = i;
+            double x1 = east ? 16 - (off + 1) : 0 + off;
+            double x2 = x1 + 1;
+            double z1 = south ? 16 - (off + 1) : 0 + off;
+            double z2 = z1 + 1;
+            shape = Shapes.or(shape, Block.box(x1, y1, z1, x2, y2, z2));
+        }
+        return shape;
+    }
+
+    // Diagonal stepped volumes
+    private static final VoxelShape DIAG_NE = buildDiagonal(true,  false);
+    private static final VoxelShape DIAG_SE = buildDiagonal(true,  true);
+    private static final VoxelShape DIAG_SW = buildDiagonal(false, true);
+    private static final VoxelShape DIAG_NW = buildDiagonal(false, false);
+
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext ctx) {
         VoxelShape shape = POST;
@@ -249,6 +271,29 @@ public class LowSecurityFencePoleBlock extends Block {
         if (state.getValue(WEST))  shape = Shapes.or(shape, ARM_WEST);
         if (state.getValue(EAST))  shape = Shapes.or(shape, ARM_EAST);
 
+        if (state.getValue(NE)) shape = Shapes.or(shape, DIAG_NE);
+        if (state.getValue(SE)) shape = Shapes.or(shape, DIAG_SE);
+        if (state.getValue(SW)) shape = Shapes.or(shape, DIAG_SW);
+        if (state.getValue(NW)) shape = Shapes.or(shape, DIAG_NW);
+
         return shape;
+    }
+    // Climbable only when any arm/diagonal exists; center-only pole (no flags) is NOT climbable
+    @Override
+    public boolean isLadder(BlockState state, LevelReader world, BlockPos pos, LivingEntity entity) {
+        return state.getValue(NORTH)
+                || state.getValue(EAST)
+                || state.getValue(SOUTH)
+                || state.getValue(WEST)
+                || state.getValue(NE)
+                || state.getValue(SE)
+                || state.getValue(SW)
+                || state.getValue(NW);
+    }
+
+    // Use the same collision shape as the visual shape so entities properly interact with the pole parts
+    @Override
+    public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext ctx) {
+        return getShape(state, level, pos, ctx);
     }
 }
