@@ -32,7 +32,9 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocks.STONE_FOSSIL.get())
                 .add(ModBlocks.DEEPSLATE_FOSSIL.get())
                 .add(ModBlocks.AMBER_ORE.get())
-                .add(ModBlocks.DEEPSLATE_ICE_SHARD_ORE.get());
+                .add(ModBlocks.DEEPSLATE_ICE_SHARD_ORE.get())
+                .add(ModBlocks.LOW_SECURITY_FENCE_POLE.get())
+                .add(ModBlocks.LOW_SECURITY_FENCE_WIRE.get());
         //.add(ModBlocks.FOSSIL_CLEANER.get())
         //.add(ModBlocks.FOSSIL_GRINDER.get())
         //.add(ModBlocks.DNA_EXTRACTOR.get())

@@ -120,6 +120,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.CERATOSAURUS_EGG.get());
         basicItem(ModItems.BRACHIOSAURUS_EGG.get());
 
+        basicItem(ModBlocks.LOW_SECURITY_FENCE_POLE.get().asItem());
+        basicItem(ModBlocks.LOW_SECURITY_FENCE_WIRE.get().asItem());
+
         simpleBlockItemBlockTexture(ModBlocks.HATCHED_VELOCIRAPTOR_EGG);
         //simpleBlockItemBlockTexture(ModBlocks.HATCHED_TYRANNOSAURUS_REX_EGG);
         //simpleBlockItemBlockTexture(ModBlocks.HATCHED_TRICERATOPS_EGG);

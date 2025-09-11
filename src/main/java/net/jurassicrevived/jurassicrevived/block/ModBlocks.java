@@ -3,6 +3,8 @@ package net.jurassicrevived.jurassicrevived.block;
 import net.jurassicrevived.jurassicrevived.JRMod;
 import net.jurassicrevived.jurassicrevived.block.custom.DecoBlock;
 import net.jurassicrevived.jurassicrevived.block.custom.EggBlock;
+import net.jurassicrevived.jurassicrevived.block.custom.LowSecurityFencePoleBlock;
+import net.jurassicrevived.jurassicrevived.block.custom.LowSecurityFenceWireBlock;
 import net.jurassicrevived.jurassicrevived.entity.ModEntities;
 import net.jurassicrevived.jurassicrevived.item.ModItems;
 import net.minecraft.world.effect.MobEffects;
@@ -47,6 +49,12 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> GYPSUM_STONE_BRICKS = registerBlock("gypsum_stone_bricks",
             () -> new Block(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<Block> LOW_SECURITY_FENCE_POLE = registerBlock("low_security_fence_pole",
+            () -> new LowSecurityFencePoleBlock(BlockBehaviour.Properties.of().strength(1.0F).noOcclusion()));
+
+    public static final RegistryObject<Block> LOW_SECURITY_FENCE_WIRE = registerBlock("low_security_fence_wire",
+            () -> new LowSecurityFenceWireBlock(BlockBehaviour.Properties.of().strength(0.5F).noOcclusion()));
 
     public static final RegistryObject<Block> STONE_FOSSIL = registerBlock("stone_fossil",
             () -> new Block(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops()));

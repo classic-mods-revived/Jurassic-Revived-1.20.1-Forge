@@ -1,0 +1,51 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"texture_size": [64, 64],
+	"textures": {
+		"1": "jurassicrevived:block/low_security_fence"
+	},
+	"elements": [
+		{
+			"from": [7.5, 3.5, 0],
+			"to": [8.5, 4.5, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [8.25, 4.25, 8.5, 4.5], "texture": "#1"},
+				"east": {"uv": [6.25, 4.25, 8.25, 4.5], "texture": "#1"},
+				"south": {"uv": [6, 4.25, 6.25, 4.5], "texture": "#1"},
+				"west": {"uv": [4, 4.25, 6, 4.5], "texture": "#1"},
+				"up": {"uv": [6.25, 4.25, 6, 2.25], "rotation": 180, "texture": "#1"},
+				"down": {"uv": [6.5, 2.25, 6.25, 4.25], "rotation": 180, "texture": "#1"}
+			}
+		},
+		{
+			"from": [7.5, 11.5, 0],
+			"to": [8.5, 12.5, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [6, 4.25, 6.25, 4.5], "texture": "#1"},
+				"east": {"uv": [4, 4.25, 6, 4.5], "texture": "#1"},
+				"south": {"uv": [8.25, 4.25, 8.5, 4.5], "texture": "#1"},
+				"west": {"uv": [6.25, 4.25, 8.25, 4.5], "texture": "#1"},
+				"up": {"uv": [6.25, 4.25, 6, 2.25], "texture": "#1"},
+				"down": {"uv": [6.5, 2.25, 6.25, 4.25], "texture": "#1"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "Fence",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [0, 1]
+		},
+		{
+			"name": "Fence",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": []
+		}
+	]
+}
