@@ -2,6 +2,7 @@ package net.jurassicrevived.jurassicrevived;
 
 import com.mojang.logging.LogUtils;
 import net.jurassicrevived.jurassicrevived.block.ModBlocks;
+import net.jurassicrevived.jurassicrevived.block.entity.custom.ModBlockEntities;
 import net.jurassicrevived.jurassicrevived.entity.ModEntities;
 import net.jurassicrevived.jurassicrevived.entity.client.VelociraptorRenderer;
 import net.jurassicrevived.jurassicrevived.entity.client.BrachiosaurusRenderer;
@@ -10,6 +11,10 @@ import net.jurassicrevived.jurassicrevived.entity.client.DilophosaurusRenderer;
 import net.jurassicrevived.jurassicrevived.event.FenceDiagonalUpdateHandler;
 import net.jurassicrevived.jurassicrevived.item.ModCreativeModeTabs;
 import net.jurassicrevived.jurassicrevived.item.ModItems;
+import net.jurassicrevived.jurassicrevived.recipe.ModRecipes;
+import net.jurassicrevived.jurassicrevived.screen.ModMenuTypes;
+import net.jurassicrevived.jurassicrevived.screen.custom.DNAExtractorScreen;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Blocks;
@@ -41,6 +46,11 @@ public class JRMod {
         ModBlocks.register(modEventBus);
 
         ModEntities.register(modEventBus);
+
+        ModBlockEntities.register(modEventBus);
+        ModMenuTypes.register(modEventBus);
+
+        ModRecipes.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
@@ -88,6 +98,8 @@ public class JRMod {
             event.enqueueWork(() -> {
 
             });
+
+            MenuScreens.register(ModMenuTypes.DNA_EXTRACTOR_MENU.get(), DNAExtractorScreen::new);
         }
     }
 }

@@ -27,6 +27,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.LOW_SECURITY_FENCE_POLE.get());
         this.dropSelf(ModBlocks.LOW_SECURITY_FENCE_WIRE.get());
 
+        this.dropSelf(ModBlocks.DNA_EXTRACTOR.get());
+
         this.add(ModBlocks.GYPSUM_STONE.get(),
                 block -> createOreDrop(ModBlocks.GYPSUM_STONE.get(), ModBlocks.GYPSUM_COBBLESTONE.get().asItem()));
         this.add(ModBlocks.AMBER_ORE.get(),

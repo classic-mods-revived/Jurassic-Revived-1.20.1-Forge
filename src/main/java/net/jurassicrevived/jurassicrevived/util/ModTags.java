@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.Block;
 
 public class ModTags {
     public static class Items {
-        public static final TagKey<Item> FOSSILS = tag("fossils");
+        public static final TagKey<Item> TISSUES = tag("tissues");
 
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(new ResourceLocation(JRMod.MOD_ID, name));

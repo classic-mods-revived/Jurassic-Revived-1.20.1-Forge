@@ -2,6 +2,7 @@ package net.jurassicrevived.jurassicrevived.datagen;
 
 import net.jurassicrevived.jurassicrevived.JRMod;
 import net.jurassicrevived.jurassicrevived.block.ModBlocks;
+import net.jurassicrevived.jurassicrevived.datagen.custom.DNAExtractingRecipeBuilder;
 import net.jurassicrevived.jurassicrevived.item.ModItems;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
@@ -117,6 +118,9 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('A', Blocks.STONE_BRICKS)
                 .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(Blocks.STONE_BRICKS).build())).save(pWriter);
+
+        new DNAExtractingRecipeBuilder(ModItems.AMPOULE.get(), ModItems.VELOCIRAPTOR_TISSUE.get(), ModItems.VELOCIRAPTOR_DNA.get(), 1)
+                .unlockedBy("has_ampoule", has(ModItems.AMPOULE.get())).save(pWriter);
     }
 
     protected static void oreSmelting(Consumer<FinishedRecipe> pFinishedRecipeConsumer, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult,

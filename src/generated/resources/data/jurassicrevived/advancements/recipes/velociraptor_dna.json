@@ -1,0 +1,35 @@
+{
+  "parent": "jurassicrevived:recipes/root",
+  "criteria": {
+    "has_ampoule": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jurassicrevived:ampoule"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "jurassicrevived:velociraptor_dna"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_ampoule",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "jurassicrevived:velociraptor_dna"
+    ]
+  },
+  "sends_telemetry_event": true
+}
