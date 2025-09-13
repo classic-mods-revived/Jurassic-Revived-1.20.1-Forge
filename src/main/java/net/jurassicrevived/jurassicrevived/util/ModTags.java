@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.Block;
 public class ModTags {
     public static class Items {
         public static final TagKey<Item> TISSUES = tag("tissues");
+        public static final TagKey<Item> DNA = tag("dna");
 
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(new ResourceLocation(JRMod.MOD_ID, name));

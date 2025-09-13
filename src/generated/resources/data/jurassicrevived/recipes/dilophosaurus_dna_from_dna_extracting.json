@@ -1,0 +1,14 @@
+{
+  "type": "jurassicrevived:dna_extracting",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:ampoule"
+    },
+    {
+      "item": "jurassicrevived:dilophosaurus_tissue"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:dilophosaurus_dna"
+  }
+}

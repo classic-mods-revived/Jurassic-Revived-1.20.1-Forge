@@ -37,6 +37,20 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModItems.COMPSOGNATHUS_TISSUE.get())
                 .add(ModItems.CERATOSAURUS_TISSUE.get())
                 .add(ModItems.BRACHIOSAURUS_TISSUE.get());
+        this.tag(ModTags.Items.DNA)
+                .add(ModItems.VELOCIRAPTOR_DNA.get())
+                .add(ModItems.TYRANNOSAURUS_REX_DNA.get())
+                .add(ModItems.TRICERATOPS_DNA.get())
+                .add(ModItems.SPINOSAURUS_DNA.get())
+                .add(ModItems.PTERANODON_DNA.get())
+                .add(ModItems.PARASAUROLOPHUS_DNA.get())
+                .add(ModItems.INDOMINUS_REX_DNA.get())
+                .add(ModItems.GALLIMIMUS_DNA.get())
+                //.add(ModItems.DIPLODOCUS_DNA.get())
+                .add(ModItems.DILOPHOSAURUS_DNA.get())
+                .add(ModItems.COMPSOGNATHUS_DNA.get())
+                .add(ModItems.CERATOSAURUS_DNA.get())
+                .add(ModItems.BRACHIOSAURUS_DNA.get());
     }
 
     @Override

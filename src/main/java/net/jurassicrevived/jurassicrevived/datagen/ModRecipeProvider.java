@@ -7,6 +7,7 @@ import net.jurassicrevived.jurassicrevived.item.ModItems;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -121,6 +122,40 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
         new DNAExtractingRecipeBuilder(ModItems.AMPOULE.get(), ModItems.VELOCIRAPTOR_TISSUE.get(), ModItems.VELOCIRAPTOR_DNA.get(), 1)
                 .unlockedBy("has_ampoule", has(ModItems.AMPOULE.get())).save(pWriter);
+        new DNAExtractingRecipeBuilder(ModItems.AMPOULE.get(), ModItems.TYRANNOSAURUS_REX_TISSUE.get(), ModItems.TYRANNOSAURUS_REX_DNA.get(), 1)
+                .unlockedBy("has_ampoule", has(ModItems.AMPOULE.get())).save(pWriter);
+        new DNAExtractingRecipeBuilder(ModItems.AMPOULE.get(), ModItems.TRICERATOPS_TISSUE.get(), ModItems.TRICERATOPS_DNA.get(), 1)
+                .unlockedBy("has_ampoule", has(ModItems.AMPOULE.get())).save(pWriter);
+        new DNAExtractingRecipeBuilder(ModItems.AMPOULE.get(), ModItems.SPINOSAURUS_TISSUE.get(), ModItems.SPINOSAURUS_DNA.get(), 1)
+                .unlockedBy("has_ampoule", has(ModItems.AMPOULE.get())).save(pWriter);
+        new DNAExtractingRecipeBuilder(ModItems.AMPOULE.get(), ModItems.PTERANODON_TISSUE.get(), ModItems.PTERANODON_DNA.get(), 1)
+                .unlockedBy("has_ampoule", has(ModItems.AMPOULE.get())).save(pWriter);
+        new DNAExtractingRecipeBuilder(ModItems.AMPOULE.get(), ModItems.PARASAUROLOPHUS_TISSUE.get(), ModItems.PARASAUROLOPHUS_DNA.get(), 1)
+                .unlockedBy("has_ampoule", has(ModItems.AMPOULE.get())).save(pWriter);
+        new DNAExtractingRecipeBuilder(ModItems.AMPOULE.get(), ModItems.INDOMINUS_REX_TISSUE.get(), ModItems.INDOMINUS_REX_DNA.get(), 1)
+                .unlockedBy("has_ampoule", has(ModItems.AMPOULE.get())).save(pWriter);
+        new DNAExtractingRecipeBuilder(ModItems.AMPOULE.get(), ModItems.GALLIMIMUS_TISSUE.get(), ModItems.GALLIMIMUS_DNA.get(), 1)
+                .unlockedBy("has_ampoule", has(ModItems.AMPOULE.get())).save(pWriter);
+        //new DNAExtractingRecipeBuilder(ModItems.AMPOULE.get(), ModItems.DIPLODOCUS_TISSUE.get(), ModItems.DIPLODOCUS.get(), 1)
+        //        .unlockedBy("has_ampoule", has(ModItems.AMPOULE.get())).save(pWriter);
+        new DNAExtractingRecipeBuilder(ModItems.AMPOULE.get(), ModItems.DILOPHOSAURUS_TISSUE.get(), ModItems.DILOPHOSAURUS_DNA.get(), 1)
+                .unlockedBy("has_ampoule", has(ModItems.AMPOULE.get())).save(pWriter);
+        new DNAExtractingRecipeBuilder(ModItems.AMPOULE.get(), ModItems.COMPSOGNATHUS_TISSUE.get(), ModItems.COMPSOGNATHUS_DNA.get(), 1)
+                .unlockedBy("has_ampoule", has(ModItems.AMPOULE.get())).save(pWriter);
+        new DNAExtractingRecipeBuilder(ModItems.AMPOULE.get(), ModItems.CERATOSAURUS_TISSUE.get(), ModItems.CERATOSAURUS_DNA.get(), 1)
+                .unlockedBy("has_ampoule", has(ModItems.AMPOULE.get())).save(pWriter);
+        new DNAExtractingRecipeBuilder(ModItems.AMPOULE.get(), ModItems.BRACHIOSAURUS_TISSUE.get(), ModItems.BRACHIOSAURUS_DNA.get(), 1)
+                .unlockedBy("has_ampoule", has(ModItems.AMPOULE.get())).save(pWriter);
+
+        DNAExtractingRecipeBuilder
+                .amberRandomDNAUniform(
+                        ModItems.AMPOULE.get(),
+                        ModItems.MOSQUITO_IN_AMBER.get(),
+                        ModItems.VELOCIRAPTOR_DNA.get(), 1).addDNAWeight(ModItems.INDOMINUS_REX_DNA.get(), 0)
+                .unlockedBy("has_ampoule", has(ModItems.MOSQUITO_IN_AMBER.get()))
+                .save(pWriter, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "random_dna"));
+
+
     }
 
     protected static void oreSmelting(Consumer<FinishedRecipe> pFinishedRecipeConsumer, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult,

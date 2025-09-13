@@ -1,0 +1,17 @@
+{
+  "type": "jurassicrevived:dna_extracting",
+  "dna_weights": {
+    "jurassicrevived:indominus_rex_dna": 0
+  },
+  "ingredients": [
+    {
+      "item": "jurassicrevived:ampoule"
+    },
+    {
+      "item": "jurassicrevived:mosquito_in_amber"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:velociraptor_dna"
+  }
+}

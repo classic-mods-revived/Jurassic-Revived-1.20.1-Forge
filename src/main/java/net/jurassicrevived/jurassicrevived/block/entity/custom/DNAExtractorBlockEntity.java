@@ -58,7 +58,7 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
 
     protected final ContainerData data;
     private int progress = 0;
-    private int maxProgress = 100;
+    private int maxProgress = 200;
 
     public DNAExtractorBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.DNA_EXTRACTOR_BE.get(), pPos, pBlockState);
@@ -164,7 +164,12 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
         this.itemHandler.extractItem(AMPOULE_SLOT, 1, false);
         this.itemHandler.extractItem(MATERIAL_INPUT, 1, false);
 
-        ItemStack result = recipe.get().getResultItem(getLevel().registryAccess());
+        // Use dynamic assemble result based on current inventory (supports random dna for amber)
+        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
+        for (int i = 0; i < itemHandler.getSlots(); i++) {
+            inventory.setItem(i, itemHandler.getStackInSlot(i));
+        }
+        ItemStack result = recipe.get().assemble(inventory, getLevel().registryAccess());
         Item resultItem = result.getItem();
         int resultCount = result.getCount();
 
@@ -173,10 +178,8 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
             ItemStack current = this.itemHandler.getStackInSlot(targetSlot);
 
             if (current.isEmpty()) {
-                // Place the result directly into the empty slot
                 this.itemHandler.setStackInSlot(targetSlot, result.copy());
             } else {
-                // Merge into existing stack, cap at max stack size
                 int existing = current.getCount();
                 int max = current.getMaxStackSize();
                 int toPlace = Math.min(existing + resultCount, max);
@@ -185,7 +188,6 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
                 current.setCount(toPlace);
                 this.itemHandler.setStackInSlot(targetSlot, current);
 
-                // Try to place any remainder into another output slot (optional)
                 if (remainder > 0) {
                     int nextSlot = getAvailableOutputSlotFor(resultItem);
                     if (nextSlot != -1) {
@@ -197,8 +199,6 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
                             int toPlace2 = Math.min(existing2 + remainder, next.getMaxStackSize());
                             next.setCount(toPlace2);
                             this.itemHandler.setStackInSlot(nextSlot, next);
-                            // If there's still remainder beyond toPlace2, it will be ignored here.
-                            // You could loop until remainder is 0 if you want full spill behavior.
                         }
                     }
                 }
@@ -221,7 +221,15 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
     private boolean hasRecipe() {
         Optional<DNAExtractorRecipe> recipe = getCurrentRecipe();
 
-        return recipe.isPresent() && canInsertOneIntoAnyOutput(recipe.get().getResultItem(getLevel().registryAccess()).getItem());
+        if (recipe.isEmpty()) return false;
+
+        // Compute dynamic result and check it can be inserted
+        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
+        for (int i = 0; i < itemHandler.getSlots(); i++) {
+            inventory.setItem(i, itemHandler.getStackInSlot(i));
+        }
+        ItemStack dynamicResult = recipe.get().assemble(inventory, getLevel().registryAccess());
+        return !dynamicResult.isEmpty() && canInsertOneIntoAnyOutput(dynamicResult.getItem());
     }
 
     private Optional<DNAExtractorRecipe> getCurrentRecipe() {
@@ -233,9 +241,16 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
     }
 
     private boolean isOutputSlotEmptyOrReceivable() {
-        // Use the current recipe’s output item rather than a hardcoded item
+        // Use the current recipe’s dynamic output rather than a fixed result item
         Optional<DNAExtractorRecipe> recipe = getCurrentRecipe();
-        return recipe.isPresent() && canInsertOneIntoAnyOutput(recipe.get().getResultItem(getLevel().registryAccess()).getItem());
+        if (recipe.isEmpty()) return false;
+
+        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
+        for (int i = 0; i < itemHandler.getSlots(); i++) {
+            inventory.setItem(i, itemHandler.getStackInSlot(i));
+        }
+        ItemStack dynamicResult = recipe.get().assemble(inventory, getLevel().registryAccess());
+        return !dynamicResult.isEmpty() && canInsertOneIntoAnyOutput(dynamicResult.getItem());
     }
 
     private boolean canInsertOneIntoAnyOutput(Item item) {

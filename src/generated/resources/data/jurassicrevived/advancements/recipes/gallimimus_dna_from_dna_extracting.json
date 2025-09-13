@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "jurassicrevived:velociraptor_dna"
+        "recipe": "jurassicrevived:gallimimus_dna_from_dna_extracting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "jurassicrevived:velociraptor_dna"
+      "jurassicrevived:gallimimus_dna_from_dna_extracting"
     ]
   },
   "sends_telemetry_event": true
