@@ -41,7 +41,7 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return switch (slot) {
                 case 0 -> stack.getItem() == ModItems.AMPOULE.get();
-                case 1 -> stack.is(ModTags.Items.TISSUES);
+                case 1 -> stack.is(ModTags.Items.TISSUES) || stack.getItem() == ModItems.MOSQUITO_IN_AMBER.get();
                 case 2, 3, 4 -> true;
                 default -> super.isItemValid(slot, stack);
             };

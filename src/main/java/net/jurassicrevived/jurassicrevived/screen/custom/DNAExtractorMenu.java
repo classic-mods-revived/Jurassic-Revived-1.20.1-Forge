@@ -1,6 +1,7 @@
 package net.jurassicrevived.jurassicrevived.screen.custom;
 
 import net.jurassicrevived.jurassicrevived.block.entity.custom.DNAExtractorBlockEntity;
+import net.jurassicrevived.jurassicrevived.item.ModItems;
 import net.jurassicrevived.jurassicrevived.screen.ModMenuTypes;
 import net.jurassicrevived.jurassicrevived.util.ModTags;
 import net.minecraft.network.FriendlyByteBuf;
@@ -34,7 +35,7 @@ public class DNAExtractorMenu extends AbstractContainerMenu {
         this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 0, 39, 35) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.getItem() == net.jurassicrevived.jurassicrevived.item.ModItems.AMPOULE.get();
+                return stack.getItem() == ModItems.AMPOULE.get();
             }
         });
 
@@ -42,7 +43,7 @@ public class DNAExtractorMenu extends AbstractContainerMenu {
         this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 1, 57, 35) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.is(ModTags.Items.TISSUES);
+                return stack.is(ModTags.Items.TISSUES) || stack.getItem() == ModItems.MOSQUITO_IN_AMBER.get();
             }
         });
 
