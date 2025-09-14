@@ -1,9 +1,13 @@
 package net.jurassicrevived.jurassicrevived.block.entity.custom;
 
+import net.jurassicrevived.jurassicrevived.block.custom.DNAExtractorBlock;
 import net.jurassicrevived.jurassicrevived.item.ModItems;
 import net.jurassicrevived.jurassicrevived.recipe.DNAExtractorRecipe;
 import net.jurassicrevived.jurassicrevived.screen.custom.DNAExtractorMenu;
+import net.jurassicrevived.jurassicrevived.util.InventoryDirectionEntry;
+import net.jurassicrevived.jurassicrevived.util.InventoryDirectionWrapper;
 import net.jurassicrevived.jurassicrevived.util.ModTags;
+import net.jurassicrevived.jurassicrevived.util.WrappedHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -28,6 +32,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
 import java.util.Optional;
 
 public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider {
@@ -55,6 +60,26 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
     private static final int OUTPUT_SLOT_3 = 4;
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+    private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
+            new InventoryDirectionWrapper(itemHandler,
+                    new InventoryDirectionEntry(Direction.DOWN, OUTPUT_SLOT_1, false),
+                    new InventoryDirectionEntry(Direction.DOWN, OUTPUT_SLOT_2, false),
+                    new InventoryDirectionEntry(Direction.DOWN, OUTPUT_SLOT_3, false),
+                    new InventoryDirectionEntry(Direction.NORTH, OUTPUT_SLOT_1, false),
+                    new InventoryDirectionEntry(Direction.NORTH, OUTPUT_SLOT_2, false),
+                    new InventoryDirectionEntry(Direction.NORTH, OUTPUT_SLOT_3, false),
+                    new InventoryDirectionEntry(Direction.SOUTH, OUTPUT_SLOT_1, false),
+                    new InventoryDirectionEntry(Direction.SOUTH, OUTPUT_SLOT_2, false),
+                    new InventoryDirectionEntry(Direction.SOUTH, OUTPUT_SLOT_3, false),
+                    new InventoryDirectionEntry(Direction.EAST, OUTPUT_SLOT_1, false),
+                    new InventoryDirectionEntry(Direction.EAST, OUTPUT_SLOT_2, false),
+                    new InventoryDirectionEntry(Direction.EAST, OUTPUT_SLOT_3, false),
+                    new InventoryDirectionEntry(Direction.WEST, OUTPUT_SLOT_1, false),
+                    new InventoryDirectionEntry(Direction.WEST, OUTPUT_SLOT_2, false),
+                    new InventoryDirectionEntry(Direction.WEST, OUTPUT_SLOT_3, false),
+                    new InventoryDirectionEntry(Direction.UP, AMPOULE_SLOT, true),
+                    new InventoryDirectionEntry(Direction.UP, MATERIAL_INPUT, true)).directionsMap;
+
 
     protected final ContainerData data;
     private int progress = 0;
@@ -110,7 +135,24 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if(cap == ForgeCapabilities.ITEM_HANDLER) {
-            return lazyItemHandler.cast();
+            if(side == null) {
+                return lazyItemHandler.cast();
+            }
+            if (directionWrappedHandlerMap.containsKey(side)) {
+                Direction localDirection = this.getBlockState().getValue(DNAExtractorBlock.FACING);
+                if (side == Direction.DOWN || side == Direction.UP) {
+                    return directionWrappedHandlerMap.get(side).cast();
+                }
+
+                return switch (localDirection) {
+                    default -> directionWrappedHandlerMap.get(side.getOpposite()).cast();
+                    case EAST -> directionWrappedHandlerMap.get(side.getClockWise()).cast();
+                    case SOUTH -> directionWrappedHandlerMap.get(side).cast();
+                    case WEST -> directionWrappedHandlerMap.get(side.getCounterClockWise()).cast();
+                };
+            } else {
+                return LazyOptional.empty();
+            }
         }
 
         return super.getCapability(cap, side);
