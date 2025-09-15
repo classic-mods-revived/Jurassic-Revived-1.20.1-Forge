@@ -35,16 +35,15 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocks.DEEPSLATE_ICE_SHARD_ORE.get())
                 .add(ModBlocks.LOW_SECURITY_FENCE_POLE.get())
                 .add(ModBlocks.LOW_SECURITY_FENCE_WIRE.get())
-                .add(ModBlocks.DNA_EXTRACTOR.get());
+                .add(ModBlocks.DNA_EXTRACTOR.get())
+                .add(ModBlocks.FOSSIL_GRINDER.get())
         //.add(ModBlocks.FOSSIL_CLEANER.get())
-        //.add(ModBlocks.FOSSIL_GRINDER.get())
-        //.add(ModBlocks.DNA_EXTRACTOR.get())
         //.add(ModBlocks.DNA_HYBRIDIZER.get())
         //.add(ModBlocks.EMBRYONIC_MACHINE.get())
         //.add(ModBlocks.EMBRYO_CALCIFICATION_MACHINE.get())
         //.add(ModBlocks.INCUBATOR.get())
-        //.add(ModBlocks.LOW_SECURITY_FENCE_POLE.get())
-        //.add(ModBlocks.LOW_SECURITY_FENCE_WIRE.get());
+        .add(ModBlocks.LOW_SECURITY_FENCE_POLE.get())
+        .add(ModBlocks.LOW_SECURITY_FENCE_WIRE.get());
 
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL);
         //.add(ModBlocks.hq_ORE.get());

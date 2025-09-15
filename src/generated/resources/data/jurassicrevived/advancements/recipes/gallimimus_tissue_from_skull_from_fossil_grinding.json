@@ -1,0 +1,33 @@
+{
+  "parent": "jurassicrevived:recipes/root",
+  "criteria": {
+    "has_skull": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "jurassicrevived:skulls"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "jurassicrevived:gallimimus_tissue_from_skull_from_fossil_grinding"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_skull",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "jurassicrevived:gallimimus_tissue_from_skull_from_fossil_grinding"
+    ]
+  },
+  "sends_telemetry_event": true
+}

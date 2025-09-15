@@ -1,0 +1,12 @@
+{
+  "type": "jurassicrevived:fossil_grinding",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:fresh_tyrannosaurus_rex_skull"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "jurassicrevived:tyrannosaurus_rex_tissue"
+  }
+}

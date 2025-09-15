@@ -1,0 +1,18 @@
+{
+  "type": "jurassicrevived:fossil_grinding",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:parasaurolophus_skull_fossil"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "jurassicrevived:parasaurolophus_tissue"
+  },
+  "weighted_outputs": {
+    "jurassicrevived:crushed_fossil": 30,
+    "jurassicrevived:parasaurolophus_tissue": 10,
+    "minecraft:bone_meal": 30,
+    "minecraft:flint": 30
+  }
+}

@@ -27,6 +27,8 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> DNA_EXTRACTOR = registerBlock("dna_extractor",
             () -> new DNAExtractorBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f)));
+    public static final RegistryObject<Block> FOSSIL_GRINDER = registerBlock("fossil_grinder",
+            () -> new FossilGrinderBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f)));
 
     public static final RegistryObject<Block> ROYAL_FERN = registerBlock("royal_fern",
             () -> new FlowerBlock(MobEffects.UNLUCK, 0, BlockBehaviour.Properties.copy(Blocks.ALLIUM)));

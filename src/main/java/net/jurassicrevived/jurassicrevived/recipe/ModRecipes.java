@@ -15,6 +15,8 @@ public class ModRecipes {
 
     public static final RegistryObject<RecipeSerializer<DNAExtractorRecipe>> DNA_EXTRACTOR_SERIALIZER =
             SERIALIZERS.register("dna_extracting", () -> DNAExtractorRecipe.Serializer.INSTANCE);
+    public static final RegistryObject<RecipeSerializer<FossilGrinderRecipe>> FOSSIL_GRINDER_SERIALIZER =
+            SERIALIZERS.register("fossil_grinding", () -> FossilGrinderRecipe.Serializer.INSTANCE);
 
     public static void register(IEventBus eventBus) {
         SERIALIZERS.register(eventBus);

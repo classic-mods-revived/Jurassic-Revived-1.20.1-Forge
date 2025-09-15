@@ -48,6 +48,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.LOW_SECURITY_FENCE_WIRE.get());
 
                         output.accept(ModBlocks.DNA_EXTRACTOR.get());
+                        output.accept(ModBlocks.FOSSIL_GRINDER.get());
 
                         output.accept(ModBlocks.STONE_FOSSIL.get());
                         output.accept(ModBlocks.DEEPSLATE_FOSSIL.get());

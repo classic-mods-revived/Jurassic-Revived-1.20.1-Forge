@@ -51,6 +51,33 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModItems.COMPSOGNATHUS_DNA.get())
                 .add(ModItems.CERATOSAURUS_DNA.get())
                 .add(ModItems.BRACHIOSAURUS_DNA.get());
+        this.tag(ModTags.Items.FOSSILS)
+                .add(ModItems.VELOCIRAPTOR_SKULL_FOSSIL.get())
+                .add(ModItems.TYRANNOSAURUS_REX_SKULL_FOSSIL.get())
+                .add(ModItems.TRICERATOPS_SKULL_FOSSIL.get())
+                .add(ModItems.SPINOSAURUS_SKULL_FOSSIL.get())
+                .add(ModItems.PTERANODON_SKULL_FOSSIL.get())
+                .add(ModItems.PARASAUROLOPHUS_SKULL_FOSSIL.get())
+                .add(ModItems.GALLIMIMUS_SKULL_FOSSIL.get())
+                //.add(ModItems.DIPLODOCUS_SKULL_FOSSIL.get())
+                .add(ModItems.DILOPHOSAURUS_SKULL_FOSSIL.get())
+                .add(ModItems.COMPSOGNATHUS_SKULL_FOSSIL.get())
+                .add(ModItems.CERATOSAURUS_SKULL_FOSSIL.get())
+                .add(ModItems.BRACHIOSAURUS_SKULL_FOSSIL.get());
+        this.tag(ModTags.Items.FOSSILS)
+                .add(ModItems.FRESH_VELOCIRAPTOR_SKULL.get())
+                .add(ModItems.FRESH_TYRANNOSAURUS_REX_SKULL.get())
+                .add(ModItems.FRESH_TRICERATOPS_SKULL.get())
+                .add(ModItems.FRESH_SPINOSAURUS_SKULL.get())
+                .add(ModItems.FRESH_PTERANODON_SKULL.get())
+                .add(ModItems.FRESH_PARASAUROLOPHUS_SKULL.get())
+                .add(ModItems.FRESH_INDOMINUS_REX_SKULL.get())
+                .add(ModItems.FRESH_GALLIMIMUS_SKULL.get())
+                //.add(ModItems.FRESH_DIPLODOCUS_SKULL.get())
+                .add(ModItems.FRESH_DILOPHOSAURUS_SKULL.get())
+                .add(ModItems.FRESH_COMPSOGNATHUS_SKULL.get())
+                .add(ModItems.FRESH_CERATOSAURUS_SKULL.get())
+                .add(ModItems.FRESH_BRACHIOSAURUS_SKULL.get());
     }
 
     @Override

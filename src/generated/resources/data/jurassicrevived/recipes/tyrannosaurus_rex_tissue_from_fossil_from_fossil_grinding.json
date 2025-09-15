@@ -1,0 +1,18 @@
+{
+  "type": "jurassicrevived:fossil_grinding",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:tyrannosaurus_rex_skull_fossil"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "jurassicrevived:tyrannosaurus_rex_tissue"
+  },
+  "weighted_outputs": {
+    "jurassicrevived:crushed_fossil": 30,
+    "jurassicrevived:tyrannosaurus_rex_tissue": 10,
+    "minecraft:bone_meal": 30,
+    "minecraft:flint": 30
+  }
+}

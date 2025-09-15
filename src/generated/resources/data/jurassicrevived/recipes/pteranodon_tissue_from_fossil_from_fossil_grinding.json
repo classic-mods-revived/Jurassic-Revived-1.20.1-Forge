@@ -1,0 +1,18 @@
+{
+  "type": "jurassicrevived:fossil_grinding",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:pteranodon_skull_fossil"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "jurassicrevived:pteranodon_tissue"
+  },
+  "weighted_outputs": {
+    "jurassicrevived:crushed_fossil": 30,
+    "jurassicrevived:pteranodon_tissue": 10,
+    "minecraft:bone_meal": 30,
+    "minecraft:flint": 30
+  }
+}

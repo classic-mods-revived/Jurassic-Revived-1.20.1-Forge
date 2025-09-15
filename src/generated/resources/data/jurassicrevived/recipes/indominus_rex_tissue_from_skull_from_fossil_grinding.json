@@ -1,0 +1,12 @@
+{
+  "type": "jurassicrevived:fossil_grinding",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:fresh_indominus_rex_skull"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "jurassicrevived:indominus_rex_tissue"
+  }
+}

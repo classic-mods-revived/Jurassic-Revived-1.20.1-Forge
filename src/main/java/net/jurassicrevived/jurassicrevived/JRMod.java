@@ -14,6 +14,7 @@ import net.jurassicrevived.jurassicrevived.item.ModItems;
 import net.jurassicrevived.jurassicrevived.recipe.ModRecipes;
 import net.jurassicrevived.jurassicrevived.screen.ModMenuTypes;
 import net.jurassicrevived.jurassicrevived.screen.custom.DNAExtractorScreen;
+import net.jurassicrevived.jurassicrevived.screen.custom.FossilGrinderScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -100,6 +101,7 @@ public class JRMod {
             });
 
             MenuScreens.register(ModMenuTypes.DNA_EXTRACTOR_MENU.get(), DNAExtractorScreen::new);
+            MenuScreens.register(ModMenuTypes.FOSSIL_GRINDER_MENU.get(), FossilGrinderScreen::new);
         }
     }
 }

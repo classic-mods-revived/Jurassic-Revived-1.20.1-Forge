@@ -123,7 +123,7 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
 
     @Override
     public Component getDisplayName() {
-        return Component.literal("Gem Empowering Station");
+        return Component.translatable("block.jurassicrevived.dna_extractor");
     }
 
     @Nullable
@@ -173,7 +173,7 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory", itemHandler.serializeNBT());
-        pTag.putInt("gem_empowering_station.progress", progress);
+        pTag.putInt("dna_extractor.progress", progress);
 
         super.saveAdditional(pTag);
     }
@@ -182,7 +182,7 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
     public void load(CompoundTag pTag) {
         super.load(pTag);
         itemHandler.deserializeNBT(pTag.getCompound("inventory"));
-        progress = pTag.getInt("gem_empowering_station.progress");
+        progress = pTag.getInt("dna_extractor.progress");
 
     }
 

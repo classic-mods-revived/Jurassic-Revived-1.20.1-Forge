@@ -1,17 +1,22 @@
 package net.jurassicrevived.jurassicrevived.datagen;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import net.jurassicrevived.jurassicrevived.JRMod;
 import net.jurassicrevived.jurassicrevived.block.ModBlocks;
 import net.jurassicrevived.jurassicrevived.datagen.custom.DNAExtractingRecipeBuilder;
+import net.jurassicrevived.jurassicrevived.datagen.custom.FossilGrindingRecipeBuilder;
 import net.jurassicrevived.jurassicrevived.item.ModItems;
+import net.jurassicrevived.jurassicrevived.util.ModTags;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.AbstractCookingRecipe;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
@@ -155,6 +160,59 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_ampoule", has(ModItems.MOSQUITO_IN_AMBER.get()))
                 .save(pWriter, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "random_dna"));
 
+        FossilGrindingRecipeBuilder.fossilWeighted(ModItems.VELOCIRAPTOR_SKULL_FOSSIL.get(), ModItems.VELOCIRAPTOR_TISSUE.get())
+                .unlockedBy("has_fossil", has(ModTags.Items.FOSSILS)).saveFossil(pWriter);
+        FossilGrindingRecipeBuilder.fossilWeighted(ModItems.TYRANNOSAURUS_REX_SKULL_FOSSIL.get(), ModItems.TYRANNOSAURUS_REX_TISSUE.get())
+                .unlockedBy("has_fossil", has(ModTags.Items.FOSSILS)).saveFossil(pWriter);
+        FossilGrindingRecipeBuilder.fossilWeighted(ModItems.TRICERATOPS_SKULL_FOSSIL.get(), ModItems.TRICERATOPS_TISSUE.get())
+                .unlockedBy("has_fossil", has(ModTags.Items.FOSSILS)).saveFossil(pWriter);
+        FossilGrindingRecipeBuilder.fossilWeighted(ModItems.SPINOSAURUS_SKULL_FOSSIL.get(), ModItems.SPINOSAURUS_TISSUE.get())
+                .unlockedBy("has_fossil", has(ModTags.Items.FOSSILS)).saveFossil(pWriter);
+        FossilGrindingRecipeBuilder.fossilWeighted(ModItems.PTERANODON_SKULL_FOSSIL.get(), ModItems.PTERANODON_TISSUE.get())
+                .unlockedBy("has_fossil", has(ModTags.Items.FOSSILS)).saveFossil(pWriter);
+        FossilGrindingRecipeBuilder.fossilWeighted(ModItems.PARASAUROLOPHUS_SKULL_FOSSIL.get(), ModItems.PARASAUROLOPHUS_TISSUE.get())
+                .unlockedBy("has_fossil", has(ModTags.Items.FOSSILS)).saveFossil(pWriter);
+        FossilGrindingRecipeBuilder.fossilWeighted(ModItems.GALLIMIMUS_SKULL_FOSSIL.get(), ModItems.GALLIMIMUS_TISSUE.get())
+                .unlockedBy("has_fossil", has(ModTags.Items.FOSSILS)).saveFossil(pWriter);
+        //FossilGrindingRecipeBuilder.fossilWeighted(ModItems.DIPLODOCUS_SKULL_FOSSIL.get(), ModItems.DIPLODOCUS_TISSUE.get())
+        //        .unlockedBy("has_fossil", has(ModTags.Items.FOSSILS)).saveFossil(pWriter);
+        FossilGrindingRecipeBuilder.fossilWeighted(ModItems.DILOPHOSAURUS_SKULL_FOSSIL.get(), ModItems.DILOPHOSAURUS_TISSUE.get())
+                .unlockedBy("has_fossil", has(ModTags.Items.FOSSILS)).saveFossil(pWriter);
+        FossilGrindingRecipeBuilder.fossilWeighted(ModItems.COMPSOGNATHUS_SKULL_FOSSIL.get(), ModItems.COMPSOGNATHUS_TISSUE.get())
+                .unlockedBy("has_fossil", has(ModTags.Items.FOSSILS)).saveFossil(pWriter);
+        FossilGrindingRecipeBuilder.fossilWeighted(ModItems.CERATOSAURUS_SKULL_FOSSIL.get(), ModItems.CERATOSAURUS_TISSUE.get())
+                .unlockedBy("has_fossil", has(ModTags.Items.FOSSILS)).saveFossil(pWriter);
+        FossilGrindingRecipeBuilder.fossilWeighted(ModItems.BRACHIOSAURUS_SKULL_FOSSIL.get(), ModItems.BRACHIOSAURUS_TISSUE.get())
+                .unlockedBy("has_fossil", has(ModTags.Items.FOSSILS)).saveFossil(pWriter);
+
+        FossilGrindingRecipeBuilder.skullDirect(ModItems.FRESH_VELOCIRAPTOR_SKULL.get(), ModItems.VELOCIRAPTOR_TISSUE.get())
+                .unlockedBy("has_skull", has(ModTags.Items.SKULLS)).saveSkull(pWriter);
+        FossilGrindingRecipeBuilder.skullDirect(ModItems.FRESH_TYRANNOSAURUS_REX_SKULL.get(), ModItems.TYRANNOSAURUS_REX_TISSUE.get())
+                .unlockedBy("has_skull", has(ModTags.Items.SKULLS)).saveSkull(pWriter);
+        FossilGrindingRecipeBuilder.skullDirect(ModItems.FRESH_TRICERATOPS_SKULL.get(), ModItems.TRICERATOPS_TISSUE.get())
+                .unlockedBy("has_skull", has(ModTags.Items.SKULLS)).saveSkull(pWriter);
+        FossilGrindingRecipeBuilder.skullDirect(ModItems.FRESH_SPINOSAURUS_SKULL.get(), ModItems.SPINOSAURUS_TISSUE.get())
+                .unlockedBy("has_skull", has(ModTags.Items.SKULLS)).saveSkull(pWriter);
+        FossilGrindingRecipeBuilder.skullDirect(ModItems.FRESH_PTERANODON_SKULL.get(), ModItems.PTERANODON_TISSUE.get())
+                .unlockedBy("has_skull", has(ModTags.Items.SKULLS)).saveSkull(pWriter);
+        FossilGrindingRecipeBuilder.skullDirect(ModItems.FRESH_PARASAUROLOPHUS_SKULL.get(), ModItems.PARASAUROLOPHUS_TISSUE.get())
+                .unlockedBy("has_skull", has(ModTags.Items.SKULLS)).saveSkull(pWriter);
+        FossilGrindingRecipeBuilder.skullDirect(ModItems.FRESH_INDOMINUS_REX_SKULL.get(), ModItems.INDOMINUS_REX_TISSUE.get())
+                .unlockedBy("has_skull", has(ModTags.Items.SKULLS)).saveSkull(pWriter);
+        FossilGrindingRecipeBuilder.skullDirect(ModItems.FRESH_GALLIMIMUS_SKULL.get(), ModItems.GALLIMIMUS_TISSUE.get())
+                .unlockedBy("has_skull", has(ModTags.Items.SKULLS)).saveSkull(pWriter);
+        //FossilGrindingRecipeBuilder.skullDirect(ModItems.FRESH_DIPLODOCUS_SKULL.get(), ModItems.DIPLODOCUS_TISSUE.get())
+        //        .unlockedBy("has_skull", has(ModTags.Items.SKULLS)).saveSkull(pWriter);
+        FossilGrindingRecipeBuilder.skullDirect(ModItems.FRESH_DILOPHOSAURUS_SKULL.get(), ModItems.DILOPHOSAURUS_TISSUE.get())
+                .unlockedBy("has_skull", has(ModTags.Items.SKULLS)).saveSkull(pWriter);
+        FossilGrindingRecipeBuilder.skullDirect(ModItems.FRESH_COMPSOGNATHUS_SKULL.get(), ModItems.COMPSOGNATHUS_TISSUE.get())
+                .unlockedBy("has_skull", has(ModTags.Items.SKULLS)).saveSkull(pWriter);
+        FossilGrindingRecipeBuilder.skullDirect(ModItems.FRESH_CERATOSAURUS_SKULL.get(), ModItems.CERATOSAURUS_TISSUE.get())
+                .unlockedBy("has_skull", has(ModTags.Items.SKULLS)).saveSkull(pWriter);
+        FossilGrindingRecipeBuilder.skullDirect(ModItems.FRESH_BRACHIOSAURUS_SKULL.get(), ModItems.BRACHIOSAURUS_TISSUE.get())
+                .unlockedBy("has_skull", has(ModTags.Items.SKULLS)).saveSkull(pWriter);
+
+
 
     }
 
@@ -178,5 +236,86 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                     .save(pFinishedRecipeConsumer, JRMod.MOD_ID + ":" + getItemName(pResult) + pRecipeName + "_" + getItemName(itemlike));
         }
     }
+    // Fossil Grinder datagen helpers:
+    // 1) Fossil input with weighted outputs: 30% bone meal, 30% flint, 30% crushed fossil, 10% tissue
+    protected void fossilGrindingFossilWeighted(Consumer<FinishedRecipe> out, ItemLike fossilInput, ItemLike tissueOutput, String recipeName) {
+        out.accept(new FinishedRecipe() {
+            @Override
+            public void serializeRecipeData(JsonObject json) {
+                // type
+                json.addProperty("type", "jurassicrevived:fossil_grinding");
 
+                // ingredients (single input)
+                JsonArray ingredients = new JsonArray();
+                ingredients.add(Ingredient.of(fossilInput).toJson());
+                json.add("ingredients", ingredients);
+
+                // result (fallback result, not used when weighted_outputs is present)
+                JsonObject result = new JsonObject();
+                result.addProperty("item", net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(tissueOutput.asItem()).toString());
+                result.addProperty("count", 1);
+                json.add("result", result);
+
+                // weighted outputs
+                JsonObject weights = new JsonObject();
+                weights.addProperty(net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(Items.BONE_MEAL).toString(), 30);
+                weights.addProperty(net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(Items.FLINT).toString(), 30);
+                weights.addProperty(net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(net.jurassicrevived.jurassicrevived.item.ModItems.CRUSHED_FOSSIL.get()).toString(), 30);
+                weights.addProperty(net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(tissueOutput.asItem()).toString(), 10);
+                json.add("weighted_outputs", weights);
+            }
+
+            @Override
+            public ResourceLocation getId() {
+                return ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "fossil_grinding/" + recipeName);
+            }
+
+            @Override
+            public RecipeSerializer<?> getType() {
+                return net.jurassicrevived.jurassicrevived.recipe.FossilGrinderRecipe.Serializer.INSTANCE;
+            }
+
+            @Override
+            public JsonObject serializeAdvancement() { return null; }
+
+            @Override
+            public ResourceLocation getAdvancementId() { return null; }
+        });
+    }
+
+    // 2) Skull item -> tissue directly
+    protected void fossilGrindingSkullDirect(Consumer<FinishedRecipe> out, ItemLike skullInput, ItemLike tissueOutput, String recipeName) {
+        out.accept(new FinishedRecipe() {
+            @Override
+            public void serializeRecipeData(JsonObject json) {
+                json.addProperty("type", "jurassicrevived:fossil_grinding");
+
+                JsonArray ingredients = new JsonArray();
+                ingredients.add(Ingredient.of(skullInput).toJson());
+                json.add("ingredients", ingredients);
+
+                JsonObject result = new JsonObject();
+                result.addProperty("item", net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(tissueOutput.asItem()).toString());
+                result.addProperty("count", 1);
+                json.add("result", result);
+                // No weighted_outputs -> deterministic result
+            }
+
+            @Override
+            public ResourceLocation getId() {
+                return ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "fossil_grinding/" + recipeName);
+            }
+
+            @Override
+            public RecipeSerializer<?> getType() {
+                return net.jurassicrevived.jurassicrevived.recipe.FossilGrinderRecipe.Serializer.INSTANCE;
+            }
+
+            @Override
+            public JsonObject serializeAdvancement() { return null; }
+
+            @Override
+            public ResourceLocation getAdvancementId() { return null; }
+        });
+    }
 }

@@ -16,6 +16,10 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("dna_extractor_be", () ->
                     BlockEntityType.Builder.of(DNAExtractorBlockEntity::new,
                             ModBlocks.DNA_EXTRACTOR.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FossilGrinderBlockEntity>> FOSSIL_GRINDER_BE =
+            BLOCK_ENTITIES.register("fossil_grinder_be", () ->
+                    BlockEntityType.Builder.of(FossilGrinderBlockEntity::new,
+                            ModBlocks.FOSSIL_GRINDER.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
