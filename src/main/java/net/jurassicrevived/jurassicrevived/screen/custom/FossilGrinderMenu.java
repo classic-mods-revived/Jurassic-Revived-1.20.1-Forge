@@ -31,7 +31,7 @@ public class FossilGrinderMenu extends AbstractContainerMenu {
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
 
-        // Input: Material slot (only velociraptor tissue may be inserted)
+        // Input: accepts items tagged as fossils or skulls
         this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 0, 57, 35) {
             @Override
             public boolean mayPlace(ItemStack stack) {

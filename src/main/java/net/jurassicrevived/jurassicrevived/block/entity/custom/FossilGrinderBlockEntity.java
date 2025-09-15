@@ -36,7 +36,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class FossilGrinderBlockEntity extends BlockEntity implements MenuProvider {
-    public final ItemStackHandler itemHandler = new ItemStackHandler(5) {
+    public final ItemStackHandler itemHandler = new ItemStackHandler(4) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
