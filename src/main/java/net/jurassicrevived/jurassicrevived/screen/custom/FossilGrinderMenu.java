@@ -35,7 +35,7 @@ public class FossilGrinderMenu extends AbstractContainerMenu {
         this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 0, 57, 35) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.is(ModTags.Items.FOSSILS);
+                return stack.is(ModTags.Items.FOSSILS) || stack.is(ModTags.Items.SKULLS);
             }
         });
 
