@@ -1,12 +1,16 @@
 package net.jurassicrevived.jurassicrevived.block.custom;
 
+import net.jurassicrevived.jurassicrevived.block.entity.custom.DNAExtractorBlockEntity;
 import net.jurassicrevived.jurassicrevived.block.entity.custom.FossilGrinderBlockEntity;
 import net.jurassicrevived.jurassicrevived.block.entity.custom.ModBlockEntities;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
@@ -59,12 +63,39 @@ public class FossilGrinderBlock extends BaseEntityBlock {
     }
 
     @Override
+    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        if (!level.isClientSide) {
+            BlockEntity be = level.getBlockEntity(pos);
+            if (be instanceof FossilGrinderBlockEntity fbe) {
+                // If Creative, just remove without dropping the item
+                if (player != null && player.getAbilities().instabuild) {
+                    level.removeBlockEntity(pos);
+                    level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
+                    return;
+                }
+
+                // Survival/Adventure: drop item with BE data if meaningful
+                ItemStack stack = new ItemStack(this.asItem());
+                if (!fbe.isEmptyForDrop()) {
+                    CompoundTag tag = fbe.saveWithoutMetadata();
+                    BlockItem.setBlockEntityData(stack, fbe.getType(), tag);
+                }
+
+                popResource(level, pos, stack);
+                level.removeBlockEntity(pos);
+                level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
+                return;
+            }
+        }
+        // Fall back to default behavior only if it wasn't our BE
+        super.playerWillDestroy(level, pos, state, player);
+    }
+
+    // Keep inventory-spill disabled; the item now carries contents.
+    @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
         if (pState.getBlock() != pNewState.getBlock()) {
-            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-            if (blockEntity instanceof FossilGrinderBlockEntity fossilGrinderBlockEntity) {
-                fossilGrinderBlockEntity.drops();
-            }
+            // Intentionally do nothing here to avoid duplicate/empty drops.
         }
 
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);

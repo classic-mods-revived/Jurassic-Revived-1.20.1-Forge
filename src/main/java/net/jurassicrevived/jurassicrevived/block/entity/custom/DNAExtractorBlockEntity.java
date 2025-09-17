@@ -121,6 +121,15 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
+    public boolean isEmptyForDrop() {
+        for (int i = 0; i < itemHandler.getSlots(); i++) {
+            if (!itemHandler.getStackInSlot(i).isEmpty()) {
+                return false;
+            }
+        }
+        return this.progress == 0;
+    }
+
     @Override
     public Component getDisplayName() {
         return Component.translatable("block.jurassicrevived.dna_extractor");
