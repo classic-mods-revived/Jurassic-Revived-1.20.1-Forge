@@ -86,16 +86,27 @@ public class FossilCleanerScreen extends AbstractContainerScreen<FossilCleanerMe
         renderTooltip(guiGraphics, mouseX, mouseY);
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) /2;
+
+        // Draw hover highlight ABOVE background + fluid, but BELOW tooltips
         if (MouseUtil.isMouseOver(mouseX, mouseY, x + 7, y + 8, 16, 50)) {
             renderHoverHighlight(guiGraphics, x + 7, y + 8, 16, 50);
         }
+
         guiGraphics.blit(SKULL_TEXTURE,  x + 57, y + 35, 0, 0, 16, 16, 16, 16);
+
+        // Draw tooltips last so they appear above everything
+        renderTooltip(guiGraphics, mouseX, mouseY);
     }
 
     // Draws a translucent white overlay similar to vanilla slot hover highlight
     private static void renderHoverHighlight(GuiGraphics g, int x, int y, int w, int h) {
+        // Push to a higher Z so it renders above the tank contents
+        var pose = g.pose();
+        pose.pushPose();
+        pose.translate(0.0F, 0.0F, 200.0F); // large enough to be on top of background/fluid
         // Same color at top and bottom to avoid gradient banding; alpha ~0.5
         g.fillGradient(x, y, x + w, y + h, 0x80FFFFFF, 0x80FFFFFF);
+        pose.popPose();
     }
 
     public static boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, FluidTankRenderer renderer) {
