@@ -1,0 +1,14 @@
+{
+  "type": "jurassicrevived:fossil_cleaning",
+  "fossil_weights": {
+    "jurassicrevived:spinosaurus_skull_fossil": 0
+  },
+  "ingredients": [
+    {
+      "item": "jurassicrevived:stone_fossil"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:velociraptor_skull_fossil"
+  }
+}

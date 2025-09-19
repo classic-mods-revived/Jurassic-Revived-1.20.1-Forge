@@ -1,0 +1,35 @@
+{
+  "parent": "jurassicrevived:recipes/root",
+  "criteria": {
+    "has_stone_fossil_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jurassicrevived:stone_fossil"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "jurassicrevived:random_fossil_from_stone_fossil_from_fossil_cleaning"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_stone_fossil_block",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "jurassicrevived:random_fossil_from_stone_fossil_from_fossil_cleaning"
+    ]
+  },
+  "sends_telemetry_event": true
+}

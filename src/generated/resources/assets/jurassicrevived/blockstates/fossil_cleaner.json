@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "jurassicrevived:block/fossil_cleaner",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "jurassicrevived:block/fossil_cleaner"
+    },
+    "facing=south": {
+      "model": "jurassicrevived:block/fossil_cleaner",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "jurassicrevived:block/fossil_cleaner",
+      "y": 270
+    }
+  }
+}
