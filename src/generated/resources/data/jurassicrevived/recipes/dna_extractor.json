@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "B": {
+      "item": "jurassicrevived:screen"
+    },
+    "C": {
+      "item": "jurassicrevived:cable"
+    },
+    "D": {
+      "item": "jurassicrevived:processor"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "BCD",
+    "AAA"
+  ],
+  "result": {
+    "item": "jurassicrevived:dna_extractor"
+  },
+  "show_notification": true
+}

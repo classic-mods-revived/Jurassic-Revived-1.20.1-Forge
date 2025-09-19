@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:iron_ingot"
+    },
+    "B": {
+      "item": "minecraft:glass"
+    },
+    "C": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "D": {
+      "item": "jurassicrevived:cutting_blades"
+    },
+    "E": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "CDB",
+    "AEA"
+  ],
+  "result": {
+    "item": "jurassicrevived:fossil_grinder"
+  },
+  "show_notification": true
+}

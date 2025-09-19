@@ -110,7 +110,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(ModBlocks.GYPSUM_STONE.get()).build())).save(pWriter);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.REINFORCED_STONE.get(), 4)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.REINFORCED_STONE.get(), 6)
                 .pattern("AAA")
                 .pattern("AAA")
                 .pattern("AAA")
@@ -118,13 +118,46 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(Blocks.STONE).build())).save(pWriter);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.REINFORCED_STONE_BRICKS.get(), 4)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.REINFORCED_STONE_BRICKS.get(), 6)
                 .pattern("AAA")
                 .pattern("AAA")
                 .pattern("AAA")
                 .define('A', Blocks.STONE_BRICKS)
                 .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(Blocks.STONE_BRICKS).build())).save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.DNA_EXTRACTOR.get(), 1)
+                .pattern("AAA")
+                .pattern("BCD")
+                .pattern("AAA")
+                .define('A', Items.LAPIS_LAZULI)
+                .define('B', ModItems.SCREEN.get())
+                .define('C', ModItems.CABLE.get())
+                .define('D', ModItems.PROCESSOR.get())
+                .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                        of(Items.LAPIS_LAZULI, ModItems.SCREEN.get(), ModItems.CABLE.get(), ModItems.PROCESSOR.get()).build())).save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.FOSSIL_GRINDER.get(), 1)
+                .pattern("ABA")
+                .pattern("CDB")
+                .pattern("AEA")
+                .define('A', Items.IRON_INGOT)
+                .define('B', Blocks.GLASS)
+                .define('C', Items.LAPIS_LAZULI)
+                .define('D', ModItems.CUTTING_BLADES.get())
+                .define('E', Items.WATER_BUCKET)
+                .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                        of(Items.IRON_INGOT, Blocks.GLASS, Items.LAPIS_LAZULI, ModItems.CUTTING_BLADES.get(), Items.WATER_BUCKET).build())).save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.FOSSIL_CLEANER.get(), 1)
+                .pattern("ABA")
+                .pattern("ACA")
+                .pattern("AAA")
+                .define('A', Items.IRON_INGOT)
+                .define('B', Items.IRON_NUGGET)
+                .define('C', Blocks.GLASS)
+                .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                        of(Items.IRON_INGOT, Items.IRON_NUGGET, Blocks.GLASS).build())).save(pWriter);
 
         new DNAExtractingRecipeBuilder(ModItems.AMPOULE.get(), ModItems.VELOCIRAPTOR_TISSUE.get(), ModItems.VELOCIRAPTOR_DNA.get(), 1)
                 .unlockedBy("has_ampoule", has(ModItems.AMPOULE.get())).save(pWriter);
