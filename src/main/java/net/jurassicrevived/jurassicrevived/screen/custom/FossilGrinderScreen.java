@@ -15,7 +15,7 @@ public class FossilGrinderScreen extends AbstractContainerScreen<FossilGrinderMe
     private static final ResourceLocation ARROW_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/arrow.png");
     private static final ResourceLocation SKULL_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/fossil_grinder/skull.png");
+            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/skull.png");
 
     public FossilGrinderScreen(FossilGrinderMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);

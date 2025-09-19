@@ -29,6 +29,8 @@ public class ModBlocks {
             () -> new DNAExtractorBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
     public static final RegistryObject<Block> FOSSIL_GRINDER = registerBlock("fossil_grinder",
             () -> new FossilGrinderBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
+    public static final RegistryObject<Block> FOSSIL_CLEANER = registerBlock("fossil_cleaner",
+            () -> new FossilCleanerBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
 
     public static final RegistryObject<Block> ROYAL_FERN = registerBlock("royal_fern",
             () -> new FlowerBlock(MobEffects.UNLUCK, 0, BlockBehaviour.Properties.copy(Blocks.ALLIUM)));

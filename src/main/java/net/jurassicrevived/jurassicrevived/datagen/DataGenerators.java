@@ -1,6 +1,7 @@
 package net.jurassicrevived.jurassicrevived.datagen;
 
 import net.jurassicrevived.jurassicrevived.JRMod;
+import net.jurassicrevived.jurassicrevived.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -32,7 +33,6 @@ public class DataGenerators {
         generator.addProvider(event.includeClient(), new ModItemModelProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeClient(), new ModBlockStateProvider(packOutput, existingFileHelper));
 
-        generator.addProvider(event.includeClient(), new ModGlobalLootModifierProvider(packOutput));
         generator.addProvider(event.includeClient(), new ModPaintingVariantTagProvider(packOutput, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeClient(), new ModPoiTypeTagsProvider(packOutput, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeClient(), new ModFluidTagsProvider(packOutput, lookupProvider, existingFileHelper));
@@ -40,6 +40,13 @@ public class DataGenerators {
         generator.addProvider(event.includeClient(), new ForgeAdvancementProvider(packOutput, lookupProvider, existingFileHelper, List.of(new ModAdvancementProvider())));
 
         generator.addProvider(event.includeServer(), new ModWorldGenProvider(packOutput, lookupProvider));
+
+        //if (event.includeServer()) {
+        //    var glm = new ModGlobalLootModifierProvider(packOutput)
+        //            .addBrushItemForAllArchaeologyTables("add_velociraptor_skull_fossil", ModItems.VELOCIRAPTOR_SKULL_FOSSIL.get(), 0.50f);
+        //            //.addBrushItemForAllArchaeologyTables("add_triceratops_skull_fossil", ModItems.TRICERATOPS_SKULL_FOSSIL.get(), 0.50f);
+        //    generator.addProvider(true, glm);
+        //}
 
     }
 }

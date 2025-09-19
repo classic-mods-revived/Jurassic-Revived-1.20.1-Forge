@@ -29,6 +29,7 @@
 
   "block.jurassicrevived.dna_extractor": "DNA Extractor",
   "block.jurassicrevived.fossil_grinder": "Fossil Grinder",
+  "block.jurassicrevived.fossil_cleaner": "Fossil Cleaner",
 
   "block.jurassicrevived.stone_fossil": "Stone Fossil",
   "block.jurassicrevived.deepslate_fossil": "Deepslate Fossil",
@@ -153,6 +154,10 @@
 
   "tooltip.jurassicrevived.gender": "Gender: %s",
   "tooltip.jurassicrevived.gender.hint": "Hint: %s to change",
+
+  "jurassicrevived.tooltip.liquid.amount.with.capacity": "%s / %s mB",
+  "jurassicrevived.tooltip.liquid.amount": "%s mB",
+  "jurassicrevived.tooltip.accepts_any_water_container": "Accepts any water container, even one's with more water than the tank can hold.",
 
   "item.jurassicrevived.jr_dino_tab_icon": "§c(You Shouldn't have this, it has no use)§r Dinosaur Spawn Eggs §b[Creative Tab Icon]",
   "item.jurassicrevived.jr_dna_tab_icon": "§c(You Shouldn't have this, it has no use)§r Genetic Material §b[Creative Tab Icon]"

@@ -20,6 +20,10 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("fossil_grinder_be", () ->
                     BlockEntityType.Builder.of(FossilGrinderBlockEntity::new,
                             ModBlocks.FOSSIL_GRINDER.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FossilCleanerBlockEntity>> FOSSIL_CLEANER_BE =
+            BLOCK_ENTITIES.register("fossil_cleaner_be", () ->
+                    BlockEntityType.Builder.of(FossilCleanerBlockEntity::new,
+                            ModBlocks.FOSSIL_CLEANER.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

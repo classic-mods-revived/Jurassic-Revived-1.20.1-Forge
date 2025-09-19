@@ -64,7 +64,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModItems.COMPSOGNATHUS_SKULL_FOSSIL.get())
                 .add(ModItems.CERATOSAURUS_SKULL_FOSSIL.get())
                 .add(ModItems.BRACHIOSAURUS_SKULL_FOSSIL.get());
-        this.tag(ModTags.Items.FOSSILS)
+        this.tag(ModTags.Items.SKULLS)
                 .add(ModItems.FRESH_VELOCIRAPTOR_SKULL.get())
                 .add(ModItems.FRESH_TYRANNOSAURUS_REX_SKULL.get())
                 .add(ModItems.FRESH_TRICERATOPS_SKULL.get())

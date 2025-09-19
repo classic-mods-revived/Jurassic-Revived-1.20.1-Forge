@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import net.jurassicrevived.jurassicrevived.JRMod;
 import net.jurassicrevived.jurassicrevived.block.ModBlocks;
 import net.jurassicrevived.jurassicrevived.datagen.custom.DNAExtractingRecipeBuilder;
+import net.jurassicrevived.jurassicrevived.datagen.custom.FossilCleaningRecipeBuilder;
 import net.jurassicrevived.jurassicrevived.datagen.custom.FossilGrindingRecipeBuilder;
 import net.jurassicrevived.jurassicrevived.item.ModItems;
 import net.jurassicrevived.jurassicrevived.util.ModTags;
@@ -213,6 +214,11 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_skull", has(ModTags.Items.SKULLS)).saveSkull(pWriter);
 
 
+        FossilCleaningRecipeBuilder.randomFossil(ModBlocks.STONE_FOSSIL.get(), ModItems.VELOCIRAPTOR_SKULL_FOSSIL.get(), 1)
+                .addFossilWeight(ModItems.SPINOSAURUS_SKULL_FOSSIL.get(), 0)
+                .unlockedBy("has_stone_fossil_block", has(ModBlocks.STONE_FOSSIL.get())).save(pWriter, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "random_fossil_from_stone_fossil_from_fossil_cleaning"));
+        FossilCleaningRecipeBuilder.randomFossil(ModBlocks.DEEPSLATE_FOSSIL.get(), ModItems.VELOCIRAPTOR_SKULL_FOSSIL.get(), 1)
+                .unlockedBy("has_deepslate_fossil_block", has(ModBlocks.DEEPSLATE_FOSSIL.get())).save(pWriter, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "random_fossil_from_deepslate_fossil_from_fossil_cleaning"));
 
     }
 
