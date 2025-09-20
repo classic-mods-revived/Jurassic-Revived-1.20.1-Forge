@@ -22,17 +22,17 @@ public class Config {
     private static final ForgeConfigSpec.IntValue ITEMS_PER_SECOND = BUILDER
             .comment("Max items transferred per second by pipes")
             .comment("Default: 64")
-            .defineInRange("pipes.itemsPerSecond", Math.min(64, MAX_ITEMS_PER_SEC), 0, MAX_ITEMS_PER_SEC);
+            .defineInRange("itemsPerSecond", Math.min(64, MAX_ITEMS_PER_SEC), 0, MAX_ITEMS_PER_SEC);
 
     private static final ForgeConfigSpec.IntValue MB_PER_SECOND = BUILDER
             .comment("Max millibuckets transferred per second by pipes")
             .comment("Default: 1,000")
-            .defineInRange("pipes.milliBucketsPerSecond", Math.min(1000, MAX_MB_PER_SEC), 0, MAX_MB_PER_SEC);
+            .defineInRange("milliBucketsPerSecond", Math.min(1000, MAX_MB_PER_SEC), 0, MAX_MB_PER_SEC);
 
     private static final ForgeConfigSpec.IntValue FE_PER_SECOND = BUILDER
             .comment("Max FE transferred per second by pipes")
             .comment("Default: 2,048")
-            .defineInRange("pipes.fePerSecond", Math.min(2048, MAX_FE_PER_SEC), 0, MAX_FE_PER_SEC);
+            .defineInRange("fePerSecond", Math.min(2048, MAX_FE_PER_SEC), 0, MAX_FE_PER_SEC);
 
     public static final ForgeConfigSpec SPEC = BUILDER.build();
 

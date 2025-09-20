@@ -158,12 +158,10 @@ public class JRConfigScreen extends Screen {
             int thumbTop = getThumbTop();
             int thumbBottom = getThumbBottom();
             if (mouseY >= thumbTop && mouseY <= thumbBottom) {
-                // Start dragging
                 draggingScrollbar = true;
                 dragStartMouseY = (int) mouseY;
                 dragStartScrollY = scrollY;
             } else {
-                // Page up/down on track click
                 int page = (scrollAreaBottom - scrollAreaTop) - 20;
                 if (mouseY < thumbTop) {
                     scrollY = clamp(scrollY - page, 0, Math.max(0, contentHeight - (scrollAreaBottom - scrollAreaTop)));
@@ -173,7 +171,26 @@ public class JRConfigScreen extends Screen {
             }
             return true;
         }
-        return super.mouseClicked(mouseX, mouseY, button);
+
+        // Temporarily position widgets to their on-screen (scrolled) Y so hit-testing works
+        int dy = scrollAreaTop - scrollY;
+        int[] originalYs = new int[] {
+            requirePowerButton.getY(), itemsBox.getY(), mbBox.getY(), feBox.getY()
+        };
+        requirePowerButton.setY(dy + 0);
+        itemsBox.setY(dy + 60);
+        mbBox.setY(dy + 120);
+        feBox.setY(dy + 180);
+
+        boolean handled = super.mouseClicked(mouseX, mouseY, button);
+
+        // Restore logical Ys
+        requirePowerButton.setY(originalYs[0]);
+        itemsBox.setY(originalYs[1]);
+        mbBox.setY(originalYs[2]);
+        feBox.setY(originalYs[3]);
+
+        return handled;
     }
 
     @Override
@@ -183,7 +200,6 @@ public class JRConfigScreen extends Screen {
             int visible = Math.max(0, trackHeight);
             int maxScroll = Math.max(0, contentHeight - visible);
             if (maxScroll > 0) {
-                // Map mouse movement to scrollY based on track minus thumb height
                 int thumbHeight = getThumbHeight();
                 int dragSpace = Math.max(1, trackHeight - thumbHeight);
                 int mouseDelta = (int) mouseY - dragStartMouseY;
@@ -192,7 +208,26 @@ public class JRConfigScreen extends Screen {
             }
             return true;
         }
-        return super.mouseDragged(mouseX, mouseY, button, dx, dy);
+
+        // Temporarily position widgets for correct dragging
+        int sy = scrollAreaTop - scrollY;
+        int[] originalYs = new int[] {
+            requirePowerButton.getY(), itemsBox.getY(), mbBox.getY(), feBox.getY()
+        };
+        requirePowerButton.setY(sy + 0);
+        itemsBox.setY(sy + 60);
+        mbBox.setY(sy + 120);
+        feBox.setY(sy + 180);
+
+        boolean handled = super.mouseDragged(mouseX, mouseY, button, dx, dy);
+
+        // Restore
+        requirePowerButton.setY(originalYs[0]);
+        itemsBox.setY(originalYs[1]);
+        mbBox.setY(originalYs[2]);
+        feBox.setY(originalYs[3]);
+
+        return handled;
     }
 
     @Override
@@ -201,7 +236,26 @@ public class JRConfigScreen extends Screen {
             draggingScrollbar = false;
             return true;
         }
-        return super.mouseReleased(mouseX, mouseY, button);
+
+        // Temporarily position widgets for correct hit-testing
+        int dy = scrollAreaTop - scrollY;
+        int[] originalYs = new int[] {
+            requirePowerButton.getY(), itemsBox.getY(), mbBox.getY(), feBox.getY()
+        };
+        requirePowerButton.setY(dy + 0);
+        itemsBox.setY(dy + 60);
+        mbBox.setY(dy + 120);
+        feBox.setY(dy + 180);
+
+        boolean handled = super.mouseReleased(mouseX, mouseY, button);
+
+        // Restore
+        requirePowerButton.setY(originalYs[0]);
+        itemsBox.setY(originalYs[1]);
+        mbBox.setY(originalYs[2]);
+        feBox.setY(originalYs[3]);
+
+        return handled;
     }
 
     @Override
@@ -335,5 +389,48 @@ public class JRConfigScreen extends Screen {
 
     private void disableScissor(GuiGraphics gfx) {
         gfx.disableScissor();
+    }
+
+    @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        // Temporarily position widgets so focused EditBox receives keys
+        int dy = scrollAreaTop - scrollY;
+        int[] originalYs = new int[] {
+            requirePowerButton.getY(), itemsBox.getY(), mbBox.getY(), feBox.getY()
+        };
+        requirePowerButton.setY(dy + 0);
+        itemsBox.setY(dy + 60);
+        mbBox.setY(dy + 120);
+        feBox.setY(dy + 180);
+
+        boolean handled = super.keyPressed(keyCode, scanCode, modifiers);
+
+        requirePowerButton.setY(originalYs[0]);
+        itemsBox.setY(originalYs[1]);
+        mbBox.setY(originalYs[2]);
+        feBox.setY(originalYs[3]);
+
+        return handled;
+    }
+
+    @Override
+    public boolean charTyped(char codePoint, int modifiers) {
+        int dy = scrollAreaTop - scrollY;
+        int[] originalYs = new int[] {
+            requirePowerButton.getY(), itemsBox.getY(), mbBox.getY(), feBox.getY()
+        };
+        requirePowerButton.setY(dy + 0);
+        itemsBox.setY(dy + 60);
+        mbBox.setY(dy + 120);
+        feBox.setY(dy + 180);
+
+        boolean handled = super.charTyped(codePoint, modifiers);
+
+        requirePowerButton.setY(originalYs[0]);
+        itemsBox.setY(originalYs[1]);
+        mbBox.setY(originalYs[2]);
+        feBox.setY(originalYs[3]);
+
+        return handled;
     }
 }
