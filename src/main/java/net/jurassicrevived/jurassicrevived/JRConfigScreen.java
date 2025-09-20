@@ -153,6 +153,10 @@ public class JRConfigScreen extends Screen {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        // Handle pinned buttons first, at their fixed positions
+        if (doneButton.mouseClicked(mouseX, mouseY, button)) return true;
+        if (cancelButton.mouseClicked(mouseX, mouseY, button)) return true;
+
         // Scrollbar hit-test
         if (button == 0 && isOverScrollbar(mouseX, mouseY)) {
             int thumbTop = getThumbTop();
@@ -172,11 +176,13 @@ public class JRConfigScreen extends Screen {
             return true;
         }
 
-        // Temporarily position widgets to their on-screen (scrolled) Y so hit-testing works
+        // Temporarily position ONLY scrollable widgets
         int dy = scrollAreaTop - scrollY;
-        int[] originalYs = new int[] {
-            requirePowerButton.getY(), itemsBox.getY(), mbBox.getY(), feBox.getY()
-        };
+        int y0 = requirePowerButton.getY();
+        int y1 = itemsBox.getY();
+        int y2 = mbBox.getY();
+        int y3 = feBox.getY();
+
         requirePowerButton.setY(dy + 0);
         itemsBox.setY(dy + 60);
         mbBox.setY(dy + 120);
@@ -184,11 +190,11 @@ public class JRConfigScreen extends Screen {
 
         boolean handled = super.mouseClicked(mouseX, mouseY, button);
 
-        // Restore logical Ys
-        requirePowerButton.setY(originalYs[0]);
-        itemsBox.setY(originalYs[1]);
-        mbBox.setY(originalYs[2]);
-        feBox.setY(originalYs[3]);
+        // Restore
+        requirePowerButton.setY(y0);
+        itemsBox.setY(y1);
+        mbBox.setY(y2);
+        feBox.setY(y3);
 
         return handled;
     }
@@ -209,11 +215,16 @@ public class JRConfigScreen extends Screen {
             return true;
         }
 
-        // Temporarily position widgets for correct dragging
+        // Pinned buttons should still receive drag events if needed
+        if (doneButton.mouseDragged(mouseX, mouseY, button, dx, dy)) return true;
+        if (cancelButton.mouseDragged(mouseX, mouseY, button, dx, dy)) return true;
+
         int sy = scrollAreaTop - scrollY;
-        int[] originalYs = new int[] {
-            requirePowerButton.getY(), itemsBox.getY(), mbBox.getY(), feBox.getY()
-        };
+        int y0 = requirePowerButton.getY();
+        int y1 = itemsBox.getY();
+        int y2 = mbBox.getY();
+        int y3 = feBox.getY();
+
         requirePowerButton.setY(sy + 0);
         itemsBox.setY(sy + 60);
         mbBox.setY(sy + 120);
@@ -221,11 +232,10 @@ public class JRConfigScreen extends Screen {
 
         boolean handled = super.mouseDragged(mouseX, mouseY, button, dx, dy);
 
-        // Restore
-        requirePowerButton.setY(originalYs[0]);
-        itemsBox.setY(originalYs[1]);
-        mbBox.setY(originalYs[2]);
-        feBox.setY(originalYs[3]);
+        requirePowerButton.setY(y0);
+        itemsBox.setY(y1);
+        mbBox.setY(y2);
+        feBox.setY(y3);
 
         return handled;
     }
@@ -237,11 +247,16 @@ public class JRConfigScreen extends Screen {
             return true;
         }
 
-        // Temporarily position widgets for correct hit-testing
+        // First try pinned buttons at their fixed positions
+        if (doneButton.mouseReleased(mouseX, mouseY, button)) return true;
+        if (cancelButton.mouseReleased(mouseX, mouseY, button)) return true;
+
         int dy = scrollAreaTop - scrollY;
-        int[] originalYs = new int[] {
-            requirePowerButton.getY(), itemsBox.getY(), mbBox.getY(), feBox.getY()
-        };
+        int y0 = requirePowerButton.getY();
+        int y1 = itemsBox.getY();
+        int y2 = mbBox.getY();
+        int y3 = feBox.getY();
+
         requirePowerButton.setY(dy + 0);
         itemsBox.setY(dy + 60);
         mbBox.setY(dy + 120);
@@ -249,11 +264,10 @@ public class JRConfigScreen extends Screen {
 
         boolean handled = super.mouseReleased(mouseX, mouseY, button);
 
-        // Restore
-        requirePowerButton.setY(originalYs[0]);
-        itemsBox.setY(originalYs[1]);
-        mbBox.setY(originalYs[2]);
-        feBox.setY(originalYs[3]);
+        requirePowerButton.setY(y0);
+        itemsBox.setY(y1);
+        mbBox.setY(y2);
+        feBox.setY(y3);
 
         return handled;
     }
@@ -393,11 +407,13 @@ public class JRConfigScreen extends Screen {
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        // Temporarily position widgets so focused EditBox receives keys
+        // Pinned buttons unaffected by key typing; only adjust scrollable widgets
         int dy = scrollAreaTop - scrollY;
-        int[] originalYs = new int[] {
-            requirePowerButton.getY(), itemsBox.getY(), mbBox.getY(), feBox.getY()
-        };
+        int y0 = requirePowerButton.getY();
+        int y1 = itemsBox.getY();
+        int y2 = mbBox.getY();
+        int y3 = feBox.getY();
+
         requirePowerButton.setY(dy + 0);
         itemsBox.setY(dy + 60);
         mbBox.setY(dy + 120);
@@ -405,10 +421,10 @@ public class JRConfigScreen extends Screen {
 
         boolean handled = super.keyPressed(keyCode, scanCode, modifiers);
 
-        requirePowerButton.setY(originalYs[0]);
-        itemsBox.setY(originalYs[1]);
-        mbBox.setY(originalYs[2]);
-        feBox.setY(originalYs[3]);
+        requirePowerButton.setY(y0);
+        itemsBox.setY(y1);
+        mbBox.setY(y2);
+        feBox.setY(y3);
 
         return handled;
     }
@@ -416,9 +432,11 @@ public class JRConfigScreen extends Screen {
     @Override
     public boolean charTyped(char codePoint, int modifiers) {
         int dy = scrollAreaTop - scrollY;
-        int[] originalYs = new int[] {
-            requirePowerButton.getY(), itemsBox.getY(), mbBox.getY(), feBox.getY()
-        };
+        int y0 = requirePowerButton.getY();
+        int y1 = itemsBox.getY();
+        int y2 = mbBox.getY();
+        int y3 = feBox.getY();
+
         requirePowerButton.setY(dy + 0);
         itemsBox.setY(dy + 60);
         mbBox.setY(dy + 120);
@@ -426,10 +444,10 @@ public class JRConfigScreen extends Screen {
 
         boolean handled = super.charTyped(codePoint, modifiers);
 
-        requirePowerButton.setY(originalYs[0]);
-        itemsBox.setY(originalYs[1]);
-        mbBox.setY(originalYs[2]);
-        feBox.setY(originalYs[3]);
+        requirePowerButton.setY(y0);
+        itemsBox.setY(y1);
+        mbBox.setY(y2);
+        feBox.setY(y3);
 
         return handled;
     }

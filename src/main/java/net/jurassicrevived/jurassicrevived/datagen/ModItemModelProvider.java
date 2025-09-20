@@ -37,6 +37,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.TIRE.get());
         basicItem(ModItems.CUTTING_BLADES.get());
 
+        basicItem(ModItems.WRENCH.get());
+
         basicItem(ModItems.VELOCIRAPTOR_SKULL_FOSSIL.get());
         basicItem(ModItems.TYRANNOSAURUS_REX_SKULL_FOSSIL.get());
         basicItem(ModItems.TRICERATOPS_SKULL_FOSSIL.get());

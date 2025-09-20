@@ -191,7 +191,7 @@ public class PipeBlock extends Block implements EntityBlock {
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         ItemStack held = player.getItemInHand(hand);
-        if (held.is(ModItems.CUTTING_BLADES.get())) {
+        if (held.is(ModItems.WRENCH.get())) {
             Direction target = getInteractionFace(state, hit, pos);
             if (target == null) {
                 return InteractionResult.PASS;

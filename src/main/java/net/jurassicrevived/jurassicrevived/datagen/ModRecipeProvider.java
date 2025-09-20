@@ -159,6 +159,15 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(Items.IRON_INGOT, Items.IRON_NUGGET, Blocks.GLASS).build())).save(pWriter);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.WRENCH.get(), 1)
+                .pattern(" A ")
+                .pattern(" BA")
+                .pattern("B  ")
+                .define('A', Items.IRON_INGOT)
+                .define('B', Items.IRON_NUGGET)
+                .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                        of(Items.IRON_INGOT, Items.IRON_NUGGET).build())).save(pWriter);
+
         new DNAExtractingRecipeBuilder(ModItems.AMPOULE.get(), ModItems.VELOCIRAPTOR_TISSUE.get(), ModItems.VELOCIRAPTOR_DNA.get(), 1)
                 .unlockedBy("has_ampoule", has(ModItems.AMPOULE.get())).save(pWriter);
         new DNAExtractingRecipeBuilder(ModItems.AMPOULE.get(), ModItems.TYRANNOSAURUS_REX_TISSUE.get(), ModItems.TYRANNOSAURUS_REX_DNA.get(), 1)

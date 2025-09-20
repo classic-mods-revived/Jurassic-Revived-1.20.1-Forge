@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:iron_ingot"
+    },
+    "B": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "pattern": [
+    " A ",
+    " BA",
+    "B  "
+  ],
+  "result": {
+    "item": "jurassicrevived:wrench"
+  },
+  "show_notification": true
+}

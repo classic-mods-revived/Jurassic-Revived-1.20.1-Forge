@@ -31,6 +31,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.PROCESSOR.get());
                         output.accept(ModItems.TIRE.get());
                         output.accept(ModItems.CUTTING_BLADES.get());
+                        output.accept(ModItems.WRENCH.get());
                     }).build());
 
     public static final RegistryObject<CreativeModeTab> JR_BLOCK_TAB = CREATIVE_MODE_TABS.register("jurassicrevived_block_tab",
