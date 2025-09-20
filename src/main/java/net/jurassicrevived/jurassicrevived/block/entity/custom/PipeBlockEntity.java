@@ -6,8 +6,6 @@ import net.jurassicrevived.jurassicrevived.block.custom.PipeBlock.Transport;
 import net.jurassicrevived.jurassicrevived.block.entity.custom.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.Container;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.item.ItemStack;
@@ -25,7 +23,9 @@ import net.minecraftforge.items.wrapper.SidedInvWrapper;
 import net.minecraftforge.energy.IEnergyStorage;
 
 import java.util.ArrayDeque;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 public class PipeBlockEntity extends BlockEntity {
 
@@ -48,11 +48,6 @@ public class PipeBlockEntity extends BlockEntity {
     public static void serverTick(Level level, BlockPos pos, BlockState state, PipeBlockEntity be) {
         if (level == null || level.isClientSide) return;
 
-        // Visual heartbeat
-        if (level.getGameTime() % 10 == 0 && level instanceof ServerLevel s) {
-            s.sendParticles(ParticleTypes.SMOKE, pos.getX() + 0.5, pos.getY() + 0.7, pos.getZ() + 0.5, 1, 0, 0.02, 0, 0);
-        }
-
         PipeBlock block = (PipeBlock) state.getBlock();
         int itemCap = block.getMaxItemsPerTick();
         int fluidCap = block.getMaxFluidPerTick();
@@ -65,21 +60,64 @@ public class PipeBlockEntity extends BlockEntity {
         }
     }
 
-    // ===== Network discovery =====
+    // ===== Network discovery with caching =====
 
     private record PipeEndpoint(BlockPos pipePos, Direction side) {}
 
     private static class Network<T> {
         final java.util.List<PipeEndpoint> sources = new java.util.ArrayList<>();
         final java.util.List<PipeEndpoint> sinks = new java.util.ArrayList<>();
-        final java.util.List<T> sinkCaps = new java.util.ArrayList<>();
     }
 
-    private static boolean isSamePipe(BlockState state, PipeBlock.Transport transport) {
+    private static final class NetKey {
+        final BlockPos root;
+        final Transport transport;
+
+        NetKey(BlockPos root, Transport transport) {
+            this.root = root;
+            this.transport = transport;
+        }
+
+        // Custom equals/hash so different positions in same network can still use cache: we normalize to the set representative
+        // For simplicity now, key by root chunk position + transport to reduce invalidations; exact canonicalization is more complex.
+        @Override public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof NetKey nk)) return false;
+            return root.getX() >> 4 == nk.root.getX() >> 4
+                    && root.getY() >> 4 == nk.root.getY() >> 4
+                    && root.getZ() >> 4 == nk.root.getZ() >> 4
+                    && transport == nk.transport;
+        }
+        @Override public int hashCode() {
+            int cx = root.getX() >> 4, cy = root.getY() >> 4, cz = root.getZ() >> 4;
+            int h = 31 * (31 * (31 + cx) + cy) + cz;
+            return 31 * h + transport.hashCode();
+        }
+    }
+
+    private static final Map<NetKey, CachedNet<?>> NET_CACHE = new HashMap<>();
+
+    private static final class CachedNet<T> {
+        final long version; // level time snapshot
+        final Network<T> net;
+        CachedNet(long version, Network<T> net) {
+            this.version = version;
+            this.net = net;
+        }
+    }
+
+    private static boolean isSamePipe(BlockState state, Transport transport) {
         return state.getBlock() instanceof PipeBlock pb && pb.getTransport() == transport;
     }
 
-    private static <T> Network<T> discoverNetwork(Level level, BlockPos start, PipeBlock.Transport transport) {
+    private static <T> Network<T> discoverNetwork(Level level, BlockPos start, Transport transport) {
+        NetKey key = new NetKey(start, transport);
+        CachedNet<T> cached = (CachedNet<T>) NET_CACHE.get(key);
+        // Simple TTL by time to avoid stale networks; recompute every 20 ticks
+        if (cached != null && (level.getGameTime() - cached.version) <= 20) {
+            return cached.net;
+        }
+
         Network<T> net = new Network<>();
         ArrayDeque<BlockPos> q = new ArrayDeque<>();
         HashSet<BlockPos> seen = new HashSet<>();
@@ -112,6 +150,8 @@ public class PipeBlockEntity extends BlockEntity {
                 }
             }
         }
+
+        NET_CACHE.put(key, new CachedNet<>(level.getGameTime(), net));
         return net;
     }
 
