@@ -27,6 +27,10 @@
   "block.jurassicrevived.low_security_fence_pole": "Low Security Fence Pole",
   "block.jurassicrevived.low_security_fence_wire": "Low Security Fence Wire",
 
+  "block.jurassicrevived.item_pipe": "Item Pipe",
+  "block.jurassicrevived.fluid_pipe": "Fluid Pipe",
+  "block.jurassicrevived.power_pipe": "Power Pipe",
+
   "block.jurassicrevived.dna_extractor": "DNA Extractor",
   "block.jurassicrevived.fossil_grinder": "Fossil Grinder",
   "block.jurassicrevived.fossil_cleaner": "Fossil Cleaner",
@@ -160,5 +164,6 @@
   "jurassicrevived.tooltip.accepts_any_water_container": "Accepts any water container, even one's with more water than the tank can hold.",
 
   "item.jurassicrevived.jr_dino_tab_icon": "§c(You Shouldn't have this, it has no use)§r Dinosaur Spawn Eggs §b[Creative Tab Icon]",
-  "item.jurassicrevived.jr_dna_tab_icon": "§c(You Shouldn't have this, it has no use)§r Genetic Material §b[Creative Tab Icon]"
+  "item.jurassicrevived.jr_dna_tab_icon": "§c(You Shouldn't have this, it has no use)§r Genetic Material §b[Creative Tab Icon]",
+  "jurassicrevived.config.title": "Jurassic Revived Config"
 }

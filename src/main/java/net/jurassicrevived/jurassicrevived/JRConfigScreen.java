@@ -15,6 +15,12 @@ public class JRConfigScreen extends Screen {
     private EditBox feBox;
     private Button requirePowerButton;
 
+    // Values being edited
+    private boolean requirePower;
+    private int itemsPerSec;
+    private int mbPerSec;
+    private int fePerSec;
+
     // Pinned buttons
     private Button doneButton;
     private Button cancelButton;
@@ -27,10 +33,11 @@ public class JRConfigScreen extends Screen {
     private int scrollAreaLeft;
     private int scrollAreaRight;
 
-    private boolean requirePower;
-    private int itemsPerSec;
-    private int mbPerSec;
-    private int fePerSec;
+    // Scrollbar state
+    private static final int SCROLLBAR_WIDTH = 6;
+    private boolean draggingScrollbar = false;
+    private int dragStartMouseY = 0;
+    private int dragStartScrollY = 0;
 
     public JRConfigScreen(Screen parent) {
         super(Component.translatable("jurassicrevived.config.title"));
@@ -137,12 +144,64 @@ public class JRConfigScreen extends Screen {
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
         if (mouseY >= scrollAreaTop && mouseY <= scrollAreaBottom) {
-            // Negative delta means scroll down visually; increase scrollY
             int step = 20;
             scrollY = clamp(scrollY - (int)(delta * step), 0, Math.max(0, contentHeight - (scrollAreaBottom - scrollAreaTop)));
             return true;
         }
         return super.mouseScrolled(mouseX, mouseY, delta);
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        // Scrollbar hit-test
+        if (button == 0 && isOverScrollbar(mouseX, mouseY)) {
+            int thumbTop = getThumbTop();
+            int thumbBottom = getThumbBottom();
+            if (mouseY >= thumbTop && mouseY <= thumbBottom) {
+                // Start dragging
+                draggingScrollbar = true;
+                dragStartMouseY = (int) mouseY;
+                dragStartScrollY = scrollY;
+            } else {
+                // Page up/down on track click
+                int page = (scrollAreaBottom - scrollAreaTop) - 20;
+                if (mouseY < thumbTop) {
+                    scrollY = clamp(scrollY - page, 0, Math.max(0, contentHeight - (scrollAreaBottom - scrollAreaTop)));
+                } else {
+                    scrollY = clamp(scrollY + page, 0, Math.max(0, contentHeight - (scrollAreaBottom - scrollAreaTop)));
+                }
+            }
+            return true;
+        }
+        return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    @Override
+    public boolean mouseDragged(double mouseX, double mouseY, int button, double dx, double dy) {
+        if (draggingScrollbar && button == 0) {
+            int trackHeight = scrollAreaBottom - scrollAreaTop;
+            int visible = Math.max(0, trackHeight);
+            int maxScroll = Math.max(0, contentHeight - visible);
+            if (maxScroll > 0) {
+                // Map mouse movement to scrollY based on track minus thumb height
+                int thumbHeight = getThumbHeight();
+                int dragSpace = Math.max(1, trackHeight - thumbHeight);
+                int mouseDelta = (int) mouseY - dragStartMouseY;
+                int newScroll = dragStartScrollY + (int) ((mouseDelta / (double) dragSpace) * maxScroll);
+                scrollY = clamp(newScroll, 0, maxScroll);
+            }
+            return true;
+        }
+        return super.mouseDragged(mouseX, mouseY, button, dx, dy);
+    }
+
+    @Override
+    public boolean mouseReleased(double mouseX, double mouseY, int button) {
+        if (button == 0 && draggingScrollbar) {
+            draggingScrollbar = false;
+            return true;
+        }
+        return super.mouseReleased(mouseX, mouseY, button);
     }
 
     @Override
@@ -156,10 +215,8 @@ public class JRConfigScreen extends Screen {
         // Scissor to scroll area
         enableScissor(gfx, scrollAreaLeft, scrollAreaTop, scrollAreaRight, scrollAreaBottom);
 
-        // Offset and render children that belong to the scroll zone
         int dy = scrollAreaTop - scrollY;
-        // Move components vertically for rendering and hitboxes
-        // We'll temporarily shift Y of scrollable widgets, render, then restore.
+
         int[] originalYs = new int[] {
             requirePowerButton.getY(), itemsBox.getY(), mbBox.getY(), feBox.getY()
         };
@@ -171,7 +228,6 @@ public class JRConfigScreen extends Screen {
 
         super.render(gfx, mouseX, mouseY, partialTick);
 
-        // Draw helper texts relative to current positions
         gfx.drawCenteredString(this.font, "Max items transferred per second by item pipes", cx, itemsBox.getY() - 36, 0xA0A0A0);
         gfx.drawCenteredString(this.font, "Default: 64", cx, itemsBox.getY() - 24, 0xA0A0A0);
         gfx.drawCenteredString(this.font, "Range: 0 ~ 1024", cx, itemsBox.getY() - 12, 0xA0A0A0);
@@ -182,7 +238,7 @@ public class JRConfigScreen extends Screen {
         gfx.drawCenteredString(this.font, "Default: 2,048", cx, feBox.getY() - 24, 0xA0A0A0);
         gfx.drawCenteredString(this.font, "Range: 0 ~ 2,097,152", cx, feBox.getY() - 12, 0xA0A0A0);
 
-        // Restore original Y positions (logical coordinates)
+        // Restore logical Y
         requirePowerButton.setY(originalYs[0]);
         itemsBox.setY(originalYs[1]);
         mbBox.setY(originalYs[2]);
@@ -190,15 +246,63 @@ public class JRConfigScreen extends Screen {
 
         disableScissor(gfx);
 
-        // Draw a subtle separator above pinned buttons
+        // Draw scrollbar on right edge of scroll zone
+        drawScrollbar(gfx);
+
+        // Separator above pinned buttons
         gfx.fill(scrollAreaLeft, scrollAreaBottom - 1, scrollAreaRight, scrollAreaBottom, 0x40FFFFFF);
 
-        // Pinned buttons are already placed in init() at the bottom; draw tooltips etc.
         doneButton.render(gfx, mouseX, mouseY, partialTick);
         cancelButton.render(gfx, mouseX, mouseY, partialTick);
     }
 
-    // Recompute layout on resize
+    private void drawScrollbar(GuiGraphics gfx) {
+        int trackLeft = scrollAreaRight - SCROLLBAR_WIDTH;
+        int trackRight = scrollAreaRight;
+        int trackTop = scrollAreaTop;
+        int trackBottom = scrollAreaBottom;
+
+        // Track
+        gfx.fill(trackLeft, trackTop, trackRight, trackBottom, 0x30000000);
+
+        // Thumb
+        int thumbTop = getThumbTop();
+        int thumbBottom = getThumbBottom();
+        int thumbColor = draggingScrollbar ? 0xFFAAAAAA : 0xFF888888;
+        int thumbColorShadow = 0xFF666666;
+
+        // Main thumb
+        gfx.fill(trackLeft + 1, thumbTop, trackRight - 1, thumbBottom, thumbColor);
+        // Edge/shadow
+        gfx.fill(trackLeft + 1, thumbBottom - 1, trackRight - 1, thumbBottom, thumbColorShadow);
+    }
+
+    private boolean isOverScrollbar(double mouseX, double mouseY) {
+        int left = scrollAreaRight - SCROLLBAR_WIDTH;
+        return mouseX >= left && mouseX <= scrollAreaRight && mouseY >= scrollAreaTop && mouseY <= scrollAreaBottom;
+    }
+
+    private int getThumbHeight() {
+        int visible = Math.max(1, scrollAreaBottom - scrollAreaTop);
+        if (contentHeight <= 0) return visible;
+        if (contentHeight <= visible) return visible;
+        // Minimum thumb size
+        int h = Math.max(20, (int) ((visible / (double) contentHeight) * visible));
+        return Math.min(visible, h);
+    }
+
+    private int getThumbTop() {
+        int visible = Math.max(1, scrollAreaBottom - scrollAreaTop);
+        int maxScroll = Math.max(0, contentHeight - visible);
+        if (maxScroll == 0) return scrollAreaTop;
+        int dragSpace = Math.max(1, visible - getThumbHeight());
+        int offset = (int) ((scrollY / (double) maxScroll) * dragSpace);
+        return scrollAreaTop + offset;
+    }
+
+    private int getThumbBottom() {
+        return Math.min(scrollAreaBottom, getThumbTop() + getThumbHeight());
+    }
     @Override
     public void resize(Minecraft minecraft, int width, int height) {
         super.resize(minecraft, width, height);
