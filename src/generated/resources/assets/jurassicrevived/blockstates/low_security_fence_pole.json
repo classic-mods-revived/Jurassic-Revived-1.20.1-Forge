@@ -3,11 +3,6 @@
     {
       "apply": {
         "model": "jurassicrevived:block/low_security_fence_pole"
-      }
-    },
-    {
-      "apply": {
-        "model": "jurassicrevived:block/low_security_fence_pole_part"
       },
       "when": {
         "north": "true"

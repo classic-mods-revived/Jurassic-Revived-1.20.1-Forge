@@ -29,6 +29,9 @@ import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.client.ConfigScreenHandler;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -40,8 +43,11 @@ public class JRMod {
     public static final String MOD_ID = "jurassicrevived";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public JRMod() {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+    // Cache the non-deprecated instance context
+    private static ModLoadingContext MOD_CTX;
+
+    public JRMod(FMLJavaModLoadingContext javaCtx) {
+        IEventBus modEventBus = javaCtx.getModEventBus();
 
         ModCreativeModeTabs.register(modEventBus);
 
@@ -65,6 +71,8 @@ public class JRMod {
         MinecraftForge.EVENT_BUS.addListener(FenceDiagonalUpdateHandler::onNeighborNotify);
         MinecraftForge.EVENT_BUS.addListener(FenceDiagonalUpdateHandler::onEntityPlace);
         MinecraftForge.EVENT_BUS.addListener(FenceDiagonalUpdateHandler::onBreak);
+
+        javaCtx.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -91,7 +99,7 @@ public class JRMod {
 
     }
 
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
+    // Client-only events
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
         @SubscribeEvent
@@ -100,9 +108,7 @@ public class JRMod {
             EntityRenderers.register(ModEntities.CERATOSAURUS.get(), CeratosaurusRenderer::new);
             EntityRenderers.register(ModEntities.BRACHIOSAURUS.get(), BrachiosaurusRenderer::new);
             EntityRenderers.register(ModEntities.DILOPHOSAURUS.get(), DilophosaurusRenderer::new);
-            event.enqueueWork(() -> {
-
-            });
+            // Config screen is registered in ClientConfigScreenBinder
 
             MenuScreens.register(ModMenuTypes.DNA_EXTRACTOR_MENU.get(), DNAExtractorScreen::new);
             MenuScreens.register(ModMenuTypes.FOSSIL_GRINDER_MENU.get(), FossilGrinderScreen::new);

@@ -1,7 +1,9 @@
 package net.jurassicrevived.jurassicrevived.block;
 
 import net.jurassicrevived.jurassicrevived.JRMod;
+import net.jurassicrevived.jurassicrevived.Config;
 import net.jurassicrevived.jurassicrevived.block.custom.*;
+import net.jurassicrevived.jurassicrevived.block.custom.PipeBlock;
 import net.jurassicrevived.jurassicrevived.entity.ModEntities;
 import net.jurassicrevived.jurassicrevived.item.ModItems;
 import net.minecraft.world.effect.MobEffects;
@@ -21,9 +23,27 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, JRMod.MOD_ID);
 
+    // Helper: conditionally register a block item (hide power pipe when disabled)
+    private static <T extends Block> RegistryObject<Item> registerBlockItemConditional(String name, RegistryObject<T> block, Supplier<Boolean> include) {
+        if (include.get()) {
+            return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+        } else {
+            return null;
+        }
+    }
 
     public static final RegistryObject<Block> CAT_PLUSHIE = registerBlock("cat_plushie",
             () -> new DecoBlock(BlockBehaviour.Properties.of().noOcclusion().sound(SoundType.WOOL)));
+
+    public static final RegistryObject<Block> ITEM_PIPE = registerBlock("item_pipe",
+            () -> new PipeBlock(BlockBehaviour.Properties.of().strength(1.0F).noOcclusion(), PipeBlock.Transport.ITEMS));
+
+    public static final RegistryObject<Block> FLUID_PIPE = registerBlock("fluid_pipe",
+            () -> new PipeBlock(BlockBehaviour.Properties.of().strength(1.0F).noOcclusion(), PipeBlock.Transport.FLUIDS));
+
+    public static final RegistryObject<Block> POWER_PIPE = registerBlock("power_pipe",
+            () -> new PipeBlock(BlockBehaviour.Properties.of().strength(1.0F).noOcclusion(), PipeBlock.Transport.ENERGY));
+
 
     public static final RegistryObject<Block> DNA_EXTRACTOR = registerBlock("dna_extractor",
             () -> new DNAExtractorBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
@@ -117,6 +137,17 @@ public class ModBlocks {
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn);
+        return toReturn;
+    }
+
+    // Overload that can skip item for placement/visibility when disabled
+    private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, boolean registerItem) {
+        RegistryObject<T> toReturn = BLOCKS.register(name, block);
+        if (registerItem) {
+            registerBlockItem(name, toReturn);
+        } else {
+            registerBlockItemConditional(name, toReturn, () -> Config.REQUIRE_POWER);
+        }
         return toReturn;
     }
 

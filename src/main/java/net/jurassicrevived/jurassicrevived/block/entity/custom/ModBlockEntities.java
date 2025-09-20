@@ -24,6 +24,18 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("fossil_cleaner_be", () ->
                     BlockEntityType.Builder.of(FossilCleanerBlockEntity::new,
                             ModBlocks.FOSSIL_CLEANER.get()).build(null));
+    public static final RegistryObject<BlockEntityType<PipeBlockEntity>> ITEM_PIPE_BE =
+            BLOCK_ENTITIES.register("item_pipe_be", () ->
+                    BlockEntityType.Builder.of(PipeBlockEntity::new,
+                            ModBlocks.ITEM_PIPE.get()).build(null));
+    public static final RegistryObject<BlockEntityType<PipeBlockEntity>> FLUID_PIPE_BE =
+            BLOCK_ENTITIES.register("fluid_pipe_be", () ->
+                    BlockEntityType.Builder.of(PipeBlockEntity::new,
+                            ModBlocks.FLUID_PIPE.get()).build(null));
+    public static final RegistryObject<BlockEntityType<PipeBlockEntity>> POWER_PIPE_BE =
+            BLOCK_ENTITIES.register("power_pipe_be", () ->
+                    BlockEntityType.Builder.of(PipeBlockEntity::new,
+                            ModBlocks.POWER_PIPE.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

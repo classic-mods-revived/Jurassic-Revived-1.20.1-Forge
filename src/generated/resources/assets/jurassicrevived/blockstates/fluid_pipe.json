@@ -1,0 +1,168 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "jurassicrevived:block/fluid_pipe"
+      }
+    },
+    {
+      "apply": {
+        "model": "jurassicrevived:block/fluid_pipe_interchange",
+        "x": 90
+      },
+      "when": {
+        "up": "pipe"
+      }
+    },
+    {
+      "apply": {
+        "model": "jurassicrevived:block/fluid_pipe_interchange",
+        "x": 270
+      },
+      "when": {
+        "down": "pipe"
+      }
+    },
+    {
+      "apply": {
+        "model": "jurassicrevived:block/fluid_pipe_interchange",
+        "y": 180
+      },
+      "when": {
+        "north": "pipe"
+      }
+    },
+    {
+      "apply": {
+        "model": "jurassicrevived:block/fluid_pipe_interchange",
+        "y": 270
+      },
+      "when": {
+        "east": "pipe"
+      }
+    },
+    {
+      "apply": {
+        "model": "jurassicrevived:block/fluid_pipe_interchange"
+      },
+      "when": {
+        "south": "pipe"
+      }
+    },
+    {
+      "apply": {
+        "model": "jurassicrevived:block/fluid_pipe_interchange",
+        "y": 90
+      },
+      "when": {
+        "west": "pipe"
+      }
+    },
+    {
+      "apply": {
+        "model": "jurassicrevived:block/fluid_pipe_connector",
+        "x": 90
+      },
+      "when": {
+        "up": "connector"
+      }
+    },
+    {
+      "apply": {
+        "model": "jurassicrevived:block/fluid_pipe_connector",
+        "x": 270
+      },
+      "when": {
+        "down": "connector"
+      }
+    },
+    {
+      "apply": {
+        "model": "jurassicrevived:block/fluid_pipe_connector",
+        "y": 180
+      },
+      "when": {
+        "north": "connector"
+      }
+    },
+    {
+      "apply": {
+        "model": "jurassicrevived:block/fluid_pipe_connector",
+        "y": 270
+      },
+      "when": {
+        "east": "connector"
+      }
+    },
+    {
+      "apply": {
+        "model": "jurassicrevived:block/fluid_pipe_connector"
+      },
+      "when": {
+        "south": "connector"
+      }
+    },
+    {
+      "apply": {
+        "model": "jurassicrevived:block/fluid_pipe_connector",
+        "y": 90
+      },
+      "when": {
+        "west": "connector"
+      }
+    },
+    {
+      "apply": {
+        "model": "jurassicrevived:block/fluid_pipe_connector_pull",
+        "x": 90
+      },
+      "when": {
+        "up": "connector_pull"
+      }
+    },
+    {
+      "apply": {
+        "model": "jurassicrevived:block/fluid_pipe_connector_pull",
+        "x": 270
+      },
+      "when": {
+        "down": "connector_pull"
+      }
+    },
+    {
+      "apply": {
+        "model": "jurassicrevived:block/fluid_pipe_connector_pull",
+        "y": 180
+      },
+      "when": {
+        "north": "connector_pull"
+      }
+    },
+    {
+      "apply": {
+        "model": "jurassicrevived:block/fluid_pipe_connector_pull",
+        "y": 270
+      },
+      "when": {
+        "east": "connector_pull"
+      }
+    },
+    {
+      "apply": {
+        "model": "jurassicrevived:block/fluid_pipe_connector_pull"
+      },
+      "when": {
+        "south": "connector_pull"
+      }
+    },
+    {
+      "apply": {
+        "model": "jurassicrevived:block/fluid_pipe_connector_pull",
+        "y": 90
+      },
+      "when": {
+        "west": "connector_pull"
+      }
+    }
+  ]
+}

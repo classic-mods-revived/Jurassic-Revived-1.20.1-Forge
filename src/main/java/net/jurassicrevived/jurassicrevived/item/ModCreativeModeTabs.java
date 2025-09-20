@@ -1,5 +1,6 @@
 package net.jurassicrevived.jurassicrevived.item;
 
+import net.jurassicrevived.jurassicrevived.Config;
 import net.jurassicrevived.jurassicrevived.JRMod;
 import net.jurassicrevived.jurassicrevived.block.ModBlocks;
 import net.minecraft.core.registries.Registries;
@@ -46,6 +47,13 @@ public class ModCreativeModeTabs {
 
                         output.accept(ModBlocks.LOW_SECURITY_FENCE_POLE.get());
                         output.accept(ModBlocks.LOW_SECURITY_FENCE_WIRE.get());
+
+                        output.accept(ModBlocks.ITEM_PIPE.get());
+                        output.accept(ModBlocks.FLUID_PIPE.get());
+                        // Hide power pipe if power is disabled
+                        if (Config.REQUIRE_POWER) {
+                            output.accept(ModBlocks.POWER_PIPE.get());
+                        }
 
                         output.accept(ModBlocks.DNA_EXTRACTOR.get());
                         output.accept(ModBlocks.FOSSIL_GRINDER.get());
