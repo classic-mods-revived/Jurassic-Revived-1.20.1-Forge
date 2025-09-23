@@ -254,6 +254,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         multipart.part()
                 .modelFile(models().getExistingFile(modLoc("block/" + baseModelName)))
+                .addModel()
+                .end();
+
+        multipart.part()
+                .modelFile(models().getExistingFile(modLoc("block/" + straightArmModelName)))
                 .rotationY(0)
                 .addModel()
                 .condition(BlockStateProperties.NORTH, true)

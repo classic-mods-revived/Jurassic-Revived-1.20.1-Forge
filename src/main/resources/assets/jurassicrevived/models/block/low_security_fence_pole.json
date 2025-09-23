@@ -6,6 +6,7 @@
 	"textures": {
 		"0": "jurassicrevived:block/low_security_fence",
         "particle": "jurassicrevived:block/low_security_fence"
+
 	},
 	"elements": [
 		{
