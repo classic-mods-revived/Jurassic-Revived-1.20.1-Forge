@@ -1,15 +1,15 @@
 package net.jurassicrevived.jurassicrevived.util;
 
-import net.jurassicrevived.jurassicrevived.JRMod;
+import net.jurassicrevived.jurassicrevived.block.custom.FencePoleBlock;
+import net.jurassicrevived.jurassicrevived.block.custom.FenceWireBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
-import org.slf4j.Logger;
 
 public final class FenceClimbHandler {
-    private static final Logger LOG = JRMod.LOGGER;
 
     public static void register() {
         MinecraftForge.EVENT_BUS.addListener(FenceClimbHandler::onServerTickEnd);
@@ -32,23 +32,24 @@ public final class FenceClimbHandler {
                     var pos = new BlockPos(x,y,z);
                     var state = level.getBlockState(pos);
 
-                    boolean isWire = state.getBlock() instanceof net.jurassicrevived.jurassicrevived.block.custom.FenceWireBlock;
-                    boolean isPole = state.getBlock() instanceof net.jurassicrevived.jurassicrevived.block.custom.FencePoleBlock;
+                    boolean isWire = state.getBlock() instanceof FenceWireBlock;
+                    boolean isPole = state.getBlock() instanceof FencePoleBlock;
                     if (!isWire && !isPole) continue;
 
                     var shape = state.getCollisionShape(level, pos, CollisionContext.of(player));
                     if (shape.isEmpty()) continue;
 
                     if (isPole) {
-                        var postAabb = new net.minecraft.world.phys.AABB(6/16.0, 0.0, 6/16.0, 10/16.0, 1.0, 10/16.0).move(pos.getX(), pos.getY(), pos.getZ());
+                        var postAabb = new AABB(6/16.0, 0.0, 6/16.0, 10/16.0, 1.0, 10/16.0).move(pos.getX(), pos.getY(), pos.getZ());
                         for (var aabb : shape.toAabbs()) {
                             var moved = aabb.move(pos.getX(), pos.getY(), pos.getZ());
                             if (approximatelySame(moved, postAabb)) continue;
-                            if (bb.intersects(moved)) { touching = true; break outer; }
+                            if (bb.intersects(moved) && notStandingOnTop(bb, moved)) { touching = true; break outer; }
                         }
                     } else {
                         for (var aabb : shape.toAabbs()) {
-                            if (bb.intersects(aabb.move(pos.getX(), pos.getY(), pos.getZ()))) { touching = true; break outer; }
+                            var moved = aabb.move(pos.getX(), pos.getY(), pos.getZ());
+                            if (bb.intersects(moved) && notStandingOnTop(bb, moved)) { touching = true; break outer; }
                         }
                     }
                 }
@@ -77,7 +78,7 @@ public final class FenceClimbHandler {
         }
     }
 
-    private static boolean approximatelySame(net.minecraft.world.phys.AABB a, net.minecraft.world.phys.AABB b) {
+    private static boolean approximatelySame(AABB a, AABB b) {
         double eps = 1e-6;
         return Math.abs(a.minX - b.minX) < eps &&
                Math.abs(a.minY - b.minY) < eps &&
@@ -85,5 +86,10 @@ public final class FenceClimbHandler {
                Math.abs(a.maxX - b.maxX) < eps &&
                Math.abs(a.maxY - b.maxY) < eps &&
                Math.abs(a.maxZ - b.maxZ) < eps;
+    }
+
+    private static boolean notStandingOnTop(AABB player, AABB block) {
+        double eps = 0.05;
+        return !(player.minY >= block.maxY - eps && player.minY <= block.maxY + eps);
     }
 }

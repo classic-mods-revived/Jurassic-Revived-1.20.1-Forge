@@ -1,8 +1,11 @@
 package net.jurassicrevived.jurassicrevived.util;
 
+import net.jurassicrevived.jurassicrevived.block.custom.FencePoleBlock;
+import net.jurassicrevived.jurassicrevived.block.custom.FenceWireBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
@@ -29,8 +32,8 @@ public final class FenceClimbClientHandler {
             var pos = new BlockPos(x,y,z);
             var state = level.getBlockState(pos);
 
-            boolean isWire = state.getBlock() instanceof net.jurassicrevived.jurassicrevived.block.custom.FenceWireBlock;
-            boolean isPole = state.getBlock() instanceof net.jurassicrevived.jurassicrevived.block.custom.FencePoleBlock;
+            boolean isWire = state.getBlock() instanceof FenceWireBlock;
+            boolean isPole = state.getBlock() instanceof FencePoleBlock;
             if (!isWire && !isPole) continue;
 
             var shape = state.getCollisionShape(level, pos, CollisionContext.of(player));
@@ -44,11 +47,12 @@ public final class FenceClimbClientHandler {
                 for (var aabb : shape.toAabbs()) {
                     var moved = aabb.move(pos.getX(), pos.getY(), pos.getZ());
                     if (approximatelySame(moved, postAabbWorld)) continue;
-                    if (bb.intersects(moved)) { touching = true; break outer; }
+                    if (bb.intersects(moved) && notStandingOnTop(bb, moved)) { touching = true; break outer; }
                 }
             } else {
                 for (var aabb : shape.toAabbs()) {
-                    if (bb.intersects(aabb.move(pos.getX(), pos.getY(), pos.getZ()))) { touching = true; break outer; }
+                    var moved = aabb.move(pos.getX(), pos.getY(), pos.getZ());
+                    if (bb.intersects(moved) && notStandingOnTop(bb, moved)) { touching = true; break outer; }
                 }
             }
         }
@@ -77,7 +81,7 @@ public final class FenceClimbClientHandler {
         player.hasImpulse = true;
     }
 
-    private static boolean approximatelySame(net.minecraft.world.phys.AABB a, net.minecraft.world.phys.AABB b) {
+    private static boolean approximatelySame(AABB a, AABB b) {
         double eps = 1e-6;
         return Math.abs(a.minX - b.minX) < eps &&
                Math.abs(a.minY - b.minY) < eps &&
@@ -85,5 +89,10 @@ public final class FenceClimbClientHandler {
                Math.abs(a.maxX - b.maxX) < eps &&
                Math.abs(a.maxY - b.maxY) < eps &&
                Math.abs(a.maxZ - b.maxZ) < eps;
+    }
+
+    private static boolean notStandingOnTop(AABB player, AABB block) {
+        double eps = 0.05;
+        return !(player.minY >= block.maxY - eps && player.minY <= block.maxY + eps);
     }
 }

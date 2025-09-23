@@ -2,7 +2,7 @@
 	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
-	"render_type": "cutout",
+  "render_type": "translucent",
 	"textures": {
 		"0": "jurassicrevived:block/power_pipe_interchange",
 		"particle": "jurassicrevived:block/power_pipe_interchange"
