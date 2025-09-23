@@ -1,7 +1,13 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_ingredients": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "jurassicrevived:wrench"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wrench_ingredients": {
       "conditions": {
         "items": [
           {
@@ -13,17 +19,11 @@
         ]
       },
       "trigger": "minecraft:inventory_changed"
-    },
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "jurassicrevived:wrench"
-      },
-      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_ingredients",
+      "has_wrench_ingredients",
       "has_the_recipe"
     ]
   ],

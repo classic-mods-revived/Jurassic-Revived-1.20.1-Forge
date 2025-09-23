@@ -124,6 +124,8 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         basicItem(ModBlocks.LOW_SECURITY_FENCE_POLE.get().asItem());
         basicItem(ModBlocks.LOW_SECURITY_FENCE_WIRE.get().asItem());
+        basicItem(ModBlocks.MEDIUM_SECURITY_FENCE_POLE.get().asItem());
+        basicItem(ModBlocks.MEDIUM_SECURITY_FENCE_WIRE.get().asItem());
 
         simpleBlockItemBlockTexture(ModBlocks.HATCHED_VELOCIRAPTOR_EGG);
         //simpleBlockItemBlockTexture(ModBlocks.HATCHED_TYRANNOSAURUS_REX_EGG);

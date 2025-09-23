@@ -1,12 +1,13 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_reinforced_stone_bricks_ingredients": {
+    "has_medium_security_fence_wire_ingredients": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:stone_bricks"
+              "minecraft:iron_ingot",
+              "minecraft:redstone"
             ]
           }
         ]
@@ -15,20 +16,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "jurassicrevived:reinforced_stone_bricks"
+        "recipe": "jurassicrevived:medium_security_fence_wire"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_reinforced_stone_bricks_ingredients",
+      "has_medium_security_fence_wire_ingredients",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "jurassicrevived:reinforced_stone_bricks"
+      "jurassicrevived:medium_security_fence_wire"
     ]
   },
   "sends_telemetry_event": false

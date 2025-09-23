@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_ingredients": {
+    "has_fossil_grinder_ingredients": {
       "conditions": {
         "items": [
           {
@@ -26,7 +26,7 @@
   },
   "requirements": [
     [
-      "has_ingredients",
+      "has_fossil_grinder_ingredients",
       "has_the_recipe"
     ]
   ],

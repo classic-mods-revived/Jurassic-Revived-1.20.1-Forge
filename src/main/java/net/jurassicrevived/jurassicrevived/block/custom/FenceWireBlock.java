@@ -1,69 +1,74 @@
 package net.jurassicrevived.jurassicrevived.block.custom;
 
+import net.jurassicrevived.jurassicrevived.util.FenceUpdateGuard;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.jurassicrevived.jurassicrevived.util.FenceUpdateGuard;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class LowSecurityFenceWireBlock extends Block {
-    // Reentrancy guard to prevent infinite update loops caused by setBlock callbacks
-    // private static final ThreadLocal<Boolean> DIAGONAL_UPDATE_GUARD = ThreadLocal.withInitial(() -> false);
+public class FenceWireBlock extends Block {
 
     private static boolean beginGuard() {
-        // if (Boolean.TRUE.equals(DIAGONAL_UPDATE_GUARD.get())) return false;
-        // DIAGONAL_UPDATE_GUARD.set(true);
-        // return true;
         return FenceUpdateGuard.begin();
     }
 
     private static void endGuard() {
-        // DIAGONAL_UPDATE_GUARD.set(false);
         FenceUpdateGuard.end();
     }
 
     public static final BooleanProperty NORTH = BlockStateProperties.NORTH;
-    public static final BooleanProperty EAST  = BlockStateProperties.EAST;
+    public static final BooleanProperty EAST = BlockStateProperties.EAST;
     public static final BooleanProperty SOUTH = BlockStateProperties.SOUTH;
-    public static final BooleanProperty WEST  = BlockStateProperties.WEST;
+    public static final BooleanProperty WEST = BlockStateProperties.WEST;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
-    // Diagonals
     public static final BooleanProperty NE = BooleanProperty.create("ne");
     public static final BooleanProperty SE = BooleanProperty.create("se");
     public static final BooleanProperty SW = BooleanProperty.create("sw");
     public static final BooleanProperty NW = BooleanProperty.create("nw");
+    public static final IntegerProperty TIER = IntegerProperty.create("tier", 0, 2);
 
-    public LowSecurityFenceWireBlock(BlockBehaviour.Properties properties) {
+    public enum Tier {
+        LOW(0), MEDIUM(1), HIGH(2);
+        public final int id;
+
+        Tier(int id) {
+            this.id = id;
+        }
+    }
+
+    private final Tier tierConfig;
+
+    public FenceWireBlock(Properties properties, Tier tier) {
         super(properties);
+        this.tierConfig = tier;
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(NORTH, false)
-                .setValue(EAST,  false)
+                .setValue(EAST, false)
                 .setValue(SOUTH, false)
-                .setValue(WEST,  false)
+                .setValue(WEST, false)
                 .setValue(POWERED, false)
                 .setValue(NE, false)
                 .setValue(SE, false)
                 .setValue(SW, false)
                 .setValue(NW, false)
+                .setValue(TIER, tier.id)
         );
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(NORTH, EAST, SOUTH, WEST, POWERED, NE, SE, SW, NW);
+        builder.add(NORTH, EAST, SOUTH, WEST, POWERED, NE, SE, SW, NW, TIER);
     }
 
     @Override
@@ -73,20 +78,16 @@ public class LowSecurityFenceWireBlock extends Block {
         boolean powered = level.hasNeighborSignal(pos);
         return this.defaultBlockState()
                 .setValue(NORTH, connectsCardinalTo(level, pos, Direction.NORTH))
-                .setValue(EAST,  connectsCardinalTo(level, pos, Direction.EAST))
+                .setValue(EAST, connectsCardinalTo(level, pos, Direction.EAST))
                 .setValue(SOUTH, connectsCardinalTo(level, pos, Direction.SOUTH))
-                .setValue(WEST,  connectsCardinalTo(level, pos, Direction.WEST))
-                .setValue(NE,    canConnectDiagonally(level, pos, Direction.NORTH, Direction.EAST))
-                .setValue(SE,    canConnectDiagonally(level, pos, Direction.SOUTH, Direction.EAST))
-                .setValue(SW,    canConnectDiagonally(level, pos, Direction.SOUTH, Direction.WEST))
-                .setValue(NW,    canConnectDiagonally(level, pos, Direction.NORTH, Direction.WEST))
-                .setValue(POWERED, powered);
+                .setValue(WEST, connectsCardinalTo(level, pos, Direction.WEST))
+                .setValue(NE, canConnectDiagonally(level, pos, Direction.NORTH, Direction.EAST))
+                .setValue(SE, canConnectDiagonally(level, pos, Direction.SOUTH, Direction.EAST))
+                .setValue(SW, canConnectDiagonally(level, pos, Direction.SOUTH, Direction.WEST))
+                .setValue(NW, canConnectDiagonally(level, pos, Direction.NORTH, Direction.WEST))
+                .setValue(POWERED, powered)
+                .setValue(TIER, tierConfig.id);
     }
-
-//    @Override
-//    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-//        level.scheduleTick(pos, this, 2);
-//    }
 
     @Override
     @SuppressWarnings("deprecation")
@@ -110,7 +111,6 @@ public class LowSecurityFenceWireBlock extends Block {
         if (poweredNow != state.getValue(POWERED)) {
             if (beginGuard()) {
                 try {
-                    // Keep full notifications for power changes
                     level.setBlock(pos, state.setValue(POWERED, poweredNow), Block.UPDATE_ALL);
                 } finally {
                     endGuard();
@@ -128,22 +128,14 @@ public class LowSecurityFenceWireBlock extends Block {
                         .setValue(SW, canConnectDiagonally(level, pos, Direction.SOUTH, Direction.WEST))
                         .setValue(NW, canConnectDiagonally(level, pos, Direction.NORTH, Direction.WEST));
                 if (updated != state) {
-                    // Diagonal-only changes: client update only to prevent ping-pong
                     level.setBlock(pos, updated, Block.UPDATE_CLIENTS);
                 }
-                // Also push recomputation to our 4 diagonals (uses UPDATE_CLIENTS inside)
                 updateDiagonalsAround(level, pos);
             } finally {
                 endGuard();
             }
         }
     }
-
-//    @Override
-//    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-//        recomputeSelfDiagonals(level, pos, state);
-//        updateDiagonalsAround(level, pos);
-//    }
 
     private void recomputeSelfDiagonals(Level level, BlockPos pos, BlockState state) {
         BlockState updated = state
@@ -158,76 +150,65 @@ public class LowSecurityFenceWireBlock extends Block {
     }
 
     private void updateDiagonalsAround(Level level, BlockPos pos) {
-        // Precompute the 4 diagonal positions relative to 'pos'
         BlockPos nePos = pos.north().east();
         BlockPos sePos = pos.south().east();
         BlockPos swPos = pos.south().west();
         BlockPos nwPos = pos.north().west();
 
-        BlockPos[] diags = new BlockPos[] { nePos, sePos, swPos, nwPos };
+        BlockPos[] diags = new BlockPos[]{nePos, sePos, swPos, nwPos};
 
         for (BlockPos p : diags) {
             BlockState bs = level.getBlockState(p);
             Block b = bs.getBlock();
 
-            if (b instanceof LowSecurityFencePoleBlock) {
-                // Determine which diagonal from 'p' points back to 'pos' and set just that flag.
-                // Mapping:
-                // - If p == pos.north().east(), pole at p should set SW toward 'pos'
-                // - If p == pos.south().east(), pole at p should set NW toward 'pos'
-                // - If p == pos.south().west(), pole at p should set NE toward 'pos'
-                // - If p == pos.north().west(), pole at p should set SE toward 'pos'
+            if (b instanceof FencePoleBlock) {
                 BooleanProperty backFlag;
                 Direction backA;
                 Direction backB;
 
                 if (p.equals(nePos)) {
-                    backFlag = LowSecurityFencePoleBlock.SW;
+                    backFlag = FencePoleBlock.SW;
                     backA = Direction.SOUTH;
                     backB = Direction.WEST;
                 } else if (p.equals(sePos)) {
-                    backFlag = LowSecurityFencePoleBlock.NW;
+                    backFlag = FencePoleBlock.NW;
                     backA = Direction.NORTH;
                     backB = Direction.WEST;
                 } else if (p.equals(swPos)) {
-                    backFlag = LowSecurityFencePoleBlock.NE;
+                    backFlag = FencePoleBlock.NE;
                     backA = Direction.NORTH;
                     backB = Direction.EAST;
-                } else { // p == nwPos
-                    backFlag = LowSecurityFencePoleBlock.SE;
+                } else {
+                    backFlag = FencePoleBlock.SE;
                     backA = Direction.SOUTH;
                     backB = Direction.EAST;
                 }
 
-                boolean allow = LowSecurityFenceWireBlock.canConnectDiagonally(level, p, backA, backB);
+                boolean allow = FenceWireBlock.canConnectDiagonally(level, p, backA, backB);
 
                 BlockState updated = bs.setValue(backFlag, allow);
                 if (updated != bs) {
-                    // Avoid neighbor notifications here
                     level.setBlock(p, updated, Block.UPDATE_CLIENTS);
                 }
 
-            } else if (b instanceof LowSecurityFenceWireBlock) {
+            } else if (b instanceof FenceWireBlock) {
                 boolean ne = canConnectDiagonally(level, p, Direction.NORTH, Direction.EAST);
                 boolean se = canConnectDiagonally(level, p, Direction.SOUTH, Direction.EAST);
                 boolean sw = canConnectDiagonally(level, p, Direction.SOUTH, Direction.WEST);
                 boolean nw = canConnectDiagonally(level, p, Direction.NORTH, Direction.WEST);
                 BlockState updated = bs
-                        .setValue(LowSecurityFenceWireBlock.NE, ne)
-                        .setValue(LowSecurityFenceWireBlock.SE, se)
-                        .setValue(LowSecurityFenceWireBlock.SW, sw)
-                        .setValue(LowSecurityFenceWireBlock.NW, nw);
+                        .setValue(FenceWireBlock.NE, ne)
+                        .setValue(FenceWireBlock.SE, se)
+                        .setValue(FenceWireBlock.SW, sw)
+                        .setValue(FenceWireBlock.NW, nw);
                 if (updated != bs) {
-                    // Avoid neighbor notifications here
                     level.setBlock(p, updated, Block.UPDATE_CLIENTS);
                 }
             }
         }
     }
 
-    // Public static helper so other blocks (like the pole) can use the same diagonal rule
     public static boolean canConnectDiagonally(LevelAccessor level, BlockPos pos, Direction a, Direction b) {
-        // Source and target
         BlockState srcState = level.getBlockState(pos);
         Block srcBlock = srcState.getBlock();
 
@@ -235,101 +216,85 @@ public class LowSecurityFenceWireBlock extends Block {
         BlockState diagState = level.getBlockState(diag);
         Block diagBlock = diagState.getBlock();
 
-        boolean srcIsPole  = srcBlock instanceof LowSecurityFencePoleBlock;
-        boolean diagIsWire = diagBlock instanceof LowSecurityFenceWireBlock;
-        boolean diagIsPole = diagBlock instanceof LowSecurityFencePoleBlock;
+        boolean srcIsPole = srcBlock instanceof FencePoleBlock;
+        boolean diagIsWire = diagBlock instanceof FenceWireBlock;
+        boolean diagIsPole = diagBlock instanceof FencePoleBlock;
 
-        // Treat solid blocks as potential diagonal endpoints if at least one face toward the corner is sturdy
         boolean diagIsSolidCorner =
                 diagState.isFaceSturdy(level, diag, a.getOpposite())
                         || diagState.isFaceSturdy(level, diag, b.getOpposite());
 
-        // Only form diagonal if the target is a wire, a pole, or a solid corner
         if (!diagIsWire && !diagIsPole && !diagIsSolidCorner) return false;
 
-        // If either endpoint is a pole, allow the diagonal (pole↔wire, pole↔pole, pole↔solid-corner)
         if (srcIsPole || diagIsPole) {
             return true;
         }
 
-        // From here we are wire↔(wire or solid-corner)
-        // Intermediate cardinal positions along the L-path
         BlockPos stepA = pos.relative(a);
         BlockPos stepB = pos.relative(b);
 
         BlockState stateA = level.getBlockState(stepA);
         BlockState stateB = level.getBlockState(stepB);
 
-        // Consider any sturdy-faced block in the path as blocking the diagonal turn
         boolean stepABlocks =
-                stateA.getBlock() instanceof LowSecurityFenceWireBlock
-                        || stateA.getBlock() instanceof LowSecurityFencePoleBlock
+                stateA.getBlock() instanceof FenceWireBlock
+                        || stateA.getBlock() instanceof FencePoleBlock
                         || stateA.isFaceSturdy(level, stepA, a.getOpposite());
 
         boolean stepBBlocks =
-                stateB.getBlock() instanceof LowSecurityFenceWireBlock
-                        || stateB.getBlock() instanceof LowSecurityFencePoleBlock
+                stateB.getBlock() instanceof FenceWireBlock
+                        || stateB.getBlock() instanceof FencePoleBlock
                         || stateB.isFaceSturdy(level, stepB, b.getOpposite());
 
-        // Block diagonals that cut across an existing leg or sturdy solid at the turn
         if (stepABlocks || stepBBlocks) return false;
-
-        // Note: Removed the "outside-corner" blocking entirely so diagonals are allowed
-        // even if a pole or solid sits at the outside corner.
 
         return true;
     }
-    // Only consider diagonals that end at another fence when suppressing wire↔wire cardinals
+
     private static boolean canConnectDiagonallyToFence(LevelAccessor level, BlockPos pos, Direction a, Direction b) {
         BlockPos diag = pos.relative(a).relative(b);
         BlockState diagState = level.getBlockState(diag);
         Block db = diagState.getBlock();
-        if (!(db instanceof LowSecurityFenceWireBlock) && !(db instanceof LowSecurityFencePoleBlock)) {
-            return false; // solids should NOT cause wire↔wire cardinal suppression
+        if (!(db instanceof FenceWireBlock) && !(db instanceof FencePoleBlock)) {
+            return false;
         }
         return canConnectDiagonally(level, pos, a, b);
     }
 
     private boolean connectsTo(BlockState neighbor) {
         Block b = neighbor.getBlock();
-        return (b instanceof LowSecurityFenceWireBlock) || (b instanceof LowSecurityFencePoleBlock);
+        return (b instanceof FenceWireBlock) || (b instanceof FencePoleBlock);
     }
 
     private static BooleanProperty propertyFor(Direction dir) {
         return switch (dir) {
             case NORTH -> NORTH;
-            case EAST  -> EAST;
+            case EAST -> EAST;
             case SOUTH -> SOUTH;
-            case WEST  -> WEST;
+            case WEST -> WEST;
             default -> throw new IllegalArgumentException("Only horizontal");
         };
     }
 
-    // Cardinal rule:
-    // - Connect to a pole in the cardinal direction.
-    // - If neighbor is a wire, suppress the cardinal connection when a corner diagonal to a FENCE (wire or pole)
-    //   is allowed from either this block or the neighbor (on either of the two corners adjacent to that side).
-    // - Otherwise, connect to any solid block with a sturdy face toward us.
     private boolean connectsCardinalTo(LevelAccessor level, BlockPos pos, Direction dir) {
         BlockPos neighborPos = pos.relative(dir);
         BlockState neighbor = level.getBlockState(neighborPos);
         Block nb = neighbor.getBlock();
 
-        if (nb instanceof LowSecurityFencePoleBlock) {
+        if (nb instanceof FencePoleBlock) {
             return true;
         }
 
-        if (nb instanceof LowSecurityFenceWireBlock) {
+        if (nb instanceof FenceWireBlock) {
             Direction right = dir.getClockWise();
-            Direction left  = dir.getCounterClockWise();
+            Direction left = dir.getCounterClockWise();
 
-            // Only count fence-ending diagonals for suppression
             boolean thisDiagRight = canConnectDiagonallyToFence(level, pos, dir, right);
-            boolean thisDiagLeft  = canConnectDiagonallyToFence(level, pos, dir, left);
+            boolean thisDiagLeft = canConnectDiagonallyToFence(level, pos, dir, left);
 
             Direction back = dir.getOpposite();
             boolean neighDiagRight = canConnectDiagonallyToFence(level, neighborPos, back, back.getClockWise());
-            boolean neighDiagLeft  = canConnectDiagonallyToFence(level, neighborPos, back, back.getCounterClockWise());
+            boolean neighDiagLeft = canConnectDiagonallyToFence(level, neighborPos, back, back.getCounterClockWise());
 
             if (thisDiagRight || thisDiagLeft || neighDiagRight || neighDiagLeft) {
                 return false;
@@ -338,7 +303,6 @@ public class LowSecurityFenceWireBlock extends Block {
             return true;
         }
 
-        // Connect to solid blocks: a sturdy face toward us is enough
         if (neighbor.isFaceSturdy(level, neighborPos, dir.getOpposite())) {
             return true;
         }
@@ -346,7 +310,6 @@ public class LowSecurityFenceWireBlock extends Block {
         return false;
     }
 
-    // --------- Light/shadow behavior ----------
     @Override
     public boolean propagatesSkylightDown(BlockState state, BlockGetter level, BlockPos pos) {
         return true;
@@ -362,22 +325,16 @@ public class LowSecurityFenceWireBlock extends Block {
         return 1.0F;
     }
 
-    // --------- Shapes ----------
     private static final VoxelShape CENTER = Block.box(7.5, 3.5, 7.5, 8.5, 12.5, 8.5);
 
-    // Arms: one tall slab per side (bridging low/high)
     private static final VoxelShape ARM_NORTH = Block.box(7.5, 3.5, 0.0, 8.5, 12.5, 8.0);
     private static final VoxelShape ARM_SOUTH = Block.box(7.5, 3.5, 8.0, 8.5, 12.5, 16.0);
-    private static final VoxelShape ARM_WEST  = Block.box(0.0, 3.5, 7.5, 8.0, 12.5, 8.5);
-    private static final VoxelShape ARM_EAST  = Block.box(8.0, 3.5, 7.5, 16.0, 12.5, 8.5);
+    private static final VoxelShape ARM_WEST = Block.box(0.0, 3.5, 7.5, 8.0, 12.5, 8.5);
+    private static final VoxelShape ARM_EAST = Block.box(8.0, 3.5, 7.5, 16.0, 12.5, 8.5);
 
-    // Build a stepped diagonal band going from a corner toward the center.
-    // 'east'/'south' indicate the corner (NE = east && !south, SE = east && south, etc.)
     private static VoxelShape buildDiagonal(boolean east, boolean south) {
         VoxelShape shape = Shapes.empty();
-        // Band thickness (wire width): 1 block unit (1/16th of a block)
         double y1 = 3.5, y2 = 12.5;
-        // Create 8 steps from edge to center. Each step is 1-wide and moves along the diagonal.
         for (int i = 0; i < 8; i++) {
             double off = i; // 0..7
             double x1 = east ? 16 - (off + 1) : 0 + off;
@@ -389,9 +346,8 @@ public class LowSecurityFenceWireBlock extends Block {
         return shape;
     }
 
-    // Diagonal stepped volumes (approximate 45° connection)
-    private static final VoxelShape DIAG_NE = buildDiagonal(true,  false);
-    private static final VoxelShape DIAG_SE = buildDiagonal(true,  true);
+    private static final VoxelShape DIAG_NE = buildDiagonal(true, false);
+    private static final VoxelShape DIAG_SE = buildDiagonal(true, true);
     private static final VoxelShape DIAG_SW = buildDiagonal(false, true);
     private static final VoxelShape DIAG_NW = buildDiagonal(false, false);
 
@@ -401,8 +357,8 @@ public class LowSecurityFenceWireBlock extends Block {
 
         if (state.getValue(NORTH)) shape = Shapes.or(shape, ARM_NORTH);
         if (state.getValue(SOUTH)) shape = Shapes.or(shape, ARM_SOUTH);
-        if (state.getValue(WEST))  shape = Shapes.or(shape, ARM_WEST);
-        if (state.getValue(EAST))  shape = Shapes.or(shape, ARM_EAST);
+        if (state.getValue(WEST)) shape = Shapes.or(shape, ARM_WEST);
+        if (state.getValue(EAST)) shape = Shapes.or(shape, ARM_EAST);
 
         if (state.getValue(NE)) shape = Shapes.or(shape, DIAG_NE);
         if (state.getValue(SE)) shape = Shapes.or(shape, DIAG_SE);
@@ -412,17 +368,11 @@ public class LowSecurityFenceWireBlock extends Block {
         return shape;
     }
 
-    // Always climbable: covers center, cardinal arms, and diagonal arms without tags
-    @Override
-    public boolean isLadder(BlockState state, LevelReader world, BlockPos pos, LivingEntity entity) {
-        return true;
-    }
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
         super.onPlace(state, level, pos, oldState, isMoving);
         if (!beginGuard()) return;
         try {
-            // Recompute our diagonals and push the “back” diagonal flag onto diagonal poles/wires
             recomputeSelfDiagonals(level, pos, state);
             updateDiagonalsAround(level, pos);
         } finally {
@@ -436,7 +386,6 @@ public class LowSecurityFenceWireBlock extends Block {
         if (!state.is(newState.getBlock())) {
             if (beginGuard()) {
                 try {
-                    // Tell diagonal neighbors to drop their back-diagonal link to this wire
                     updateDiagonalsAround(level, pos);
                 } finally {
                     endGuard();
@@ -449,5 +398,12 @@ public class LowSecurityFenceWireBlock extends Block {
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext ctx) {
         return getShape(state, level, pos, ctx);
+    }
+
+    @Override
+    public VoxelShape getVisualShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext ctx) {
+        boolean hasDiagonal = state.getValue(NE) || state.getValue(SE) || state.getValue(SW) || state.getValue(NW);
+        if (!hasDiagonal) return getShape(state, level, pos, ctx);
+        return Shapes.block();
     }
 }

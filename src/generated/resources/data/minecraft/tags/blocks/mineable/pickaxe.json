@@ -15,7 +15,7 @@
     "jurassicrevived:dna_extractor",
     "jurassicrevived:fossil_grinder",
     "jurassicrevived:fossil_cleaner",
-    "jurassicrevived:low_security_fence_pole",
-    "jurassicrevived:low_security_fence_wire"
+    "jurassicrevived:medium_security_fence_pole",
+    "jurassicrevived:medium_security_fence_wire"
   ]
 }

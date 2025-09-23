@@ -24,8 +24,10 @@
   "block.jurassicrevived.reinforced_stone": "Reinforced Stone",
   "block.jurassicrevived.reinforced_stone_bricks": "Reinforced Stone Bricks",
 
-  "block.jurassicrevived.low_security_fence_pole": "Low Security Fence Pole",
-  "block.jurassicrevived.low_security_fence_wire": "Low Security Fence Wire",
+  "block.jurassicrevived.low_security_fence_pole": "§aLow §r§7Security Fence Pole",
+  "block.jurassicrevived.low_security_fence_wire": "§aLow §r§7Security Fence Wire",
+  "block.jurassicrevived.medium_security_fence_pole": "§6Medium §r§7Security Fence Pole",
+  "block.jurassicrevived.medium_security_fence_wire": "§6Medium §r§7Security Fence Wire",
 
   "block.jurassicrevived.item_pipe": "Item Pipe",
   "block.jurassicrevived.fluid_pipe": "Fluid Pipe",
@@ -85,6 +87,7 @@
   "item.jurassicrevived.processor": "Processor",
   "item.jurassicrevived.tire": "Tire",
   "item.jurassicrevived.cutting_blades": "Cutting Blades",
+  "item.jurassicrevived.wrench": "Wrench",
 
   "item.jurassicrevived.velociraptor_tissue": "Velociraptor Tissue",
   "item.jurassicrevived.tyrannosaurus_rex_tissue": "Tyrannosaurus Rex Tissue",

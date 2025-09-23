@@ -1,12 +1,13 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_reinforced_stone_bricks_ingredients": {
+    "has_fluid_pipe_ingredients": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:stone_bricks"
+              "minecraft:water_bucket",
+              "jurassicrevived:cable"
             ]
           }
         ]
@@ -15,20 +16,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "jurassicrevived:reinforced_stone_bricks"
+        "recipe": "jurassicrevived:fluid_pipe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_reinforced_stone_bricks_ingredients",
+      "has_fluid_pipe_ingredients",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "jurassicrevived:reinforced_stone_bricks"
+      "jurassicrevived:fluid_pipe"
     ]
   },
   "sends_telemetry_event": false

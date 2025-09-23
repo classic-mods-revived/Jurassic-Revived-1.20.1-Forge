@@ -42,8 +42,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         //.add(ModBlocks.EMBRYONIC_MACHINE.get())
         //.add(ModBlocks.EMBRYO_CALCIFICATION_MACHINE.get())
         //.add(ModBlocks.INCUBATOR.get())
-        .add(ModBlocks.LOW_SECURITY_FENCE_POLE.get())
-        .add(ModBlocks.LOW_SECURITY_FENCE_WIRE.get());
+        .add(ModBlocks.MEDIUM_SECURITY_FENCE_POLE.get())
+        .add(ModBlocks.MEDIUM_SECURITY_FENCE_WIRE.get());
 
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL);
         //.add(ModBlocks.hq_ORE.get());

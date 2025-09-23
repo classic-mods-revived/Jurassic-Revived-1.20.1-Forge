@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:redstone"
+    },
+    "B": {
+      "item": "jurassicrevived:cable"
+    }
+  },
+  "pattern": [
+    " A ",
+    "BBB",
+    " A "
+  ],
+  "result": {
+    "count": 8,
+    "item": "jurassicrevived:power_pipe"
+  },
+  "show_notification": true
+}

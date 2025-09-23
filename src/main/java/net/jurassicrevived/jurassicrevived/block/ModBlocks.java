@@ -75,10 +75,13 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops()));
 
     public static final RegistryObject<Block> LOW_SECURITY_FENCE_POLE = registerBlock("low_security_fence_pole",
-            () -> new LowSecurityFencePoleBlock(BlockBehaviour.Properties.of().strength(1.0F).noOcclusion()));
-
+            () -> new FencePoleBlock(BlockBehaviour.Properties.of().strength(1.0F).noOcclusion(), FencePoleBlock.Tier.LOW));
     public static final RegistryObject<Block> LOW_SECURITY_FENCE_WIRE = registerBlock("low_security_fence_wire",
-            () -> new LowSecurityFenceWireBlock(BlockBehaviour.Properties.of().strength(0.5F).noOcclusion()));
+            () -> new FenceWireBlock(BlockBehaviour.Properties.of().strength(0.5F).noOcclusion(), FenceWireBlock.Tier.LOW));
+    public static final RegistryObject<Block> MEDIUM_SECURITY_FENCE_POLE = registerBlock("medium_security_fence_pole",
+            () -> new FencePoleBlock(BlockBehaviour.Properties.of().strength(1.0F).noOcclusion(), FencePoleBlock.Tier.MEDIUM));
+    public static final RegistryObject<Block> MEDIUM_SECURITY_FENCE_WIRE = registerBlock("medium_security_fence_wire",
+            () -> new FenceWireBlock(BlockBehaviour.Properties.of().strength(0.5F).noOcclusion(), FenceWireBlock.Tier.MEDIUM));
 
     public static final RegistryObject<Block> STONE_FOSSIL = registerBlock("stone_fossil",
             () -> new Block(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops()));

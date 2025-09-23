@@ -17,6 +17,8 @@ import net.jurassicrevived.jurassicrevived.screen.ModMenuTypes;
 import net.jurassicrevived.jurassicrevived.screen.custom.DNAExtractorScreen;
 import net.jurassicrevived.jurassicrevived.screen.custom.FossilCleanerScreen;
 import net.jurassicrevived.jurassicrevived.screen.custom.FossilGrinderScreen;
+import net.jurassicrevived.jurassicrevived.util.FenceClimbClientHandler;
+import net.jurassicrevived.jurassicrevived.util.FenceClimbHandler;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -65,6 +67,8 @@ public class JRMod {
 
         modEventBus.addListener(this::commonSetup);
 
+        FenceClimbHandler.register();
+
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
 
@@ -109,6 +113,8 @@ public class JRMod {
             EntityRenderers.register(ModEntities.BRACHIOSAURUS.get(), BrachiosaurusRenderer::new);
             EntityRenderers.register(ModEntities.DILOPHOSAURUS.get(), DilophosaurusRenderer::new);
             // Config screen is registered in ClientConfigScreenBinder
+
+            FenceClimbClientHandler.register();
 
             MenuScreens.register(ModMenuTypes.DNA_EXTRACTOR_MENU.get(), DNAExtractorScreen::new);
             MenuScreens.register(ModMenuTypes.FOSSIL_GRINDER_MENU.get(), FossilGrinderScreen::new);

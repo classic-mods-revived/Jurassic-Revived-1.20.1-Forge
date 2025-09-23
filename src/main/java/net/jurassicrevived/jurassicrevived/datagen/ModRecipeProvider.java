@@ -44,7 +44,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("B  ")
                 .define('A', Items.IRON_INGOT)
                 .define('B', Blocks.GLASS)
-                .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                .unlockedBy("has_ampoule_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(Items.IRON_INGOT, Blocks.GLASS).build())).save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SYRINGE.get(), 3)
@@ -54,7 +54,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('A', Items.IRON_INGOT)
                 .define('B', Blocks.GLASS)
                 .define('C', Items.IRON_NUGGET)
-                .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                .unlockedBy("has__syringe_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(Items.IRON_INGOT, Blocks.GLASS, Items.IRON_NUGGET).build())).save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.CABLE.get(), 4)
@@ -63,7 +63,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("AB ")
                 .define('A', Items.COPPER_INGOT)
                 .define('B', Items.IRON_NUGGET)
-                .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                .unlockedBy("has_cable_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(Items.COPPER_INGOT, Items.IRON_NUGGET).build())).save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SCREEN.get(), 2)
@@ -73,7 +73,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('A', Items.IRON_INGOT)
                 .define('B', Blocks.REDSTONE_LAMP)
                 .define('C', ModItems.CABLE.get())
-                .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                .unlockedBy("has_screen_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(Items.IRON_INGOT, Blocks.REDSTONE_LAMP, ModItems.CABLE.get()).build())).save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.PROCESSOR.get())
@@ -83,7 +83,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('A', Items.GOLD_NUGGET)
                 .define('B', Items.IRON_INGOT)
                 .define('C', Items.REDSTONE)
-                .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                .unlockedBy("has_processor_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(Items.GOLD_NUGGET, Items.IRON_INGOT, Items.REDSTONE).build())).save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.TIRE.get())
@@ -92,7 +92,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("AAA")
                 .define('A', Items.INK_SAC)
                 .define('B', Items.IRON_INGOT)
-                .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                .unlockedBy("has_tire_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(Items.INK_SAC, Items.IRON_INGOT).build())).save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.CUTTING_BLADES.get(), 4)
@@ -100,14 +100,14 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern(" A ")
                 .pattern("A A")
                 .define('A', Items.IRON_INGOT)
-                .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                .unlockedBy("has_cutting_blades_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(Items.IRON_INGOT).build())).save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.GYPSUM_STONE_BRICKS.get(), 4)
                 .pattern("AA")
                 .pattern("AA")
                 .define('A', ModBlocks.GYPSUM_STONE.get())
-                .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                .unlockedBy("has_gypsum_stone_bricks_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(ModBlocks.GYPSUM_STONE.get()).build())).save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.REINFORCED_STONE.get(), 6)
@@ -115,7 +115,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("AAA")
                 .pattern("AAA")
                 .define('A', Blocks.STONE)
-                .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                .unlockedBy("has_reinforced_stone_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(Blocks.STONE).build())).save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.REINFORCED_STONE_BRICKS.get(), 6)
@@ -123,8 +123,43 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("AAA")
                 .pattern("AAA")
                 .define('A', Blocks.STONE_BRICKS)
-                .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                .unlockedBy("has_reinforced_stone_bricks_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(Blocks.STONE_BRICKS).build())).save(pWriter);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.LOW_SECURITY_FENCE_POLE.get(), 8)
+                .pattern("ABA")
+                .pattern(" B ")
+                .pattern("ABA")
+                .define('A', Items.IRON_INGOT)
+                .define('B', Items.IRON_NUGGET)
+                .unlockedBy("has_low_security_fence_pole_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                        of(Items.IRON_INGOT, Items.IRON_NUGGET).build())).save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.LOW_SECURITY_FENCE_WIRE.get(), 16)
+                .pattern("AAA")
+                .pattern(" B ")
+                .pattern("AAA")
+                .define('A', Items.IRON_INGOT)
+                .define('B', Items.REDSTONE)
+                .unlockedBy("has_low_security_fence_wire_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                        of(Items.IRON_INGOT, Items.REDSTONE).build())).save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.MEDIUM_SECURITY_FENCE_POLE.get(), 8)
+                .pattern("ABA")
+                .pattern("ABA")
+                .pattern("ABA")
+                .define('A', Items.IRON_INGOT)
+                .define('B', Items.IRON_NUGGET)
+                .unlockedBy("has_medium_security_fence_pole_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                        of(Items.IRON_INGOT, Items.IRON_NUGGET).build())).save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.MEDIUM_SECURITY_FENCE_WIRE.get(), 16)
+                .pattern("AAA")
+                .pattern("BBB")
+                .pattern("AAA")
+                .define('A', Items.IRON_INGOT)
+                .define('B', Items.REDSTONE)
+                .unlockedBy("has_medium_security_fence_wire_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                        of(Items.IRON_INGOT, Items.REDSTONE).build())).save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.DNA_EXTRACTOR.get(), 1)
                 .pattern("AAA")
@@ -134,7 +169,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', ModItems.SCREEN.get())
                 .define('C', ModItems.CABLE.get())
                 .define('D', ModItems.PROCESSOR.get())
-                .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                .unlockedBy("has_dna_extractor_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(Items.LAPIS_LAZULI, ModItems.SCREEN.get(), ModItems.CABLE.get(), ModItems.PROCESSOR.get()).build())).save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.FOSSIL_GRINDER.get(), 1)
@@ -146,7 +181,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('C', Items.LAPIS_LAZULI)
                 .define('D', ModItems.CUTTING_BLADES.get())
                 .define('E', Items.WATER_BUCKET)
-                .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                .unlockedBy("has_fossil_grinder_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(Items.IRON_INGOT, Blocks.GLASS, Items.LAPIS_LAZULI, ModItems.CUTTING_BLADES.get(), Items.WATER_BUCKET).build())).save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.FOSSIL_CLEANER.get(), 1)
@@ -156,7 +191,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('A', Items.IRON_INGOT)
                 .define('B', Items.IRON_NUGGET)
                 .define('C', Blocks.GLASS)
-                .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                .unlockedBy("has_fossil_cleaner_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(Items.IRON_INGOT, Items.IRON_NUGGET, Blocks.GLASS).build())).save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.WRENCH.get(), 1)
@@ -165,8 +200,32 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("B  ")
                 .define('A', Items.IRON_INGOT)
                 .define('B', Items.IRON_NUGGET)
-                .unlockedBy("has_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                .unlockedBy("has_wrench_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(Items.IRON_INGOT, Items.IRON_NUGGET).build())).save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.ITEM_PIPE.get(), 8)
+                .pattern("AAA")
+                .define('A', Items.IRON_INGOT)
+                .unlockedBy("has_item_pipe_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                        of(ModItems.CABLE.get()).build())).save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.FLUID_PIPE.get(), 8)
+                .pattern(" A ")
+                .pattern("BBB")
+                .pattern(" A ")
+                .define('A', Items.WATER_BUCKET)
+                .define('B', ModItems.CABLE.get())
+                .unlockedBy("has_fluid_pipe_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                        of(Items.WATER_BUCKET, ModItems.CABLE.get()).build())).save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.POWER_PIPE.get(), 8)
+                .pattern(" A ")
+                .pattern("BBB")
+                .pattern(" A ")
+                .define('A', Items.REDSTONE)
+                .define('B', ModItems.CABLE.get())
+                .unlockedBy("has_power_pipe_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                        of(Items.REDSTONE, ModItems.CABLE.get()).build())).save(pWriter);
 
         new DNAExtractingRecipeBuilder(ModItems.AMPOULE.get(), ModItems.VELOCIRAPTOR_TISSUE.get(), ModItems.VELOCIRAPTOR_DNA.get(), 1)
                 .unlockedBy("has_ampoule", has(ModItems.AMPOULE.get())).save(pWriter);

@@ -48,6 +48,8 @@ public class ModCreativeModeTabs {
 
                         output.accept(ModBlocks.LOW_SECURITY_FENCE_POLE.get());
                         output.accept(ModBlocks.LOW_SECURITY_FENCE_WIRE.get());
+                        output.accept(ModBlocks.MEDIUM_SECURITY_FENCE_POLE.get());
+                        output.accept(ModBlocks.MEDIUM_SECURITY_FENCE_WIRE.get());
 
                         output.accept(ModBlocks.ITEM_PIPE.get());
                         output.accept(ModBlocks.FLUID_PIPE.get());

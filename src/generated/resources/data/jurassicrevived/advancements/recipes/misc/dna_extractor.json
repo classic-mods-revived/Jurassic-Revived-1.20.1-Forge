@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_ingredients": {
+    "has_dna_extractor_ingredients": {
       "conditions": {
         "items": [
           {
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_ingredients",
+      "has_dna_extractor_ingredients",
       "has_the_recipe"
     ]
   ],

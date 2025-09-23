@@ -26,6 +26,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.DEEPSLATE_FOSSIL.get());
         this.dropSelf(ModBlocks.LOW_SECURITY_FENCE_POLE.get());
         this.dropSelf(ModBlocks.LOW_SECURITY_FENCE_WIRE.get());
+        this.dropSelf(ModBlocks.MEDIUM_SECURITY_FENCE_POLE.get());
+        this.dropSelf(ModBlocks.MEDIUM_SECURITY_FENCE_WIRE.get());
 
         this.dropSelf(ModBlocks.ITEM_PIPE.get());
         this.dropSelf(ModBlocks.POWER_PIPE.get());

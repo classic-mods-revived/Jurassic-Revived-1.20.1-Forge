@@ -2,8 +2,8 @@ package net.jurassicrevived.jurassicrevived.datagen;
 
 import net.jurassicrevived.jurassicrevived.JRMod;
 import net.jurassicrevived.jurassicrevived.block.ModBlocks;
-import net.jurassicrevived.jurassicrevived.block.custom.LowSecurityFencePoleBlock;
-import net.jurassicrevived.jurassicrevived.block.custom.LowSecurityFenceWireBlock;
+import net.jurassicrevived.jurassicrevived.block.custom.FencePoleBlock;
+import net.jurassicrevived.jurassicrevived.block.custom.FenceWireBlock;
 import net.jurassicrevived.jurassicrevived.block.custom.PipeBlock;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -81,10 +81,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 "low_security_fence_pole",
                 "low_security_fence_pole_part",
                 "low_security_fence_pole_diagonal_part",
-                LowSecurityFencePoleBlock.NE,
-                LowSecurityFencePoleBlock.SE,
-                LowSecurityFencePoleBlock.SW,
-                LowSecurityFencePoleBlock.NW
+                FencePoleBlock.NE,
+                FencePoleBlock.SE,
+                FencePoleBlock.SW,
+                FencePoleBlock.NW
         );
 
         customFenceMultipart(
@@ -92,14 +92,34 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 "low_security_fence_wire",
                 "low_security_fence_wire_part",
                 "low_security_fence_wire_diagonal_part",
-                LowSecurityFenceWireBlock.NE,
-                LowSecurityFenceWireBlock.SE,
-                LowSecurityFenceWireBlock.SW,
-                LowSecurityFenceWireBlock.NW
+                FenceWireBlock.NE,
+                FenceWireBlock.SE,
+                FenceWireBlock.SW,
+                FenceWireBlock.NW
         );
 
-        // Pipes (combined blockstate + item model generation):
-        // distinct base names so each pipe can have its own textures/models
+        customFenceMultipart(
+                ModBlocks.MEDIUM_SECURITY_FENCE_POLE,
+                "medium_security_fence_pole",
+                "medium_security_fence_pole_part",
+                "medium_security_fence_pole_diagonal_part",
+                FencePoleBlock.NE,
+                FencePoleBlock.SE,
+                FencePoleBlock.SW,
+                FencePoleBlock.NW
+        );
+
+        customFenceMultipart(
+                ModBlocks.MEDIUM_SECURITY_FENCE_WIRE,
+                "medium_security_fence_wire",
+                "medium_security_fence_wire_part",
+                "medium_security_fence_wire_diagonal_part",
+                FenceWireBlock.NE,
+                FenceWireBlock.SE,
+                FenceWireBlock.SW,
+                FenceWireBlock.NW
+        );
+
         pipeMultipartWithItem(ModBlocks.ITEM_PIPE, "item_pipe");
         pipeMultipartWithItem(ModBlocks.FLUID_PIPE, "fluid_pipe");
         pipeMultipartWithItem(ModBlocks.POWER_PIPE, "power_pipe");
@@ -168,31 +188,21 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlock(block.get(), eggModel);
     }
 
-    // Combined helper: generate multipart for the pipe, and also the item model (3D: parent to base block model)
     private void pipeMultipartWithItem(RegistryObject<? extends Block> regBlock, String modelBaseName) {
         pipeMultipart(regBlock, modelBaseName);
-        // Item model uses the base block model for a 3D inventory icon
         ModelFile itemParent = new ModelFile.UncheckedModelFile(modLoc("block/" + modelBaseName));
         simpleBlockItem(regBlock.get(), itemParent);
     }
 
-    // Generate multipart blockstate for PipeBlock:
-    // - always show "block/<base>"
-    // - show "block/<base>_interchange" for each direction where the enum property equals PIPE
-    // - show "block/<base>_connector"  for each direction where the enum property equals CONNECTOR
-    // - show "block/<base>_connector_pull" for CONNECTOR_PULL
     private void pipeMultipart(RegistryObject<? extends Block> regBlock, String modelBaseName) {
         Block block = regBlock.get();
         var multipart = getMultipartBuilder(block);
 
-        // Base pipe model always present
         multipart.part()
                 .modelFile(models().getExistingFile(modLoc("block/" + modelBaseName)))
                 .addModel()
                 .end();
 
-        // Interchange (pipe-to-pipe) connections
-        // Fix backwards rotations: use UP=90, DOWN=270, and standard NESW yaw
         addDirectionalEnumPart(multipart, "block/" + modelBaseName + "_interchange", PipeBlock.UP,   PipeBlock.ConnectionType.PIPE, 90, 0);
         addDirectionalEnumPart(multipart, "block/" + modelBaseName + "_interchange", PipeBlock.DOWN, PipeBlock.ConnectionType.PIPE, 270, 0);
         addDirectionalEnumPart(multipart, "block/" + modelBaseName + "_interchange", PipeBlock.NORTH, PipeBlock.ConnectionType.PIPE, 0, 180);
@@ -200,7 +210,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
         addDirectionalEnumPart(multipart, "block/" + modelBaseName + "_interchange", PipeBlock.SOUTH, PipeBlock.ConnectionType.PIPE, 0, 0);
         addDirectionalEnumPart(multipart, "block/" + modelBaseName + "_interchange", PipeBlock.WEST,  PipeBlock.ConnectionType.PIPE, 0, 90);
 
-        // Connector (push) connections
         addDirectionalEnumPart(multipart, "block/" + modelBaseName + "_connector", PipeBlock.UP,   PipeBlock.ConnectionType.CONNECTOR, 90, 0);
         addDirectionalEnumPart(multipart, "block/" + modelBaseName + "_connector", PipeBlock.DOWN, PipeBlock.ConnectionType.CONNECTOR, 270, 0);
         addDirectionalEnumPart(multipart, "block/" + modelBaseName + "_connector", PipeBlock.NORTH, PipeBlock.ConnectionType.CONNECTOR, 0, 180);
@@ -208,7 +217,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
         addDirectionalEnumPart(multipart, "block/" + modelBaseName + "_connector", PipeBlock.SOUTH, PipeBlock.ConnectionType.CONNECTOR, 0, 0);
         addDirectionalEnumPart(multipart, "block/" + modelBaseName + "_connector", PipeBlock.WEST,  PipeBlock.ConnectionType.CONNECTOR, 0, 90);
 
-        // Connector pull connections
         addDirectionalEnumPart(multipart, "block/" + modelBaseName + "_connector_pull", PipeBlock.UP,   PipeBlock.ConnectionType.CONNECTOR_PULL, 90, 0);
         addDirectionalEnumPart(multipart, "block/" + modelBaseName + "_connector_pull", PipeBlock.DOWN, PipeBlock.ConnectionType.CONNECTOR_PULL, 270, 0);
         addDirectionalEnumPart(multipart, "block/" + modelBaseName + "_connector_pull", PipeBlock.NORTH, PipeBlock.ConnectionType.CONNECTOR_PULL, 0, 180);
@@ -217,7 +225,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
         addDirectionalEnumPart(multipart, "block/" + modelBaseName + "_connector_pull", PipeBlock.WEST,  PipeBlock.ConnectionType.CONNECTOR_PULL, 0, 90);
     }
 
-    // Helper to add a part for a specific enum value on a directional property, with X/Y rotation
     private void addDirectionalEnumPart(MultiPartBlockStateBuilder multipart,
                                         String modelPath,
                                         EnumProperty<PipeBlock.ConnectionType> prop,

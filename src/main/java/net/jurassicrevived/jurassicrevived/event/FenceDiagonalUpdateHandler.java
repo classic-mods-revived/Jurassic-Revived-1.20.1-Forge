@@ -1,7 +1,7 @@
 package net.jurassicrevived.jurassicrevived.event;
 
-import net.jurassicrevived.jurassicrevived.block.custom.LowSecurityFencePoleBlock;
-import net.jurassicrevived.jurassicrevived.block.custom.LowSecurityFenceWireBlock;
+import net.jurassicrevived.jurassicrevived.block.custom.FencePoleBlock;
+import net.jurassicrevived.jurassicrevived.block.custom.FenceWireBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
@@ -38,22 +38,22 @@ public class FenceDiagonalUpdateHandler {
         for (BlockPos p : diagonals) {
             BlockState bs = level.getBlockState(p);
 
-            if (bs.getBlock() instanceof LowSecurityFenceWireBlock) {
+            if (bs.getBlock() instanceof FenceWireBlock) {
                 BlockState updated = bs
-                        .setValue(LowSecurityFenceWireBlock.NE, LowSecurityFenceWireBlock.canConnectDiagonally(level, p, Direction.NORTH, Direction.EAST))
-                        .setValue(LowSecurityFenceWireBlock.SE, LowSecurityFenceWireBlock.canConnectDiagonally(level, p, Direction.SOUTH, Direction.EAST))
-                        .setValue(LowSecurityFenceWireBlock.SW, LowSecurityFenceWireBlock.canConnectDiagonally(level, p, Direction.SOUTH, Direction.WEST))
-                        .setValue(LowSecurityFenceWireBlock.NW, LowSecurityFenceWireBlock.canConnectDiagonally(level, p, Direction.NORTH, Direction.WEST));
+                        .setValue(FenceWireBlock.NE, FenceWireBlock.canConnectDiagonally(level, p, Direction.NORTH, Direction.EAST))
+                        .setValue(FenceWireBlock.SE, FenceWireBlock.canConnectDiagonally(level, p, Direction.SOUTH, Direction.EAST))
+                        .setValue(FenceWireBlock.SW, FenceWireBlock.canConnectDiagonally(level, p, Direction.SOUTH, Direction.WEST))
+                        .setValue(FenceWireBlock.NW, FenceWireBlock.canConnectDiagonally(level, p, Direction.NORTH, Direction.WEST));
                 if (updated != bs) {
                     // Client-only update to avoid neighbor notification ping-pong
                     level.setBlock(p, updated, Block.UPDATE_CLIENTS);
                 }
-            } else if (bs.getBlock() instanceof LowSecurityFencePoleBlock) {
+            } else if (bs.getBlock() instanceof FencePoleBlock) {
                 BlockState updated = bs
-                        .setValue(LowSecurityFencePoleBlock.NE, LowSecurityFenceWireBlock.canConnectDiagonally(level, p, Direction.NORTH, Direction.EAST))
-                        .setValue(LowSecurityFencePoleBlock.SE, LowSecurityFenceWireBlock.canConnectDiagonally(level, p, Direction.SOUTH, Direction.EAST))
-                        .setValue(LowSecurityFencePoleBlock.SW, LowSecurityFenceWireBlock.canConnectDiagonally(level, p, Direction.SOUTH, Direction.WEST))
-                        .setValue(LowSecurityFencePoleBlock.NW, LowSecurityFenceWireBlock.canConnectDiagonally(level, p, Direction.NORTH, Direction.WEST));
+                        .setValue(FencePoleBlock.NE, FenceWireBlock.canConnectDiagonally(level, p, Direction.NORTH, Direction.EAST))
+                        .setValue(FencePoleBlock.SE, FenceWireBlock.canConnectDiagonally(level, p, Direction.SOUTH, Direction.EAST))
+                        .setValue(FencePoleBlock.SW, FenceWireBlock.canConnectDiagonally(level, p, Direction.SOUTH, Direction.WEST))
+                        .setValue(FencePoleBlock.NW, FenceWireBlock.canConnectDiagonally(level, p, Direction.NORTH, Direction.WEST));
                 if (updated != bs) {
                     // Client-only update to avoid neighbor notification ping-pong
                     level.setBlock(p, updated, Block.UPDATE_CLIENTS);
