@@ -8,15 +8,20 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class FencePoleBlock extends Block {
+public class FencePoleBlock extends Block implements SimpleWaterloggedBlock {
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty NORTH = BooleanProperty.create("north");
     public static final BooleanProperty EAST  = BooleanProperty.create("east");
     public static final BooleanProperty SOUTH = BooleanProperty.create("south");
@@ -48,18 +53,21 @@ public class FencePoleBlock extends Block {
                 .setValue(SW, false)
                 .setValue(NW, false)
                 .setValue(TIER, tier.id)
+                .setValue(WATERLOGGED, false)
         );
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(NORTH, EAST, SOUTH, WEST, NE, SE, SW, NW, TIER);
+        builder.add(WATERLOGGED, NORTH, EAST, SOUTH, WEST, NE, SE, SW, NW, TIER);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         Level level = ctx.getLevel();
         BlockPos pos = ctx.getClickedPos();
+        FluidState fluid = level.getFluidState(pos);
+
         return this.defaultBlockState()
                 .setValue(NORTH, connectsTo(level, pos, Direction.NORTH))
                 .setValue(EAST,  connectsTo(level, pos, Direction.EAST))
@@ -69,12 +77,16 @@ public class FencePoleBlock extends Block {
                 .setValue(SE,    FenceWireBlock.canConnectDiagonally(level, pos, Direction.SOUTH, Direction.EAST))
                 .setValue(SW,    FenceWireBlock.canConnectDiagonally(level, pos, Direction.SOUTH, Direction.WEST))
                 .setValue(NW,    FenceWireBlock.canConnectDiagonally(level, pos, Direction.NORTH, Direction.WEST))
-                .setValue(TIER, tierConfig.id);
+                .setValue(TIER, tierConfig.id)
+                .setValue(WATERLOGGED, fluid.getType() == Fluids.WATER);
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public BlockState updateShape(BlockState state, Direction dir, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+        if (state.getValue(WATERLOGGED)) {
+            level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        }
         if (dir.getAxis().isHorizontal()) {
             boolean connect = connectsTo(level, pos, dir);
             state = state.setValue(propertyFor(dir), connect);
@@ -170,6 +182,11 @@ public class FencePoleBlock extends Block {
             case WEST  -> WEST;
             default -> throw new IllegalArgumentException("Only horizontal");
         };
+    }
+
+    @Override
+    public FluidState getFluidState(BlockState state) {
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override

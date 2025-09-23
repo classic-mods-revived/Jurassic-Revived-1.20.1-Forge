@@ -15,13 +15,18 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -34,7 +39,7 @@ import net.jurassicrevived.jurassicrevived.item.ModItems;
 
 import javax.annotation.Nullable;
 
-public class PipeBlock extends Block implements EntityBlock {
+public class PipeBlock extends Block implements EntityBlock, SimpleWaterloggedBlock {
 
     public enum Transport {
         ITEMS, FLUIDS, ENERGY
@@ -60,6 +65,7 @@ public class PipeBlock extends Block implements EntityBlock {
     public static final EnumProperty<ConnectionType> SOUTH = EnumProperty.create("south", ConnectionType.class);
     public static final EnumProperty<ConnectionType> WEST = EnumProperty.create("west", ConnectionType.class);
     public static final EnumProperty<ConnectionType> EAST = EnumProperty.create("east", ConnectionType.class);
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     private final Transport transport;
 
@@ -89,6 +95,7 @@ public class PipeBlock extends Block implements EntityBlock {
                         .setValue(SOUTH, ConnectionType.NONE)
                         .setValue(WEST, ConnectionType.NONE)
                         .setValue(EAST, ConnectionType.NONE)
+                        .setValue(WATERLOGGED, false)
         );
     }
 
@@ -98,7 +105,7 @@ public class PipeBlock extends Block implements EntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(DOWN, UP, NORTH, SOUTH, WEST, EAST);
+        builder.add(DOWN, UP, NORTH, SOUTH, WEST, EAST, WATERLOGGED);
     }
 
     @Nullable
@@ -109,7 +116,8 @@ public class PipeBlock extends Block implements EntityBlock {
         }
         Level level = ctx.getLevel();
         BlockPos pos = ctx.getClickedPos();
-        BlockState state = this.defaultBlockState();
+        BlockState state = this.defaultBlockState()
+                .setValue(WATERLOGGED, level.getFluidState(pos).getType() == Fluids.WATER);
         for (Direction dir : Direction.values()) {
             state = setConnectionForDirection(level, pos, state, dir);
         }
@@ -118,7 +126,15 @@ public class PipeBlock extends Block implements EntityBlock {
 
     @Override
     public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+        if (state.getValue(WATERLOGGED)) {
+            level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        }
         return setConnectionForDirection(level, pos, state, direction);
+    }
+
+    @Override
+    public FluidState getFluidState(BlockState state) {
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
