@@ -45,6 +45,8 @@ public class ModBlocks {
             () -> new PipeBlock(BlockBehaviour.Properties.of().strength(1.0F).noOcclusion(), PipeBlock.Transport.ENERGY));
 
 
+    public static final RegistryObject<Block> GENERATOR = registerBlock("generator",
+            () -> new GeneratorBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
     public static final RegistryObject<Block> DNA_EXTRACTOR = registerBlock("dna_extractor",
             () -> new DNAExtractorBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
     public static final RegistryObject<Block> FOSSIL_GRINDER = registerBlock("fossil_grinder",

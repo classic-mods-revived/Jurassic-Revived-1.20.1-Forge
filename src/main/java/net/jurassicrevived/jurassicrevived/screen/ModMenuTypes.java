@@ -1,9 +1,7 @@
 package net.jurassicrevived.jurassicrevived.screen;
 
 import net.jurassicrevived.jurassicrevived.JRMod;
-import net.jurassicrevived.jurassicrevived.screen.custom.DNAExtractorMenu;
-import net.jurassicrevived.jurassicrevived.screen.custom.FossilCleanerMenu;
-import net.jurassicrevived.jurassicrevived.screen.custom.FossilGrinderMenu;
+import net.jurassicrevived.jurassicrevived.screen.custom.*;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
@@ -17,6 +15,8 @@ public class ModMenuTypes {
     public static final DeferredRegister<MenuType<?>> MENUS =
             DeferredRegister.create(ForgeRegistries.MENU_TYPES, JRMod.MOD_ID);
 
+    public static final RegistryObject<MenuType<GeneratorMenu>> GENERATOR_MENU =
+            registerMenuType(GeneratorMenu::new, "generator_menu");
     public static final RegistryObject<MenuType<DNAExtractorMenu>> DNA_EXTRACTOR_MENU =
             registerMenuType(DNAExtractorMenu::new, "dna_extractor_menu");
     public static final RegistryObject<MenuType<FossilGrinderMenu>> FOSSIL_GRINDER_MENU =

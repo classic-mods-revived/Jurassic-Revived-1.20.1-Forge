@@ -36,6 +36,10 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("power_pipe_be", () ->
                     BlockEntityType.Builder.of(PipeBlockEntity::new,
                             ModBlocks.POWER_PIPE.get()).build(null));
+    public static final RegistryObject<BlockEntityType<GeneratorBlockEntity>> GENERATOR_BE =
+            BLOCK_ENTITIES.register("generator_be", () ->
+                    BlockEntityType.Builder.of(GeneratorBlockEntity::new,
+                            ModBlocks.GENERATOR.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
