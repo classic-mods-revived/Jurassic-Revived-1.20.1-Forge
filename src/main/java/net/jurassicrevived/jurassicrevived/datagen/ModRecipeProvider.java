@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.jurassicrevived.jurassicrevived.JRMod;
 import net.jurassicrevived.jurassicrevived.block.ModBlocks;
+import net.jurassicrevived.jurassicrevived.datagen.custom.ConfigCondition;
 import net.jurassicrevived.jurassicrevived.datagen.custom.DNAExtractingRecipeBuilder;
 import net.jurassicrevived.jurassicrevived.datagen.custom.FossilCleaningRecipeBuilder;
 import net.jurassicrevived.jurassicrevived.datagen.custom.FossilGrindingRecipeBuilder;
@@ -20,6 +21,8 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.crafting.ConditionalRecipe;
+import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 
 import java.util.List;
@@ -34,6 +37,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pWriter) {
+
+        ICondition requirePowerCondition = new ConfigCondition();
 
         oreSmelting(pWriter, GYPSUM_SMELTABLES, RecipeCategory.MISC, ModBlocks.GYPSUM_STONE.get(), 0.25f, 200, "gypsum_stone");
         oreBlasting(pWriter, GYPSUM_SMELTABLES, RecipeCategory.MISC, ModBlocks.GYPSUM_STONE.get(), 0.25f, 100, "gypsum_stone");
@@ -161,6 +166,23 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_medium_security_fence_wire_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(Items.IRON_INGOT, Items.REDSTONE).build())).save(pWriter);
 
+        ConditionalRecipe.builder()
+                .addCondition(requirePowerCondition)
+                .addRecipe(
+                        (consumer) -> ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.GENERATOR.get(), 1)
+                .pattern("ABA")
+                .pattern("CDE")
+                .pattern("ABA")
+                .define('A', Blocks.IRON_BLOCK)
+                .define('B', ModItems.CABLE.get())
+                .define('C', Blocks.REDSTONE_BLOCK)
+                .define('D', ModItems.PROCESSOR.get())
+                .define('E', Items.COPPER_INGOT)
+                .unlockedBy("has_generator_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                        of(Blocks.IRON_BLOCK, ModItems.CABLE.get(), Blocks.REDSTONE_BLOCK, ModItems.PROCESSOR.get(), Items.COPPER_INGOT).build())).save(consumer))
+                .generateAdvancement()
+                .build(pWriter, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "generator_with_power_req"));
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.DNA_EXTRACTOR.get(), 1)
                 .pattern("AAA")
                 .pattern("BCD")
@@ -218,14 +240,19 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_fluid_pipe_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(Items.WATER_BUCKET, ModItems.CABLE.get()).build())).save(pWriter);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.POWER_PIPE.get(), 8)
+        ConditionalRecipe.builder()
+                .addCondition(requirePowerCondition)
+                .addRecipe(
+                        (consumer) ->ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.POWER_PIPE.get(), 8)
                 .pattern(" A ")
                 .pattern("BBB")
                 .pattern(" A ")
                 .define('A', Items.REDSTONE)
                 .define('B', ModItems.CABLE.get())
                 .unlockedBy("has_power_pipe_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
-                        of(Items.REDSTONE, ModItems.CABLE.get()).build())).save(pWriter);
+                        of(Items.REDSTONE, ModItems.CABLE.get()).build())).save(consumer))
+                .generateAdvancement()
+                .build(pWriter, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "power_pipe_with_power_req"));
 
         new DNAExtractingRecipeBuilder(ModItems.AMPOULE.get(), ModItems.VELOCIRAPTOR_TISSUE.get(), ModItems.VELOCIRAPTOR_DNA.get(), 1)
                 .unlockedBy("has_ampoule", has(ModItems.AMPOULE.get())).save(pWriter);

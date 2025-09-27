@@ -1,0 +1,42 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "jurassicrevived:require_power"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": {
+          "A": {
+            "item": "minecraft:iron_block"
+          },
+          "B": {
+            "item": "jurassicrevived:cable"
+          },
+          "C": {
+            "item": "minecraft:redstone_block"
+          },
+          "D": {
+            "item": "jurassicrevived:processor"
+          },
+          "E": {
+            "item": "minecraft:copper_ingot"
+          }
+        },
+        "pattern": [
+          "ABA",
+          "CDE",
+          "ABA"
+        ],
+        "result": {
+          "item": "jurassicrevived:generator"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}

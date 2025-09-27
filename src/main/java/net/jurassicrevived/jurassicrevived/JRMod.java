@@ -3,6 +3,7 @@ package net.jurassicrevived.jurassicrevived;
 import com.mojang.logging.LogUtils;
 import net.jurassicrevived.jurassicrevived.block.ModBlocks;
 import net.jurassicrevived.jurassicrevived.block.entity.custom.ModBlockEntities;
+import net.jurassicrevived.jurassicrevived.datagen.custom.ConfigCondition;
 import net.jurassicrevived.jurassicrevived.entity.ModEntities;
 import net.jurassicrevived.jurassicrevived.entity.client.VelociraptorRenderer;
 import net.jurassicrevived.jurassicrevived.entity.client.BrachiosaurusRenderer;
@@ -69,6 +70,8 @@ public class JRMod {
         modEventBus.addListener(this::commonSetup);
 
         FenceClimbHandler.register();
+
+        ConfigCondition.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
