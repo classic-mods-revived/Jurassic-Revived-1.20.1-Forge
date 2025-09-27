@@ -67,22 +67,36 @@ public class GeneratorScreen extends AbstractContainerScreen<GeneratorMenu> {
         guiGraphics.blit(GUI_TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
 
         energyInfoArea.render(guiGraphics);
-        renderFuelBurning(guiGraphics, x, y);
     }
 
     private void renderFuelBurning(GuiGraphics guiGraphics, int x, int y) {
-        if(this.menu.isBurning()) {
-            int l = Mth.ceil(this.menu.getFuelProgress() * 13.0F) + 1;
-            guiGraphics.blit(LIT_PROGRESS_TEXTURE, 14, 14, 0, 14 - l,
-                    x + 80, y + 18 + 14 - l, 14, l, 14, 14);
+        if (this.menu.isBurning()) {
+            float progress = Mth.clamp(this.menu.getFuelProgress(), 0.0F, 1.0F);
+            int minPixels = 2;
+            int visible = Mth.clamp(Mth.ceil(progress * 14.0F), minPixels, 14);
+
+            int texW = 14, texH = 14;
+            int width = 14, height = visible;
+
+            int srcU = 0;
+            int srcV = texH - visible;
+
+            int destX = x + 80;
+            int bottomY = y + 18 + 14;
+            int destY = bottomY - visible;
+
+            guiGraphics.blit(LIT_PROGRESS_TEXTURE, destX, destY, srcU, srcV, width, height, texW, texH);
         }
     }
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
         renderBackground(guiGraphics);
+        int x = (width - imageWidth) / 2;
+        int y = (height - imageHeight) / 2;
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
+        renderFuelBurning(guiGraphics, x, y);
     }
 
     private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, FluidTankRenderer renderer) {

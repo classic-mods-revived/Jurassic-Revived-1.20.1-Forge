@@ -49,13 +49,13 @@ public class GeneratorBlockEntity extends BlockEntity implements MenuProvider {
     private int burnTimeTotal = 0;   // total ticks for current fuel
     private boolean isBurning = false;
 
-    private static final int ENERGY_TRANSFER_RATE = Config.fePerSecond / 20;
+    private static final float ENERGY_TRANSFER_RATE = Config.fePerSecond / 20f;
 
     private final ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
     private LazyOptional<IEnergyStorage> lazyEnergy = LazyOptional.empty();
 
     private ModEnergyStorage createEnergyStorage() {
-        return new ModEnergyStorage(256000, Config.fePerSecond / 20) {
+        return new ModEnergyStorage(256000, (int) ENERGY_TRANSFER_RATE) {
             @Override
             public void onEnergyChanged() {
                 setChanged();
@@ -95,9 +95,9 @@ public class GeneratorBlockEntity extends BlockEntity implements MenuProvider {
 
     private void generateEnergyTick() {
         // Generate up to transfer rate per tick
-        int toAdd = Math.min(ENERGY_TRANSFER_RATE, this.ENERGY_STORAGE.getMaxEnergyStored() - this.ENERGY_STORAGE.getEnergyStored());
+        float toAdd = Math.min((ENERGY_TRANSFER_RATE / 10), this.ENERGY_STORAGE.getMaxEnergyStored() - this.ENERGY_STORAGE.getEnergyStored());
         if (toAdd > 0) {
-            this.ENERGY_STORAGE.receiveEnergy(toAdd, false);
+            this.ENERGY_STORAGE.receiveEnergy((int) toAdd, false);
             // ensure neighbors (including your pipes) see new energy immediately
             if (level != null && !level.isClientSide) {
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
@@ -233,18 +233,18 @@ public class GeneratorBlockEntity extends BlockEntity implements MenuProvider {
             if (neighbor == null) continue;
 
             neighbor.getCapability(ForgeCapabilities.ENERGY, dir.getOpposite()).ifPresent(target -> {
-                int offer = Math.min(ENERGY_TRANSFER_RATE, this.ENERGY_STORAGE.getEnergyStored());
+                float offer = Math.min(ENERGY_TRANSFER_RATE, this.ENERGY_STORAGE.getEnergyStored());
                 if (offer <= 0) return;
 
-                int accepted = target.receiveEnergy(offer, true);
+                float accepted = target.receiveEnergy((int) offer, true);
                 if (accepted <= 0) return;
 
-                int actuallyExtracted = this.ENERGY_STORAGE.extractEnergy(accepted, false);
+                float actuallyExtracted = this.ENERGY_STORAGE.extractEnergy((int) accepted, false);
                 if (actuallyExtracted <= 0) return;
 
-                int actuallyAccepted = target.receiveEnergy(actuallyExtracted, false);
+                float actuallyAccepted = target.receiveEnergy((int) actuallyExtracted, false);
                 if (actuallyAccepted < actuallyExtracted) {
-                    this.ENERGY_STORAGE.receiveEnergy(actuallyExtracted - actuallyAccepted, false);
+                    this.ENERGY_STORAGE.receiveEnergy((int) (actuallyExtracted - actuallyAccepted), false);
                 }
             });
         }
