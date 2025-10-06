@@ -11,7 +11,7 @@ public class Config {
 
     // Power requirement toggle
     private static final ForgeConfigSpec.BooleanValue REQUIRE_POWER_SPEC = BUILDER
-            .comment("If true, power systems are enabled. If false, power pipes are disabled.")
+            .comment("If true, power systems are enabled. If false, disabled. Requires a restart to take effect")
             .define("requirePower", false);
 
     // Throughput (per second) with clamped defaults

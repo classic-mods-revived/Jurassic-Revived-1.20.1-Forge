@@ -1,7 +1,9 @@
 package net.jurassicrevived.jurassicrevived.screen.custom;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.jurassicrevived.jurassicrevived.Config;
 import net.jurassicrevived.jurassicrevived.JRMod;
+import net.jurassicrevived.jurassicrevived.screen.renderer.EnergyDisplayTooltipArea;
 import net.jurassicrevived.jurassicrevived.screen.renderer.FluidTankRenderer;
 import net.jurassicrevived.jurassicrevived.util.MouseUtil;
 import net.minecraft.client.gui.GuiGraphics;
@@ -23,6 +25,7 @@ public class FossilCleanerScreen extends AbstractContainerScreen<FossilCleanerMe
     private static final ResourceLocation SKULL_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/skull.png");
     private FluidTankRenderer fluidRenderer;
+    private EnergyDisplayTooltipArea energyInfoArea;
 
     public FossilCleanerScreen(FossilCleanerMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
@@ -36,6 +39,20 @@ public class FossilCleanerScreen extends AbstractContainerScreen<FossilCleanerMe
         this.titleLabelY = 10000;
 
         assignFluidRenderer();
+
+        assignEnergyInfoArea();
+    }
+
+    private void renderEnergyAreaTooltip(GuiGraphics guiGraphics, int pMouseX, int pMouseY, int x, int y) {
+        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 156, 11, 8, 64) && Config.REQUIRE_POWER) {
+            guiGraphics.renderTooltip(this.font, energyInfoArea.getTooltips(),
+                    Optional.empty(), pMouseX - x, pMouseY - y);
+        }
+    }
+
+    private void assignEnergyInfoArea() {
+        energyInfoArea = new EnergyDisplayTooltipArea(((width - imageWidth) / 2) + 156,
+                ((height - imageHeight) / 2) + 11, menu.blockEntity.getEnergyStorage(null));
     }
 
     private void assignFluidRenderer() {
@@ -57,6 +74,10 @@ public class FossilCleanerScreen extends AbstractContainerScreen<FossilCleanerMe
 
         // Make hover area align with the tank's top-left corner (16x50)
         renderFluidTooltipArea(guiGraphics, pMouseX, pMouseY, x, y, menu.blockEntity.getFluid(), 7, 8, fluidRenderer);
+
+        if (Config.REQUIRE_POWER) {
+            renderEnergyAreaTooltip(guiGraphics, pMouseX, pMouseY, x, y);
+        }
     }
 
     @Override
@@ -71,6 +92,10 @@ public class FossilCleanerScreen extends AbstractContainerScreen<FossilCleanerMe
         RenderProgressArrow(guiGraphics, x, y);
 
         fluidRenderer.render(guiGraphics, x + 7, y + 8, menu.blockEntity.getFluid());
+
+        if (Config.REQUIRE_POWER) {
+            energyInfoArea.render(guiGraphics);
+        }
     }
 
     private void RenderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
@@ -111,5 +136,9 @@ public class FossilCleanerScreen extends AbstractContainerScreen<FossilCleanerMe
 
     public static boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, FluidTankRenderer renderer) {
         return MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, renderer.getWidth(), renderer.getHeight());
+    }
+
+    public static boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, int width, int height) {
+        return MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, width, height);
     }
 }

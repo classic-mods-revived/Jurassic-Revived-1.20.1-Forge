@@ -1,7 +1,9 @@
 package net.jurassicrevived.jurassicrevived.block.entity.custom;
 
+import net.jurassicrevived.jurassicrevived.Config;
 import net.jurassicrevived.jurassicrevived.block.ModBlocks;
 import net.jurassicrevived.jurassicrevived.block.custom.FossilCleanerBlock;
+import net.jurassicrevived.jurassicrevived.block.entity.energy.ModEnergyStorage;
 import net.jurassicrevived.jurassicrevived.recipe.FossilCleanerRecipe;
 import net.jurassicrevived.jurassicrevived.screen.custom.FossilCleanerMenu;
 import net.jurassicrevived.jurassicrevived.util.InventoryDirectionEntry;
@@ -33,6 +35,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
@@ -106,6 +109,31 @@ public class FossilCleanerBlockEntity extends BlockEntity implements MenuProvide
     private int progress = 0;
     private int maxProgress = 200;
     private int fluidCraftAmount = 250;
+
+    private static final float ENERGY_TRANSFER_RATE = (float) Config.fePerSecond / 20f;
+
+    private final ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
+    private LazyOptional<IEnergyStorage> lazyEnergy = LazyOptional.empty();
+
+    private ModEnergyStorage createEnergyStorage() {
+        if (Config.REQUIRE_POWER) {
+            return new ModEnergyStorage(16000, (int) ENERGY_TRANSFER_RATE) {
+                @Override
+                public void onEnergyChanged() {
+                    setChanged();
+                    if (getLevel() != null) {
+                        getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+                    }
+                }
+            };
+        }
+        return null;
+    }
+
+    public IEnergyStorage getEnergyStorage(@Nullable Direction direction) {
+        if (Config.REQUIRE_POWER) {return this.ENERGY_STORAGE;}
+        return null;
+    }
 
     private final FluidTank FLUID_TANK = createFluidTank();
 
@@ -252,6 +280,10 @@ public class FossilCleanerBlockEntity extends BlockEntity implements MenuProvide
             }
         }
 
+        if (cap == ForgeCapabilities.ENERGY) {
+            return lazyEnergy.cast();
+        }
+
         return super.getCapability(cap, side);
     }
 
@@ -261,6 +293,8 @@ public class FossilCleanerBlockEntity extends BlockEntity implements MenuProvide
         lazyItemHandler = LazyOptional.of(() -> itemHandler);
         // Expose input-only fluid handler to the outside
         lazyFluidHandler = LazyOptional.of(() -> INPUT_ONLY_HANDLER);
+
+        lazyEnergy = LazyOptional.of(() -> ENERGY_STORAGE);
     }
 
     @Override
@@ -268,6 +302,7 @@ public class FossilCleanerBlockEntity extends BlockEntity implements MenuProvide
         super.invalidateCaps();
         lazyItemHandler.invalidate();
         lazyFluidHandler.invalidate();
+        lazyEnergy.invalidate();
     }
 
     @Override
@@ -276,7 +311,9 @@ public class FossilCleanerBlockEntity extends BlockEntity implements MenuProvide
         pTag.putInt("fossil_cleaning.progress", progress);
         pTag.putInt("fossil_cleaning.maxProgress", maxProgress);
         pTag = FLUID_TANK.writeToNBT(pTag);
-
+        if (Config.REQUIRE_POWER) {
+            pTag.putInt("fossil_cleaning.energy", this.ENERGY_STORAGE.getEnergyStored());
+        }
         super.saveAdditional(pTag);
     }
 
@@ -287,7 +324,9 @@ public class FossilCleanerBlockEntity extends BlockEntity implements MenuProvide
         // Fix key to match saveAdditional
         progress = pTag.getInt("fossil_cleaning.progress");
         FLUID_TANK.readFromNBT(pTag);
-
+        if (Config.REQUIRE_POWER) {
+            this.ENERGY_STORAGE.setEnergy(pTag.getInt("fossil_cleaning.energy"));
+        }
     }
 
     // Sync tank and other BE data to client
@@ -316,8 +355,16 @@ public class FossilCleanerBlockEntity extends BlockEntity implements MenuProvide
     public void tick(Level level, BlockPos pPos, BlockState pState) {
         // Always try to pull fluid from the water slot into the tank first
         fillUpOnFluid();
+        if (Config.REQUIRE_POWER) {
+            pullEnergyFromNeighbors();
+        }
 
         if (isOutputSlotEmptyOrReceivable() && hasRecipe()) {
+            if (Config.REQUIRE_POWER && !consumeEnergyPerTick(64)) {
+                // Not enough energy to continue; don't advance progress but keep state
+                setChanged(level, pPos, pState);
+                return;
+            }
             increaseCraftingProcess();
             setChanged(level, pPos, pState);
 
@@ -328,6 +375,45 @@ public class FossilCleanerBlockEntity extends BlockEntity implements MenuProvide
             }
         } else {
             resetProgress();
+        }
+    }
+
+    private void pullEnergyFromNeighbors() {
+        if (this.ENERGY_STORAGE == null || level == null) return;
+        int space = this.ENERGY_STORAGE.getMaxEnergyStored() - this.ENERGY_STORAGE.getEnergyStored();
+        if (space <= 0) return;
+
+        for (Direction dir : Direction.values()) {
+            if (space <= 0) break;
+
+            BlockPos neighborPos = worldPosition.relative(dir);
+            BlockEntity neighbor = level.getBlockEntity(neighborPos);
+            if (neighbor == null) continue;
+
+            neighbor.getCapability(ForgeCapabilities.ENERGY, dir.getOpposite()).ifPresent(source -> {
+                // How much we can pull this tick, bounded by our space and per-tick rate
+                int request = Math.min((int) ENERGY_TRANSFER_RATE, this.ENERGY_STORAGE.getMaxEnergyStored() - this.ENERGY_STORAGE.getEnergyStored());
+                if (request <= 0) return;
+
+                // Check how much neighbor can provide
+                int canExtract = source.extractEnergy(request, true);
+                if (canExtract <= 0) return;
+
+                // Receive into our buffer (simulate first)
+                int canReceive = this.ENERGY_STORAGE.receiveEnergy(canExtract, true);
+                if (canReceive <= 0) return;
+
+                // Perform actual transfer
+                int actuallyExtracted = source.extractEnergy(canReceive, false);
+                if (actuallyExtracted <= 0) return;
+
+                int actuallyReceived = this.ENERGY_STORAGE.receiveEnergy(actuallyExtracted, false);
+
+                // If for some reason we couldn't take all we extracted, push back the leftover
+                if (actuallyReceived < actuallyExtracted) {
+                    source.receiveEnergy(actuallyExtracted - actuallyReceived, false);
+                }
+            });
         }
     }
 
@@ -519,5 +605,15 @@ public class FossilCleanerBlockEntity extends BlockEntity implements MenuProvide
 
     public FluidStack getFluid() {
         return FLUID_TANK.getFluid();
+    }
+
+    // Consume a fixed amount of FE this tick if available; returns true if deducted
+    private boolean consumeEnergyPerTick(int fe) {
+        if (fe <= 0) return true;
+        if (ENERGY_STORAGE.getEnergyStored() >= fe) {
+            ENERGY_STORAGE.extractEnergy(fe, false);
+            return true;
+        }
+        return false;
     }
 }

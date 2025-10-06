@@ -95,7 +95,7 @@ public class GeneratorBlockEntity extends BlockEntity implements MenuProvider {
 
     private void generateEnergyTick() {
         // Generate up to transfer rate per tick
-        float toAdd = Math.min((ENERGY_TRANSFER_RATE / 10), this.ENERGY_STORAGE.getMaxEnergyStored() - this.ENERGY_STORAGE.getEnergyStored());
+        float toAdd = Math.min((256), this.ENERGY_STORAGE.getMaxEnergyStored() - this.ENERGY_STORAGE.getEnergyStored());
         if (toAdd > 0) {
             this.ENERGY_STORAGE.receiveEnergy((int) toAdd, false);
             // ensure neighbors (including your pipes) see new energy immediately
@@ -316,18 +316,26 @@ public class GeneratorBlockEntity extends BlockEntity implements MenuProvider {
         else this.burnTime = 0;
     }
 
+    // Sync tank and other BE data to client
     @Override
-    public @Nullable Packet<ClientGamePacketListener> getUpdatePacket() {
+    public CompoundTag getUpdateTag() {
+        CompoundTag tag = super.getUpdateTag();
+        saveAdditional(tag);
+        return tag;
+    }
+
+    @Override
+    public void handleUpdateTag(CompoundTag tag) {
+        load(tag);
+    }
+
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
     @Override
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-        super.onDataPacket(net, pkt);
-    }
-
-    @Override
-    public CompoundTag getUpdateTag() {
-        return this.saveWithoutMetadata();
+        load(pkt.getTag());
     }
 }
