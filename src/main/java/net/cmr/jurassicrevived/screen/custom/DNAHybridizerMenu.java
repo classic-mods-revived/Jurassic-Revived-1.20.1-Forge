@@ -35,7 +35,7 @@ public class DNAHybridizerMenu extends AbstractContainerMenu {
         this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 0, 57, 26) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.is(ModTags.Items.TISSUES);
+                return stack.is(ModTags.Items.DNA);
             }
         });
 
@@ -43,14 +43,14 @@ public class DNAHybridizerMenu extends AbstractContainerMenu {
         this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 1, 57, 44) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.is(ModTags.Items.TISSUES);
+                return stack.is(ModTags.Items.DNA);
             }
         });
         // Output slots: cannot insert anything, but can always take out
         this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 2, 57, 62) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.is(ModTags.Items.TISSUES);
+                return stack.is(ModTags.Items.DNA);
             }
         });
         this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 3, 103, 35) {

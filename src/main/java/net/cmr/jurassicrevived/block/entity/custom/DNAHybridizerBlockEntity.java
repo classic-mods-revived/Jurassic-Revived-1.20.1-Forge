@@ -43,7 +43,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvider {
-    public final ItemStackHandler itemHandler = new ItemStackHandler(5) {
+    public final ItemStackHandler itemHandler = new ItemStackHandler(4) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
@@ -52,40 +52,29 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return switch (slot) {
-                case 0 -> stack.getItem() == ModItems.AMPOULE.get();
-                case 1 -> stack.is(ModTags.Items.TISSUES) || stack.getItem() == ModItems.MOSQUITO_IN_AMBER.get();
-                case 2, 3, 4 -> true;
+                case 0, 1, 2 -> stack.is(net.cmr.jurassicrevived.util.ModTags.Items.DNA);
+                case 3 -> false;
                 default -> super.isItemValid(slot, stack);
             };
         }
     };
 
-    private static final int AMPOULE_SLOT = 0;
-    private static final int MATERIAL_INPUT = 1;
-    private static final int OUTPUT_SLOT_1 = 2;
-    private static final int OUTPUT_SLOT_2 = 3;
-    private static final int OUTPUT_SLOT_3 = 4;
+    private static final int DNA_SLOT_1 = 0;
+    private static final int DNA_SLOT_2 = 1;
+    private static final int DNA_SLOT_3 = 2;
+    private static final int OUTPUT   = 3;
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             new InventoryDirectionWrapper(itemHandler,
-                    new InventoryDirectionEntry(Direction.DOWN, OUTPUT_SLOT_1, false),
-                    new InventoryDirectionEntry(Direction.DOWN, OUTPUT_SLOT_2, false),
-                    new InventoryDirectionEntry(Direction.DOWN, OUTPUT_SLOT_3, false),
-                    new InventoryDirectionEntry(Direction.NORTH, OUTPUT_SLOT_1, false),
-                    new InventoryDirectionEntry(Direction.NORTH, OUTPUT_SLOT_2, false),
-                    new InventoryDirectionEntry(Direction.NORTH, OUTPUT_SLOT_3, false),
-                    new InventoryDirectionEntry(Direction.SOUTH, OUTPUT_SLOT_1, false),
-                    new InventoryDirectionEntry(Direction.SOUTH, OUTPUT_SLOT_2, false),
-                    new InventoryDirectionEntry(Direction.SOUTH, OUTPUT_SLOT_3, false),
-                    new InventoryDirectionEntry(Direction.EAST, OUTPUT_SLOT_1, false),
-                    new InventoryDirectionEntry(Direction.EAST, OUTPUT_SLOT_2, false),
-                    new InventoryDirectionEntry(Direction.EAST, OUTPUT_SLOT_3, false),
-                    new InventoryDirectionEntry(Direction.WEST, OUTPUT_SLOT_1, false),
-                    new InventoryDirectionEntry(Direction.WEST, OUTPUT_SLOT_2, false),
-                    new InventoryDirectionEntry(Direction.WEST, OUTPUT_SLOT_3, false),
-                    new InventoryDirectionEntry(Direction.UP, AMPOULE_SLOT, true),
-                    new InventoryDirectionEntry(Direction.UP, MATERIAL_INPUT, true)).directionsMap;
+                    new InventoryDirectionEntry(Direction.DOWN, OUTPUT, false),
+                    new InventoryDirectionEntry(Direction.NORTH, OUTPUT, false),
+                    new InventoryDirectionEntry(Direction.SOUTH, OUTPUT, false),
+                    new InventoryDirectionEntry(Direction.EAST, OUTPUT, false),
+                    new InventoryDirectionEntry(Direction.WEST, OUTPUT, false),
+                    new InventoryDirectionEntry(Direction.UP, DNA_SLOT_1, true),
+                    new InventoryDirectionEntry(Direction.UP, DNA_SLOT_2, true),
+                    new InventoryDirectionEntry(Direction.UP, DNA_SLOT_3, true)).directionsMap;
 
 
     protected final ContainerData data;
@@ -309,49 +298,23 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
 
     private void craftItem() {
         Optional<DNAHybridizerRecipe> recipe = getCurrentRecipe();
+        if (recipe.isEmpty()) return;
 
-        this.itemHandler.extractItem(AMPOULE_SLOT, 1, false);
-        this.itemHandler.extractItem(MATERIAL_INPUT, 1, false);
+        this.itemHandler.extractItem(DNA_SLOT_1, 1, false);
+        this.itemHandler.extractItem(DNA_SLOT_2, 1, false);
+        this.itemHandler.extractItem(DNA_SLOT_3, 1, false);
 
-        // Use dynamic assemble result based on current inventory (supports random dna for amber)
-        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
+        SimpleContainer inv = new SimpleContainer(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
-            inventory.setItem(i, itemHandler.getStackInSlot(i));
+            inv.setItem(i, itemHandler.getStackInSlot(i));
         }
-        ItemStack result = recipe.get().assemble(inventory, getLevel().registryAccess());
-        Item resultItem = result.getItem();
-        int resultCount = result.getCount();
-
-        int targetSlot = getAvailableOutputSlotFor(resultItem);
-        if (targetSlot != -1) {
-            ItemStack current = this.itemHandler.getStackInSlot(targetSlot);
-
-            if (current.isEmpty()) {
-                this.itemHandler.setStackInSlot(targetSlot, result.copy());
-            } else {
-                int existing = current.getCount();
-                int max = current.getMaxStackSize();
-                int toPlace = Math.min(existing + resultCount, max);
-                int remainder = (existing + resultCount) - toPlace;
-
-                current.setCount(toPlace);
-                this.itemHandler.setStackInSlot(targetSlot, current);
-
-                if (remainder > 0) {
-                    int nextSlot = getAvailableOutputSlotFor(resultItem);
-                    if (nextSlot != -1) {
-                        ItemStack next = this.itemHandler.getStackInSlot(nextSlot);
-                        if (next.isEmpty()) {
-                            this.itemHandler.setStackInSlot(nextSlot, new ItemStack(resultItem, remainder));
-                        } else {
-                            int existing2 = next.getCount();
-                            int toPlace2 = Math.min(existing2 + remainder, next.getMaxStackSize());
-                            next.setCount(toPlace2);
-                            this.itemHandler.setStackInSlot(nextSlot, next);
-                        }
-                    }
-                }
-            }
+        ItemStack result = recipe.get().assemble(inv, getLevel().registryAccess());
+        ItemStack current = this.itemHandler.getStackInSlot(OUTPUT);
+        if (current.isEmpty()) {
+            this.itemHandler.setStackInSlot(OUTPUT, result.copy());
+        } else if (ItemStack.isSameItemSameTags(current, result) && current.getCount() < current.getMaxStackSize()) {
+            current.grow(Math.min(result.getCount(), current.getMaxStackSize() - current.getCount()));
+            this.itemHandler.setStackInSlot(OUTPUT, current);
         }
     }
 
@@ -377,8 +340,12 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
         for (int i = 0; i < itemHandler.getSlots(); i++) {
             inventory.setItem(i, itemHandler.getStackInSlot(i));
         }
-        ItemStack dynamicResult = recipe.get().assemble(inventory, getLevel().registryAccess());
-        return !dynamicResult.isEmpty() && canInsertOneIntoAnyOutput(dynamicResult.getItem());
+        ItemStack result = recipe.get().assemble(inventory, getLevel().registryAccess());
+        ItemStack out = itemHandler.getStackInSlot(OUTPUT);
+        if (result.isEmpty()) return false;
+        if (out.isEmpty()) return true;
+        if (!ItemStack.isSameItemSameTags(out, result)) return false;
+        return out.getCount() + result.getCount() <= out.getMaxStackSize();
     }
 
     private Optional<DNAHybridizerRecipe> getCurrentRecipe() {
@@ -407,7 +374,7 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
     }
 
     private int getAvailableOutputSlotFor(Item item) {
-        int[] outputs = { OUTPUT_SLOT_1, OUTPUT_SLOT_2, OUTPUT_SLOT_3 };
+        int[] outputs = { OUTPUT };
 
         // Prefer merging into existing stacks first
         for (int slot : outputs) {

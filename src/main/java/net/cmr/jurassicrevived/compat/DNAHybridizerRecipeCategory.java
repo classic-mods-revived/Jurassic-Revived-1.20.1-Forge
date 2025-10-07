@@ -111,24 +111,11 @@ public class DNAHybridizerRecipeCategory implements IRecipeCategory<DNAHybridize
 
         builder.addSlot(RecipeIngredientRole.INPUT, 57, 26).addIngredients(recipe.getIngredients().get(0));
         builder.addSlot(RecipeIngredientRole.INPUT, 57, 44).addIngredients(recipe.getIngredients().get(1));
+// ... existing code ...
+        // Add third input slot visually under the first two (adjust coordinates as per your GUI)
+        builder.addSlot(RecipeIngredientRole.INPUT, 57, 62).addIngredients(recipe.getIngredients().get(2));
 
-        // If the second ingredient is Mosquito in Amber, cycle all DNA as possible outputs
-        Ingredient second = recipe.getIngredients().size() > 1 ? recipe.getIngredients().get(1) : Ingredient.EMPTY;
-        if (!second.isEmpty() && second.test(new ItemStack(ModItems.MOSQUITO_IN_AMBER.get()))) {
-            ItemStack[] candidates = Ingredient.of(ModTags.Items.DNA).getItems();
-            builder.addSlot(RecipeIngredientRole.OUTPUT, 103, 35)
-                    .addItemStacks(java.util.Arrays.asList(candidates))
-                    .addRichTooltipCallback((slotView, tooltip) -> {
-                        slotView.getDisplayedIngredient(VanillaTypes.ITEM_STACK).ifPresent(stack -> {
-                            if (recipe.hasAnyWeightsConfigured()) {
-                                int weight = recipe.getWeightOrDefault(stack.getItem(), 1);
-                                tooltip.add(Component.literal("Weight: " + weight));
-                            }
-                        });
-                    });
-        } else {
-            builder.addSlot(RecipeIngredientRole.OUTPUT, 103, 35).addItemStack(recipe.getResultItem(null));
-        }
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 103, 35).addItemStack(recipe.getResultItem(null));
     }
 
 }

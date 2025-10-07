@@ -4,10 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.cmr.jurassicrevived.JRMod;
 import net.cmr.jurassicrevived.block.ModBlocks;
-import net.cmr.jurassicrevived.datagen.custom.ConfigCondition;
-import net.cmr.jurassicrevived.datagen.custom.DNAExtractingRecipeBuilder;
-import net.cmr.jurassicrevived.datagen.custom.FossilCleaningRecipeBuilder;
-import net.cmr.jurassicrevived.datagen.custom.FossilGrindingRecipeBuilder;
+import net.cmr.jurassicrevived.datagen.custom.*;
 import net.cmr.jurassicrevived.item.ModItems;
 import net.cmr.jurassicrevived.util.ModTags;
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -359,6 +356,13 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         FossilCleaningRecipeBuilder.randomFossil(ModBlocks.DEEPSLATE_FOSSIL.get(), ModItems.VELOCIRAPTOR_SKULL_FOSSIL.get(), 1)
                 .unlockedBy("has_deepslate_fossil_block", has(ModBlocks.DEEPSLATE_FOSSIL.get())).save(pWriter, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "random_fossil_from_deepslate_fossil_from_fossil_cleaning"));
 
+        new DNAHybridizingRecipeBuilder(
+                ModItems.TYRANNOSAURUS_REX_DNA.get(),
+                ModItems.VELOCIRAPTOR_DNA.get(),
+                ModItems.CERATOSAURUS_DNA.get(),
+                ModItems.INDOMINUS_REX_DNA.get(), 1)
+                .unlockedBy("has_dna", has(ModTags.Items.DNA))
+                .save(pWriter, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "indominus_rex_dna_from_hybridizing"));
     }
 
     protected static void oreSmelting(Consumer<FinishedRecipe> pFinishedRecipeConsumer, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult,
