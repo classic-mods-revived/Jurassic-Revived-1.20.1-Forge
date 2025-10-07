@@ -17,6 +17,8 @@ public class ModRecipes {
             SERIALIZERS.register("fossil_grinding", () -> FossilGrinderRecipe.Serializer.INSTANCE);
     public static final RegistryObject<RecipeSerializer<FossilCleanerRecipe>> FOSSIL_CLEANER_SERIALIZER =
             SERIALIZERS.register("fossil_cleaning", () -> FossilCleanerRecipe.Serializer.INSTANCE);
+    public static final RegistryObject<RecipeSerializer<DNAHybridizerRecipe>> DNA_HYBRIDIZER_SERIALIZER =
+            SERIALIZERS.register("dna_hybridizing", () -> DNAHybridizerRecipe.Serializer.INSTANCE);
 
     public static void register(IEventBus eventBus) {
         SERIALIZERS.register(eventBus);
