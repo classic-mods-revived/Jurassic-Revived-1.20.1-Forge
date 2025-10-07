@@ -281,7 +281,11 @@ public class FossilCleanerBlockEntity extends BlockEntity implements MenuProvide
         }
 
         if (cap == ForgeCapabilities.ENERGY) {
-            return lazyEnergy.cast();
+            // Only expose energy when power is required and storage exists
+            if (Config.REQUIRE_POWER && ENERGY_STORAGE != null) {
+                return lazyEnergy.cast();
+            }
+            return LazyOptional.empty();
         }
 
         return super.getCapability(cap, side);
@@ -294,7 +298,11 @@ public class FossilCleanerBlockEntity extends BlockEntity implements MenuProvide
         // Expose input-only fluid handler to the outside
         lazyFluidHandler = LazyOptional.of(() -> INPUT_ONLY_HANDLER);
 
-        lazyEnergy = LazyOptional.of(() -> ENERGY_STORAGE);
+        if (Config.REQUIRE_POWER && ENERGY_STORAGE != null) {
+            lazyEnergy = LazyOptional.of(() -> ENERGY_STORAGE);
+        } else {
+            lazyEnergy = LazyOptional.empty();
+        }
     }
 
     @Override
@@ -360,7 +368,7 @@ public class FossilCleanerBlockEntity extends BlockEntity implements MenuProvide
         }
 
         if (isOutputSlotEmptyOrReceivable() && hasRecipe()) {
-            if (Config.REQUIRE_POWER && !consumeEnergyPerTick(64)) {
+            if (Config.REQUIRE_POWER && !consumeEnergyPerTick(10)) {
                 // Not enough energy to continue; don't advance progress but keep state
                 setChanged(level, pPos, pState);
                 return;

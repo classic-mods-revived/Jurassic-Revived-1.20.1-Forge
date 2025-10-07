@@ -1,8 +1,9 @@
 package net.cmr.jurassicrevived.screen.custom;
 
-import net.cmr.jurassicrevived.block.ModBlocks;
-import net.cmr.jurassicrevived.block.entity.custom.FossilCleanerBlockEntity;
+import net.cmr.jurassicrevived.block.entity.custom.DNAHybridizerBlockEntity;
+import net.cmr.jurassicrevived.item.ModItems;
 import net.cmr.jurassicrevived.screen.ModMenuTypes;
+import net.cmr.jurassicrevived.util.ModTags;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -12,18 +13,18 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class FossilCleanerMenu extends AbstractContainerMenu {
-    public final FossilCleanerBlockEntity blockEntity;
+public class DNAHybridizerMenu extends AbstractContainerMenu {
+    public final DNAHybridizerBlockEntity blockEntity;
     public final Level level;
     public final ContainerData data;
 
-    public FossilCleanerMenu(int containerId, Inventory inventory, FriendlyByteBuf data) {
+    public DNAHybridizerMenu(int containerId, Inventory inventory, FriendlyByteBuf data) {
         this(containerId, inventory, inventory.player.level().getBlockEntity(data.readBlockPos()), new SimpleContainerData(2));
     }
 
-    public FossilCleanerMenu(int containerId, Inventory inventory, BlockEntity entity, ContainerData data) {
-        super(ModMenuTypes.FOSSIL_CLEANER_MENU.get(), containerId);
-        blockEntity = ((FossilCleanerBlockEntity) entity);
+    public DNAHybridizerMenu(int containerId, Inventory inventory, BlockEntity entity, ContainerData data) {
+        super(ModMenuTypes.DNA_HYBRIDIZER_MENU.get(), containerId);
+        blockEntity = ((DNAHybridizerBlockEntity) entity);
         this.level = inventory.player.level();
         this.data = data;
 
@@ -31,36 +32,28 @@ public class FossilCleanerMenu extends AbstractContainerMenu {
         addPlayerHotbar(inventory);
 
         // Input: Ampoule slot (only ampoules may be inserted)
-        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 0, 7, 61) {
+        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 0, 57, 26) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-
-                return blockEntity.itemHandler.isItemValid(0, stack);
+                return stack.is(ModTags.Items.TISSUES);
             }
         });
 
         // Input: Material slot (only velociraptor tissue may be inserted)
-        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 1, 57, 35) {
+        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 1, 57, 44) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.getItem() == ModBlocks.STONE_FOSSIL.get().asItem() || stack.getItem() == ModBlocks.DEEPSLATE_FOSSIL.get().asItem();
+                return stack.is(ModTags.Items.TISSUES);
             }
         });
-
         // Output slots: cannot insert anything, but can always take out
-        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 2, 103, 35) {
+        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 2, 57, 62) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return false;
+                return stack.is(ModTags.Items.TISSUES);
             }
         });
-        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 3, 121, 35) {
-            @Override
-            public boolean mayPlace(ItemStack stack) {
-                return false;
-            }
-        });
-        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 4, 139, 35) {
+        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 3, 103, 35) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return false;
@@ -98,7 +91,7 @@ public class FossilCleanerMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 5;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 4;  // must be the number of slots you have!
 
     public ItemStack quickMoveStack(Player playerIn, int pIndex) {
         Slot sourceSlot = slots.get(pIndex);
@@ -111,7 +104,7 @@ public class FossilCleanerMenu extends AbstractContainerMenu {
             // This is a vanilla container slot so merge the stack into the tile inventory
             // Restrict to the two input slots only (exclude output slots).
             int teInputStart = TE_INVENTORY_FIRST_SLOT_INDEX;          // handler indices 0-1
-            int teInputEndExclusive = TE_INVENTORY_FIRST_SLOT_INDEX + 2;
+            int teInputEndExclusive = TE_INVENTORY_FIRST_SLOT_INDEX + 3;
             if (!moveItemStackTo(sourceStack, teInputStart, teInputEndExclusive, false)) {
                 return ItemStack.EMPTY;  // EMPTY_ITEM
             }

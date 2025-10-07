@@ -19,6 +19,10 @@ public class DNAExtractorScreen extends AbstractContainerScreen<DNAExtractorMenu
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/dna_extractor/dna_extractor_gui.png");
     private static final ResourceLocation ARROW_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/arrow.png");
+    private static final ResourceLocation WHITE_ARROW_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/white_arrow.png");
+    private static final ResourceLocation POWER_BAR_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/power_bar.png");
     private static final ResourceLocation AMPOULE_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/dna_extractor/ampoule.png");
     private static final ResourceLocation AMBER_TEXTURE =
@@ -40,14 +44,14 @@ public class DNAExtractorScreen extends AbstractContainerScreen<DNAExtractorMenu
     }
 
     private void renderEnergyAreaTooltip(GuiGraphics guiGraphics, int pMouseX, int pMouseY, int x, int y) {
-        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 156, 11, 8, 64) && Config.REQUIRE_POWER) {
+        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 160, 11, 8, 64) && Config.REQUIRE_POWER) {
             guiGraphics.renderTooltip(this.font, energyInfoArea.getTooltips(),
                     Optional.empty(), pMouseX - x, pMouseY - y);
         }
     }
 
     private void assignEnergyInfoArea() {
-        energyInfoArea = new EnergyDisplayTooltipArea(((width - imageWidth) / 2) + 156,
+        energyInfoArea = new EnergyDisplayTooltipArea(((width - imageWidth) / 2) + 160,
                 ((height - imageHeight) / 2) + 11, menu.blockEntity.getEnergyStorage(null));
     }
 
@@ -58,7 +62,7 @@ public class DNAExtractorScreen extends AbstractContainerScreen<DNAExtractorMenu
 
         if (Config.REQUIRE_POWER) {
             renderEnergyAreaTooltip(guiGraphics, pMouseX, pMouseY, x, y);
-        }
+            }
     }
 
     @Override
@@ -70,16 +74,20 @@ public class DNAExtractorScreen extends AbstractContainerScreen<DNAExtractorMenu
         int y = (this.height - this.imageHeight) /2;
 
         guiGraphics.blit(GUI_TEXTURE, x, y, 0, 0, this.imageWidth, this.imageHeight, 176, 166);
-        RenderProgressArrow(guiGraphics, x, y);
+        guiGraphics.blit(ARROW_TEXTURE,  x + 76, y + 35, 0, 0, 24, 16, 24, 16);
+
+        guiGraphics.blit(AMPOULE_TEXTURE, x + 39, y + 35, 0, 0, 16, 16, 16, 16);
+        guiGraphics.blit(AMBER_TEXTURE,  x + 57, y + 35, 0, 0, 16, 16, 16, 16);
 
         if (Config.REQUIRE_POWER) {
-            energyInfoArea.render(guiGraphics);
+            guiGraphics.blit(POWER_BAR_TEXTURE, x+159, y+10, 0, 0, 10, 66, 10, 66);
+
         }
     }
 
     private void RenderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
         if(menu.isCrafting()) {
-            guiGraphics.blit(ARROW_TEXTURE, x+73, y + 30, 0, 0, menu.getScaledArrowProgress(), 16, 24, 16);
+            guiGraphics.blit(WHITE_ARROW_TEXTURE, x+76, y + 35, 0, 0, menu.getScaledArrowProgress(), 16, 24, 16);
         }
     }
 
@@ -90,8 +98,12 @@ public class DNAExtractorScreen extends AbstractContainerScreen<DNAExtractorMenu
         renderTooltip(guiGraphics, mouseX, mouseY);
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) /2;
-        guiGraphics.blit(AMPOULE_TEXTURE, x + 39, y + 35, 0, 0, 16, 16, 16, 16);
-        guiGraphics.blit(AMBER_TEXTURE,  x + 57, y + 35, 0, 0, 16, 16, 16, 16);
+
+        RenderProgressArrow(guiGraphics, x, y);
+
+        if (Config.REQUIRE_POWER) {
+            energyInfoArea.render(guiGraphics);
+        }
     }
 
     public static boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, int width, int height) {

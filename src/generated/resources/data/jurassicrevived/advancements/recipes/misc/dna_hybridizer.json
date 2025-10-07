@@ -1,0 +1,39 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_dna_hybridizer_ingredients": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jurassicrevived:screen",
+              "minecraft:iron_ingot",
+              "jurassicrevived:cable",
+              "jurassicrevived:processor",
+              "minecraft:redstone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "jurassicrevived:dna_hybridizer"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_dna_hybridizer_ingredients",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "jurassicrevived:dna_hybridizer"
+    ]
+  },
+  "sends_telemetry_event": false
+}

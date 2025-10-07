@@ -14,20 +14,24 @@ import net.minecraft.world.entity.player.Inventory;
 
 import java.util.Optional;
 
-public class FossilGrinderScreen extends AbstractContainerScreen<FossilGrinderMenu> {
+public class DNAHybridizerScreen extends AbstractContainerScreen<DNAHybridizerMenu> {
     private static final ResourceLocation GUI_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/fossil_grinder/fossil_grinder_gui.png");
+            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/dna_hybridizer/dna_hybridizer_gui.png");
     private static final ResourceLocation ARROW_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/arrow.png");
     private static final ResourceLocation WHITE_ARROW_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/white_arrow.png");
     private static final ResourceLocation POWER_BAR_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/power_bar.png");
-    private static final ResourceLocation SKULL_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/skull.png");
+    private static final ResourceLocation AMPOULE_B_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/dna_hybridizer/ampoule_b.png");
+    private static final ResourceLocation AMPOULE_T_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/dna_hybridizer/ampoule_t.png");
+    private static final ResourceLocation AMPOULE_A_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/dna_hybridizer/ampoule_a.png");
     private EnergyDisplayTooltipArea energyInfoArea;
 
-    public FossilGrinderScreen(FossilGrinderMenu menu, Inventory playerInventory, Component title) {
+    public DNAHybridizerScreen(DNAHybridizerMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
     }
 
@@ -60,7 +64,7 @@ public class FossilGrinderScreen extends AbstractContainerScreen<FossilGrinderMe
 
         if (Config.REQUIRE_POWER) {
             renderEnergyAreaTooltip(guiGraphics, pMouseX, pMouseY, x, y);
-            }
+        }
     }
 
     @Override
@@ -72,13 +76,14 @@ public class FossilGrinderScreen extends AbstractContainerScreen<FossilGrinderMe
         int y = (this.height - this.imageHeight) /2;
 
         guiGraphics.blit(GUI_TEXTURE, x, y, 0, 0, this.imageWidth, this.imageHeight, 176, 166);
-        guiGraphics.blit(ARROW_TEXTURE,  x + 76, y + 35, 0, 0, 24, 16, 24, 16);
 
-        guiGraphics.blit(SKULL_TEXTURE,  x + 57, y + 35, 0, 0, 16, 16, 16, 16);
+        guiGraphics.blit(AMPOULE_B_TEXTURE, x + 57, y + 26, 0, 0, 16, 16, 16, 16);
+        guiGraphics.blit(AMPOULE_T_TEXTURE,  x + 57, y + 44, 0, 0, 16, 16, 16, 16);
+        guiGraphics.blit(AMPOULE_A_TEXTURE,  x + 57, y + 62, 0, 0, 16, 16, 16, 16);
+        guiGraphics.blit(ARROW_TEXTURE,  x + 76, y + 35, 0, 0, 24, 16, 24, 16);
 
         if (Config.REQUIRE_POWER) {
             guiGraphics.blit(POWER_BAR_TEXTURE, x+159, y+10, 0, 0, 10, 66, 10, 66);
-
         }
     }
 
@@ -101,7 +106,7 @@ public class FossilGrinderScreen extends AbstractContainerScreen<FossilGrinderMe
         if (Config.REQUIRE_POWER) {
             energyInfoArea.render(guiGraphics);
         }
-    }
+        }
 
     public static boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, int width, int height) {
         return MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, width, height);

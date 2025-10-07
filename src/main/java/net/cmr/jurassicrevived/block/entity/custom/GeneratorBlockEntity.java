@@ -95,7 +95,7 @@ public class GeneratorBlockEntity extends BlockEntity implements MenuProvider {
 
     private void generateEnergyTick() {
         // Generate up to transfer rate per tick
-        float toAdd = Math.min((256), this.ENERGY_STORAGE.getMaxEnergyStored() - this.ENERGY_STORAGE.getEnergyStored());
+        float toAdd = Math.min((100), this.ENERGY_STORAGE.getMaxEnergyStored() - this.ENERGY_STORAGE.getEnergyStored());
         if (toAdd > 0) {
             this.ENERGY_STORAGE.receiveEnergy((int) toAdd, false);
             // ensure neighbors (including your pipes) see new energy immediately

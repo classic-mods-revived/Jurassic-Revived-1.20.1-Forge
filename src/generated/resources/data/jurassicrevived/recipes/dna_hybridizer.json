@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "jurassicrevived:screen"
+    },
+    "B": {
+      "item": "minecraft:iron_ingot"
+    },
+    "C": {
+      "item": "jurassicrevived:cable"
+    },
+    "D": {
+      "item": "jurassicrevived:processor"
+    },
+    "E": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "CDC",
+    "BEB"
+  ],
+  "result": {
+    "item": "jurassicrevived:dna_hybridizer"
+  },
+  "show_notification": true
+}

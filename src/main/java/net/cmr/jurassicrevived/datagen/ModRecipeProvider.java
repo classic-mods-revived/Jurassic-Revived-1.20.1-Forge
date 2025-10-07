@@ -215,6 +215,18 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_fossil_cleaner_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(Items.IRON_INGOT, Items.IRON_NUGGET, Blocks.GLASS).build())).save(pWriter);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.DNA_HYBRIDIZER.get(), 1)
+                .pattern("ABA")
+                .pattern("CDC")
+                .pattern("BEB")
+                .define('A', ModItems.SCREEN.get())
+                .define('B', Items.IRON_INGOT)
+                .define('C', ModItems.CABLE.get())
+                .define('D', ModItems.PROCESSOR.get())
+                .define('E', Items.REDSTONE)
+                .unlockedBy("has_dna_hybridizer_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                        of(ModItems.SCREEN.get(), Items.IRON_INGOT, ModItems.CABLE.get(), ModItems.PROCESSOR.get(), Items.REDSTONE).build())).save(pWriter);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.WRENCH.get(), 1)
                 .pattern(" A ")
                 .pattern(" BA")

@@ -24,6 +24,10 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("fossil_cleaner_be", () ->
                     BlockEntityType.Builder.of(FossilCleanerBlockEntity::new,
                             ModBlocks.FOSSIL_CLEANER.get()).build(null));
+    public static final RegistryObject<BlockEntityType<DNAHybridizerBlockEntity>> DNA_HYBRIDIZER_BE =
+            BLOCK_ENTITIES.register("dna_hybridizer_be", () ->
+                    BlockEntityType.Builder.of(DNAHybridizerBlockEntity::new,
+                            ModBlocks.DNA_HYBRIDIZER.get()).build(null));
     public static final RegistryObject<BlockEntityType<PipeBlockEntity>> ITEM_PIPE_BE =
             BLOCK_ENTITIES.register("item_pipe_be", () ->
                     BlockEntityType.Builder.of(PipeBlockEntity::new,

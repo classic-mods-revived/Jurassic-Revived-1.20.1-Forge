@@ -24,11 +24,9 @@ public class ModBlocks {
             DeferredRegister.create(ForgeRegistries.BLOCKS, JRMod.MOD_ID);
 
     // Helper: conditionally register a block item (hide power pipe when disabled)
-    private static <T extends Block> RegistryObject<Item> registerBlockItemConditional(String name, RegistryObject<T> block, Supplier<Boolean> include) {
+    private static <T extends Block> void registerBlockItemConditional(String name, RegistryObject<T> block, Supplier<Boolean> include) {
         if (include.get()) {
-            return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
-        } else {
-            return null;
+            ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
         }
     }
 
@@ -53,6 +51,8 @@ public class ModBlocks {
             () -> new FossilGrinderBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
     public static final RegistryObject<Block> FOSSIL_CLEANER = registerBlock("fossil_cleaner",
             () -> new FossilCleanerBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
+    public static final RegistryObject<Block> DNA_HYBRIDIZER = registerBlock("dna_hybridizer",
+            () -> new DNAHybridizerBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
 
     public static final RegistryObject<Block> ROYAL_FERN = registerBlock("royal_fern",
             () -> new FlowerBlock(MobEffects.UNLUCK, 0, BlockBehaviour.Properties.copy(Blocks.ALLIUM)));

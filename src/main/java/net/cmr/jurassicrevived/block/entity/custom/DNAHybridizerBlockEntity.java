@@ -1,11 +1,11 @@
 package net.cmr.jurassicrevived.block.entity.custom;
 
 import net.cmr.jurassicrevived.Config;
-import net.cmr.jurassicrevived.block.custom.DNAExtractorBlock;
+import net.cmr.jurassicrevived.block.custom.DNAHybridizerBlock;
 import net.cmr.jurassicrevived.block.entity.energy.ModEnergyStorage;
 import net.cmr.jurassicrevived.item.ModItems;
-import net.cmr.jurassicrevived.recipe.DNAExtractorRecipe;
-import net.cmr.jurassicrevived.screen.custom.DNAExtractorMenu;
+import net.cmr.jurassicrevived.recipe.DNAHybridizerRecipe;
+import net.cmr.jurassicrevived.screen.custom.DNAHybridizerMenu;
 import net.cmr.jurassicrevived.util.InventoryDirectionEntry;
 import net.cmr.jurassicrevived.util.InventoryDirectionWrapper;
 import net.cmr.jurassicrevived.util.ModTags;
@@ -42,7 +42,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Map;
 import java.util.Optional;
 
-public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider {
+public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvider {
     public final ItemStackHandler itemHandler = new ItemStackHandler(5) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -117,14 +117,14 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
         return null;
     }
 
-    public DNAExtractorBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntities.DNA_EXTRACTOR_BE.get(), pPos, pBlockState);
+    public DNAHybridizerBlockEntity(BlockPos pPos, BlockState pBlockState) {
+        super(ModBlockEntities.DNA_HYBRIDIZER_BE.get(), pPos, pBlockState);
         this.data = new ContainerData() {
             @Override
             public int get(int pIndex) {
                 return switch (pIndex) {
-                    case 0 -> DNAExtractorBlockEntity.this.progress;
-                    case 1 -> DNAExtractorBlockEntity.this.maxProgress;
+                    case 0 -> DNAHybridizerBlockEntity.this.progress;
+                    case 1 -> DNAHybridizerBlockEntity.this.maxProgress;
                     default -> 0;
                 };
             }
@@ -132,8 +132,8 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
             @Override
             public void set(int pIndex, int pValue) {
                 switch (pIndex) {
-                    case 0 -> DNAExtractorBlockEntity.this.progress = pValue;
-                    case 1 -> DNAExtractorBlockEntity.this.maxProgress = pValue;
+                    case 0 -> DNAHybridizerBlockEntity.this.progress = pValue;
+                    case 1 -> DNAHybridizerBlockEntity.this.maxProgress = pValue;
                 }
             }
 
@@ -164,13 +164,13 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
 
     @Override
     public Component getDisplayName() {
-        return Component.translatable("block.jurassicrevived.dna_extractor");
+        return Component.translatable("block.jurassicrevived.dna_hybridizer");
     }
 
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
-        return new DNAExtractorMenu(pContainerId, pPlayerInventory, this, this.data);
+        return new DNAHybridizerMenu(pContainerId, pPlayerInventory, this, this.data);
     }
 
     @Override
@@ -180,7 +180,7 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
                 return lazyItemHandler.cast();
             }
             if (directionWrappedHandlerMap.containsKey(side)) {
-                Direction localDirection = this.getBlockState().getValue(DNAExtractorBlock.FACING);
+                Direction localDirection = this.getBlockState().getValue(DNAHybridizerBlock.FACING);
                 if (side == Direction.DOWN || side == Direction.UP) {
                     return directionWrappedHandlerMap.get(side).cast();
                 }
@@ -203,7 +203,6 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
             }
             return LazyOptional.empty();
         }
-
         return super.getCapability(cap, side);
     }
 
@@ -211,6 +210,7 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
     public void onLoad() {
         super.onLoad();
         lazyItemHandler = LazyOptional.of(() -> itemHandler);
+        // Only create a non-empty LazyOptional if storage exists
         if (Config.REQUIRE_POWER && ENERGY_STORAGE != null) {
             lazyEnergy = LazyOptional.of(() -> ENERGY_STORAGE);
         } else {
@@ -228,9 +228,9 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory", itemHandler.serializeNBT());
-        pTag.putInt("dna_extractor.progress", progress);
+        pTag.putInt("dna_hybridizer.progress", progress);
         if (Config.REQUIRE_POWER) {
-            pTag.putInt("dna_extractor.energy", this.ENERGY_STORAGE.getEnergyStored());
+            pTag.putInt("dna_hybridizer.energy", this.ENERGY_STORAGE.getEnergyStored());
         }
         super.saveAdditional(pTag);
     }
@@ -239,9 +239,9 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
     public void load(CompoundTag pTag) {
         super.load(pTag);
         itemHandler.deserializeNBT(pTag.getCompound("inventory"));
-        progress = pTag.getInt("dna_extractor.progress");
+        progress = pTag.getInt("dna_hybridizer.progress");
         if (Config.REQUIRE_POWER) {
-            this.ENERGY_STORAGE.setEnergy(pTag.getInt("dna_extractor.energy"));
+            this.ENERGY_STORAGE.setEnergy(pTag.getInt("dna_hybridizer.energy"));
         }
     }
 
@@ -308,7 +308,7 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
     }
 
     private void craftItem() {
-        Optional<DNAExtractorRecipe> recipe = getCurrentRecipe();
+        Optional<DNAHybridizerRecipe> recipe = getCurrentRecipe();
 
         this.itemHandler.extractItem(AMPOULE_SLOT, 1, false);
         this.itemHandler.extractItem(MATERIAL_INPUT, 1, false);
@@ -368,7 +368,7 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
     }
 
     private boolean hasRecipe() {
-        Optional<DNAExtractorRecipe> recipe = getCurrentRecipe();
+        Optional<DNAHybridizerRecipe> recipe = getCurrentRecipe();
 
         if (recipe.isEmpty()) return false;
 
@@ -381,17 +381,17 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
         return !dynamicResult.isEmpty() && canInsertOneIntoAnyOutput(dynamicResult.getItem());
     }
 
-    private Optional<DNAExtractorRecipe> getCurrentRecipe() {
+    private Optional<DNAHybridizerRecipe> getCurrentRecipe() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
         for(int i = 0; i < itemHandler.getSlots(); i++) {
             inventory.setItem(i, itemHandler.getStackInSlot(i));
         }
-        return this.level.getRecipeManager().getRecipeFor(DNAExtractorRecipe.Type.INSTANCE, inventory, this.level);
+        return this.level.getRecipeManager().getRecipeFor(DNAHybridizerRecipe.Type.INSTANCE, inventory, this.level);
     }
 
     private boolean isOutputSlotEmptyOrReceivable() {
         // Use the current recipe’s dynamic output rather than a fixed result item
-        Optional<DNAExtractorRecipe> recipe = getCurrentRecipe();
+        Optional<DNAHybridizerRecipe> recipe = getCurrentRecipe();
         if (recipe.isEmpty()) return false;
 
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());

@@ -15,10 +15,7 @@ import net.cmr.jurassicrevived.item.ModItems;
 import net.cmr.jurassicrevived.loot.ModLootProviders;
 import net.cmr.jurassicrevived.recipe.ModRecipes;
 import net.cmr.jurassicrevived.screen.ModMenuTypes;
-import net.cmr.jurassicrevived.screen.custom.DNAExtractorScreen;
-import net.cmr.jurassicrevived.screen.custom.FossilCleanerScreen;
-import net.cmr.jurassicrevived.screen.custom.FossilGrinderScreen;
-import net.cmr.jurassicrevived.screen.custom.GeneratorScreen;
+import net.cmr.jurassicrevived.screen.custom.*;
 import net.cmr.jurassicrevived.util.FenceClimbClientHandler;
 import net.cmr.jurassicrevived.util.FenceClimbHandler;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -123,6 +120,7 @@ public class JRMod {
             MenuScreens.register(ModMenuTypes.DNA_EXTRACTOR_MENU.get(), DNAExtractorScreen::new);
             MenuScreens.register(ModMenuTypes.FOSSIL_GRINDER_MENU.get(), FossilGrinderScreen::new);
             MenuScreens.register(ModMenuTypes.FOSSIL_CLEANER_MENU.get(), FossilCleanerScreen::new);
+            MenuScreens.register(ModMenuTypes.DNA_HYBRIDIZER_MENU.get(), DNAHybridizerScreen::new);
         }
     }
 }

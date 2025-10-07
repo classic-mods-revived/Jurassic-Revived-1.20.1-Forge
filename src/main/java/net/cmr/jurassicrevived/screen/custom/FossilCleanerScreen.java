@@ -22,6 +22,10 @@ public class FossilCleanerScreen extends AbstractContainerScreen<FossilCleanerMe
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/fossil_cleaner/fossil_cleaner_gui.png");
     private static final ResourceLocation ARROW_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/arrow.png");
+    private static final ResourceLocation WHITE_ARROW_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/white_arrow.png");
+    private static final ResourceLocation POWER_BAR_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/power_bar.png");
     private static final ResourceLocation SKULL_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/skull.png");
     private FluidTankRenderer fluidRenderer;
@@ -44,14 +48,14 @@ public class FossilCleanerScreen extends AbstractContainerScreen<FossilCleanerMe
     }
 
     private void renderEnergyAreaTooltip(GuiGraphics guiGraphics, int pMouseX, int pMouseY, int x, int y) {
-        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 156, 11, 8, 64) && Config.REQUIRE_POWER) {
+        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 160, 11, 8, 64) && Config.REQUIRE_POWER) {
             guiGraphics.renderTooltip(this.font, energyInfoArea.getTooltips(),
                     Optional.empty(), pMouseX - x, pMouseY - y);
         }
     }
 
     private void assignEnergyInfoArea() {
-        energyInfoArea = new EnergyDisplayTooltipArea(((width - imageWidth) / 2) + 156,
+        energyInfoArea = new EnergyDisplayTooltipArea(((width - imageWidth) / 2) + 160,
                 ((height - imageHeight) / 2) + 11, menu.blockEntity.getEnergyStorage(null));
     }
 
@@ -89,18 +93,20 @@ public class FossilCleanerScreen extends AbstractContainerScreen<FossilCleanerMe
         int y = (this.height - this.imageHeight) /2;
 
         guiGraphics.blit(GUI_TEXTURE, x, y, 0, 0, this.imageWidth, this.imageHeight, 176, 166);
-        RenderProgressArrow(guiGraphics, x, y);
+        guiGraphics.blit(ARROW_TEXTURE,  x + 76, y + 35, 0, 0, 24, 16, 24, 16);
+
+        guiGraphics.blit(SKULL_TEXTURE,  x + 57, y + 35, 0, 0, 16, 16, 16, 16);
 
         fluidRenderer.render(guiGraphics, x + 7, y + 8, menu.blockEntity.getFluid());
 
         if (Config.REQUIRE_POWER) {
-            energyInfoArea.render(guiGraphics);
+            guiGraphics.blit(POWER_BAR_TEXTURE, x+159, y+10, 0, 0, 10, 66, 10, 66);
         }
     }
 
     private void RenderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
         if(menu.isCrafting()) {
-            guiGraphics.blit(ARROW_TEXTURE, x+73, y + 30, 0, 0, menu.getScaledArrowProgress(), 16, 24, 16);
+            guiGraphics.blit(WHITE_ARROW_TEXTURE, x+76, y + 35, 0, 0, menu.getScaledArrowProgress(), 16, 24, 16);
         }
     }
 
@@ -117,10 +123,14 @@ public class FossilCleanerScreen extends AbstractContainerScreen<FossilCleanerMe
             renderHoverHighlight(guiGraphics, x + 7, y + 8, 16, 50);
         }
 
-        guiGraphics.blit(SKULL_TEXTURE,  x + 57, y + 35, 0, 0, 16, 16, 16, 16);
-
         // Draw tooltips last so they appear above everything
         renderTooltip(guiGraphics, mouseX, mouseY);
+
+        RenderProgressArrow(guiGraphics, x, y);
+
+        if (Config.REQUIRE_POWER) {
+            energyInfoArea.render(guiGraphics);
+        }
     }
 
     // Draws a translucent white overlay similar to vanilla slot hover highlight
