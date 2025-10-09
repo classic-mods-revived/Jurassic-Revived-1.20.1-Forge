@@ -1,6 +1,5 @@
 package net.cmr.jurassicrevived.block.custom;
 
-import net.cmr.jurassicrevived.util.FenceUpdateGuard;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -8,17 +7,19 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.cmr.jurassicrevived.util.FenceUpdateGuard;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 
 public class FenceWireBlock extends Block implements SimpleWaterloggedBlock {
 
@@ -54,7 +55,7 @@ public class FenceWireBlock extends Block implements SimpleWaterloggedBlock {
 
     private final Tier tierConfig;
 
-    public FenceWireBlock(Properties properties, Tier tier) {
+    public FenceWireBlock(BlockBehaviour.Properties properties, Tier tier) {
         super(properties);
         this.tierConfig = tier;
         this.registerDefaultState(this.stateDefinition.any()
@@ -368,59 +369,46 @@ public class FenceWireBlock extends Block implements SimpleWaterloggedBlock {
     private static final VoxelShape DIAG_SW = buildDiagonal(false, true);
     private static final VoxelShape DIAG_NW = buildDiagonal(false, false);
 
+    // Precomputed shapes for all 256 combinations:
+    // bit 0..3: NORTH, EAST, SOUTH, WEST; bit 4..7: NE, SE, SW, NW
+    private static final VoxelShape[] SHAPES = new VoxelShape[256];
+
+    static {
+        for (int mask = 0; mask < SHAPES.length; mask++) {
+            VoxelShape s = CENTER;
+
+            if ((mask & (1 << 0)) != 0) s = Shapes.or(s, ARM_NORTH);
+            if ((mask & (1 << 1)) != 0) s = Shapes.or(s, ARM_EAST);
+            if ((mask & (1 << 2)) != 0) s = Shapes.or(s, ARM_SOUTH);
+            if ((mask & (1 << 3)) != 0) s = Shapes.or(s, ARM_WEST);
+
+            if ((mask & (1 << 4)) != 0) s = Shapes.or(s, DIAG_NE);
+            if ((mask & (1 << 5)) != 0) s = Shapes.or(s, DIAG_SE);
+            if ((mask & (1 << 6)) != 0) s = Shapes.or(s, DIAG_SW);
+            if ((mask & (1 << 7)) != 0) s = Shapes.or(s, DIAG_NW);
+
+            SHAPES[mask] = s;
+        }
+    }
+
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext ctx) {
-        VoxelShape shape = CENTER;
+        int mask = 0;
+        if (state.getValue(NORTH)) mask |= (1 << 0);
+        if (state.getValue(EAST))  mask |= (1 << 1);
+        if (state.getValue(SOUTH)) mask |= (1 << 2);
+        if (state.getValue(WEST))  mask |= (1 << 3);
 
-        if (state.getValue(NORTH)) shape = Shapes.or(shape, ARM_NORTH);
-        if (state.getValue(SOUTH)) shape = Shapes.or(shape, ARM_SOUTH);
-        if (state.getValue(WEST)) shape = Shapes.or(shape, ARM_WEST);
-        if (state.getValue(EAST)) shape = Shapes.or(shape, ARM_EAST);
+        if (state.getValue(NE)) mask |= (1 << 4);
+        if (state.getValue(SE)) mask |= (1 << 5);
+        if (state.getValue(SW)) mask |= (1 << 6);
+        if (state.getValue(NW)) mask |= (1 << 7);
 
-        if (state.getValue(NE)) shape = Shapes.or(shape, DIAG_NE);
-        if (state.getValue(SE)) shape = Shapes.or(shape, DIAG_SE);
-        if (state.getValue(SW)) shape = Shapes.or(shape, DIAG_SW);
-        if (state.getValue(NW)) shape = Shapes.or(shape, DIAG_NW);
-
-        return shape;
-    }
-
-    @Override
-    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
-        super.onPlace(state, level, pos, oldState, isMoving);
-        if (!beginGuard()) return;
-        try {
-            recomputeSelfDiagonals(level, pos, state);
-            updateDiagonalsAround(level, pos);
-        } finally {
-            endGuard();
-        }
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-        if (!state.is(newState.getBlock())) {
-            if (beginGuard()) {
-                try {
-                    updateDiagonalsAround(level, pos);
-                } finally {
-                    endGuard();
-                }
-            }
-        }
-        super.onRemove(state, level, pos, newState, isMoving);
+        return SHAPES[mask];
     }
 
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext ctx) {
         return getShape(state, level, pos, ctx);
-    }
-
-    @Override
-    public VoxelShape getVisualShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext ctx) {
-        boolean hasDiagonal = state.getValue(NE) || state.getValue(SE) || state.getValue(SW) || state.getValue(NW);
-        if (!hasDiagonal) return getShape(state, level, pos, ctx);
-        return Shapes.block();
     }
 }

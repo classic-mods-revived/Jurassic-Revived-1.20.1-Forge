@@ -68,7 +68,6 @@ public class PipeBlock extends Block implements EntityBlock, SimpleWaterloggedBl
 
     private final Transport transport;
 
-    // Voxel shapes
     private static final VoxelShape CORE = box(6, 6, 6, 10, 10, 10);
     private static final VoxelShape ARM_DOWN = box(6, 0, 6, 10, 6, 10);
     private static final VoxelShape ARM_UP = box(6, 10, 6, 10, 16, 10);
@@ -82,6 +81,21 @@ public class PipeBlock extends Block implements EntityBlock, SimpleWaterloggedBl
     private static final VoxelShape CAP_SOUTH = box(6, 6, 15, 10, 10, 16);
     private static final VoxelShape CAP_WEST = box(0, 6, 6, 1, 10, 10);
     private static final VoxelShape CAP_EAST = box(15, 6, 6, 16, 10, 10);
+
+    private static final VoxelShape[] SHAPES = new VoxelShape[64];
+
+    static {
+        for (int mask = 0; mask < SHAPES.length; mask++) {
+            VoxelShape s = CORE;
+            if ((mask & (1 << 0)) != 0) s = Shapes.or(s, ARM_DOWN,  CAP_DOWN);
+            if ((mask & (1 << 1)) != 0) s = Shapes.or(s, ARM_UP,    CAP_UP);
+            if ((mask & (1 << 2)) != 0) s = Shapes.or(s, ARM_NORTH, CAP_NORTH);
+            if ((mask & (1 << 3)) != 0) s = Shapes.or(s, ARM_SOUTH, CAP_SOUTH);
+            if ((mask & (1 << 4)) != 0) s = Shapes.or(s, ARM_WEST,  CAP_WEST);
+            if ((mask & (1 << 5)) != 0) s = Shapes.or(s, ARM_EAST,  CAP_EAST);
+            SHAPES[mask] = s;
+        }
+    }
 
     public PipeBlock(BlockBehaviour.Properties properties, Transport transport) {
         super(properties.noOcclusion());
@@ -239,7 +253,6 @@ public class PipeBlock extends Block implements EntityBlock, SimpleWaterloggedBl
         return super.use(state, level, pos, player, hand, hit);
     }
 
-    // Pick face: test hit against arm and its front cap first; fall back to nearest connected arm
     private Direction getInteractionFace(BlockState state, BlockHitResult hit, BlockPos pos) {
         Vec3 local = hit.getLocation().subtract(pos.getX(), pos.getY(), pos.getZ());
         double x = Mth.clamp(local.x * 16.0, 0.0, 16.0);
@@ -302,17 +315,16 @@ public class PipeBlock extends Block implements EntityBlock, SimpleWaterloggedBl
         return RenderShape.MODEL;
     }
 
-    // Include caps in collision/selection so you can click them
     @Override
     public VoxelShape getShape(BlockState state, net.minecraft.world.level.BlockGetter level, BlockPos pos, CollisionContext ctx) {
-        VoxelShape shape = CORE;
-        for (Direction dir : Direction.values()) {
-            ConnectionType t = state.getValue(getProp(dir));
-            if (t != ConnectionType.NONE) {
-                shape = Shapes.or(shape, armFor(dir), capFor(dir));
-            }
-        }
-        return shape;
+        int mask = 0;
+        if (state.getValue(DOWN)  != ConnectionType.NONE) mask |= (1 << 0);
+        if (state.getValue(UP)    != ConnectionType.NONE) mask |= (1 << 1);
+        if (state.getValue(NORTH) != ConnectionType.NONE) mask |= (1 << 2);
+        if (state.getValue(SOUTH) != ConnectionType.NONE) mask |= (1 << 3);
+        if (state.getValue(WEST)  != ConnectionType.NONE) mask |= (1 << 4);
+        if (state.getValue(EAST)  != ConnectionType.NONE) mask |= (1 << 5);
+        return SHAPES[mask];
     }
 
     private static VoxelShape armFor(Direction dir) {
