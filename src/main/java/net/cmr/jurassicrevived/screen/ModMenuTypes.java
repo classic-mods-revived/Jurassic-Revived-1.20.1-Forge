@@ -25,6 +25,8 @@ public class ModMenuTypes {
             registerMenuType(FossilCleanerMenu::new, "fossil_cleaner_menu");
     public static final RegistryObject<MenuType<DNAHybridizerMenu>> DNA_HYBRIDIZER_MENU =
             registerMenuType(DNAHybridizerMenu::new, "dna_hybridizer_menu");
+    public static final RegistryObject<MenuType<EmbryonicMachineMenu>> EMBRYONIC_MACHINE_MENU =
+            registerMenuType(EmbryonicMachineMenu::new, "embryonic_machine_menu");
 
 
     private static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory, String name) {

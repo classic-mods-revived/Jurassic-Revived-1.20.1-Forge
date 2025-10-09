@@ -1,0 +1,14 @@
+{
+  "type": "jurassicrevived:embryonic_machining",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:syringe"
+    },
+    {
+      "item": "jurassicrevived:gallimimus_dna"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:gallimimus_syringe"
+  }
+}

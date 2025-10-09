@@ -4,7 +4,7 @@
   "creativetab.jurassicrevived_plant_tab": "Prehistoric Plants",
   "creativetab.jurassicrevived_fossil_tab": "Fossils",
   "creativetab.jurassicrevived_dna_tab": "Genetic Material",
-  "creativetab.jurassicrevived_dino_tab": "Dinosuar Spawn Eggs",
+  "creativetab.jurassicrevived_dino_tab": "Dinosaur Spawn Eggs",
 
   "item.jurassicrevived.velociraptor_spawn_egg": "Velociraptor Spawn Egg",
   "item.jurassicrevived.ceratosaurus_spawn_egg": "Ceratosaurus Spawn Egg",
@@ -38,6 +38,8 @@
   "block.jurassicrevived.fossil_grinder": "Fossil Grinder",
   "block.jurassicrevived.fossil_cleaner": "Fossil Cleaner",
   "block.jurassicrevived.dna_hybridizer": "DNA Hybridizer",
+  "block.jurassicrevived.dna_hybridizer": "DNA Hybridizer",
+  "block.jurassicrevived.embryonic_machine": "Embryonic Machine",
 
   "block.jurassicrevived.stone_fossil": "Stone Fossil",
   "block.jurassicrevived.deepslate_fossil": "Deepslate Fossil",

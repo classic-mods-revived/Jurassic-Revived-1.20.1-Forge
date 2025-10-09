@@ -1,0 +1,14 @@
+{
+  "type": "jurassicrevived:embryonic_machining",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:syringe"
+    },
+    {
+      "item": "jurassicrevived:indominus_rex_dna"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:indominus_rex_syringe"
+  }
+}

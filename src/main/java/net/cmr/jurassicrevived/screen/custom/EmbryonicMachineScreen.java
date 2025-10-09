@@ -14,9 +14,9 @@ import net.minecraft.world.entity.player.Inventory;
 
 import java.util.Optional;
 
-public class DNAExtractorScreen extends AbstractContainerScreen<DNAExtractorMenu> {
+public class EmbryonicMachineScreen extends AbstractContainerScreen<EmbryonicMachineMenu> {
     private static final ResourceLocation GUI_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/dna_extractor/dna_extractor_gui.png");
+            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/embryonic_machine/embryonic_machine_gui.png");
     private static final ResourceLocation ARROW_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/arrow.png");
     private static final ResourceLocation WHITE_ARROW_TEXTURE =
@@ -25,11 +25,11 @@ public class DNAExtractorScreen extends AbstractContainerScreen<DNAExtractorMenu
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/power_bar.png");
     private static final ResourceLocation AMPOULE_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/ampoule.png");
-    private static final ResourceLocation AMBER_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/dna_extractor/amber.png");
+    private static final ResourceLocation SYRINGE_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/syringe.png");
     private EnergyDisplayTooltipArea energyInfoArea;
 
-    public DNAExtractorScreen(DNAExtractorMenu menu, Inventory playerInventory, Component title) {
+    public EmbryonicMachineScreen(EmbryonicMachineMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
     }
 
@@ -76,8 +76,8 @@ public class DNAExtractorScreen extends AbstractContainerScreen<DNAExtractorMenu
         guiGraphics.blit(GUI_TEXTURE, x, y, 0, 0, this.imageWidth, this.imageHeight, 176, 166);
         guiGraphics.blit(ARROW_TEXTURE,  x + 76, y + 35, 0, 0, 24, 16, 24, 16);
 
-        guiGraphics.blit(AMPOULE_TEXTURE, x + 39, y + 35, 0, 0, 16, 16, 16, 16);
-        guiGraphics.blit(AMBER_TEXTURE,  x + 57, y + 35, 0, 0, 16, 16, 16, 16);
+        guiGraphics.blit(SYRINGE_TEXTURE, x + 39, y + 35, 0, 0, 16, 16, 16, 16);
+        guiGraphics.blit(AMPOULE_TEXTURE,  x + 57, y + 35, 0, 0, 16, 16, 16, 16);
 
         if (Config.REQUIRE_POWER) {
             guiGraphics.blit(POWER_BAR_TEXTURE, x+159, y+10, 0, 0, 10, 66, 10, 66);

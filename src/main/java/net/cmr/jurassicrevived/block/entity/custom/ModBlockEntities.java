@@ -28,6 +28,10 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("dna_hybridizer_be", () ->
                     BlockEntityType.Builder.of(DNAHybridizerBlockEntity::new,
                             ModBlocks.DNA_HYBRIDIZER.get()).build(null));
+    public static final RegistryObject<BlockEntityType<EmbryonicMachineBlockEntity>> EMBRYONIC_MACHINE_BE =
+            BLOCK_ENTITIES.register("embryonic_machine_be", () ->
+                    BlockEntityType.Builder.of(EmbryonicMachineBlockEntity::new,
+                            ModBlocks.EMBRYONIC_MACHINE.get()).build(null));
     public static final RegistryObject<BlockEntityType<PipeBlockEntity>> ITEM_PIPE_BE =
             BLOCK_ENTITIES.register("item_pipe_be", () ->
                     BlockEntityType.Builder.of(PipeBlockEntity::new,
