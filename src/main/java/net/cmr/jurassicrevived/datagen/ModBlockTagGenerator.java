@@ -40,7 +40,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocks.FOSSIL_CLEANER.get())
                 .add(ModBlocks.DNA_HYBRIDIZER.get())
                 .add(ModBlocks.EMBRYONIC_MACHINE.get())
-                //.add(ModBlocks.EMBRYO_CALCIFICATION_MACHINE.get())
+                .add(ModBlocks.EMBRYO_CALCIFICATION_MACHINE.get())
                 //.add(ModBlocks.INCUBATOR.get())
                 .add(ModBlocks.MEDIUM_SECURITY_FENCE_POLE.get())
                 .add(ModBlocks.MEDIUM_SECURITY_FENCE_WIRE.get());

@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:iron_ingot"
+    },
+    "B": {
+      "item": "jurassicrevived:syringe"
+    },
+    "C": {
+      "item": "jurassicrevived:screen"
+    },
+    "D": {
+      "item": "jurassicrevived:cable"
+    },
+    "E": {
+      "item": "jurassicrevived:processor"
+    },
+    "F": {
+      "item": "minecraft:flint"
+    }
+  },
+  "pattern": [
+    "AB ",
+    "CDE",
+    "FAF"
+  ],
+  "result": {
+    "item": "jurassicrevived:embryo_calcification_machine"
+  },
+  "show_notification": true
+}

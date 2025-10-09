@@ -235,6 +235,19 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_embryonic_machine_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of( Items.IRON_INGOT, ModItems.AMPOULE.get(), Items.IRON_NUGGET, Items.REDSTONE).build())).save(pWriter);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.EMBRYO_CALCIFICATION_MACHINE.get(), 1)
+                .pattern("AB ")
+                .pattern("CDE")
+                .pattern("FAF")
+                .define('A', Items.IRON_INGOT)
+                .define('B', ModItems.SYRINGE.get())
+                .define('C', ModItems.SCREEN.get())
+                .define('D', ModItems.CABLE.get())
+                .define('E', ModItems.PROCESSOR.get())
+                .define('F', Items.FLINT)
+                .unlockedBy("has_embryonic_machine_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                        of( Items.IRON_INGOT, ModItems.SYRINGE.get(), ModItems.SCREEN.get(), ModItems.CABLE.get(),ModItems.PROCESSOR.get(), Items.IRON_NUGGET).build())).save(pWriter);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.WRENCH.get(), 1)
                 .pattern(" A ")
                 .pattern(" BA")
@@ -401,6 +414,33 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_syringe", has(ModItems.SYRINGE.get())).save(pWriter);
         new EmbryonicMachiningRecipeBuilder(ModItems.SYRINGE.get(), ModItems.BRACHIOSAURUS_DNA.get(), ModItems.BRACHIOSAURUS_SYRINGE.get(), 1)
                 .unlockedBy("has_syringe", has(ModItems.SYRINGE.get())).save(pWriter);
+
+        new EmbryoCalcificationMachiningRecipeBuilder(ModItems.VELOCIRAPTOR_SYRINGE.get(), Items.EGG, ModItems.VELOCIRAPTOR_EGG.get(), 1)
+                .unlockedBy("has_syringes", has(ModTags.Items.SYRINGES)).save(pWriter);
+        new EmbryoCalcificationMachiningRecipeBuilder(ModItems.TYRANNOSAURUS_REX_SYRINGE.get(), Items.EGG, ModItems.TYRANNOSAURUS_REX_EGG.get(), 1)
+                .unlockedBy("has_syringes", has(ModTags.Items.SYRINGES)).save(pWriter);
+        new EmbryoCalcificationMachiningRecipeBuilder(ModItems.TRICERATOPS_SYRINGE.get(), Items.EGG, ModItems.TRICERATOPS_EGG.get(), 1)
+                .unlockedBy("has_syringes", has(ModTags.Items.SYRINGES)).save(pWriter);
+        new EmbryoCalcificationMachiningRecipeBuilder(ModItems.SPINOSAURUS_SYRINGE.get(), Items.EGG, ModItems.SPINOSAURUS_EGG.get(), 1)
+                .unlockedBy("has_syringes", has(ModTags.Items.SYRINGES)).save(pWriter);
+        new EmbryoCalcificationMachiningRecipeBuilder(ModItems.PTERANODON_SYRINGE.get(), Items.EGG, ModItems.PTERANODON_EGG.get(), 1)
+                .unlockedBy("has_syringes", has(ModTags.Items.SYRINGES)).save(pWriter);
+        new EmbryoCalcificationMachiningRecipeBuilder(ModItems.PARASAUROLOPHUS_SYRINGE.get(), Items.EGG, ModItems.PARASAUROLOPHUS_EGG.get(), 1)
+                .unlockedBy("has_syringes", has(ModTags.Items.SYRINGES)).save(pWriter);
+        new EmbryoCalcificationMachiningRecipeBuilder(ModItems.INDOMINUS_REX_SYRINGE.get(), Items.EGG, ModItems.INDOMINUS_REX_EGG.get(), 1)
+                .unlockedBy("has_syringes", has(ModTags.Items.SYRINGES)).save(pWriter);
+        new EmbryoCalcificationMachiningRecipeBuilder(ModItems.GALLIMIMUS_SYRINGE.get(), Items.EGG, ModItems.GALLIMIMUS_EGG.get(), 1)
+                .unlockedBy("has_syringes", has(ModTags.Items.SYRINGES)).save(pWriter);
+        //new EmbryoCalcificationMachiningRecipeBuilder(ModItems.DIPLODOCUS_SYRINGE.get(), Items.EGG, ModItems.DIPLODOCUS_EGG.get(), 1)
+        //        .unlockedBy("has_syringes", has(ModTags.Items.SYRINGES)).save(pWriter);
+        new EmbryoCalcificationMachiningRecipeBuilder(ModItems.DILOPHOSAURUS_SYRINGE.get(), Items.EGG, ModItems.DILOPHOSAURUS_EGG.get(), 1)
+                .unlockedBy("has_syringes", has(ModTags.Items.SYRINGES)).save(pWriter);
+        new EmbryoCalcificationMachiningRecipeBuilder(ModItems.COMPSOGNATHUS_SYRINGE.get(), Items.EGG, ModItems.COMPSOGNATHUS_EGG.get(), 1)
+                .unlockedBy("has_syringes", has(ModTags.Items.SYRINGES)).save(pWriter);
+        new EmbryoCalcificationMachiningRecipeBuilder(ModItems.CERATOSAURUS_SYRINGE.get(), Items.EGG, ModItems.CERATOSAURUS_EGG.get(), 1)
+                .unlockedBy("has_syringes", has(ModTags.Items.SYRINGES)).save(pWriter);
+        new EmbryoCalcificationMachiningRecipeBuilder(ModItems.BRACHIOSAURUS_SYRINGE.get(), Items.EGG, ModItems.BRACHIOSAURUS_EGG.get(), 1)
+                .unlockedBy("has_syringes", has(ModTags.Items.SYRINGES)).save(pWriter);
     }
 
     protected static void oreSmelting(Consumer<FinishedRecipe> pFinishedRecipeConsumer, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult,

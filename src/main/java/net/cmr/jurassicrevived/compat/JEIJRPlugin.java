@@ -29,6 +29,7 @@ public class JEIJRPlugin implements IModPlugin {
         registration.addRecipeCategories(new FossilCleanerRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new DNAHybridizerRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new EmbryonicMachineRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new EmbryoCalcificationMachineRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
@@ -39,11 +40,13 @@ public class JEIJRPlugin implements IModPlugin {
         List<FossilGrinderRecipe> fossilGrinderRecipes = recipeManager.getAllRecipesFor(FossilGrinderRecipe.Type.INSTANCE);
         List<FossilCleanerRecipe> fossilCleanerRecipes = recipeManager.getAllRecipesFor(FossilCleanerRecipe.Type.INSTANCE);
         List<EmbryonicMachineRecipe> embryonicMachineRecipes = recipeManager.getAllRecipesFor(EmbryonicMachineRecipe.Type.INSTANCE);
+        List<EmbryoCalcificationMachineRecipe> embryoCalcificationMachineRecipes = recipeManager.getAllRecipesFor(EmbryoCalcificationMachineRecipe.Type.INSTANCE);
 
         registration.addRecipes(DNAExtractorRecipeCategory.DNA_EXTRACTOR_RECIPE_RECIPE_TYPE, dnaExtractorRecipes);
         registration.addRecipes(FossilGrinderRecipeCategory.FOSSIL_GRINDING_RECIPE_RECIPE_TYPE, fossilGrinderRecipes);
         registration.addRecipes(FossilCleanerRecipeCategory.FOSSIL_CLEANING_RECIPE_RECIPE_TYPE, fossilCleanerRecipes);
         registration.addRecipes(EmbryonicMachineRecipeCategory.EMBRYONIC_MACHINING_RECIPE_RECIPE_TYPE, embryonicMachineRecipes);
+        registration.addRecipes(EmbryoCalcificationMachineRecipeCategory.EMBRYO_CALCIFICATION_MACHINING_RECIPE_RECIPE_TYPE, embryoCalcificationMachineRecipes);
     }
 
     @Override
@@ -58,5 +61,7 @@ public class JEIJRPlugin implements IModPlugin {
                 DNAHybridizerRecipeCategory.DNA_HYBRIDIZING_RECIPE_RECIPE_TYPE);
         registration.addRecipeClickArea(EmbryonicMachineScreen.class, 76, 35, 24, 16,
                 EmbryonicMachineRecipeCategory.EMBRYONIC_MACHINING_RECIPE_RECIPE_TYPE);
+        registration.addRecipeClickArea(EmbryoCalcificationMachineScreen.class, 76, 35, 24, 16,
+                EmbryoCalcificationMachineRecipeCategory.EMBRYO_CALCIFICATION_MACHINING_RECIPE_RECIPE_TYPE);
     }
 }

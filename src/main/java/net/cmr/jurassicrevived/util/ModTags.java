@@ -12,6 +12,7 @@ public class ModTags {
     public static class Items {
         public static final TagKey<Item> TISSUES = tag("tissues");
         public static final TagKey<Item> DNA = tag("dna");
+        public static final TagKey<Item> SYRINGES = tag("syringes");
         public static final TagKey<Item> FOSSILS = tag("fossils");
         public static final TagKey<Item> SKULLS = tag("skulls");
 
