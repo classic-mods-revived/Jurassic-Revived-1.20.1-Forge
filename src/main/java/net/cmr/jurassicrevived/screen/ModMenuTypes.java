@@ -29,6 +29,8 @@ public class ModMenuTypes {
             registerMenuType(EmbryonicMachineMenu::new, "embryonic_machine_menu");
     public static final RegistryObject<MenuType<EmbryoCalcificationMachineMenu>> EMBRYO_CALCIFICATION_MACHINE_MENU =
             registerMenuType(EmbryoCalcificationMachineMenu::new, "embryo_calcification_machine_menu");
+    public static final RegistryObject<MenuType<IncubatorMenu>> INCUBATOR_MENU =
+            registerMenuType(IncubatorMenu::new, "incubator_menu");
 
 
     private static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory, String name) {

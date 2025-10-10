@@ -10,26 +10,25 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 
 import java.util.Optional;
 
-public class EmbryoCalcificationMachineScreen extends AbstractContainerScreen<EmbryoCalcificationMachineMenu> {
+public class IncubatorScreen extends AbstractContainerScreen<IncubatorMenu> {
     private static final ResourceLocation GUI_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/embryo_calcification_machine/embryo_calcification_machine_gui.png");
-    private static final ResourceLocation ARROW_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/arrow.png");
-    private static final ResourceLocation WHITE_ARROW_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/white_arrow.png");
+            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/incubator/incubator_gui.png");
     private static final ResourceLocation POWER_BAR_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/power_bar.png");
-    private static final ResourceLocation SYRINGE_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/syringe.png");
+    private static final ResourceLocation LIT_PROGRESS_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID,"textures/gui/generic/lit_progress.png");
+    private static final ResourceLocation HAY_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/incubator/hay.png");
     private static final ResourceLocation EGG_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/egg.png");
     private EnergyDisplayTooltipArea energyInfoArea;
 
-    public EmbryoCalcificationMachineScreen(EmbryoCalcificationMachineMenu menu, Inventory playerInventory, Component title) {
+    public IncubatorScreen(IncubatorMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
     }
 
@@ -74,10 +73,18 @@ public class EmbryoCalcificationMachineScreen extends AbstractContainerScreen<Em
         int y = (this.height - this.imageHeight) /2;
 
         guiGraphics.blit(GUI_TEXTURE, x, y, 0, 0, this.imageWidth, this.imageHeight, 176, 166);
-        guiGraphics.blit(ARROW_TEXTURE,  x + 76, y + 35, 0, 0, 24, 16, 24, 16);
+        guiGraphics.blit(HAY_TEXTURE,  x + 46, y + 31, 0, 0, 24, 24, 24, 24);
+        guiGraphics.blit(HAY_TEXTURE,  x + 76, y + 31, 0, 0, 24, 24, 24, 24);
+        guiGraphics.blit(HAY_TEXTURE,  x + 106, y + 31, 0, 0, 24, 24, 24, 24);
 
-        guiGraphics.blit(SYRINGE_TEXTURE, x + 39, y + 35, 0, 0, 16, 16, 16, 16);
-        guiGraphics.blit(EGG_TEXTURE,  x + 57, y + 35, 0, 0, 16, 16, 16, 16);
+        guiGraphics.blit(EGG_TEXTURE,  x + 50, y + 35, 0, 0, 16, 16, 16, 16);
+        guiGraphics.blit(EGG_TEXTURE,  x + 80, y + 35, 0, 0, 16, 16, 16, 16);
+        guiGraphics.blit(EGG_TEXTURE,  x + 110, y + 35, 0, 0, 16, 16, 16, 16);
+
+        // Per-slot progress bars
+        renderProgressBar(guiGraphics, x + 50, y + 55, 0);
+        renderProgressBar(guiGraphics, x + 80, y + 55, 1);
+        renderProgressBar(guiGraphics, x + 110, y + 55, 2);
 
         if (Config.REQUIRE_POWER) {
             guiGraphics.blit(POWER_BAR_TEXTURE, x+159, y+10, 0, 0, 10, 66, 10, 66);
@@ -85,28 +92,36 @@ public class EmbryoCalcificationMachineScreen extends AbstractContainerScreen<Em
         }
     }
 
-    private void RenderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
-        if(menu.isCrafting()) {
-            guiGraphics.blit(WHITE_ARROW_TEXTURE, x+76, y + 35, 0, 0, menu.getScaledArrowProgress(), 16, 24, 16);
+    private void renderProgressBar(GuiGraphics gg, int destX, int topY, int slot) {
+        if (menu.isCrafting(slot)) {
+            float progress = Mth.clamp(menu.getProgressRatio(slot), 0.0F, 1.0F);
+            int minPixels = 2;
+            int visible = Mth.clamp(Mth.ceil(progress * 14.0F), minPixels, 14);
+
+            int texW = 14, texH = 14;
+            int width = 14, height = visible;
+
+            int srcU = 0;
+            int srcV = texH - visible;
+
+            int bottomY = topY + 14;
+            int destY = bottomY - visible;
+
+            gg.blit(LIT_PROGRESS_TEXTURE, destX, destY, srcU, srcV, width, height, texW, texH);
         }
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        renderBackground(guiGraphics);
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
-        renderTooltip(guiGraphics, mouseX, mouseY);
-        int x = (this.width - this.imageWidth) / 2;
-        int y = (this.height - this.imageHeight) /2;
-
-        RenderProgressArrow(guiGraphics, x, y);
-
+    public void render(GuiGraphics gg, int mouseX, int mouseY, float partialTick) {
+        renderBackground(gg);
+        super.render(gg, mouseX, mouseY, partialTick);
+        renderTooltip(gg, mouseX, mouseY);
         if (Config.REQUIRE_POWER) {
-            energyInfoArea.render(guiGraphics);
+            energyInfoArea.render(gg);
         }
     }
 
-    public static boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, int width, int height) {
-        return MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, width, height);
+    public static boolean isMouseAboveArea(int mouseX, int mouseY, int x, int y, int offsetX, int offsetY, int width, int height) {
+        return MouseUtil.isMouseOver(mouseX, mouseY, x + offsetX, y + offsetY, width, height);
     }
 }

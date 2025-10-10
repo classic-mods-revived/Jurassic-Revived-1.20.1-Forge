@@ -23,6 +23,8 @@ public class ModRecipes {
             SERIALIZERS.register("embryonic_machining", () -> EmbryonicMachineRecipe.Serializer.INSTANCE);
     public static final RegistryObject<RecipeSerializer<EmbryoCalcificationMachineRecipe>> EMBRYO_CALCIFICATION_MACHINE_SERIALIZER =
             SERIALIZERS.register("embryo_calcification_machining", () -> EmbryoCalcificationMachineRecipe.Serializer.INSTANCE);
+    public static final RegistryObject<RecipeSerializer<IncubatorRecipe>> INCUBATOR_SERIALIZER =
+            SERIALIZERS.register("incubating", () -> IncubatorRecipe.Serializer.INSTANCE);
 
     public static void register(IEventBus eventBus) {
         SERIALIZERS.register(eventBus);

@@ -57,6 +57,8 @@ public class ModBlocks {
             () -> new EmbryonicMachineBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
     public static final RegistryObject<Block> EMBRYO_CALCIFICATION_MACHINE = registerBlock("embryo_calcification_machine",
             () -> new EmbryoCalcificationMachineBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
+    public static final RegistryObject<Block> INCUBATOR = registerBlock("incubator",
+            () -> new IncubatorBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
 
     public static final RegistryObject<Block> ROYAL_FERN = registerBlock("royal_fern",
             () -> new FlowerBlock(MobEffects.UNLUCK, 0, BlockBehaviour.Properties.copy(Blocks.ALLIUM)));

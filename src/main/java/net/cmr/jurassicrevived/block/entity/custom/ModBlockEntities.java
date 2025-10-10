@@ -36,6 +36,10 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("embryo_calcification_machine_be", () ->
                     BlockEntityType.Builder.of(EmbryoCalcificationMachineBlockEntity::new,
                             ModBlocks.EMBRYO_CALCIFICATION_MACHINE.get()).build(null));
+    public static final RegistryObject<BlockEntityType<IncubatorBlockEntity>> INCUBATOR_BE =
+            BLOCK_ENTITIES.register("incubator_be", () ->
+                    BlockEntityType.Builder.of(IncubatorBlockEntity::new,
+                            ModBlocks.INCUBATOR.get()).build(null));
     public static final RegistryObject<BlockEntityType<PipeBlockEntity>> ITEM_PIPE_BE =
             BLOCK_ENTITIES.register("item_pipe_be", () ->
                     BlockEntityType.Builder.of(PipeBlockEntity::new,

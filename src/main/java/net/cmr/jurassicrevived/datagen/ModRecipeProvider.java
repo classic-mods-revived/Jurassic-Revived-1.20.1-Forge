@@ -248,6 +248,18 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_embryonic_machine_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of( Items.IRON_INGOT, ModItems.SYRINGE.get(), ModItems.SCREEN.get(), ModItems.CABLE.get(),ModItems.PROCESSOR.get(), Items.IRON_NUGGET).build())).save(pWriter);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.INCUBATOR.get(), 1)
+                .pattern("AAA")
+                .pattern("BCB")
+                .pattern("DED")
+                .define('A', Blocks.GLASS)
+                .define('B', Items.COPPER_INGOT)
+                .define('C', Blocks.HAY_BLOCK)
+                .define('D', Items.IRON_INGOT)
+                .define('E', ModItems.CABLE.get())
+                .unlockedBy("has_incubator_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                        of( Blocks.GLASS, Items.COPPER_INGOT, Blocks.HAY_BLOCK, Items.IRON_INGOT, ModItems.CABLE.get()).build())).save(pWriter);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.WRENCH.get(), 1)
                 .pattern(" A ")
                 .pattern(" BA")
@@ -441,6 +453,11 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_syringes", has(ModTags.Items.SYRINGES)).save(pWriter);
         new EmbryoCalcificationMachiningRecipeBuilder(ModItems.BRACHIOSAURUS_SYRINGE.get(), Items.EGG, ModItems.BRACHIOSAURUS_EGG.get(), 1)
                 .unlockedBy("has_syringes", has(ModTags.Items.SYRINGES)).save(pWriter);
+
+        new IncubatorRecipeBuilder(ModItems.VELOCIRAPTOR_EGG.get(), ModBlocks.HATCHED_VELOCIRAPTOR_EGG.get(), 1)
+                .unlockedBy("has_eggs", has(ModTags.Items.EGGS)).save(pWriter);
+        new IncubatorRecipeBuilder(ModItems.CERATOSAURUS_EGG.get(), ModBlocks.HATCHED_CERATOSAURUS_EGG.get(), 1)
+                .unlockedBy("has_eggs", has(ModTags.Items.EGGS)).save(pWriter);
     }
 
     protected static void oreSmelting(Consumer<FinishedRecipe> pFinishedRecipeConsumer, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult,
