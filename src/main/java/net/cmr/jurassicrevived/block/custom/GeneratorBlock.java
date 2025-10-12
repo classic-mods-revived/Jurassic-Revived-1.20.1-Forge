@@ -89,9 +89,6 @@ public class GeneratorBlock extends BaseEntityBlock {
 
     @Override
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
-        if (!Config.REQUIRE_POWER) {
-            return null;
-        }
         return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 

@@ -124,9 +124,6 @@ public class PipeBlock extends Block implements EntityBlock, SimpleWaterloggedBl
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        if (this.transport == Transport.ENERGY && !Config.REQUIRE_POWER) {
-            return null;
-        }
         Level level = ctx.getLevel();
         BlockPos pos = ctx.getClickedPos();
         BlockState state = this.defaultBlockState()

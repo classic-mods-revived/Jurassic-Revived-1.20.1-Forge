@@ -101,6 +101,18 @@ public class EmbryonicMachineBlockEntity extends BlockEntity implements MenuProv
         if (Config.REQUIRE_POWER) {
             return new ModEnergyStorage(16000, (int) ENERGY_TRANSFER_RATE) {
                 @Override
+                public int extractEnergy(int maxExtract, boolean simulate) {
+                    // Disallow sending power out
+                    return 0;
+                }
+
+                @Override
+                public boolean canExtract() {
+                    // Disallow sending power out
+                    return false;
+                }
+
+                @Override
                 public void onEnergyChanged() {
                     setChanged();
                     if (getLevel() != null) {

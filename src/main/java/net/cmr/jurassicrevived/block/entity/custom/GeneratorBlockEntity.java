@@ -57,6 +57,18 @@ public class GeneratorBlockEntity extends BlockEntity implements MenuProvider {
     private ModEnergyStorage createEnergyStorage() {
         return new ModEnergyStorage(256000, (int) ENERGY_TRANSFER_RATE) {
             @Override
+            public int receiveEnergy(int maxReceive, boolean simulate) {
+                // Disallow receiving power
+                return 0;
+            }
+
+            @Override
+            public boolean canReceive() {
+                // Disallow receiving power
+                return false;
+            }
+
+            @Override
             public void onEnergyChanged() {
                 setChanged();
                 if (getLevel() != null) {
@@ -95,10 +107,13 @@ public class GeneratorBlockEntity extends BlockEntity implements MenuProvider {
 
     private void generateEnergyTick() {
         // Generate up to transfer rate per tick
-        float toAdd = Math.min((100), this.ENERGY_STORAGE.getMaxEnergyStored() - this.ENERGY_STORAGE.getEnergyStored());
+        int space = this.ENERGY_STORAGE.getMaxEnergyStored() - this.ENERGY_STORAGE.getEnergyStored();
+        int toAdd = Math.min(100, Math.max(0, space));
         if (toAdd > 0) {
-            this.ENERGY_STORAGE.receiveEnergy((int) toAdd, false);
-            // ensure neighbors (including your pipes) see new energy immediately
+            // Bypass external receive by directly adding to storage
+            this.ENERGY_STORAGE.setEnergy(this.ENERGY_STORAGE.getEnergyStored() + toAdd);
+            this.ENERGY_STORAGE.onEnergyChanged();
+
             if (level != null && !level.isClientSide) {
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }

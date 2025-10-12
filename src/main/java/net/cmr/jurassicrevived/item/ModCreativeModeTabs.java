@@ -51,12 +51,9 @@ public class ModCreativeModeTabs {
 
                         output.accept(ModBlocks.ITEM_PIPE.get());
                         output.accept(ModBlocks.FLUID_PIPE.get());
-                        // Hide power pipe if power is disabled
-                        if (Config.REQUIRE_POWER) {
-                            output.accept(ModBlocks.POWER_PIPE.get());
-                            output.accept(ModBlocks.GENERATOR.get());
-                        }
+                        output.accept(ModBlocks.POWER_PIPE.get());
 
+                        output.accept(ModBlocks.GENERATOR.get());
                         output.accept(ModBlocks.DNA_EXTRACTOR.get());
                         output.accept(ModBlocks.FOSSIL_GRINDER.get());
                         output.accept(ModBlocks.FOSSIL_CLEANER.get());
