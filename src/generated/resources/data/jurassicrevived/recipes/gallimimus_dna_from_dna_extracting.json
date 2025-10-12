@@ -2,7 +2,7 @@
   "type": "jurassicrevived:dna_extracting",
   "ingredients": [
     {
-      "item": "jurassicrevived:ampoule"
+      "item": "jurassicrevived:test_tube"
     },
     {
       "item": "jurassicrevived:gallimimus_tissue"

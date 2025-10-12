@@ -52,7 +52,7 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return switch (slot) {
-                case 0 -> stack.getItem() == ModItems.AMPOULE.get();
+                case 0 -> stack.getItem() == ModItems.TEST_TUBE.get();
                 case 1 -> stack.is(ModTags.Items.TISSUES) || stack.getItem() == ModItems.MOSQUITO_IN_AMBER.get();
                 case 2, 3, 4 -> true;
                 default -> super.isItemValid(slot, stack);
@@ -60,7 +60,7 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
         }
     };
 
-    private static final int AMPOULE_SLOT = 0;
+    private static final int TEST_TUBE_SLOT = 0;
     private static final int MATERIAL_INPUT = 1;
     private static final int OUTPUT_SLOT_1 = 2;
     private static final int OUTPUT_SLOT_2 = 3;
@@ -84,7 +84,7 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
                     new InventoryDirectionEntry(Direction.WEST, OUTPUT_SLOT_1, false),
                     new InventoryDirectionEntry(Direction.WEST, OUTPUT_SLOT_2, false),
                     new InventoryDirectionEntry(Direction.WEST, OUTPUT_SLOT_3, false),
-                    new InventoryDirectionEntry(Direction.UP, AMPOULE_SLOT, true),
+                    new InventoryDirectionEntry(Direction.UP, TEST_TUBE_SLOT, true),
                     new InventoryDirectionEntry(Direction.UP, MATERIAL_INPUT, true)).directionsMap;
 
 
@@ -310,7 +310,7 @@ public class DNAExtractorBlockEntity extends BlockEntity implements MenuProvider
     private void craftItem() {
         Optional<DNAExtractorRecipe> recipe = getCurrentRecipe();
 
-        this.itemHandler.extractItem(AMPOULE_SLOT, 1, false);
+        this.itemHandler.extractItem(TEST_TUBE_SLOT, 1, false);
         this.itemHandler.extractItem(MATERIAL_INPUT, 1, false);
 
         // Use dynamic assemble result based on current inventory (supports random dna for amber)

@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "jurassicrevived:item/fresh_pteranodon_skull"
-  }
-}

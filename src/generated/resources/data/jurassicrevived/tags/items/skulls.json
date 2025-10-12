@@ -1,16 +1,16 @@
 {
   "values": [
-    "jurassicrevived:fresh_velociraptor_skull",
-    "jurassicrevived:fresh_tyrannosaurus_rex_skull",
-    "jurassicrevived:fresh_triceratops_skull",
-    "jurassicrevived:fresh_spinosaurus_skull",
-    "jurassicrevived:fresh_pteranodon_skull",
-    "jurassicrevived:fresh_parasaurolophus_skull",
-    "jurassicrevived:fresh_indominus_rex_skull",
-    "jurassicrevived:fresh_gallimimus_skull",
-    "jurassicrevived:fresh_dilophosaurus_skull",
-    "jurassicrevived:fresh_compsognathus_skull",
+    "jurassicrevived:fresh_brachiosaurus_skull",
     "jurassicrevived:fresh_ceratosaurus_skull",
-    "jurassicrevived:fresh_brachiosaurus_skull"
+    "jurassicrevived:fresh_compsognathus_skull",
+    "jurassicrevived:fresh_dilophosaurus_skull",
+    "jurassicrevived:fresh_diplodocus_skull",
+    "jurassicrevived:fresh_gallimimus_skull",
+    "jurassicrevived:fresh_indominus_rex_skull",
+    "jurassicrevived:fresh_parasaurolophus_skull",
+    "jurassicrevived:fresh_spinosaurus_skull",
+    "jurassicrevived:fresh_triceratops_skull",
+    "jurassicrevived:fresh_tyrannosaurus_rex_skull",
+    "jurassicrevived:fresh_velociraptor_skull"
   ]
 }

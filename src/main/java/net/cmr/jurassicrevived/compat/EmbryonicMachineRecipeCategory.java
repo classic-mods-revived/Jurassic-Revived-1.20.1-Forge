@@ -37,7 +37,7 @@ public class EmbryonicMachineRecipeCategory implements IRecipeCategory<Embryonic
 
     public EmbryonicMachineRecipeCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.drawableBuilder(TEXTURE, 0, 0, 176, 80).setTextureSize(176, 166).build();
-        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.DNA_EXTRACTOR.get()));
+        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.EMBRYONIC_MACHINE.get()));
     }
 
     @Override

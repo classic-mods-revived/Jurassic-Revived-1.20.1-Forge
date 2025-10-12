@@ -31,11 +31,14 @@ public class DNAHybridizerMenu extends AbstractContainerMenu {
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
 
-        // Input: Ampoule slot (only ampoules may be inserted)
         this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 0, 57, 26) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.is(ModTags.Items.DNA);
+            }
+            @Override
+            public boolean mayPickup(Player playerIn) {
+                return true; // Explicitly allow players (and JEI) to take items from this slot
             }
         });
 
@@ -45,12 +48,20 @@ public class DNAHybridizerMenu extends AbstractContainerMenu {
             public boolean mayPlace(ItemStack stack) {
                 return stack.is(ModTags.Items.DNA);
             }
+            @Override
+            public boolean mayPickup(Player playerIn) {
+                return true; // Explicitly allow players (and JEI) to take items from this slot
+            }
         });
         // Output slots: cannot insert anything, but can always take out
         this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 2, 57, 62) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.is(ModTags.Items.DNA);
+            }
+            @Override
+            public boolean mayPickup(Player playerIn) {
+                return true; // Explicitly allow players (and JEI) to take items from this slot
             }
         });
         this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 3, 103, 35) {

@@ -5,13 +5,13 @@
   },
   "ingredients": [
     {
-      "item": "jurassicrevived:ampoule"
+      "item": "jurassicrevived:test_tube"
     },
     {
       "item": "jurassicrevived:mosquito_in_amber"
     }
   ],
   "result": {
-    "item": "jurassicrevived:velociraptor_dna"
+    "item": "jurassicrevived:brachiosaurus_dna"
   }
 }

@@ -31,11 +31,14 @@ public class EmbryonicMachineMenu extends AbstractContainerMenu {
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
 
-        // Input: Ampoule slot (only ampoules may be inserted)
         this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 0, 39, 35) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.getItem() == ModItems.SYRINGE.get();
+            }
+            @Override
+            public boolean mayPickup(Player playerIn) {
+                return true; // Explicitly allow players (and JEI) to take items from this slot
             }
         });
 
@@ -44,6 +47,10 @@ public class EmbryonicMachineMenu extends AbstractContainerMenu {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.is(ModTags.Items.DNA);
+            }
+            @Override
+            public boolean mayPickup(Player playerIn) {
+                return true; // Explicitly allow players (and JEI) to take items from this slot
             }
         });
 

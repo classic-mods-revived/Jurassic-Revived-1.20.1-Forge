@@ -70,15 +70,11 @@ public class DNAExtractingRecipeBuilder implements RecipeBuilder {
         return this;
     }
     
-    
-
-    // Convenience: specific helper for Ampoule + Mosquito in Amber random dna recipe (uniform weights)
-    // resultPlaceholder is any one dna; runtime will pick randomly from the DNA tag.
-    public static DNAExtractingRecipeBuilder amberRandomDNAUniform(ItemLike ampoule,
+    public static DNAExtractingRecipeBuilder amberRandomDNAUniform(ItemLike testtube,
                                                                       ItemLike amber,
                                                                       ItemLike resultPlaceholder,
                                                                       int uniformWeightPerDNA) {
-        return new DNAExtractingRecipeBuilder(ampoule, amber, resultPlaceholder, 1)
+        return new DNAExtractingRecipeBuilder(testtube, amber, resultPlaceholder, 1)
                 .addAllItemsFromTagUniform(net.cmr.jurassicrevived.util.ModTags.Items.DNA, uniformWeightPerDNA);
     }
 

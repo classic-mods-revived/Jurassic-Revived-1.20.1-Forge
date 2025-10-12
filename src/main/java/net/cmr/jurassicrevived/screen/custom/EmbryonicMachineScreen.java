@@ -23,8 +23,8 @@ public class EmbryonicMachineScreen extends AbstractContainerScreen<EmbryonicMac
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/white_arrow.png");
     private static final ResourceLocation POWER_BAR_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/power_bar.png");
-    private static final ResourceLocation AMPOULE_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/ampoule.png");
+    private static final ResourceLocation TEST_TUBE_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/test_tube.png");
     private static final ResourceLocation SYRINGE_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/syringe.png");
     private EnergyDisplayTooltipArea energyInfoArea;
@@ -77,7 +77,7 @@ public class EmbryonicMachineScreen extends AbstractContainerScreen<EmbryonicMac
         guiGraphics.blit(ARROW_TEXTURE,  x + 76, y + 35, 0, 0, 24, 16, 24, 16);
 
         guiGraphics.blit(SYRINGE_TEXTURE, x + 39, y + 35, 0, 0, 16, 16, 16, 16);
-        guiGraphics.blit(AMPOULE_TEXTURE,  x + 57, y + 35, 0, 0, 16, 16, 16, 16);
+        guiGraphics.blit(TEST_TUBE_TEXTURE,  x + 57, y + 35, 0, 0, 16, 16, 16, 16);
 
         if (Config.REQUIRE_POWER) {
             guiGraphics.blit(POWER_BAR_TEXTURE, x+159, y+10, 0, 0, 10, 66, 10, 66);

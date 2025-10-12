@@ -105,44 +105,41 @@ public class ModBlocks {
     public static final RegistryObject<Block> REINFORCED_STONE_BRICKS = registerBlock("reinforced_stone_bricks",
             () -> new Block(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops()));
 
-    public static final RegistryObject<Block> HATCHED_VELOCIRAPTOR_EGG = registerBlock("hatched_velociraptor_egg",
-            () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.VELOCIRAPTOR));
-
-    /*public static final RegistryObject<Block> HATCHED_TYRANNOSAURUS_REX_EGG = registerBlock("hatched_tyrannosaurus_rex_egg",
-            () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.TYRANNOSAURUS_REX));
-
-    public static final RegistryObject<Block> HATCHED_TRICERATOPS_EGG = registerBlock("hatched_triceratops_egg",
-            () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.TRICERATOPS));
-
-    public static final RegistryObject<Block> HATCHED_SPINOSAURUS_EGG = registerBlock("hatched_spinosaurus_egg",
-            () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.SPINOSAURUS));
-
-    public static final RegistryObject<Block> HATCHED_PTERANODON_EGG = registerBlock("hatched_pteranodon_egg",
-            () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.PTERANODON));
-
-    public static final RegistryObject<Block> HATCHED_PARASAUROLOPHUS_EGG = registerBlock("hatched_parasaurolophus_egg",
-            () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.PARASAUROLOPHUS));
-
-    public static final RegistryObject<Block> HATCHED_INDOMINUS_REX_EGG = registerBlock("hatched_indominus_rex_egg",
-            () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.INDOMINUS_REX));
-
-    public static final RegistryObject<Block> HATCHED_GALLIMIMUS_EGG = registerBlock("hatched_gallimimus_egg",
-            () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.GALLIMIMUS));
-
-    public static final RegistryObject<Block> HATCHED_DIPLODOCUS_EGG = registerBlock("hatched_diplodocus_egg",
-            () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.DIPLODOCUS));*/
-
-    public static final RegistryObject<Block> HATCHED_DILOPHOSAURUS_EGG = registerBlock("hatched_dilophosaurus_egg",
-            () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.DILOPHOSAURUS));
-
-    //public static final RegistryObject<Block> HATCHED_COMPSOGNATHUS_EGG = registerBlock("hatched_compsognathus_egg",
-    //        () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.COMPSOGNATHUS));
+    public static final RegistryObject<Block> HATCHED_BRACHIOSAURUS_EGG = registerBlock("hatched_brachiosaurus_egg",
+            () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.BRACHIOSAURUS));
 
     public static final RegistryObject<Block> HATCHED_CERATOSAURUS_EGG = registerBlock("hatched_ceratosaurus_egg",
             () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.CERATOSAURUS));
 
-    public static final RegistryObject<Block> HATCHED_BRACHIOSAURUS_EGG = registerBlock("hatched_brachiosaurus_egg",
-            () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.BRACHIOSAURUS));
+    //public static final RegistryObject<Block> HATCHED_COMPSOGNATHUS_EGG = registerBlock("hatched_compsognathus_egg",
+    //        () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.COMPSOGNATHUS));
+
+    public static final RegistryObject<Block> HATCHED_DILOPHOSAURUS_EGG = registerBlock("hatched_dilophosaurus_egg",
+            () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.DILOPHOSAURUS));
+
+    /*public static final RegistryObject<Block> HATCHED_DIPLODOCUS_EGG = registerBlock("hatched_diplodocus_egg",
+            () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.DIPLODOCUS));
+
+    public static final RegistryObject<Block> HATCHED_GALLIMIMUS_EGG = registerBlock("hatched_gallimimus_egg",
+            () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.GALLIMIMUS));
+
+    public static final RegistryObject<Block> HATCHED_INDOMINUS_REX_EGG = registerBlock("hatched_indominus_rex_egg",
+            () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.INDOMINUS_REX));
+
+    public static final RegistryObject<Block> HATCHED_PARASAUROLOPHUS_EGG = registerBlock("hatched_parasaurolophus_egg",
+            () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.PARASAUROLOPHUS));
+
+    public static final RegistryObject<Block> HATCHED_SPINOSAURUS_EGG = registerBlock("hatched_spinosaurus_egg",
+            () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.SPINOSAURUS));
+
+    public static final RegistryObject<Block> HATCHED_TRICERATOPS_EGG = registerBlock("hatched_triceratops_egg",
+            () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.TRICERATOPS));
+
+    public static final RegistryObject<Block> HATCHED_TYRANNOSAURUS_REX_EGG = registerBlock("hatched_tyrannosaurus_rex_egg",
+            () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.TYRANNOSAURUS_REX));*/
+
+    public static final RegistryObject<Block> HATCHED_VELOCIRAPTOR_EGG = registerBlock("hatched_velociraptor_egg",
+            () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.VELOCIRAPTOR));
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {

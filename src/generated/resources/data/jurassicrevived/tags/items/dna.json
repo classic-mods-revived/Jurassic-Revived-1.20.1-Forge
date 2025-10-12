@@ -1,16 +1,16 @@
 {
   "values": [
-    "jurassicrevived:velociraptor_dna",
-    "jurassicrevived:tyrannosaurus_rex_dna",
-    "jurassicrevived:triceratops_dna",
-    "jurassicrevived:spinosaurus_dna",
-    "jurassicrevived:pteranodon_dna",
-    "jurassicrevived:parasaurolophus_dna",
-    "jurassicrevived:indominus_rex_dna",
-    "jurassicrevived:gallimimus_dna",
-    "jurassicrevived:dilophosaurus_dna",
-    "jurassicrevived:compsognathus_dna",
+    "jurassicrevived:brachiosaurus_dna",
     "jurassicrevived:ceratosaurus_dna",
-    "jurassicrevived:brachiosaurus_dna"
+    "jurassicrevived:compsognathus_dna",
+    "jurassicrevived:dilophosaurus_dna",
+    "jurassicrevived:diplodocus_dna",
+    "jurassicrevived:gallimimus_dna",
+    "jurassicrevived:indominus_rex_dna",
+    "jurassicrevived:parasaurolophus_dna",
+    "jurassicrevived:spinosaurus_dna",
+    "jurassicrevived:triceratops_dna",
+    "jurassicrevived:tyrannosaurus_rex_dna",
+    "jurassicrevived:velociraptor_dna"
   ]
 }

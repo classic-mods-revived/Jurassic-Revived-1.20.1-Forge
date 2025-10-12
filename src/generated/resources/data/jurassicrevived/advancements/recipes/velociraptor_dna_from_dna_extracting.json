@@ -1,12 +1,12 @@
 {
   "parent": "jurassicrevived:recipes/root",
   "criteria": {
-    "has_ampoule": {
+    "has_TEST_TUBE": {
       "conditions": {
         "items": [
           {
             "items": [
-              "jurassicrevived:ampoule"
+              "jurassicrevived:test_tube"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_ampoule",
+      "has_TEST_TUBE",
       "has_the_recipe"
     ]
   ],

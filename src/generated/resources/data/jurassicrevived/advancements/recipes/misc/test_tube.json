@@ -1,0 +1,36 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_TEST_TUBE_ingredients": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:iron_ingot",
+              "minecraft:glass"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "jurassicrevived:test_tube"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_TEST_TUBE_ingredients",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "jurassicrevived:test_tube"
+    ]
+  },
+  "sends_telemetry_event": false
+}

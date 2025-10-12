@@ -31,11 +31,14 @@ public class DNAExtractorMenu extends AbstractContainerMenu {
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
 
-        // Input: Ampoule slot (only ampoules may be inserted)
         this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 0, 39, 35) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.getItem() == ModItems.AMPOULE.get();
+                return stack.getItem() == ModItems.TEST_TUBE.get();
+            }
+            @Override
+            public boolean mayPickup(Player playerIn) {
+                return true; // Explicitly allow players (and JEI) to take items from this slot
             }
         });
 
@@ -44,6 +47,10 @@ public class DNAExtractorMenu extends AbstractContainerMenu {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.is(ModTags.Items.TISSUES) || stack.getItem() == ModItems.MOSQUITO_IN_AMBER.get();
+            }
+            @Override
+            public boolean mayPickup(Player playerIn) {
+                return true; // Explicitly allow players (and JEI) to take items from this slot
             }
         });
 
@@ -68,6 +75,10 @@ public class DNAExtractorMenu extends AbstractContainerMenu {
         });
 
         addDataSlots(data);
+    }
+
+    public boolean moveItemStackToPublic(ItemStack pStack, int pStartIndex, int pEndIndex, boolean pReverseDirection) {
+        return this.moveItemStackTo(pStack, pStartIndex, pEndIndex, pReverseDirection);
     }
 
     public boolean isCrafting() {

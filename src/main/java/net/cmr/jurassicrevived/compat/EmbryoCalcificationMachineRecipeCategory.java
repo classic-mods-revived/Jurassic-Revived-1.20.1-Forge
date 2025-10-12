@@ -37,7 +37,7 @@ public class EmbryoCalcificationMachineRecipeCategory implements IRecipeCategory
 
     public EmbryoCalcificationMachineRecipeCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.drawableBuilder(TEXTURE, 0, 0, 176, 80).setTextureSize(176, 166).build();
-        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.DNA_EXTRACTOR.get()));
+        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.EMBRYO_CALCIFICATION_MACHINE.get()));
     }
 
     @Override
@@ -47,7 +47,7 @@ public class EmbryoCalcificationMachineRecipeCategory implements IRecipeCategory
 
     @Override
     public Component getTitle() {
-        return Component.translatable("block.jurassicrevived.embryonic_machine");
+        return Component.translatable("block.jurassicrevived.embryo_calcification_machine");
     }
 
     @Override

@@ -23,8 +23,8 @@ public class DNAExtractorScreen extends AbstractContainerScreen<DNAExtractorMenu
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/white_arrow.png");
     private static final ResourceLocation POWER_BAR_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/power_bar.png");
-    private static final ResourceLocation AMPOULE_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/ampoule.png");
+    private static final ResourceLocation TEST_TUBE_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/test_tube.png");
     private static final ResourceLocation AMBER_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/dna_extractor/amber.png");
     private EnergyDisplayTooltipArea energyInfoArea;
@@ -76,7 +76,7 @@ public class DNAExtractorScreen extends AbstractContainerScreen<DNAExtractorMenu
         guiGraphics.blit(GUI_TEXTURE, x, y, 0, 0, this.imageWidth, this.imageHeight, 176, 166);
         guiGraphics.blit(ARROW_TEXTURE,  x + 76, y + 35, 0, 0, 24, 16, 24, 16);
 
-        guiGraphics.blit(AMPOULE_TEXTURE, x + 39, y + 35, 0, 0, 16, 16, 16, 16);
+        guiGraphics.blit(TEST_TUBE_TEXTURE, x + 39, y + 35, 0, 0, 16, 16, 16, 16);
         guiGraphics.blit(AMBER_TEXTURE,  x + 57, y + 35, 0, 0, 16, 16, 16, 16);
 
         if (Config.REQUIRE_POWER) {

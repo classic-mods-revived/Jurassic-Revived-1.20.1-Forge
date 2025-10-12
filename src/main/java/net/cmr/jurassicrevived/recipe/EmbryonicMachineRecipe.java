@@ -47,9 +47,9 @@ public class EmbryonicMachineRecipe implements Recipe<SimpleContainer> {
             return false;
         }
 
-        boolean ampouleslot = inputItems.get(0).test(pContainer.getItem(0));
+        boolean testtubeslot = inputItems.get(0).test(pContainer.getItem(0));
         boolean materialslot = inputItems.get(1).test(pContainer.getItem(1));
-        return ampouleslot && materialslot;
+        return testtubeslot && materialslot;
     }
 
     @Override

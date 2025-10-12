@@ -146,12 +146,8 @@ public class IncubatorRecipeCategory implements IRecipeCategory<IncubatorRecipe>
         var ing = recipe.getIngredients().isEmpty() ? null : recipe.getIngredients().get(0);
         if ( ing != null ) {
             builder.addSlot(RecipeIngredientRole.INPUT, 50, 35).addIngredients(ing).addItemStack(recipe.getResultItem(null));
-            builder.addSlot(RecipeIngredientRole.INPUT, 80, 35).addIngredients(ing).addItemStack(recipe.getResultItem(null));
-            builder.addSlot(RecipeIngredientRole.INPUT, 110, 35).addIngredients(ing).addItemStack(recipe.getResultItem(null));
         } else {
             builder.addSlot(RecipeIngredientRole.OUTPUT, 50, 35).addItemStack(recipe.getResultItem(null));
-            builder.addSlot(RecipeIngredientRole.OUTPUT, 80, 35).addItemStack(recipe.getResultItem(null));
-            builder.addSlot(RecipeIngredientRole.OUTPUT, 110, 35).addItemStack(recipe.getResultItem(null));
         }
     }
 }

@@ -23,12 +23,12 @@ public class DNAHybridizerScreen extends AbstractContainerScreen<DNAHybridizerMe
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/white_arrow.png");
     private static final ResourceLocation POWER_BAR_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/power_bar.png");
-    private static final ResourceLocation AMPOULE_B_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/dna_hybridizer/ampoule_b.png");
-    private static final ResourceLocation AMPOULE_T_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/dna_hybridizer/ampoule_t.png");
-    private static final ResourceLocation AMPOULE_A_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/dna_hybridizer/ampoule_a.png");
+    private static final ResourceLocation TEST_TUBE_B_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/dna_hybridizer/test_tube_b.png");
+    private static final ResourceLocation TEST_TUBE_T_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/dna_hybridizer/test_tube_t.png");
+    private static final ResourceLocation TEST_TUBE_A_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/dna_hybridizer/test_tube_a.png");
     private EnergyDisplayTooltipArea energyInfoArea;
 
     public DNAHybridizerScreen(DNAHybridizerMenu menu, Inventory playerInventory, Component title) {
@@ -77,9 +77,9 @@ public class DNAHybridizerScreen extends AbstractContainerScreen<DNAHybridizerMe
 
         guiGraphics.blit(GUI_TEXTURE, x, y, 0, 0, this.imageWidth, this.imageHeight, 176, 166);
 
-        guiGraphics.blit(AMPOULE_B_TEXTURE, x + 57, y + 26, 0, 0, 16, 16, 16, 16);
-        guiGraphics.blit(AMPOULE_T_TEXTURE,  x + 57, y + 44, 0, 0, 16, 16, 16, 16);
-        guiGraphics.blit(AMPOULE_A_TEXTURE,  x + 57, y + 62, 0, 0, 16, 16, 16, 16);
+        guiGraphics.blit(TEST_TUBE_B_TEXTURE, x + 57, y + 26, 0, 0, 16, 16, 16, 16);
+        guiGraphics.blit(TEST_TUBE_T_TEXTURE,  x + 57, y + 44, 0, 0, 16, 16, 16, 16);
+        guiGraphics.blit(TEST_TUBE_A_TEXTURE,  x + 57, y + 62, 0, 0, 16, 16, 16, 16);
         guiGraphics.blit(ARROW_TEXTURE,  x + 76, y + 35, 0, 0, 24, 16, 24, 16);
 
         if (Config.REQUIRE_POWER) {

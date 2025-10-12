@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:iron_ingot"
+    },
+    "B": {
+      "item": "minecraft:glass"
+    }
+  },
+  "pattern": [
+    "  A",
+    " B ",
+    "B  "
+  ],
+  "result": {
+    "count": 3,
+    "item": "jurassicrevived:test_tube"
+  },
+  "show_notification": true
+}

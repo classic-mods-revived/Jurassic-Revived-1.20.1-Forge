@@ -39,48 +39,6 @@ public class EmbryonicMachiningRecipeBuilder implements RecipeBuilder {
         this.count = count;
     }
 
-//    // Fluent helpers to set explicit weights
-//    public EmbryonicMachiningRecipeBuilder addDNAWeight(Item item, int weight) {
-//        ResourceLocation id = ForgeRegistries.ITEMS.getKey(item);
-//        if (id != null) {
-//            dnaWeights.put(id, weight);
-//        }
-//        return this;
-//    }
-//
-//    public EmbryonicMachiningRecipeBuilder addDNAWeight(ResourceLocation itemId, int weight) {
-//        dnaWeights.put(itemId, weight);
-//        return this;
-//    }
-//
-//    // Convenience: add uniform weight for every item currently in the given tag
-//    // In 1.20.1 data gen, iterate the items directly (no holder.value() call needed here)
-//    public EmbryonicMachiningRecipeBuilder addAllItemsFromTagUniform(TagKey<Item> tag, int weight) {
-//        var tags = ForgeRegistries.ITEMS.tags();
-//        if (tags != null) {
-//            var entryList = tags.getTag(tag);
-//            for (Item item : entryList) {
-//                ResourceLocation id = ForgeRegistries.ITEMS.getKey(item);
-//                if (id != null) {
-//                    dnaWeights.put(id, weight);
-//                }
-//            }
-//        }
-//        return this;
-//    }
-//    
-//    
-//
-//    // Convenience: specific helper for Ampoule + Mosquito in Amber random dna recipe (uniform weights)
-//    // resultPlaceholder is any one dna; runtime will pick randomly from the DNA tag.
-//    public static EmbryonicMachiningRecipeBuilder amberRandomDNAUniform(ItemLike ampoule,
-//                                                                        ItemLike amber,
-//                                                                        ItemLike resultPlaceholder,
-//                                                                        int uniformWeightPerDNA) {
-//        return new EmbryonicMachiningRecipeBuilder(ampoule, amber, resultPlaceholder, 1)
-//                .addAllItemsFromTagUniform(net.cmr.jurassicrevived.util.ModTags.Items.DNA, uniformWeightPerDNA);
-//    }
-
     @Override
     public RecipeBuilder unlockedBy(String pCriterionName, CriterionTriggerInstance pCriterionTrigger) {
         this.advancement.addCriterion(pCriterionName, pCriterionTrigger);

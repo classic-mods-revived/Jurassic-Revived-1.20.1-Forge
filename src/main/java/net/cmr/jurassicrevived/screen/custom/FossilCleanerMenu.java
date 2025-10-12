@@ -30,12 +30,15 @@ public class FossilCleanerMenu extends AbstractContainerMenu {
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
 
-        // Input: Ampoule slot (only ampoules may be inserted)
         this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 0, 7, 61) {
             @Override
             public boolean mayPlace(ItemStack stack) {
 
                 return blockEntity.itemHandler.isItemValid(0, stack);
+            }
+            @Override
+            public boolean mayPickup(Player playerIn) {
+                return true; // Explicitly allow players (and JEI) to take items from this slot
             }
         });
 
@@ -44,6 +47,10 @@ public class FossilCleanerMenu extends AbstractContainerMenu {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.getItem() == ModBlocks.STONE_FOSSIL.get().asItem() || stack.getItem() == ModBlocks.DEEPSLATE_FOSSIL.get().asItem();
+            }
+            @Override
+            public boolean mayPickup(Player playerIn) {
+                return true; // Explicitly allow players (and JEI) to take items from this slot
             }
         });
 

@@ -1,15 +1,15 @@
 {
   "values": [
-    "jurassicrevived:velociraptor_skull_fossil",
-    "jurassicrevived:tyrannosaurus_rex_skull_fossil",
-    "jurassicrevived:triceratops_skull_fossil",
-    "jurassicrevived:spinosaurus_skull_fossil",
-    "jurassicrevived:pteranodon_skull_fossil",
-    "jurassicrevived:parasaurolophus_skull_fossil",
-    "jurassicrevived:gallimimus_skull_fossil",
-    "jurassicrevived:dilophosaurus_skull_fossil",
-    "jurassicrevived:compsognathus_skull_fossil",
+    "jurassicrevived:brachiosaurus_skull_fossil",
     "jurassicrevived:ceratosaurus_skull_fossil",
-    "jurassicrevived:brachiosaurus_skull_fossil"
+    "jurassicrevived:compsognathus_skull_fossil",
+    "jurassicrevived:dilophosaurus_skull_fossil",
+    "jurassicrevived:diplodocus_skull_fossil",
+    "jurassicrevived:gallimimus_skull_fossil",
+    "jurassicrevived:parasaurolophus_skull_fossil",
+    "jurassicrevived:spinosaurus_skull_fossil",
+    "jurassicrevived:triceratops_skull_fossil",
+    "jurassicrevived:tyrannosaurus_rex_skull_fossil",
+    "jurassicrevived:velociraptor_skull_fossil"
   ]
 }

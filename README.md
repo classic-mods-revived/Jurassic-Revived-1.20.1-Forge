@@ -30,7 +30,7 @@ description: The Wiki for Jurassic Revived
 - Parasaurolophus
 - Dilophosaurus
 - Gallimimus
-- Pteranodon (based on Jurassic Park III)
+- Diplodocus
 - Spinosaurus (based on Jurassic Park III)
 - Ceratosaurus (based on Jurassic Park III)
 - Indominus Rex

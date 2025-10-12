@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "jurassicrevived:item/jr_dna_tab_icon"
-  }
-}
