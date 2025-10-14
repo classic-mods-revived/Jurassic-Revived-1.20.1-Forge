@@ -2,24 +2,24 @@ package net.cmr.jurassicrevived.entity.client;
 
 import com.google.common.collect.Maps;
 import net.cmr.jurassicrevived.JRMod;
-import net.cmr.jurassicrevived.entity.custom.VelociraptorEntity;
-import net.cmr.jurassicrevived.entity.variant.VelociraptorVariant;
+import net.cmr.jurassicrevived.entity.custom.TyrannosaurusRexEntity;
+import net.cmr.jurassicrevived.entity.variant.TyrannosaurusRexVariant;
 import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.cache.object.GeoBone;
 import software.bernie.geckolib.constant.DataTickets;
+import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.model.GeoModel;
 
 import java.util.Map;
 
-public class VelociraptorModel extends GeoModel<VelociraptorEntity> {
+public class TyrannosaurusRexModel extends GeoModel<TyrannosaurusRexEntity> {
 
-    private static final Map<VelociraptorVariant, ResourceLocation> LOCATION_BY_VARIANT =
-            Util.make(Maps.newEnumMap(VelociraptorVariant.class), map -> {
-                map.put(VelociraptorVariant.MALE, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/entity/velociraptor.png"));
-                map.put(VelociraptorVariant.FEMALE, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/entity/velociraptor_female.png"));
+    private static final Map<TyrannosaurusRexVariant, ResourceLocation> LOCATION_BY_VARIANT =
+            Util.make(Maps.newEnumMap(TyrannosaurusRexVariant.class), map -> {
+                map.put(TyrannosaurusRexVariant.MALE, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/entity/tyrannosaurus_rex.png"));
+                map.put(TyrannosaurusRexVariant.FEMALE, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/entity/tyrannosaurus_rex_female.png"));
             });
 
     // Model-local "currently applied" offsets; cleared before each entity render
@@ -27,25 +27,25 @@ public class VelociraptorModel extends GeoModel<VelociraptorEntity> {
     private float[] appliedRoll = null;
 
     @Override
-    public ResourceLocation getModelResource(VelociraptorEntity animatable) {
-        return ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "geo/velociraptor.geo.json");
+    public ResourceLocation getModelResource(TyrannosaurusRexEntity animatable) {
+        return ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "geo/tyrannosaurus_rex.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureResource(VelociraptorEntity animatable) {
+    public ResourceLocation getTextureResource(TyrannosaurusRexEntity animatable) {
         return LOCATION_BY_VARIANT.get(animatable.getVariant());
     }
 
     @Override
-    public ResourceLocation getAnimationResource(VelociraptorEntity animatable) {
-        return ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "animations/velociraptor.animation.json");
+    public ResourceLocation getAnimationResource(TyrannosaurusRexEntity animatable) {
+        return ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "animations/tyrannosaurus_rex.animation.json");
     }
 
     @Override
-    public void setCustomAnimations(VelociraptorEntity entity, long id, AnimationState<VelociraptorEntity> state) {
+    public void setCustomAnimations(TyrannosaurusRexEntity entity, long id, AnimationState<TyrannosaurusRexEntity> state) {
         super.setCustomAnimations(entity, id, state);
 
-        String[] tailBones = { "tail1", "tail2", "tail3", "tail4", "tail5", "tail6" };
+        String[] tailBones = { "Tail1", "Tail2", "Tail3", "Tail4", "Tail5", "Tail6" };
         int n = tailBones.length;
 
         if (appliedYaw == null || appliedYaw.length != n) {
@@ -98,7 +98,7 @@ public class VelociraptorModel extends GeoModel<VelociraptorEntity> {
             appliedRoll[i] = roll;
         }
         
-        GeoBone head = (GeoBone) getAnimationProcessor().getBone("body1");
+        GeoBone head = (GeoBone) getAnimationProcessor().getBone("Neck1");
 
         if (head != null) {
             var entityData = state.getData(DataTickets.ENTITY_MODEL_DATA);

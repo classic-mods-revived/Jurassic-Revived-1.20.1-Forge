@@ -1,22 +1,22 @@
 package net.cmr.jurassicrevived.entity.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.cmr.jurassicrevived.entity.custom.CeratosaurusEntity;
+import net.cmr.jurassicrevived.entity.custom.TyrannosaurusRexEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 
-public class CeratosaurusRenderer extends GeoEntityRenderer<CeratosaurusEntity> {
+public class TyrannosaurusRexRenderer extends GeoEntityRenderer<TyrannosaurusRexEntity> {
 
-    public CeratosaurusRenderer(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new CeratosaurusModel());
+    public TyrannosaurusRexRenderer(EntityRendererProvider.Context renderManager) {
+        super(renderManager, new TyrannosaurusRexModel());
     }
 
     @Override
-    public void render(CeratosaurusEntity entity, float entityYaw, float partialTick, PoseStack poseStack,
+    public void render(TyrannosaurusRexEntity entity, float entityYaw, float partialTick, PoseStack poseStack,
                        MultiBufferSource bufferSource, int packedLight) {
-        poseStack.scale(1.75F, 1.75F, 1.75F);
+        poseStack.scale(2F, 2F, 2F);
         if(entity.isBaby()) {
             poseStack.scale(0.4F, 0.4F, 0.4F);
         }

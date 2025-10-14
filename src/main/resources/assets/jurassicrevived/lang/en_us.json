@@ -6,15 +6,17 @@
   "creativetab.jurassicrevived_dna_tab": "Genetic Material",
   "creativetab.jurassicrevived_dino_tab": "Dinosaur Spawn Eggs",
 
-  "item.jurassicrevived.velociraptor_spawn_egg": "Velociraptor Spawn Egg",
-  "item.jurassicrevived.ceratosaurus_spawn_egg": "Ceratosaurus Spawn Egg",
   "item.jurassicrevived.brachiosaurus_spawn_egg": "Brachiosaurus Spawn Egg",
+  "item.jurassicrevived.ceratosaurus_spawn_egg": "Ceratosaurus Spawn Egg",
   "item.jurassicrevived.dilophosaurus_spawn_egg": "Dilophosaurus Spawn Egg",
+  "item.jurassicrevived.velociraptor_spawn_egg": "Velociraptor Spawn Egg",
+  "item.jurassicrevived.tyrannosaurus_rex_spawn_egg": "Tyrannosaurus Rex Spawn Egg",
 
-  "entity.jurassicrevived.velociraptor": "Velociraptor",
-  "entity.jurassicrevived.ceratosaurus": "Ceratosaurus",
   "entity.jurassicrevived.brachiosaurus": "Brachiosaurus",
+  "entity.jurassicrevived.ceratosaurus": "Ceratosaurus",
   "entity.jurassicrevived.dilophosaurus": "Dilophosaurus",
+  "entity.jurassicrevived.tyrannosaurus_rex": "Tyrannosaurus Rex",
+  "entity.jurassicrevived.velociraptor": "Velociraptor",
 
   "block.jurassicrevived.cat_plushie": "Cat Plushie",
   "block.jurassicrevived.gypsum_stone": "Gypsum Stone",
@@ -91,6 +93,7 @@
   "item.jurassicrevived.tire": "Tire",
   "item.jurassicrevived.cutting_blades": "Cutting Blades",
   "item.jurassicrevived.wrench": "Wrench",
+  "item.jurassicrevived.mac_n_cheese": "§6Mac 'N' Cheese§r",
 
   "item.jurassicrevived.brachiosaurus_tissue": "Brachiosaurus Tissue",
   "item.jurassicrevived.ceratosaurus_tissue": "Ceratosaurus Tissue",

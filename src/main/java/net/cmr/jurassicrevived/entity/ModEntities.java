@@ -1,10 +1,7 @@
 package net.cmr.jurassicrevived.entity;
 
 import net.cmr.jurassicrevived.JRMod;
-import net.cmr.jurassicrevived.entity.custom.VelociraptorEntity;
-import net.cmr.jurassicrevived.entity.custom.BrachiosaurusEntity;
-import net.cmr.jurassicrevived.entity.custom.CeratosaurusEntity;
-import net.cmr.jurassicrevived.entity.custom.DilophosaurusEntity;
+import net.cmr.jurassicrevived.entity.custom.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -16,6 +13,12 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
             DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, JRMod.MOD_ID);
+
+    public static final RegistryObject<EntityType<TyrannosaurusRexEntity>> TYRANNOSAURUS_REX =
+            ENTITY_TYPES.register("tyrannosaurus_rex",
+                    () -> EntityType.Builder.of(TyrannosaurusRexEntity::new, MobCategory.CREATURE)
+                            .sized(1.5f, 1.75f)
+                            .build(new ResourceLocation(JRMod.MOD_ID, "tyrannosaurus_rex").toString()));
 
     public static final RegistryObject<EntityType<VelociraptorEntity>> VELOCIRAPTOR =
             ENTITY_TYPES.register("velociraptor",

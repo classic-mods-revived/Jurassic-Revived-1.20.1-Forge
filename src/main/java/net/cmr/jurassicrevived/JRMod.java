@@ -5,10 +5,7 @@ import net.cmr.jurassicrevived.block.ModBlocks;
 import net.cmr.jurassicrevived.block.entity.custom.ModBlockEntities;
 import net.cmr.jurassicrevived.datagen.custom.ConfigCondition;
 import net.cmr.jurassicrevived.entity.ModEntities;
-import net.cmr.jurassicrevived.entity.client.VelociraptorRenderer;
-import net.cmr.jurassicrevived.entity.client.BrachiosaurusRenderer;
-import net.cmr.jurassicrevived.entity.client.CeratosaurusRenderer;
-import net.cmr.jurassicrevived.entity.client.DilophosaurusRenderer;
+import net.cmr.jurassicrevived.entity.client.*;
 import net.cmr.jurassicrevived.event.FenceDiagonalUpdateHandler;
 import net.cmr.jurassicrevived.item.ModCreativeModeTabs;
 import net.cmr.jurassicrevived.item.ModItems;
@@ -108,10 +105,11 @@ public class JRMod {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            EntityRenderers.register(ModEntities.VELOCIRAPTOR.get(), VelociraptorRenderer::new);
-            EntityRenderers.register(ModEntities.CERATOSAURUS.get(), CeratosaurusRenderer::new);
             EntityRenderers.register(ModEntities.BRACHIOSAURUS.get(), BrachiosaurusRenderer::new);
+            EntityRenderers.register(ModEntities.CERATOSAURUS.get(), CeratosaurusRenderer::new);
             EntityRenderers.register(ModEntities.DILOPHOSAURUS.get(), DilophosaurusRenderer::new);
+            EntityRenderers.register(ModEntities.TYRANNOSAURUS_REX.get(), TyrannosaurusRexRenderer::new);
+            EntityRenderers.register(ModEntities.VELOCIRAPTOR.get(), VelociraptorRenderer::new);
             // Config screen is registered in ClientConfigScreenBinder
 
             FenceClimbClientHandler.register();

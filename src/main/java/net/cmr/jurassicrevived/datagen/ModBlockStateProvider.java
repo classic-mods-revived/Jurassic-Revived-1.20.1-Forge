@@ -68,7 +68,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         horizontalFacingWithItem(ModBlocks.INCUBATOR);
 
         eggLike(ModBlocks.HATCHED_VELOCIRAPTOR_EGG);
-        //eggLike(ModBlocks.HATCHED_TYRANNOSAURUS_REX_EGG);
+        eggLike(ModBlocks.HATCHED_TYRANNOSAURUS_REX_EGG);
         //eggLike(ModBlocks.HATCHED_TRICERATOPS_EGG);
         //eggLike(ModBlocks.HATCHED_SPINOSAURUS_EGG);
         //eggLike(ModBlocks.HATCHED_PARASAUROLOPHUS_EGG);

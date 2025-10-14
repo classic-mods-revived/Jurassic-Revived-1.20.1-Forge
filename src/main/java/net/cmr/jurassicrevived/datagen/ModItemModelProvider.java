@@ -20,10 +20,11 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        withExistingParent(ModItems.VELOCIRAPTOR_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.CERATOSAURUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.BRACHIOSAURUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.CERATOSAURUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.DILOPHOSAURUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.TYRANNOSAURUS_REX_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.VELOCIRAPTOR_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
         basicItem(ModItems.TEST_TUBE.get());
         basicItem(ModItems.SYRINGE.get());
@@ -35,8 +36,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.PROCESSOR.get());
         basicItem(ModItems.TIRE.get());
         basicItem(ModItems.CUTTING_BLADES.get());
-
         basicItem(ModItems.WRENCH.get());
+        basicItem(ModItems.MAC_N_CHEESE.get());
 
         basicItem(ModItems.BRACHIOSAURUS_SKULL_FOSSIL.get());
         basicItem(ModItems.CERATOSAURUS_SKULL_FOSSIL.get());

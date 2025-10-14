@@ -10,13 +10,13 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -29,6 +29,7 @@ import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 
 public class DilophosaurusEntity extends Animal implements GeoEntity {
@@ -48,20 +49,40 @@ public class DilophosaurusEntity extends Animal implements GeoEntity {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new PanicGoal(this, 2.0));
-        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0));
-        this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25));
-        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0));
-        this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
-        this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
+        this.goalSelector.addGoal(2, new FloatGoal(this));
+        //this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, SpinosaurusEntity.class, (float) 20, 1, 1));
+        //this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, TyrannosaurusRexEntity.class, (float) 20, 1, 1));
+        this.goalSelector.addGoal(5, new AvoidEntityGoal<>(this, VelociraptorEntity.class, (float) 20, 1, 1));
+        //this.goalSelector.addGoal(6, new AvoidEntityGoal<>(this, ParasaurulophusEntity.class, (float) 20, 1, 1));
+        this.goalSelector.addGoal(7, new AvoidEntityGoal<>(this, CeratosaurusEntity.class, (float) 20, 1, 1));
+        //this.goalSelector.addGoal(8, new AvoidEntityGoal<>(this, TriceratopsEntity.class, (float) 20, 1, 1));
+        this.goalSelector.addGoal(9, new AvoidEntityGoal<>(this, BrachiosaurusEntity.class, (float) 20, 1, 1));
+        this.goalSelector.addGoal(10, new MeleeAttackGoal(this, 1, false) {
+            @Override
+            protected double getAttackReachSqr(LivingEntity entity) {
+                return 4;
+            }
+        });
+        this.goalSelector.addGoal(11, new RandomStrollGoal(this, 1));
+        this.goalSelector.addGoal(12, new FollowMobGoal(this, 1, (float) 20, (float) 10));
+        this.targetSelector.addGoal(13, new NearestAttackableTargetGoal<>(this, Animal.class, 10, false, false,
+                target -> target.getType() != this.getType()));
+        //this.targetSelector.addGoal(14, new NearestAttackableTargetGoal(this, GallimimusEntity.class, false, false));
+        this.targetSelector.addGoal(15, new NearestAttackableTargetGoal(this, Player.class, false, false));
+        //this.targetSelector.addGoal(16, new NearestAttackableTargetGoal(this, CompsognathusEntity.class, false, false));
+        this.goalSelector.addGoal(17, new RandomLookAroundGoal(this));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
         return Animal.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 20D)
-                .add(Attributes.MOVEMENT_SPEED, 0.5D)
-                .add(Attributes.FOLLOW_RANGE, 24D);
+                .add(Attributes.MAX_HEALTH, 30D)
+                .add(Attributes.MOVEMENT_SPEED, 0.3D)
+                .add(Attributes.ARMOR, 0D)
+                .add(Attributes.FOLLOW_RANGE, 32D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.3D)
+                .add(Attributes.ATTACK_KNOCKBACK, 0D)
+                .add(Attributes.ATTACK_DAMAGE, 8D);
     }
 
     @Override
@@ -76,24 +97,27 @@ public class DilophosaurusEntity extends Animal implements GeoEntity {
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 0, this::predicate));
+    public boolean doHurtTarget(Entity target) {
+        boolean hit = super.doHurtTarget(target);
+        if (!level().isClientSide && hit && target instanceof LivingEntity) {
+            if (this.level() instanceof ServerLevel serverLevel) {
+                this.triggerAnim("attackController", "attack");
+            }
+        }
+        return hit;
     }
 
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> state) {
-        // Keep regular locomotion/idle; tail sway is procedural in the model
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<>(this, "Walk/Run/Idle", state -> {
+            if (state.isMoving())
+                return state.setAndContinue(DilophosaurusEntity.this.isSprinting() ? RawAnimation.begin().then("anim.dilophosaurus.running", Animation.LoopType.LOOP) : RawAnimation.begin().then("anim.dilophosaurus.walk", Animation.LoopType.LOOP));
 
-        if (state.isMoving()) {
-            state.getController().setAnimation(
-                    RawAnimation.begin().then("anim.dilophosaurus.walk", Animation.LoopType.LOOP)
-            );
-            return PlayState.CONTINUE;
-        }
-        state.getController().setAnimation(
-                RawAnimation.begin().then("anim.dilophosaurus.idle", Animation.LoopType.LOOP)
-        );
+            return state.setAndContinue(RawAnimation.begin().then("anim.dilophosaurus.idle", Animation.LoopType.LOOP));
+        }));
 
-        return PlayState.CONTINUE;
+        controllers.add(new AnimationController<>(this, "attackController", state -> PlayState.STOP)
+                .triggerableAnim("attack", RawAnimation.begin().then("anim.dilophosaurus.attack", Animation.LoopType.PLAY_ONCE)));
     }
 
     private float getSignedTurnDelta() {
