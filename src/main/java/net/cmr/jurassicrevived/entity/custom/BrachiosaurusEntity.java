@@ -76,8 +76,7 @@ public class BrachiosaurusEntity extends Animal implements GeoEntity {
                 .add(Attributes.FOLLOW_RANGE, 32D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1D)
                 .add(Attributes.ATTACK_KNOCKBACK, 0D)
-                .add(Attributes.ATTACK_DAMAGE, 75D)
-                .add(Attributes.FOLLOW_RANGE, 24D);
+                .add(Attributes.ATTACK_DAMAGE, 75D);
     }
 
     @Override
@@ -106,7 +105,7 @@ public class BrachiosaurusEntity extends Animal implements GeoEntity {
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "Walk/Run/Idle", state -> {
             if (state.isMoving())
-                return state.setAndContinue(BrachiosaurusEntity.this.isSprinting() ? RawAnimation.begin().then("anim.brachiosaurus.running", Animation.LoopType.LOOP) : RawAnimation.begin().then("anim.brachiosaurus.walk", Animation.LoopType.LOOP));
+                return state.setAndContinue(BrachiosaurusEntity.this.isSprinting() ? RawAnimation.begin().then("anim.brachiosaurus.run", Animation.LoopType.LOOP) : RawAnimation.begin().then("anim.brachiosaurus.walk", Animation.LoopType.LOOP));
 
             return state.setAndContinue(RawAnimation.begin().then("anim.brachiosaurus.idle", Animation.LoopType.LOOP));
         }));

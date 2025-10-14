@@ -90,6 +90,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.DILOPHOSAURUS_SKULL_FOSSIL.get());
                         output.accept(ModItems.DIPLODOCUS_SKULL_FOSSIL.get());
                         output.accept(ModItems.GALLIMIMUS_SKULL_FOSSIL.get());
+                        output.accept(ModItems.OURANOSAURUS_SKULL_FOSSIL.get());
                         output.accept(ModItems.PARASAUROLOPHUS_SKULL_FOSSIL.get());
                         output.accept(ModItems.SPINOSAURUS_SKULL_FOSSIL.get());
                         output.accept(ModItems.TRICERATOPS_SKULL_FOSSIL.get());
@@ -103,6 +104,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.FRESH_DIPLODOCUS_SKULL.get());
                         output.accept(ModItems.FRESH_GALLIMIMUS_SKULL.get());
                         output.accept(ModItems.FRESH_INDOMINUS_REX_SKULL.get());
+                        output.accept(ModItems.FRESH_OURANOSAURUS_SKULL.get());
                         output.accept(ModItems.FRESH_PARASAUROLOPHUS_SKULL.get());
                         output.accept(ModItems.FRESH_SPINOSAURUS_SKULL.get());
                         output.accept(ModItems.FRESH_TRICERATOPS_SKULL.get());
@@ -121,6 +123,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.DIPLODOCUS_TISSUE.get());
                         output.accept(ModItems.GALLIMIMUS_TISSUE.get());
                         output.accept(ModItems.INDOMINUS_REX_TISSUE.get());
+                        output.accept(ModItems.OURANOSAURUS_TISSUE.get());
                         output.accept(ModItems.PARASAUROLOPHUS_TISSUE.get());
                         output.accept(ModItems.SPINOSAURUS_TISSUE.get());
                         output.accept(ModItems.TRICERATOPS_TISSUE.get());
@@ -134,6 +137,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.DIPLODOCUS_DNA.get());
                         output.accept(ModItems.GALLIMIMUS_DNA.get());
                         output.accept(ModItems.INDOMINUS_REX_DNA.get());
+                        output.accept(ModItems.OURANOSAURUS_DNA.get());
                         output.accept(ModItems.PARASAUROLOPHUS_DNA.get());
                         output.accept(ModItems.SPINOSAURUS_DNA.get());
                         output.accept(ModItems.TRICERATOPS_DNA.get());
@@ -147,6 +151,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.DIPLODOCUS_SYRINGE.get());
                         output.accept(ModItems.GALLIMIMUS_SYRINGE.get());
                         output.accept(ModItems.INDOMINUS_REX_SYRINGE.get());
+                        output.accept(ModItems.OURANOSAURUS_SYRINGE.get());
                         output.accept(ModItems.PARASAUROLOPHUS_SYRINGE.get());
                         output.accept(ModItems.SPINOSAURUS_SYRINGE.get());
                         output.accept(ModItems.TRICERATOPS_SYRINGE.get());
@@ -160,6 +165,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.DIPLODOCUS_EGG.get());
                         output.accept(ModItems.GALLIMIMUS_EGG.get());
                         output.accept(ModItems.INDOMINUS_REX_EGG.get());
+                        output.accept(ModItems.OURANOSAURUS_EGG.get());
                         output.accept(ModItems.PARASAUROLOPHUS_EGG.get());
                         output.accept(ModItems.SPINOSAURUS_EGG.get());
                         output.accept(ModItems.TRICERATOPS_EGG.get());
@@ -175,6 +181,8 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.CERATOSAURUS_SPAWN_EGG.get());
                         output.accept(ModItems.COMPSOGNATHUS_SPAWN_EGG.get());
                         output.accept(ModItems.DILOPHOSAURUS_SPAWN_EGG.get());
+                        output.accept(ModItems.OURANOSAURUS_SPAWN_EGG.get());
+                        output.accept(ModItems.PARASAUROLOPHUS_SPAWN_EGG.get());
                         output.accept(ModItems.VELOCIRAPTOR_SPAWN_EGG.get());
                         output.accept(ModItems.TYRANNOSAURUS_REX_SPAWN_EGG.get());
                     }).build());

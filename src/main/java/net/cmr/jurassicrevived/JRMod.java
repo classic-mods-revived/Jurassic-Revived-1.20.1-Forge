@@ -110,6 +110,8 @@ public class JRMod {
             EntityRenderers.register(ModEntities.COMPSOGNATHUS.get(), CompsognathusRenderer::new);
             EntityRenderers.register(ModEntities.DILOPHOSAURUS.get(), DilophosaurusRenderer::new);
             EntityRenderers.register(ModEntities.FDUCK.get(), FDuckRenderer::new);
+            EntityRenderers.register(ModEntities.OURANOSAURUS.get(), OuranosaurusRenderer::new);
+            EntityRenderers.register(ModEntities.PARASAUROLOPHUS.get(), ParasaurolophusRenderer::new);
             EntityRenderers.register(ModEntities.TYRANNOSAURUS_REX.get(), TyrannosaurusRexRenderer::new);
             EntityRenderers.register(ModEntities.VELOCIRAPTOR.get(), VelociraptorRenderer::new);
             // Config screen is registered in ClientConfigScreenBinder

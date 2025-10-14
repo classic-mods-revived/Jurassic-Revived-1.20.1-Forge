@@ -114,7 +114,7 @@ public class DilophosaurusEntity extends Animal implements GeoEntity {
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "Walk/Run/Idle", state -> {
             if (state.isMoving())
-                return state.setAndContinue(DilophosaurusEntity.this.isSprinting() ? RawAnimation.begin().then("anim.dilophosaurus.running", Animation.LoopType.LOOP) : RawAnimation.begin().then("anim.dilophosaurus.walk", Animation.LoopType.LOOP));
+                return state.setAndContinue(DilophosaurusEntity.this.isSprinting() ? RawAnimation.begin().then("anim.dilophosaurus.run", Animation.LoopType.LOOP) : RawAnimation.begin().then("anim.dilophosaurus.walk", Animation.LoopType.LOOP));
 
             return state.setAndContinue(RawAnimation.begin().then("anim.dilophosaurus.idle", Animation.LoopType.LOOP));
         }));

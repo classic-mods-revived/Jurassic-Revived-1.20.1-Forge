@@ -114,7 +114,7 @@ public class FDuckEntity extends Animal implements GeoEntity {
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "Walk/Run/Idle", state -> {
             if (state.isMoving())
-                return state.setAndContinue(FDuckEntity.this.isSprinting() ? RawAnimation.begin().then("anim.fduck.running", Animation.LoopType.LOOP) : RawAnimation.begin().then("anim.fduck.walk", Animation.LoopType.LOOP));
+                return state.setAndContinue(FDuckEntity.this.isSprinting() ? RawAnimation.begin().then("anim.fduck.walk", Animation.LoopType.LOOP) : RawAnimation.begin().then("anim.fduck.walk", Animation.LoopType.LOOP));
 
             return state.setAndContinue(RawAnimation.begin().then("anim.fduck.idle", Animation.LoopType.LOOP));
         }));

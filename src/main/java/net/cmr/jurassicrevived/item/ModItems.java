@@ -27,8 +27,10 @@ public class ModItems {
     //        () -> new CustomGenderedSpawnEggItem(ModEntities.TRICERATOPS, 0x353A30, 0x121212, new Item.Properties()));
     //public static final RegistryObject<Item> SPINOSAURUS_SPAWN_EGG = ITEMS.register("spinosaurus_spawn_egg",
     //        () -> new CustomGenderedSpawnEggItem(ModEntities.SPINOSAURUS, 0x685E5A, 0x5D3831, new Item.Properties()));
-    //public static final RegistryObject<Item> PARASAUROLOPHUS_SPAWN_EGG = ITEMS.register("parasaurolophus_spawn_egg",
-    //        () -> new CustomGenderedSpawnEggItem(ModEntities.PARASAUROLOPHUS, 0x856836, 0x442911, new Item.Properties()));
+    public static final RegistryObject<Item> PARASAUROLOPHUS_SPAWN_EGG = ITEMS.register("parasaurolophus_spawn_egg",
+            () -> new CustomGenderedSpawnEggItem(ModEntities.PARASAUROLOPHUS, 0x856836, 0x442911, new Item.Properties()));
+    public static final RegistryObject<Item> OURANOSAURUS_SPAWN_EGG = ITEMS.register("ouranosaurus_spawn_egg",
+            () -> new CustomGenderedSpawnEggItem(ModEntities.OURANOSAURUS, 0x6b4b31, 0xff8900, new Item.Properties()));
     //public static final RegistryObject<Item> INDOMINUS_REX_SPAWN_EGG = ITEMS.register("indominus_rex_spawn_egg",
     //        () -> new CustomGenderedSpawnEggItem(ModEntities.INDOMINUX_REX, 0x9C9B99, 0x60605F, new Item.Properties()));
     //public static final RegistryObject<Item> GALLIMIMUS_SPAWN_EGG = ITEMS.register("gallimimus_spawn_egg",
@@ -63,6 +65,7 @@ public class ModItems {
     public static final RegistryObject<Item> DILOPHOSAURUS_SKULL_FOSSIL = ITEMS.register("dilophosaurus_skull_fossil", () -> new Item(new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> DIPLODOCUS_SKULL_FOSSIL = ITEMS.register("diplodocus_skull_fossil", () -> new Item(new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> GALLIMIMUS_SKULL_FOSSIL = ITEMS.register("gallimimus_skull_fossil", () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final RegistryObject<Item> OURANOSAURUS_SKULL_FOSSIL = ITEMS.register("ouranosaurus_skull_fossil", () -> new Item(new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> PARASAUROLOPHUS_SKULL_FOSSIL = ITEMS.register("parasaurolophus_skull_fossil", () -> new Item(new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> SPINOSAURUS_SKULL_FOSSIL = ITEMS.register("spinosaurus_skull_fossil", () -> new Item(new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> TRICERATOPS_SKULL_FOSSIL = ITEMS.register("triceratops_skull_fossil", () -> new Item(new Item.Properties().stacksTo(16)));
@@ -76,6 +79,7 @@ public class ModItems {
     public static final RegistryObject<Item> FRESH_DIPLODOCUS_SKULL = ITEMS.register("fresh_diplodocus_skull", () -> new Item(new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> FRESH_GALLIMIMUS_SKULL = ITEMS.register("fresh_gallimimus_skull", () -> new Item(new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> FRESH_INDOMINUS_REX_SKULL = ITEMS.register("fresh_indominus_rex_skull", () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final RegistryObject<Item> FRESH_OURANOSAURUS_SKULL = ITEMS.register("fresh_ouranosaurus_skull", () -> new Item(new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> FRESH_PARASAUROLOPHUS_SKULL = ITEMS.register("fresh_parasaurolophus_skull", () -> new Item(new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> FRESH_SPINOSAURUS_SKULL = ITEMS.register("fresh_spinosaurus_skull", () -> new Item(new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> FRESH_TRICERATOPS_SKULL = ITEMS.register("fresh_triceratops_skull", () -> new Item(new Item.Properties().stacksTo(16)));
@@ -89,6 +93,7 @@ public class ModItems {
     public static final RegistryObject<Item> DIPLODOCUS_TISSUE = ITEMS.register("diplodocus_tissue", () -> new Item(new Item.Properties().stacksTo(8).rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> GALLIMIMUS_TISSUE = ITEMS.register("gallimimus_tissue", () -> new Item(new Item.Properties().stacksTo(8).rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> INDOMINUS_REX_TISSUE = ITEMS.register("indominus_rex_tissue", () -> new Item(new Item.Properties().stacksTo(8).rarity(Rarity.EPIC)));
+    public static final RegistryObject<Item> OURANOSAURUS_TISSUE = ITEMS.register("ouranosaurus_tissue", () -> new Item(new Item.Properties().stacksTo(8).rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> PARASAUROLOPHUS_TISSUE = ITEMS.register("parasaurolophus_tissue", () -> new Item(new Item.Properties().stacksTo(8).rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> SPINOSAURUS_TISSUE = ITEMS.register("spinosaurus_tissue", () -> new Item(new Item.Properties().stacksTo(8).rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> TRICERATOPS_TISSUE = ITEMS.register("triceratops_tissue", () -> new Item(new Item.Properties().stacksTo(8).rarity(Rarity.EPIC)));
@@ -102,6 +107,7 @@ public class ModItems {
     public static final RegistryObject<Item> DIPLODOCUS_DNA = ITEMS.register("diplodocus_dna", () -> new Item(new Item.Properties().stacksTo(8).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> GALLIMIMUS_DNA = ITEMS.register("gallimimus_dna", () -> new Item(new Item.Properties().stacksTo(8).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> INDOMINUS_REX_DNA = ITEMS.register("indominus_rex_dna", () -> new Item(new Item.Properties().stacksTo(8).rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> OURANOSAURUS_DNA = ITEMS.register("ouranosaurus_dna", () -> new Item(new Item.Properties().stacksTo(8).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> PARASAUROLOPHUS_DNA = ITEMS.register("parasaurolophus_dna", () -> new Item(new Item.Properties().stacksTo(8).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> SPINOSAURUS_DNA = ITEMS.register("spinosaurus_dna", () -> new Item(new Item.Properties().stacksTo(8).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> TRICERATOPS_DNA = ITEMS.register("triceratops_dna", () -> new Item(new Item.Properties().stacksTo(8).rarity(Rarity.RARE)));
@@ -115,6 +121,7 @@ public class ModItems {
     public static final RegistryObject<Item> DIPLODOCUS_SYRINGE = ITEMS.register("diplodocus_syringe", () -> new Item(new Item.Properties().stacksTo(8).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> GALLIMIMUS_SYRINGE = ITEMS.register("gallimimus_syringe", () -> new Item(new Item.Properties().stacksTo(8).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> INDOMINUS_REX_SYRINGE = ITEMS.register("indominus_rex_syringe", () -> new Item(new Item.Properties().stacksTo(8).rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> OURANOSAURUS_SYRINGE = ITEMS.register("ouranosaurus_syringe", () -> new Item(new Item.Properties().stacksTo(8).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> PARASAUROLOPHUS_SYRINGE = ITEMS.register("parasaurolophus_syringe", () -> new Item(new Item.Properties().stacksTo(8).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> SPINOSAURUS_SYRINGE = ITEMS.register("spinosaurus_syringe", () -> new Item(new Item.Properties().stacksTo(8).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> TRICERATOPS_SYRINGE = ITEMS.register("triceratops_syringe", () -> new Item(new Item.Properties().stacksTo(8).rarity(Rarity.UNCOMMON)));
@@ -128,6 +135,7 @@ public class ModItems {
     public static final RegistryObject<Item> DIPLODOCUS_EGG = ITEMS.register("diplodocus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> GALLIMIMUS_EGG = ITEMS.register("gallimimus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> INDOMINUS_REX_EGG = ITEMS.register("indominus_rex_egg", () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> OURANOSAURUS_EGG = ITEMS.register("ouranosaurus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> PARASAUROLOPHUS_EGG = ITEMS.register("parasaurolophus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> SPINOSAURUS_EGG = ITEMS.register("spinosaurus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> TRICERATOPS_EGG = ITEMS.register("triceratops_egg", () -> new Item(new Item.Properties().stacksTo(1)));

@@ -78,8 +78,7 @@ public class CompsognathusEntity extends Animal implements GeoEntity {
                 .add(Attributes.FOLLOW_RANGE, 32D)
                 .add(Attributes.ATTACK_DAMAGE, 10D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.3D)
-                .add(Attributes.ATTACK_KNOCKBACK, 0D)
-                .add(Attributes.FOLLOW_RANGE, 24D);
+                .add(Attributes.ATTACK_KNOCKBACK, 0D);
     }
 
     @Override
@@ -108,7 +107,7 @@ public class CompsognathusEntity extends Animal implements GeoEntity {
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "Walk/Run/Idle", state -> {
             if (state.isMoving())
-                return state.setAndContinue(CompsognathusEntity.this.isSprinting() ? RawAnimation.begin().then("anim.compsognathus.running", Animation.LoopType.LOOP) : RawAnimation.begin().then("anim.compsognathus.walk", Animation.LoopType.LOOP));
+                return state.setAndContinue(CompsognathusEntity.this.isSprinting() ? RawAnimation.begin().then("anim.compsognathus..run", Animation.LoopType.LOOP) : RawAnimation.begin().then("anim.compsognathus.walk", Animation.LoopType.LOOP));
 
             return state.setAndContinue(RawAnimation.begin().then("anim.compsognathus.idle", Animation.LoopType.LOOP));
         }));
