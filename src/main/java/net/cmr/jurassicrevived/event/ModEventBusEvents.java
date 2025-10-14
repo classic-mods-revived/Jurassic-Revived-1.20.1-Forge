@@ -14,6 +14,7 @@ public class ModEventBusEvents {
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(ModEntities.BRACHIOSAURUS.get(), BrachiosaurusEntity.createAttributes().build());
         event.put(ModEntities.CERATOSAURUS.get(), CeratosaurusEntity.createAttributes().build());
+        event.put(ModEntities.COMPSOGNATHUS.get(), CeratosaurusEntity.createAttributes().build());
         event.put(ModEntities.DILOPHOSAURUS.get(), DilophosaurusEntity.createAttributes().build());
         event.put(ModEntities.TYRANNOSAURUS_REX.get(), TyrannosaurusRexEntity.createAttributes().build());
         event.put(ModEntities.VELOCIRAPTOR.get(), VelociraptorEntity.createAttributes().build());

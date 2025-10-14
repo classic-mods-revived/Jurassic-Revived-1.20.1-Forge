@@ -53,16 +53,19 @@ public class BrachiosaurusEntity extends Animal implements GeoEntity {
         this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, VelociraptorEntity.class, (float) 20, 1, 1));
         this.goalSelector.addGoal(5, new AvoidEntityGoal<>(this, CeratosaurusEntity.class, (float) 20, 1, 1));
         //this.goalSelector.addGoal(6, new AvoidEntityGoal<>(this, SpinosaurusEntity.class, (float) 20, 1, 1));
-        //this.goalSelector.addGoal(7, new AvoidEntityGoal<>(this, TyrannosaurusRexEntity.class, (float) 20, 1, 1));
+        this.goalSelector.addGoal(7, new AvoidEntityGoal<>(this, TyrannosaurusRexEntity.class, (float) 20, 1, 1));
         this.goalSelector.addGoal(8, new MeleeAttackGoal(this, 1, false) {
             @Override
             protected double getAttackReachSqr(LivingEntity entity) {
                 return 49;
             }
         });
-        this.goalSelector.addGoal(9, new RandomStrollGoal(this, 1));
-        this.goalSelector.addGoal(10, new FollowMobGoal(this, 1, (float) 20, (float) 10));
-        this.goalSelector.addGoal(11, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(9, new BreedGoal(this, 1.0));
+        this.goalSelector.addGoal(10, new FollowParentGoal(this, 1.25));
+        this.goalSelector.addGoal(11, new WaterAvoidingRandomStrollGoal(this, 1.0));
+        this.goalSelector.addGoal(12, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(13, new FollowMobGoal(this, 1, (float) 20, (float) 10));
+        this.goalSelector.addGoal(14, new RandomLookAroundGoal(this));
     }
 
     public static AttributeSupplier.Builder createAttributes() {

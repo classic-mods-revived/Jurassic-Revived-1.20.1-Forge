@@ -107,6 +107,7 @@ public class JRMod {
         public static void onClientSetup(FMLClientSetupEvent event) {
             EntityRenderers.register(ModEntities.BRACHIOSAURUS.get(), BrachiosaurusRenderer::new);
             EntityRenderers.register(ModEntities.CERATOSAURUS.get(), CeratosaurusRenderer::new);
+            EntityRenderers.register(ModEntities.COMPSOGNATHUS.get(), CompsognathusRenderer::new);
             EntityRenderers.register(ModEntities.DILOPHOSAURUS.get(), DilophosaurusRenderer::new);
             EntityRenderers.register(ModEntities.TYRANNOSAURUS_REX.get(), TyrannosaurusRexRenderer::new);
             EntityRenderers.register(ModEntities.VELOCIRAPTOR.get(), VelociraptorRenderer::new);

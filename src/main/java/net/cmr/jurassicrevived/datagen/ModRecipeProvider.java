@@ -449,6 +449,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_eggs", has(ModTags.Items.EGGS)).save(pWriter);
         new IncubatorRecipeBuilder(ModItems.CERATOSAURUS_EGG.get(), ModBlocks.HATCHED_CERATOSAURUS_EGG.get(), 1)
                 .unlockedBy("has_eggs", has(ModTags.Items.EGGS)).save(pWriter);
+        new IncubatorRecipeBuilder(ModItems.COMPSOGNATHUS_EGG.get(), ModBlocks.HATCHED_COMPSOGNATHUS_EGG.get(), 1)
+                .unlockedBy("has_eggs", has(ModTags.Items.EGGS)).save(pWriter);
         new IncubatorRecipeBuilder(ModItems.DILOPHOSAURUS_EGG.get(), ModBlocks.HATCHED_DILOPHOSAURUS_EGG.get(), 1)
                 .unlockedBy("has_eggs", has(ModTags.Items.EGGS)).save(pWriter);
         new IncubatorRecipeBuilder(ModItems.VELOCIRAPTOR_EGG.get(), ModBlocks.HATCHED_VELOCIRAPTOR_EGG.get(), 1)

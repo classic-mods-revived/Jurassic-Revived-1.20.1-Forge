@@ -31,6 +31,8 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.CUTTING_BLADES.get());
                         output.accept(ModItems.WRENCH.get());
                         output.accept(ModItems.MAC_N_CHEESE.get());
+                        output.accept(ModItems.WALNUT_PUMPKIN_PIE.get());
+                        output.accept(ModItems.BANANA_NUT_COOKIE.get());
                     }).build());
 
     public static final RegistryObject<CreativeModeTab> JR_BLOCK_TAB = CREATIVE_MODE_TABS.register("jurassicrevived_block_tab",
@@ -171,6 +173,7 @@ public class ModCreativeModeTabs {
                     .displayItems((displayParameters, output) -> {
                         output.accept(ModItems.BRACHIOSAURUS_SPAWN_EGG.get());
                         output.accept(ModItems.CERATOSAURUS_SPAWN_EGG.get());
+                        output.accept(ModItems.COMPSOGNATHUS_SPAWN_EGG.get());
                         output.accept(ModItems.DILOPHOSAURUS_SPAWN_EGG.get());
                         output.accept(ModItems.VELOCIRAPTOR_SPAWN_EGG.get());
                         output.accept(ModItems.TYRANNOSAURUS_REX_SPAWN_EGG.get());

@@ -59,21 +59,24 @@ public class TyrannosaurusRexEntity extends Animal implements GeoEntity {
                 return 4;
             }
         });
-        this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1.2));
-        this.goalSelector.addGoal(6, new FollowMobGoal(this, 1.2, (float) 20, (float) 10));
-        this.targetSelector.addGoal(7, new NearestAttackableTargetGoal<>(this, Monster.class, true));
-        this.targetSelector.addGoal(7, new NearestAttackableTargetGoal<>(this, Animal.class, 10, false, false,
+        this.goalSelector.addGoal(5, new BreedGoal(this, 1.0));
+        this.goalSelector.addGoal(6, new FollowParentGoal(this, 1.25));
+        this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0));
+        this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(9, new FollowMobGoal(this, 1.2, (float) 20, (float) 10));
+        this.targetSelector.addGoal(10, new NearestAttackableTargetGoal<>(this, Monster.class, true));
+        this.targetSelector.addGoal(11, new NearestAttackableTargetGoal<>(this, Animal.class, 10, false, false,
                 target -> target.getType() != this.getType()));
-        //this.targetSelector.addGoal(8, new NearestAttackableTargetGoal(this, TriceratopsEntity.class, false, false));
-        //this.targetSelector.addGoal(9, new NearestAttackableTargetGoal(this, GallimimusEntity.class, false, false));
-        this.targetSelector.addGoal(10, new NearestAttackableTargetGoal(this, DilophosaurusEntity.class, false, false));
-        this.targetSelector.addGoal(11, new NearestAttackableTargetGoal(this, CeratosaurusEntity.class, false, false));
-        //this.targetSelector.addGoal(12, new NearestAttackableTargetGoal(this, ParasaurulophusEntity.class, false, false));
-        this.targetSelector.addGoal(13, new NearestAttackableTargetGoal(this, VelociraptorEntity.class, false, false));
-        //this.targetSelector.addGoal(14, new NearestAttackableTargetGoal(this, SpinosaurusEntity.class, false, false));
-        //this.targetSelector.addGoal(15, new NearestAttackableTargetGoal(this, IndominusRexEntity.class, false, false));
-        this.targetSelector.addGoal(16, new NearestAttackableTargetGoal(this, Player.class, false, false));
-        this.goalSelector.addGoal(17, new RandomLookAroundGoal(this));
+        //this.targetSelector.addGoal(12, new NearestAttackableTargetGoal(this, TriceratopsEntity.class, false, false));
+        //this.targetSelector.addGoal(13, new NearestAttackableTargetGoal(this, GallimimusEntity.class, false, false));
+        this.targetSelector.addGoal(14, new NearestAttackableTargetGoal(this, DilophosaurusEntity.class, false, false));
+        this.targetSelector.addGoal(15, new NearestAttackableTargetGoal(this, CeratosaurusEntity.class, false, false));
+        //this.targetSelector.addGoal(16, new NearestAttackableTargetGoal(this, ParasaurulophusEntity.class, false, false));
+        this.targetSelector.addGoal(17, new NearestAttackableTargetGoal(this, VelociraptorEntity.class, false, false));
+        //this.targetSelector.addGoal(18, new NearestAttackableTargetGoal(this, SpinosaurusEntity.class, false, false));
+        //this.targetSelector.addGoal(19, new NearestAttackableTargetGoal(this, IndominusRexEntity.class, false, false));
+        this.targetSelector.addGoal(20, new NearestAttackableTargetGoal(this, Player.class, false, false));
+        this.goalSelector.addGoal(21, new RandomLookAroundGoal(this));
 
 
     }

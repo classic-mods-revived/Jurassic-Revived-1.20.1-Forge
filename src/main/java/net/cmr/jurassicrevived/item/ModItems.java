@@ -16,6 +16,8 @@ public class ModItems {
 
     public static final RegistryObject<Item> WRENCH = ITEMS.register("wrench", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> MAC_N_CHEESE = ITEMS.register("mac_n_cheese", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(12).saturationMod(0.6f).build())));
+    public static final RegistryObject<Item> WALNUT_PUMPKIN_PIE = ITEMS.register("walnut_pumpkin_pie", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(12).saturationMod(0.6f).build())));
+    public static final RegistryObject<Item> BANANA_NUT_COOKIE = ITEMS.register("banana_nut_cookie", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(12).saturationMod(0.6f).build())));
 
     public static final RegistryObject<Item> VELOCIRAPTOR_SPAWN_EGG = ITEMS.register("velociraptor_spawn_egg",
             () -> new CustomGenderedSpawnEggItem(ModEntities.VELOCIRAPTOR, 0x8A5837, 0x45220D, new Item.Properties()));
@@ -35,8 +37,8 @@ public class ModItems {
     //        () -> new CustomGenderedSpawnEggItem(ModEntities.DIPLODOCUS, 0x, 0x, new Item.Properties()));
     public static final RegistryObject<Item> DILOPHOSAURUS_SPAWN_EGG = ITEMS.register("dilophosaurus_spawn_egg",
             () -> new CustomGenderedSpawnEggItem(ModEntities.DILOPHOSAURUS, 0x575D32, 0x16191C, new Item.Properties()));
-    //public static final RegistryObject<Item> COMPSOGNATHUS_SPAWN_EGG = ITEMS.register("compsognathus_spawn_egg",
-    //        () -> new CustomGenderedSpawnEggItem(ModEntities.COMPSOGNATHUS, 0x676D24, 0x373E16, new Item.Properties()));
+    public static final RegistryObject<Item> COMPSOGNATHUS_SPAWN_EGG = ITEMS.register("compsognathus_spawn_egg",
+            () -> new CustomGenderedSpawnEggItem(ModEntities.COMPSOGNATHUS, 0x676D24, 0x373E16, new Item.Properties()));
     public static final RegistryObject<Item> CERATOSAURUS_SPAWN_EGG = ITEMS.register("ceratosaurus_spawn_egg",
             () -> new CustomGenderedSpawnEggItem(ModEntities.CERATOSAURUS, 0x954846, 0x221F1D, new Item.Properties()));
     public static final RegistryObject<Item> BRACHIOSAURUS_SPAWN_EGG = ITEMS.register("brachiosaurus_spawn_egg",

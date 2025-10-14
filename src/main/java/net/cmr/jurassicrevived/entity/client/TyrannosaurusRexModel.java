@@ -102,7 +102,7 @@ public class TyrannosaurusRexModel extends GeoModel<TyrannosaurusRexEntity> {
 
         if (head != null) {
             var entityData = state.getData(DataTickets.ENTITY_MODEL_DATA);
-            float clampedYawDeg = Mth.clamp(entityData.netHeadYaw(), -30.0f, 30.0f);
+            float clampedYawDeg = Mth.clamp(entityData.netHeadYaw(), -20.0f, 20.0f);
             head.setRotY(clampedYawDeg * Mth.DEG_TO_RAD);
         }
     }

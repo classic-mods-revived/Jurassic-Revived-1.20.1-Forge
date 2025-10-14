@@ -22,6 +22,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         withExistingParent(ModItems.BRACHIOSAURUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.CERATOSAURUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.COMPSOGNATHUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.DILOPHOSAURUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.TYRANNOSAURUS_REX_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.VELOCIRAPTOR_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
@@ -38,6 +39,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.CUTTING_BLADES.get());
         basicItem(ModItems.WRENCH.get());
         basicItem(ModItems.MAC_N_CHEESE.get());
+        basicItem(ModItems.WALNUT_PUMPKIN_PIE.get());
+        basicItem(ModItems.BANANA_NUT_COOKIE.get());
 
         basicItem(ModItems.BRACHIOSAURUS_SKULL_FOSSIL.get());
         basicItem(ModItems.CERATOSAURUS_SKULL_FOSSIL.get());
@@ -123,7 +126,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         simpleBlockItemBlockTexture(ModBlocks.HATCHED_BRACHIOSAURUS_EGG);
         simpleBlockItemBlockTexture(ModBlocks.HATCHED_CERATOSAURUS_EGG);
-        //simpleBlockItemBlockTexture(ModBlocks.HATCHED_COMPSOGNATHUS_EGG);
+        simpleBlockItemBlockTexture(ModBlocks.HATCHED_COMPSOGNATHUS_EGG);
         simpleBlockItemBlockTexture(ModBlocks.HATCHED_DILOPHOSAURUS_EGG);
         //simpleBlockItemBlockTexture(ModBlocks.HATCHED_DIPLODOCUS_EGG);
         //simpleBlockItemBlockTexture(ModBlocks.HATCHED_GALLIMIMUS_EGG);
@@ -141,52 +144,52 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     private ItemModelBuilder saplingItem(RegistryObject<Block> item) {
         return withExistingParent(item.getId().getPath(),
-                new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(JRMod.MOD_ID,"block/" + item.getId().getPath()));
+                ResourceLocation.fromNamespaceAndPath("minecraft", "item/generated")).texture("layer0",
+                ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID,"block/" + item.getId().getPath()));
     }
 
     private ItemModelBuilder complexBlock(Block block) {
-        return withExistingParent(ForgeRegistries.BLOCKS.getKey(block).getPath(), new ResourceLocation(JRMod.MOD_ID,
+        return withExistingParent(ForgeRegistries.BLOCKS.getKey(block).getPath(), ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID,
                 "block/" + ForgeRegistries.BLOCKS.getKey(block).getPath()));
     }
 
     public void fenceItem(RegistryObject<Block> block, RegistryObject<Block> baseBlock) {
         this.withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(), mcLoc("block/fence_inventory"))
-                .texture("texture",  new ResourceLocation(JRMod.MOD_ID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
+                .texture("texture",  ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
     }
 
     public void wallItem(RegistryObject<Block> block, RegistryObject<Block> baseBlock) {
         this.withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(), mcLoc("block/wall_inventory"))
-                .texture("wall",  new ResourceLocation(JRMod.MOD_ID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
+                .texture("wall",  ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
     }
 
     public void buttonItem(RegistryObject<Block> block, RegistryObject<Block> baseBlock) {
         this.withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(), mcLoc("block/button_inventory"))
-                .texture("texture",  new ResourceLocation(JRMod.MOD_ID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
+                .texture("texture",  ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
     }
 
 
     private ItemModelBuilder handheldItem(RegistryObject<Item> item) {
         return withExistingParent(item.getId().getPath(),
-                new ResourceLocation("item/handheld")).texture("layer0",
-                new ResourceLocation(JRMod.MOD_ID,"item/" + item.getId().getPath()));
+                ResourceLocation.fromNamespaceAndPath("minecraft","item/handheld")).texture("layer0",
+                ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID,"item/" + item.getId().getPath()));
     }
 
     private ItemModelBuilder simpleBlockItem(RegistryObject<Block> item) {
         return withExistingParent(item.getId().getPath(),
-                new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(JRMod.MOD_ID,"item/" + item.getId().getPath()));
+                ResourceLocation.fromNamespaceAndPath("minecraft", "item/generated")).texture("layer0",
+                ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID,"item/" + item.getId().getPath()));
     }
 
     private ItemModelBuilder simpleBlockItemBlockTexture(RegistryObject<Block> item) {
         return withExistingParent(item.getId().getPath(),
-                new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(JRMod.MOD_ID,"block/" + item.getId().getPath()));
+                ResourceLocation.fromNamespaceAndPath("minecraft","item/generated")).texture("layer0",
+                ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID,"block/" + item.getId().getPath()));
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
         return withExistingParent(item.getId().getPath(),
-                new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(JRMod.MOD_ID,"item/" + item.getId().getPath()));
+                ResourceLocation.fromNamespaceAndPath("minecraft","item/generated")).texture("layer0",
+                ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID,"item/" + item.getId().getPath()));
     }
 }

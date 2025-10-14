@@ -111,8 +111,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> HATCHED_CERATOSAURUS_EGG = registerBlock("hatched_ceratosaurus_egg",
             () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.CERATOSAURUS));
 
-    //public static final RegistryObject<Block> HATCHED_COMPSOGNATHUS_EGG = registerBlock("hatched_compsognathus_egg",
-    //        () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.COMPSOGNATHUS));
+    public static final RegistryObject<Block> HATCHED_COMPSOGNATHUS_EGG = registerBlock("hatched_compsognathus_egg",
+            () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.COMPSOGNATHUS));
 
     public static final RegistryObject<Block> HATCHED_DILOPHOSAURUS_EGG = registerBlock("hatched_dilophosaurus_egg",
             () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.DILOPHOSAURUS));

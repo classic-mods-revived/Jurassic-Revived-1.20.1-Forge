@@ -52,7 +52,7 @@ public class DilophosaurusEntity extends Animal implements GeoEntity {
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
         this.goalSelector.addGoal(2, new FloatGoal(this));
         //this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, SpinosaurusEntity.class, (float) 20, 1, 1));
-        //this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, TyrannosaurusRexEntity.class, (float) 20, 1, 1));
+        this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, TyrannosaurusRexEntity.class, (float) 20, 1.2, 1.2));
         this.goalSelector.addGoal(5, new AvoidEntityGoal<>(this, VelociraptorEntity.class, (float) 20, 1, 1));
         //this.goalSelector.addGoal(6, new AvoidEntityGoal<>(this, ParasaurulophusEntity.class, (float) 20, 1, 1));
         this.goalSelector.addGoal(7, new AvoidEntityGoal<>(this, CeratosaurusEntity.class, (float) 20, 1, 1));
@@ -64,14 +64,17 @@ public class DilophosaurusEntity extends Animal implements GeoEntity {
                 return 4;
             }
         });
-        this.goalSelector.addGoal(11, new RandomStrollGoal(this, 1));
-        this.goalSelector.addGoal(12, new FollowMobGoal(this, 1, (float) 20, (float) 10));
-        this.targetSelector.addGoal(13, new NearestAttackableTargetGoal<>(this, Animal.class, 10, false, false,
+        this.goalSelector.addGoal(11, new BreedGoal(this, 1.0));
+        this.goalSelector.addGoal(12, new FollowParentGoal(this, 1.25));
+        this.goalSelector.addGoal(13, new WaterAvoidingRandomStrollGoal(this, 1.0));
+        this.goalSelector.addGoal(14, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(15, new FollowMobGoal(this, 1, (float) 20, (float) 10));
+        this.targetSelector.addGoal(16, new NearestAttackableTargetGoal<>(this, Animal.class, 10, false, false,
                 target -> target.getType() != this.getType()));
-        //this.targetSelector.addGoal(14, new NearestAttackableTargetGoal(this, GallimimusEntity.class, false, false));
-        this.targetSelector.addGoal(15, new NearestAttackableTargetGoal(this, Player.class, false, false));
-        //this.targetSelector.addGoal(16, new NearestAttackableTargetGoal(this, CompsognathusEntity.class, false, false));
-        this.goalSelector.addGoal(17, new RandomLookAroundGoal(this));
+        //this.targetSelector.addGoal(17, new NearestAttackableTargetGoal(this, GallimimusEntity.class, false, false));
+        this.targetSelector.addGoal(18, new NearestAttackableTargetGoal(this, Player.class, false, false));
+        this.targetSelector.addGoal(19, new NearestAttackableTargetGoal(this, CompsognathusEntity.class, false, false));
+        this.goalSelector.addGoal(20, new RandomLookAroundGoal(this));
     }
 
     public static AttributeSupplier.Builder createAttributes() {

@@ -2,8 +2,8 @@ package net.cmr.jurassicrevived.entity.client;
 
 import com.google.common.collect.Maps;
 import net.cmr.jurassicrevived.JRMod;
-import net.cmr.jurassicrevived.entity.custom.BrachiosaurusEntity;
-import net.cmr.jurassicrevived.entity.variant.BrachiosaurusVariant;
+import net.cmr.jurassicrevived.entity.custom.CompsognathusEntity;
+import net.cmr.jurassicrevived.entity.variant.CompsognathusVariant;
 import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -14,12 +14,12 @@ import software.bernie.geckolib.model.GeoModel;
 
 import java.util.Map;
 
-public class BrachiosaurusModel extends GeoModel<BrachiosaurusEntity> {
+public class CompsognathusModel extends GeoModel<CompsognathusEntity> {
 
-    private static final Map<BrachiosaurusVariant, ResourceLocation> LOCATION_BY_VARIANT =
-            Util.make(Maps.newEnumMap(BrachiosaurusVariant.class), map -> {
-                map.put(BrachiosaurusVariant.MALE, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/entity/brachiosaurus.png"));
-                map.put(BrachiosaurusVariant.FEMALE, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/entity/brachiosaurus_female.png"));
+    private static final Map<CompsognathusVariant, ResourceLocation> LOCATION_BY_VARIANT =
+            Util.make(Maps.newEnumMap(CompsognathusVariant.class), map -> {
+                map.put(CompsognathusVariant.MALE, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/entity/compsognathus.png"));
+                map.put(CompsognathusVariant.FEMALE, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/entity/compsognathus_female.png"));
             });
 
     // Model-local "currently applied" offsets; cleared before each entity render
@@ -27,25 +27,25 @@ public class BrachiosaurusModel extends GeoModel<BrachiosaurusEntity> {
     private float[] appliedRoll = null;
 
     @Override
-    public ResourceLocation getModelResource(BrachiosaurusEntity animatable) {
-        return ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "geo/brachiosaurus.geo.json");
+    public ResourceLocation getModelResource(CompsognathusEntity animatable) {
+        return ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "geo/compsognathus.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureResource(BrachiosaurusEntity animatable) {
+    public ResourceLocation getTextureResource(CompsognathusEntity animatable) {
         return LOCATION_BY_VARIANT.get(animatable.getVariant());
     }
 
     @Override
-    public ResourceLocation getAnimationResource(BrachiosaurusEntity animatable) {
-        return ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "animations/brachiosaurus.animation.json");
+    public ResourceLocation getAnimationResource(CompsognathusEntity animatable) {
+        return ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "animations/compsognathus.animation.json");
     }
 
     @Override
-    public void setCustomAnimations(BrachiosaurusEntity entity, long id, AnimationState<BrachiosaurusEntity> state) {
+    public void setCustomAnimations(CompsognathusEntity entity, long id, AnimationState<CompsognathusEntity> state) {
         super.setCustomAnimations(entity, id, state);
 
-        String[] tailBones = { "tail1", "tail2", "tail3", "tail4", "tail5", "tail6" };
+        String[] tailBones = { "Tail1", "Tail2", "Tail3", "Tail4" };
         int n = tailBones.length;
 
         if (appliedYaw == null || appliedYaw.length != n) {
@@ -79,7 +79,7 @@ public class BrachiosaurusModel extends GeoModel<BrachiosaurusEntity> {
         float baseYaw = sway * maxYawDeg * deg2rad;
         float baseRoll = -baseYaw * rollFraction;
 
-        float[] weights = { 1.00f, 0.78f, 0.58f, 0.42f, 0.30f, 0.22f };
+        float[] weights = { 1.00f, 0.78f, 0.58f, 0.42f };
 
         for (int i = 0; i < n; i++) {
             GeoBone bone = (GeoBone) getAnimationProcessor().getBone(tailBones[i]);
@@ -102,7 +102,7 @@ public class BrachiosaurusModel extends GeoModel<BrachiosaurusEntity> {
 
         if (head != null) {
             var entityData = state.getData(DataTickets.ENTITY_MODEL_DATA);
-            float clampedYawDeg = Mth.clamp(entityData.netHeadYaw(), -10.0f, 10.0f);
+            float clampedYawDeg = Mth.clamp(entityData.netHeadYaw(), -30.0f, 30.0f);
             head.setRotY(clampedYawDeg * Mth.DEG_TO_RAD);
         }
     }
