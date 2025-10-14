@@ -50,6 +50,12 @@ public class ModEntities {
                             .sized(1.5f, 1.75f)
                             .build(ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "dilophosaurus").toString()));
 
+    public static final RegistryObject<EntityType<FDuckEntity>> FDUCK =
+            ENTITY_TYPES.register("fduck",
+                    () -> EntityType.Builder.of(FDuckEntity::new, MobCategory.CREATURE)
+                            .sized(1.5f, 1.75f)
+                            .build(ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "fduck").toString()));
+
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
     }

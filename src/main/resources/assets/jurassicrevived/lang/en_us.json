@@ -10,6 +10,7 @@
   "item.jurassicrevived.ceratosaurus_spawn_egg": "Ceratosaurus Spawn Egg",
   "item.jurassicrevived.compsognathus_spawn_egg": "Compsognathus Spawn Egg",
   "item.jurassicrevived.dilophosaurus_spawn_egg": "Dilophosaurus Spawn Egg",
+  "item.jurassicrevived.fduck_spawn_egg": "FDuck Spawn Egg",
   "item.jurassicrevived.velociraptor_spawn_egg": "Velociraptor Spawn Egg",
   "item.jurassicrevived.tyrannosaurus_rex_spawn_egg": "Tyrannosaurus Rex Spawn Egg",
 
@@ -17,6 +18,7 @@
   "entity.jurassicrevived.ceratosaurus": "Ceratosaurus",
   "entity.jurassicrevived.compsognathus": "Compsognathus",
   "entity.jurassicrevived.dilophosaurus": "Dilophosaurus",
+  "entity.jurassicrevived.fduck": "FDuck",
   "entity.jurassicrevived.tyrannosaurus_rex": "Tyrannosaurus Rex",
   "entity.jurassicrevived.velociraptor": "Velociraptor",
 
