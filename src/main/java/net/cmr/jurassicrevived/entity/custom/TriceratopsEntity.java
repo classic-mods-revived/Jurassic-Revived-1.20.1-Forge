@@ -64,9 +64,9 @@ public class TriceratopsEntity extends Animal implements GeoEntity {
         this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 1.0));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(11, new FollowMobGoal(this, 0.8, (float) 20, (float) 10));
-        //this.goalSelector.addGoal(12, new AvoidEntityGoal<>(this, SpinosaurusEntity.class, (float) 20, 0.8, 0.8));
+        this.goalSelector.addGoal(12, new AvoidEntityGoal<>(this, SpinosaurusEntity.class, (float) 20, 0.8, 0.8));
         this.goalSelector.addGoal(13, new AvoidEntityGoal<>(this, TyrannosaurusRexEntity.class, (float) 20, 0.8, 0.8));
-        //this.goalSelector.addGoal(14, new AvoidEntityGoal<>(this, IndominusRexEntity.class, (float) 20, 0.8, 0.8));
+        this.goalSelector.addGoal(14, new AvoidEntityGoal<>(this, IndominusRexEntity.class, (float) 20, 0.8, 0.8));
         this.goalSelector.addGoal(15, new EatBlockGoal(this));
         this.goalSelector.addGoal(16, new RandomLookAroundGoal(this));
     }

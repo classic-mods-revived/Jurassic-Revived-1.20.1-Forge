@@ -67,14 +67,14 @@ public class TyrannosaurusRexEntity extends Animal implements GeoEntity {
         this.targetSelector.addGoal(10, new NearestAttackableTargetGoal<>(this, Monster.class, true));
         this.targetSelector.addGoal(11, new NearestAttackableTargetGoal<>(this, Animal.class, 10, false, false,
                 target -> target.getType() != this.getType()));
-        //this.targetSelector.addGoal(12, new NearestAttackableTargetGoal(this, TriceratopsEntity.class, false, false));
-        //this.targetSelector.addGoal(13, new NearestAttackableTargetGoal(this, GallimimusEntity.class, false, false));
+        this.targetSelector.addGoal(12, new NearestAttackableTargetGoal(this, TriceratopsEntity.class, false, false));
+        this.targetSelector.addGoal(13, new NearestAttackableTargetGoal(this, GallimimusEntity.class, false, false));
         this.targetSelector.addGoal(14, new NearestAttackableTargetGoal(this, DilophosaurusEntity.class, false, false));
         this.targetSelector.addGoal(15, new NearestAttackableTargetGoal(this, CeratosaurusEntity.class, false, false));
-        //this.targetSelector.addGoal(16, new NearestAttackableTargetGoal(this, ParasaurulophusEntity.class, false, false));
+        this.targetSelector.addGoal(16, new NearestAttackableTargetGoal(this, ParasaurolophusEntity.class, false, false));
         this.targetSelector.addGoal(17, new NearestAttackableTargetGoal(this, VelociraptorEntity.class, false, false));
-        //this.targetSelector.addGoal(18, new NearestAttackableTargetGoal(this, SpinosaurusEntity.class, false, false));
-        //this.targetSelector.addGoal(19, new NearestAttackableTargetGoal(this, IndominusRexEntity.class, false, false));
+        this.targetSelector.addGoal(18, new NearestAttackableTargetGoal(this, SpinosaurusEntity.class, false, false));
+        this.targetSelector.addGoal(19, new NearestAttackableTargetGoal(this, IndominusRexEntity.class, false, false));
         this.targetSelector.addGoal(20, new NearestAttackableTargetGoal(this, Player.class, false, false));
         this.goalSelector.addGoal(21, new RandomLookAroundGoal(this));
 

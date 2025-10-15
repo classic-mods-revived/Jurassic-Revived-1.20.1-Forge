@@ -51,12 +51,12 @@ public class DilophosaurusEntity extends Animal implements GeoEntity {
     protected void registerGoals() {
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
         this.goalSelector.addGoal(2, new FloatGoal(this));
-        //this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, SpinosaurusEntity.class, (float) 20, 1, 1));
+        this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, SpinosaurusEntity.class, (float) 20, 1, 1));
         this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, TyrannosaurusRexEntity.class, (float) 20, 1.2, 1.2));
         this.goalSelector.addGoal(5, new AvoidEntityGoal<>(this, VelociraptorEntity.class, (float) 20, 1, 1));
-        //this.goalSelector.addGoal(6, new AvoidEntityGoal<>(this, ParasaurulophusEntity.class, (float) 20, 1, 1));
+        this.goalSelector.addGoal(6, new AvoidEntityGoal<>(this, ParasaurolophusEntity.class, (float) 20, 1, 1));
         this.goalSelector.addGoal(7, new AvoidEntityGoal<>(this, CeratosaurusEntity.class, (float) 20, 1, 1));
-        //this.goalSelector.addGoal(8, new AvoidEntityGoal<>(this, TriceratopsEntity.class, (float) 20, 1, 1));
+        this.goalSelector.addGoal(8, new AvoidEntityGoal<>(this, TriceratopsEntity.class, (float) 20, 1, 1));
         this.goalSelector.addGoal(9, new AvoidEntityGoal<>(this, BrachiosaurusEntity.class, (float) 20, 1, 1));
         this.goalSelector.addGoal(10, new MeleeAttackGoal(this, 1, false) {
             @Override
@@ -71,7 +71,7 @@ public class DilophosaurusEntity extends Animal implements GeoEntity {
         this.goalSelector.addGoal(15, new FollowMobGoal(this, 1, (float) 20, (float) 10));
         this.targetSelector.addGoal(16, new NearestAttackableTargetGoal<>(this, Animal.class, 10, false, false,
                 target -> target.getType() != this.getType()));
-        //this.targetSelector.addGoal(17, new NearestAttackableTargetGoal(this, GallimimusEntity.class, false, false));
+        this.targetSelector.addGoal(17, new NearestAttackableTargetGoal(this, GallimimusEntity.class, false, false));
         this.targetSelector.addGoal(18, new NearestAttackableTargetGoal(this, Player.class, false, false));
         this.targetSelector.addGoal(19, new NearestAttackableTargetGoal(this, CompsognathusEntity.class, false, false));
         this.goalSelector.addGoal(20, new RandomLookAroundGoal(this));

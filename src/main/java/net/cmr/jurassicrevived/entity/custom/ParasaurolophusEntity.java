@@ -57,7 +57,7 @@ public class ParasaurolophusEntity extends Animal implements GeoEntity {
         this.goalSelector.addGoal(8, new AvoidEntityGoal<>(this, DilophosaurusEntity.class, (float) 20, 1.2, 1.2));
         this.goalSelector.addGoal(9, new AvoidEntityGoal<>(this, VelociraptorEntity.class, (float) 20, 1.2, 1.2));
         this.goalSelector.addGoal(10, new AvoidEntityGoal<>(this, CeratosaurusEntity.class, (float) 20, 1.2, 1.2));
-        //this.goalSelector.addGoal(11, new AvoidEntityGoal<>(this, SpinosaurusEntity.class, (float) 20, 1.2, 1.2));
+        this.goalSelector.addGoal(11, new AvoidEntityGoal<>(this, SpinosaurusEntity.class, (float) 20, 1.2, 1.2));
         this.goalSelector.addGoal(12, new AvoidEntityGoal<>(this, TyrannosaurusRexEntity.class, (float) 20, 1.2, 1.2));
         this.goalSelector.addGoal(13, new RandomLookAroundGoal(this));
     }

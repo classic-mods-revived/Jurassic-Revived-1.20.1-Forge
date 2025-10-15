@@ -68,6 +68,12 @@ public class ModEntities {
                             .sized(1.5f, 1.75f)
                             .build(ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "gallimimus").toString()));
 
+    public static final RegistryObject<EntityType<IndominusRexEntity>> INDOMINUS_REX =
+            ENTITY_TYPES.register("indominus_rex",
+                    () -> EntityType.Builder.of(IndominusRexEntity::new, MobCategory.CREATURE)
+                            .sized(1.5f, 1.75f)
+                            .build(ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "indominus_rex").toString()));
+
     public static final RegistryObject<EntityType<OuranosaurusEntity>> OURANOSAURUS =
             ENTITY_TYPES.register("ouranosaurus",
                     () -> EntityType.Builder.of(OuranosaurusEntity::new, MobCategory.CREATURE)

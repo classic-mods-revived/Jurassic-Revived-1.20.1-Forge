@@ -53,7 +53,7 @@ public class DiplodocusEntity extends Animal implements GeoEntity {
         this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, DilophosaurusEntity.class, (float) 20, 1, 1));
         this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, VelociraptorEntity.class, (float) 20, 1, 1));
         this.goalSelector.addGoal(5, new AvoidEntityGoal<>(this, CeratosaurusEntity.class, (float) 20, 1, 1));
-        //this.goalSelector.addGoal(6, new AvoidEntityGoal<>(this, SpinosaurusEntity.class, (float) 20, 1, 1));
+        this.goalSelector.addGoal(6, new AvoidEntityGoal<>(this, SpinosaurusEntity.class, (float) 20, 1, 1));
         this.goalSelector.addGoal(7, new AvoidEntityGoal<>(this, TyrannosaurusRexEntity.class, (float) 20, 1, 1));
         this.goalSelector.addGoal(8, new MeleeAttackGoal(this, 1, false) {
             @Override
