@@ -14,6 +14,12 @@ public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
             DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, JRMod.MOD_ID);
 
+    public static final RegistryObject<EntityType<AlbertosaurusEntity>> ALBERTOSAURUS =
+            ENTITY_TYPES.register("albertosaurus",
+                    () -> EntityType.Builder.of(AlbertosaurusEntity::new, MobCategory.CREATURE)
+                            .sized(1.5f, 1.75f)
+                            .build(ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "albertosaurus").toString()));
+
     public static final RegistryObject<EntityType<TyrannosaurusRexEntity>> TYRANNOSAURUS_REX =
             ENTITY_TYPES.register("tyrannosaurus_rex",
                     () -> EntityType.Builder.of(TyrannosaurusRexEntity::new, MobCategory.CREATURE)

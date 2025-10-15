@@ -6,6 +6,7 @@
   "creativetab.jurassicrevived_dna_tab": "Genetic Material",
   "creativetab.jurassicrevived_dino_tab": "Dinosaur Spawn Eggs",
 
+  "item.jurassicrevived.albertosaurus_spawn_egg": "Albertosaurus Spawn Egg",
   "item.jurassicrevived.brachiosaurus_spawn_egg": "Brachiosaurus Spawn Egg",
   "item.jurassicrevived.ceratosaurus_spawn_egg": "Ceratosaurus Spawn Egg",
   "item.jurassicrevived.compsognathus_spawn_egg": "Compsognathus Spawn Egg",
@@ -21,6 +22,7 @@
   "item.jurassicrevived.triceratops_spawn_egg": "Triceratops Spawn Egg",
   "item.jurassicrevived.tyrannosaurus_rex_spawn_egg": "Tyrannosaurus Rex Spawn Egg",
 
+  "entity.jurassicrevived.albertosaurus": "Albertosaurus",
   "entity.jurassicrevived.brachiosaurus": "Brachiosaurus",
   "entity.jurassicrevived.ceratosaurus": "Ceratosaurus",
   "entity.jurassicrevived.compsognathus": "Compsognathus",
@@ -73,6 +75,7 @@
   "block.jurassicrevived.western_sword_fern": "Western Sword Fern",
   "block.jurassicrevived.potted_western_sword_fern": "Potted Western Sword Fern",
 
+  "item.jurassicrevived.albertosaurus_skull_fossil": "Albertosaurus Skull Fossil",
   "item.jurassicrevived.brachiosaurus_skull_fossil": "Brachiosaurus Skull Fossil",
   "item.jurassicrevived.ceratosaurus_skull_fossil": "Ceratosaurus Skull Fossil",
   "item.jurassicrevived.compsognathus_skull_fossil": "Compsognathus Skull Fossil",
@@ -87,6 +90,7 @@
   "item.jurassicrevived.tyrannosaurus_rex_skull_fossil": "Tyrannosaurus Rex Skull Fossil",
   "item.jurassicrevived.velociraptor_skull_fossil": "Velociraptor Skull Fossil",
 
+  "item.jurassicrevived.fresh_albertosaurus_skull": "Fresh Albertosaurus Skull",
   "item.jurassicrevived.fresh_brachiosaurus_skull": "Fresh Brachiosaurus Skull",
   "item.jurassicrevived.fresh_ceratosaurus_skull": "Fresh Ceratosaurus Skull",
   "item.jurassicrevived.fresh_compsognathus_skull": "Fresh Compsognathus Skull",
@@ -116,6 +120,7 @@
   "item.jurassicrevived.walnut_pumpkin_pie": "§5Walnut Pumpkin Pie§r",
   "item.jurassicrevived.banana_nut_cookie": "§dBanana Nut Cookie§r",
 
+  "item.jurassicrevived.albertosaurus_tissue": "Albertosaurus Tissue",
   "item.jurassicrevived.brachiosaurus_tissue": "Brachiosaurus Tissue",
   "item.jurassicrevived.ceratosaurus_tissue": "Ceratosaurus Tissue",
   "item.jurassicrevived.compsognathus_tissue": "Compsognathus Tissue",
@@ -130,6 +135,7 @@
   "item.jurassicrevived.tyrannosaurus_rex_tissue": "Tyrannosaurus Rex Tissue",
   "item.jurassicrevived.velociraptor_tissue": "Velociraptor Tissue",
 
+  "item.jurassicrevived.albertosaurus_dna": "Albertosaurus DNA",
   "item.jurassicrevived.brachiosaurus_dna": "Brachiosaurus DNA",
   "item.jurassicrevived.ceratosaurus_dna": "Ceratosaurus DNA",
   "item.jurassicrevived.compsognathus_dna": "Compsognathus DNA",
@@ -144,6 +150,7 @@
   "item.jurassicrevived.tyrannosaurus_rex_dna": "Tyrannosaurus Rex DNA",
   "item.jurassicrevived.velociraptor_dna": "Velociraptor DNA",
 
+  "item.jurassicrevived.albertosaurus_syringe": "Albertosaurus Syringe",
   "item.jurassicrevived.brachiosaurus_syringe": "Brachiosaurus Syringe",
   "item.jurassicrevived.ceratosaurus_syringe": "Ceratosaurus Syringe",
   "item.jurassicrevived.compsognathus_syringe": "Compsognathus Syringe",
@@ -158,6 +165,7 @@
   "item.jurassicrevived.tyrannosaurus_rex_syringe": "Tyrannosaurus Rex Syringe",
   "item.jurassicrevived.velociraptor_syringe": "Velociraptor Syringe",
 
+  "item.jurassicrevived.albertosaurus_egg": "Albertosaurus Egg",
   "item.jurassicrevived.brachiosaurus_egg": "Brachiosaurus Egg",
   "item.jurassicrevived.ceratosaurus_egg": "Ceratosaurus Egg",
   "item.jurassicrevived.compsognathus_egg": "Compsognathus Egg",
@@ -172,6 +180,7 @@
   "item.jurassicrevived.tyrannosaurus_rex_egg": "Tyrannosaurus Rex Egg",
   "item.jurassicrevived.velociraptor_egg": "Velociraptor Egg",
 
+  "block.jurassicrevived.hatched_albertosaurus_egg": "§aHatched Albertosaurus Egg",
   "block.jurassicrevived.hatched_brachiosaurus_egg": "§aHatched Brachiosaurus Egg",
   "block.jurassicrevived.hatched_ceratosaurus_egg": "§aHatched Ceratosaurus Egg",
   "block.jurassicrevived.hatched_compsognathus_egg": "§aHatched Compsognathus Egg",

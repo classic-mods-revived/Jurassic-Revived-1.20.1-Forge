@@ -22,6 +22,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
     protected void addTags(HolderLookup.Provider pProvider) {
         // Add Item Tags here
         this.tag(ModTags.Items.TISSUES)
+                .add(ModItems.ALBERTOSAURUS_TISSUE.get())
                 .add(ModItems.BRACHIOSAURUS_TISSUE.get())
                 .add(ModItems.CERATOSAURUS_TISSUE.get())
                 .add(ModItems.COMPSOGNATHUS_TISSUE.get())
@@ -36,6 +37,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModItems.TYRANNOSAURUS_REX_TISSUE.get())
                 .add(ModItems.VELOCIRAPTOR_TISSUE.get());
         this.tag(ModTags.Items.DNA)
+                .add(ModItems.ALBERTOSAURUS_DNA.get())
                 .add(ModItems.BRACHIOSAURUS_DNA.get())
                 .add(ModItems.CERATOSAURUS_DNA.get())
                 .add(ModItems.COMPSOGNATHUS_DNA.get())
@@ -50,6 +52,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModItems.TYRANNOSAURUS_REX_DNA.get())
                 .add(ModItems.VELOCIRAPTOR_DNA.get());
         this.tag(ModTags.Items.SYRINGES)
+                .add(ModItems.ALBERTOSAURUS_SYRINGE.get())
                 .add(ModItems.BRACHIOSAURUS_SYRINGE.get())
                 .add(ModItems.CERATOSAURUS_SYRINGE.get())
                 .add(ModItems.COMPSOGNATHUS_SYRINGE.get())
@@ -64,6 +67,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModItems.TYRANNOSAURUS_REX_SYRINGE.get())
                 .add(ModItems.VELOCIRAPTOR_SYRINGE.get());
         this.tag(ModTags.Items.EGGS)
+                .add(ModItems.ALBERTOSAURUS_EGG.get())
                 .add(ModItems.BRACHIOSAURUS_EGG.get())
                 .add(ModItems.CERATOSAURUS_EGG.get())
                 .add(ModItems.COMPSOGNATHUS_EGG.get())
@@ -78,6 +82,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModItems.TYRANNOSAURUS_REX_EGG.get())
                 .add(ModItems.VELOCIRAPTOR_EGG.get());
         this.tag(ModTags.Items.FOSSILS)
+                .add(ModItems.ALBERTOSAURUS_SKULL_FOSSIL.get())
                 .add(ModItems.BRACHIOSAURUS_SKULL_FOSSIL.get())
                 .add(ModItems.CERATOSAURUS_SKULL_FOSSIL.get())
                 .add(ModItems.COMPSOGNATHUS_SKULL_FOSSIL.get())
@@ -91,6 +96,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModItems.TYRANNOSAURUS_REX_SKULL_FOSSIL.get())
                 .add(ModItems.VELOCIRAPTOR_SKULL_FOSSIL.get());
         this.tag(ModTags.Items.SKULLS)
+                .add(ModItems.FRESH_ALBERTOSAURUS_SKULL.get())
                 .add(ModItems.FRESH_BRACHIOSAURUS_SKULL.get())
                 .add(ModItems.FRESH_CERATOSAURUS_SKULL.get())
                 .add(ModItems.FRESH_COMPSOGNATHUS_SKULL.get())

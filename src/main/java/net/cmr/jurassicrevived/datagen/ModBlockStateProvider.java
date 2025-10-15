@@ -80,6 +80,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         eggLike(ModBlocks.HATCHED_COMPSOGNATHUS_EGG);
         eggLike(ModBlocks.HATCHED_CERATOSAURUS_EGG);
         eggLike(ModBlocks.HATCHED_BRACHIOSAURUS_EGG);
+        eggLike(ModBlocks.HATCHED_ALBERTOSAURUS_EGG);
 
         customFenceMultipart(
                 ModBlocks.LOW_SECURITY_FENCE_POLE,

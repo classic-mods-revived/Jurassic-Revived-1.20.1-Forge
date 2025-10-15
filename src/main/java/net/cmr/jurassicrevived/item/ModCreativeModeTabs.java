@@ -80,10 +80,11 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.WESTERN_SWORD_FERN.get());
                     }).build());
 
-    public static final RegistryObject<CreativeModeTab> JR_FOSSIL_TAB = CREATIVE_MODE_TABS.register("jurassicrevived_fossil_tab",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.TYRANNOSAURUS_REX_SKULL_FOSSIL.get()))
-                    .title(Component.translatable("creativetab.jurassicrevived_fossil_tab"))
+    public static final RegistryObject<CreativeModeTab> JR_DNA_TAB = CREATIVE_MODE_TABS.register("jurassicrevived_dna_tab",
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.TYRANNOSAURUS_REX_DNA.get()))
+                    .title(Component.translatable("creativetab.jurassicrevived_dna_tab"))
                     .displayItems((displayParameters, output) -> {
+                        output.accept(ModItems.ALBERTOSAURUS_SKULL_FOSSIL.get());
                         output.accept(ModItems.BRACHIOSAURUS_SKULL_FOSSIL.get());
                         output.accept(ModItems.CERATOSAURUS_SKULL_FOSSIL.get());
                         output.accept(ModItems.COMPSOGNATHUS_SKULL_FOSSIL.get());
@@ -97,6 +98,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.TYRANNOSAURUS_REX_SKULL_FOSSIL.get());
                         output.accept(ModItems.VELOCIRAPTOR_SKULL_FOSSIL.get());
 
+                        output.accept(ModItems.FRESH_ALBERTOSAURUS_SKULL.get());
                         output.accept(ModItems.FRESH_BRACHIOSAURUS_SKULL.get());
                         output.accept(ModItems.FRESH_CERATOSAURUS_SKULL.get());
                         output.accept(ModItems.FRESH_COMPSOGNATHUS_SKULL.get());
@@ -110,12 +112,8 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.FRESH_TRICERATOPS_SKULL.get());
                         output.accept(ModItems.FRESH_TYRANNOSAURUS_REX_SKULL.get());
                         output.accept(ModItems.FRESH_VELOCIRAPTOR_SKULL.get());
-                    }).build());
 
-    public static final RegistryObject<CreativeModeTab> JR_DNA_TAB = CREATIVE_MODE_TABS.register("jurassicrevived_dna_tab",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.TYRANNOSAURUS_REX_DNA.get()))
-                    .title(Component.translatable("creativetab.jurassicrevived_dna_tab"))
-                    .displayItems((displayParameters, output) -> {
+                        output.accept(ModItems.ALBERTOSAURUS_TISSUE.get());
                         output.accept(ModItems.BRACHIOSAURUS_TISSUE.get());
                         output.accept(ModItems.CERATOSAURUS_TISSUE.get());
                         output.accept(ModItems.COMPSOGNATHUS_TISSUE.get());
@@ -130,6 +128,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.TYRANNOSAURUS_REX_TISSUE.get());
                         output.accept(ModItems.VELOCIRAPTOR_TISSUE.get());
 
+                        output.accept(ModItems.ALBERTOSAURUS_DNA.get());
                         output.accept(ModItems.BRACHIOSAURUS_DNA.get());
                         output.accept(ModItems.CERATOSAURUS_DNA.get());
                         output.accept(ModItems.COMPSOGNATHUS_DNA.get());
@@ -144,6 +143,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.TYRANNOSAURUS_REX_DNA.get());
                         output.accept(ModItems.VELOCIRAPTOR_DNA.get());
 
+                        output.accept(ModItems.ALBERTOSAURUS_SYRINGE.get());
                         output.accept(ModItems.BRACHIOSAURUS_SYRINGE.get());
                         output.accept(ModItems.CERATOSAURUS_SYRINGE.get());
                         output.accept(ModItems.COMPSOGNATHUS_SYRINGE.get());
@@ -158,6 +158,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.TYRANNOSAURUS_REX_SYRINGE.get());
                         output.accept(ModItems.VELOCIRAPTOR_SYRINGE.get());
 
+                        output.accept(ModItems.ALBERTOSAURUS_EGG.get());
                         output.accept(ModItems.BRACHIOSAURUS_EGG.get());
                         output.accept(ModItems.CERATOSAURUS_EGG.get());
                         output.accept(ModItems.COMPSOGNATHUS_EGG.get());
@@ -177,6 +178,7 @@ public class ModCreativeModeTabs {
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.TYRANNOSAURUS_REX_SPAWN_EGG.get()))
                     .title(Component.translatable("creativetab.jurassicrevived_dino_tab"))
                     .displayItems((displayParameters, output) -> {
+                        output.accept(ModItems.ALBERTOSAURUS_SPAWN_EGG.get());
                         output.accept(ModItems.BRACHIOSAURUS_SPAWN_EGG.get());
                         output.accept(ModItems.CERATOSAURUS_SPAWN_EGG.get());
                         output.accept(ModItems.COMPSOGNATHUS_SPAWN_EGG.get());
