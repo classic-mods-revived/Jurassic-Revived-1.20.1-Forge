@@ -1,0 +1,11 @@
+{
+  "type": "jurassicrevived:incubating",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:triceratops_egg"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:hatched_triceratops_egg"
+  }
+}

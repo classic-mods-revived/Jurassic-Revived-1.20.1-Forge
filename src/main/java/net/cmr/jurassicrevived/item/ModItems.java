@@ -23,8 +23,8 @@ public class ModItems {
             () -> new CustomGenderedSpawnEggItem(ModEntities.VELOCIRAPTOR, 0x8A5837, 0x45220D, new Item.Properties()));
     public static final RegistryObject<Item> TYRANNOSAURUS_REX_SPAWN_EGG = ITEMS.register("tyrannosaurus_rex_spawn_egg",
             () -> new CustomGenderedSpawnEggItem(ModEntities.TYRANNOSAURUS_REX, 0x4C3C2D, 0x241F1E, new Item.Properties()));
-    //public static final RegistryObject<Item> TRICERATOPS_SPAWN_EGG = ITEMS.register("triceratops_spawn_egg",
-    //        () -> new CustomGenderedSpawnEggItem(ModEntities.TRICERATOPS, 0x353A30, 0x121212, new Item.Properties()));
+    public static final RegistryObject<Item> TRICERATOPS_SPAWN_EGG = ITEMS.register("triceratops_spawn_egg",
+            () -> new CustomGenderedSpawnEggItem(ModEntities.TRICERATOPS, 0x353A30, 0x121212, new Item.Properties()));
     //public static final RegistryObject<Item> SPINOSAURUS_SPAWN_EGG = ITEMS.register("spinosaurus_spawn_egg",
     //        () -> new CustomGenderedSpawnEggItem(ModEntities.SPINOSAURUS, 0x685E5A, 0x5D3831, new Item.Properties()));
     public static final RegistryObject<Item> PARASAUROLOPHUS_SPAWN_EGG = ITEMS.register("parasaurolophus_spawn_egg",

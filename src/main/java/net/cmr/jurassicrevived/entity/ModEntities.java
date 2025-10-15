@@ -68,6 +68,12 @@ public class ModEntities {
                             .sized(1.5f, 1.75f)
                             .build(ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "parasaurolophus").toString()));
 
+    public static final RegistryObject<EntityType<TriceratopsEntity>> TRICERATOPS =
+            ENTITY_TYPES.register("triceratops",
+                    () -> EntityType.Builder.of(TriceratopsEntity::new, MobCategory.CREATURE)
+                            .sized(1.5f, 1.75f)
+                            .build(ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "triceratops").toString()));
+
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
     }

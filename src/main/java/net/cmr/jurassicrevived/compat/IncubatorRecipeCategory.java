@@ -90,8 +90,6 @@ public class IncubatorRecipeCategory implements IRecipeCategory<IncubatorRecipe>
             ItemStack toRender = showOutput && !out.isEmpty() ? out : in;
             // Render at all three positions so it looks like each slot is toggling
             drawStackIcon(g, toRender, 50, 35);
-            drawStackIcon(g, toRender, 80, 35);
-            drawStackIcon(g, toRender, 110, 35);
         }
 
         if (Config.REQUIRE_POWER) {
