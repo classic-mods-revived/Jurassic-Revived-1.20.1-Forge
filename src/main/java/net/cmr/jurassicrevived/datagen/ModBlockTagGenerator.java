@@ -53,7 +53,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocks.HATCHED_PARASAUROLOPHUS_EGG.get())
                 .add(ModBlocks.HATCHED_OURANOSAURUS_EGG.get())
                 //.add(ModBlocks.HATCHED_INDOMINUS_REX_EGG.get())
-                //.add(ModBlocks.HATCHED_GALLIMIMUS_EGG.get())
+                .add(ModBlocks.HATCHED_GALLIMIMUS_EGG.get())
                 .add(ModBlocks.HATCHED_DIPLODOCUS_EGG.get())
                 .add(ModBlocks.HATCHED_DILOPHOSAURUS_EGG.get())
                 .add(ModBlocks.HATCHED_COMPSOGNATHUS_EGG.get())

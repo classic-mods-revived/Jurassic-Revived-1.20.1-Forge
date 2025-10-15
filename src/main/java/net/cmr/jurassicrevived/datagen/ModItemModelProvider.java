@@ -26,6 +26,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         withExistingParent(ModItems.DILOPHOSAURUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.DIPLODOCUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.FDUCK_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.GALLIMIMUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.OURANOSAURUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.PARASAUROLOPHUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.TRICERATOPS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
@@ -140,7 +141,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleBlockItemBlockTexture(ModBlocks.HATCHED_COMPSOGNATHUS_EGG);
         simpleBlockItemBlockTexture(ModBlocks.HATCHED_DILOPHOSAURUS_EGG);
         simpleBlockItemBlockTexture(ModBlocks.HATCHED_DIPLODOCUS_EGG);
-        //simpleBlockItemBlockTexture(ModBlocks.HATCHED_GALLIMIMUS_EGG);
+        simpleBlockItemBlockTexture(ModBlocks.HATCHED_GALLIMIMUS_EGG);
         //simpleBlockItemBlockTexture(ModBlocks.HATCHED_INDOMINUS_REX_EGG);
         simpleBlockItemBlockTexture(ModBlocks.HATCHED_OURANOSAURUS_EGG);
         simpleBlockItemBlockTexture(ModBlocks.HATCHED_PARASAUROLOPHUS_EGG);

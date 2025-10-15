@@ -182,6 +182,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.COMPSOGNATHUS_SPAWN_EGG.get());
                         output.accept(ModItems.DILOPHOSAURUS_SPAWN_EGG.get());
                         output.accept(ModItems.DIPLODOCUS_SPAWN_EGG.get());
+                        output.accept(ModItems.GALLIMIMUS_SPAWN_EGG.get());
                         output.accept(ModItems.OURANOSAURUS_SPAWN_EGG.get());
                         output.accept(ModItems.PARASAUROLOPHUS_SPAWN_EGG.get());
                         output.accept(ModItems.TRICERATOPS_SPAWN_EGG.get());
