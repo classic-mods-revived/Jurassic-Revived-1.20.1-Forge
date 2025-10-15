@@ -114,6 +114,7 @@ public class JRMod {
             EntityRenderers.register(ModEntities.GALLIMIMUS.get(), GallimimusRenderer::new);
             EntityRenderers.register(ModEntities.OURANOSAURUS.get(), OuranosaurusRenderer::new);
             EntityRenderers.register(ModEntities.PARASAUROLOPHUS.get(), ParasaurolophusRenderer::new);
+            EntityRenderers.register(ModEntities.SPINOSAURUS.get(), SpinosaurusRenderer::new);
             EntityRenderers.register(ModEntities.TRICERATOPS.get(), TriceratopsRenderer::new);
             EntityRenderers.register(ModEntities.TYRANNOSAURUS_REX.get(), TyrannosaurusRexRenderer::new);
             EntityRenderers.register(ModEntities.VELOCIRAPTOR.get(), VelociraptorRenderer::new);
