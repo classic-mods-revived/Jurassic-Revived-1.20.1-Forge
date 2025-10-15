@@ -75,7 +75,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         eggLike(ModBlocks.HATCHED_OURANOSAURUS_EGG);
         //eggLike(ModBlocks.HATCHED_INDOMINUS_REX_EGG);
         //eggLike(ModBlocks.HATCHED_GALLIMIMUS_EGG);
-        //eggLike(ModBlocks.HATCHED_DIPLODOCUS_EGG);
+        eggLike(ModBlocks.HATCHED_DIPLODOCUS_EGG);
         eggLike(ModBlocks.HATCHED_DILOPHOSAURUS_EGG);
         eggLike(ModBlocks.HATCHED_COMPSOGNATHUS_EGG);
         eggLike(ModBlocks.HATCHED_CERATOSAURUS_EGG);

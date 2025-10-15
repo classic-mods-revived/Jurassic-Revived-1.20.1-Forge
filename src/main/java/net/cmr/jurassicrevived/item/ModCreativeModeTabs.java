@@ -171,20 +171,6 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.TRICERATOPS_EGG.get());
                         output.accept(ModItems.TYRANNOSAURUS_REX_EGG.get());
                         output.accept(ModItems.VELOCIRAPTOR_EGG.get());
-
-                        output.accept(ModBlocks.HATCHED_BRACHIOSAURUS_EGG.get());
-                        output.accept(ModBlocks.HATCHED_CERATOSAURUS_EGG.get());
-                        output.accept(ModBlocks.HATCHED_COMPSOGNATHUS_EGG.get());
-                        output.accept(ModBlocks.HATCHED_DILOPHOSAURUS_EGG.get());
-                        //output.accept(ModBlocks.HATCHED_DIPLODOCUS_EGG.get());
-                        //output.accept(ModBlocks.HATCHED_GALLIMIMUS_EGG.get());
-                        //output.accept(ModBlocks.HATCHED_INDOMINUS_REX_EGG.get());
-                        output.accept(ModBlocks.HATCHED_OURANOSAURUS_EGG.get());
-                        output.accept(ModBlocks.HATCHED_PARASAUROLOPHUS_EGG.get());
-                        //output.accept(ModBlocks.HATCHED_SPINOSAURUS_EGG.get());
-                        output.accept(ModBlocks.HATCHED_TRICERATOPS_EGG.get());
-                        output.accept(ModBlocks.HATCHED_TYRANNOSAURUS_REX_EGG.get());
-                        output.accept(ModBlocks.HATCHED_VELOCIRAPTOR_EGG.get());
                     }).build());
 
     public static final RegistryObject<CreativeModeTab> JR_DINO_TAB = CREATIVE_MODE_TABS.register("jurassicrevived_dino_tab",
@@ -195,6 +181,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.CERATOSAURUS_SPAWN_EGG.get());
                         output.accept(ModItems.COMPSOGNATHUS_SPAWN_EGG.get());
                         output.accept(ModItems.DILOPHOSAURUS_SPAWN_EGG.get());
+                        output.accept(ModItems.DIPLODOCUS_SPAWN_EGG.get());
                         output.accept(ModItems.OURANOSAURUS_SPAWN_EGG.get());
                         output.accept(ModItems.PARASAUROLOPHUS_SPAWN_EGG.get());
                         output.accept(ModItems.TRICERATOPS_SPAWN_EGG.get());
