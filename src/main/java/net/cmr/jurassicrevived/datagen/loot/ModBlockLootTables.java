@@ -40,6 +40,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.REINFORCED_STONE.get());
         this.dropSelf(ModBlocks.REINFORCED_STONE_BRICKS.get());
 
+        this.dropSelf(ModBlocks.HATCHED_APATOSAURUS_EGG.get());
         this.dropSelf(ModBlocks.HATCHED_ALBERTOSAURUS_EGG.get());
         this.dropSelf(ModBlocks.HATCHED_BRACHIOSAURUS_EGG.get());
         this.dropSelf(ModBlocks.HATCHED_CERATOSAURUS_EGG.get());

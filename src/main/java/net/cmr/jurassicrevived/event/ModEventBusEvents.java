@@ -12,6 +12,7 @@ public class ModEventBusEvents {
 
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
+        event.put(ModEntities.APATOSAURUS.get(), ApatosaurusEntity.createAttributes().build());
         event.put(ModEntities.ALBERTOSAURUS.get(), AlbertosaurusEntity.createAttributes().build());
         event.put(ModEntities.BRACHIOSAURUS.get(), BrachiosaurusEntity.createAttributes().build());
         event.put(ModEntities.CERATOSAURUS.get(), CeratosaurusEntity.createAttributes().build());

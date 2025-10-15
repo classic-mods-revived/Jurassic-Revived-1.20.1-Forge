@@ -1,0 +1,11 @@
+{
+  "type": "jurassicrevived:incubating",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:apatosaurus_egg"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:hatched_apatosaurus_egg"
+  }
+}
