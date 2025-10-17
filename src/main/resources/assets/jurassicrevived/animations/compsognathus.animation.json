@@ -260,6 +260,9 @@
 							},
 							"lerp_mode": "catmullrom"
 						}
+					},
+					"position": {
+						"vector": [0, -0.1, 0]
 					}
 				},
 				"Tail2": {
@@ -282,6 +285,9 @@
 							},
 							"lerp_mode": "catmullrom"
 						}
+					},
+					"position": {
+						"vector": [0, -0.2, 0]
 					}
 				},
 				"Tail3": {

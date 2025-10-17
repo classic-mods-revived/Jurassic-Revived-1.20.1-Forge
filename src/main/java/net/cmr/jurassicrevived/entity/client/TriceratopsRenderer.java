@@ -16,6 +16,7 @@ public class TriceratopsRenderer extends GeoEntityRenderer<TriceratopsEntity> {
     @Override
     public void render(TriceratopsEntity entity, float entityYaw, float partialTick, PoseStack poseStack,
                        MultiBufferSource bufferSource, int packedLight) {
+        poseStack.scale(1.5F, 1.5F, 1.5F);
         if(entity.isBaby()) {
             poseStack.scale(0.4F, 0.4F, 0.4F);
         }
