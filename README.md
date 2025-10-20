@@ -22,18 +22,38 @@ description: The Wiki for Jurassic Revived
 
 ---
 ### 🦕 Dinosaurs (with more to come in the future):
-- Tyrannosaurus rex
-- Velociraptor (Jurassic-style)
-- Compsognathus
-- Triceratops
+- Albertosaurus
+- Apatosaurus
+- Baryonyx
 - Brachiosaurus
-- Parasaurolophus
+- Carnotaurus
+- Ceratosaurus
+- Compsognathus
+- Concavenator
+- Deinonychus
 - Dilophosaurus
-- Gallimimus
 - Diplodocus
-- Spinosaurus (based on Jurassic Park III)
-- Ceratosaurus (based on Jurassic Park III)
+- D Rex
+- Edmontosaurus
+- Gallimimus
+- Giganotosuarus
+- Guanlong
+- Herrerasaurus
 - Indominus Rex
+- Majungasaurus
+- Ouranosaurus
+- Parasaurolophus
+- Procompsognathus
+- Protoceratops
+- Rugops
+- Shantungosaurus
+- Spinosaurus
+- Stegosaurus
+- Styracosaurus
+- Theriznosarus
+- Triceratops
+- Tyrannosaurus Rex
+- Velociraptor
 
 More species may be added over time.
 
