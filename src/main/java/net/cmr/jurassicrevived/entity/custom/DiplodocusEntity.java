@@ -120,7 +120,7 @@ public class DiplodocusEntity extends Animal implements GeoEntity {
                 .triggerableAnim("attack", RawAnimation.begin().then("anim.diplodocus.attack", Animation.LoopType.PLAY_ONCE)));
 
         controllers.add(new AnimationController<>(this, "mouthController", state -> PlayState.STOP)
-                .triggerableAnim("mouth", RawAnimation.begin().then("anim.diplodocus.mouth", Animation.LoopType.PLAY_ONCE)));
+                .triggerableAnim("mouth", RawAnimation.begin().then("anim.diplodocus.call", Animation.LoopType.PLAY_ONCE)));
     }
 
     private float getSignedTurnDelta() {

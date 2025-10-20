@@ -3,7 +3,7 @@ package net.cmr.jurassicrevived.entity.client;
 import com.google.common.collect.Maps;
 import net.cmr.jurassicrevived.JRMod;
 import net.cmr.jurassicrevived.entity.custom.DilophosaurusEntity;
-import net.cmr.jurassicrevived.entity.variant.CeratosaurusVariant;
+import net.cmr.jurassicrevived.entity.variant.DilophosaurusVariant;
 import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -16,10 +16,10 @@ import java.util.Map;
 
 public class DilophosaurusModel extends GeoModel<DilophosaurusEntity> {
 
-    private static final Map<CeratosaurusVariant, ResourceLocation> LOCATION_BY_VARIANT =
-            Util.make(Maps.newEnumMap(CeratosaurusVariant.class), map -> {
-                map.put(CeratosaurusVariant.MALE, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/entity/dilophosaurus.png"));
-                map.put(CeratosaurusVariant.FEMALE, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/entity/dilophosaurus_female.png"));
+    private static final Map<DilophosaurusVariant, ResourceLocation> LOCATION_BY_VARIANT =
+            Util.make(Maps.newEnumMap(DilophosaurusVariant.class), map -> {
+                map.put(DilophosaurusVariant.MALE, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/entity/dilophosaurus.png"));
+                map.put(DilophosaurusVariant.FEMALE, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/entity/dilophosaurus_female.png"));
             });
 
     // Model-local "currently applied" offsets; cleared before each entity render
