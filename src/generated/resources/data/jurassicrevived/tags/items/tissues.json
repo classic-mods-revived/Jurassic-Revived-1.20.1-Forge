@@ -1,7 +1,7 @@
 {
   "values": [
-    "jurassicrevived:albertosaurus_tissue",
     "jurassicrevived:apatosaurus_tissue",
+    "jurassicrevived:albertosaurus_tissue",
     "jurassicrevived:brachiosaurus_tissue",
     "jurassicrevived:ceratosaurus_tissue",
     "jurassicrevived:compsognathus_tissue",
@@ -14,6 +14,23 @@
     "jurassicrevived:spinosaurus_tissue",
     "jurassicrevived:triceratops_tissue",
     "jurassicrevived:tyrannosaurus_rex_tissue",
-    "jurassicrevived:velociraptor_tissue"
+    "jurassicrevived:velociraptor_tissue",
+    "jurassicrevived:baryonyx_tissue",
+    "jurassicrevived:carnotaurus_tissue",
+    "jurassicrevived:concavenator_tissue",
+    "jurassicrevived:deinonychus_tissue",
+    "jurassicrevived:edmontosaurus_tissue",
+    "jurassicrevived:giganotosaurus_tissue",
+    "jurassicrevived:guanlong_tissue",
+    "jurassicrevived:herrerasaurus_tissue",
+    "jurassicrevived:majungasaurus_tissue",
+    "jurassicrevived:procompsognathus_tissue",
+    "jurassicrevived:protoceratops_tissue",
+    "jurassicrevived:rugops_tissue",
+    "jurassicrevived:shantungosaurus_tissue",
+    "jurassicrevived:stegosaurus_tissue",
+    "jurassicrevived:styracosaurus_tissue",
+    "jurassicrevived:therizinosaurus_tissue",
+    "jurassicrevived:distortus_rex_tissue"
   ]
 }

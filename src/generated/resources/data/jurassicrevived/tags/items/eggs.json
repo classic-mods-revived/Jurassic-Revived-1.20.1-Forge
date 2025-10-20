@@ -1,7 +1,7 @@
 {
   "values": [
-    "jurassicrevived:albertosaurus_egg",
     "jurassicrevived:apatosaurus_egg",
+    "jurassicrevived:albertosaurus_egg",
     "jurassicrevived:brachiosaurus_egg",
     "jurassicrevived:ceratosaurus_egg",
     "jurassicrevived:compsognathus_egg",
@@ -14,6 +14,23 @@
     "jurassicrevived:spinosaurus_egg",
     "jurassicrevived:triceratops_egg",
     "jurassicrevived:tyrannosaurus_rex_egg",
-    "jurassicrevived:velociraptor_egg"
+    "jurassicrevived:velociraptor_egg",
+    "jurassicrevived:baryonyx_egg",
+    "jurassicrevived:carnotaurus_egg",
+    "jurassicrevived:concavenator_egg",
+    "jurassicrevived:deinonychus_egg",
+    "jurassicrevived:edmontosaurus_egg",
+    "jurassicrevived:giganotosaurus_egg",
+    "jurassicrevived:guanlong_egg",
+    "jurassicrevived:herrerasaurus_egg",
+    "jurassicrevived:majungasaurus_egg",
+    "jurassicrevived:procompsognathus_egg",
+    "jurassicrevived:protoceratops_egg",
+    "jurassicrevived:rugops_egg",
+    "jurassicrevived:shantungosaurus_egg",
+    "jurassicrevived:stegosaurus_egg",
+    "jurassicrevived:styracosaurus_egg",
+    "jurassicrevived:therizinosaurus_egg",
+    "jurassicrevived:distortus_rex_egg"
   ]
 }

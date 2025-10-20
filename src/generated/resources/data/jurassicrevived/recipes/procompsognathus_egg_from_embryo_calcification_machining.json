@@ -1,0 +1,14 @@
+{
+  "type": "jurassicrevived:embryo_calcification_machining",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:procompsognathus_syringe"
+    },
+    {
+      "item": "minecraft:egg"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:procompsognathus_egg"
+  }
+}

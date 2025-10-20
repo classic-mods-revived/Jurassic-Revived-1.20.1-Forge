@@ -1,0 +1,18 @@
+{
+  "type": "jurassicrevived:fossil_grinding",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:baryonyx_skull_fossil"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "jurassicrevived:baryonyx_tissue"
+  },
+  "weighted_outputs": {
+    "jurassicrevived:baryonyx_tissue": 10,
+    "jurassicrevived:crushed_fossil": 30,
+    "minecraft:bone_meal": 30,
+    "minecraft:flint": 30
+  }
+}

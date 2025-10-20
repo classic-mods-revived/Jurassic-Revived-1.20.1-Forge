@@ -16,7 +16,7 @@ public class ApatosaurusRenderer extends GeoEntityRenderer<ApatosaurusEntity> {
     @Override
     public void render(ApatosaurusEntity entity, float entityYaw, float partialTick, PoseStack poseStack,
                        MultiBufferSource bufferSource, int packedLight) {
-        poseStack.scale(2.5F, 2.5F, 2.5F);
+        poseStack.scale(1.75F, 1.75F, 1.75F);
         if(entity.isBaby()) {
             poseStack.scale(0.4F, 0.4F, 0.4F);
         }

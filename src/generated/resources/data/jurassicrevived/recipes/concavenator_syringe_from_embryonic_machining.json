@@ -1,0 +1,14 @@
+{
+  "type": "jurassicrevived:embryonic_machining",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:syringe"
+    },
+    {
+      "item": "jurassicrevived:concavenator_dna"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:concavenator_syringe"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "jurassicrevived:embryo_calcification_machining",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:deinonychus_syringe"
+    },
+    {
+      "item": "minecraft:egg"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:deinonychus_egg"
+  }
+}

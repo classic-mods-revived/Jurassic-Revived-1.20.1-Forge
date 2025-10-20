@@ -1,0 +1,14 @@
+{
+  "type": "jurassicrevived:embryonic_machining",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:syringe"
+    },
+    {
+      "item": "jurassicrevived:baryonyx_dna"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:baryonyx_syringe"
+  }
+}

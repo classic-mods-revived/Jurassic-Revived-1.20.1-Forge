@@ -1,0 +1,14 @@
+{
+  "type": "jurassicrevived:embryo_calcification_machining",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:carnotaurus_syringe"
+    },
+    {
+      "item": "minecraft:egg"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:carnotaurus_egg"
+  }
+}

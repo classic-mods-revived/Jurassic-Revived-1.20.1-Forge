@@ -1,7 +1,7 @@
 {
   "values": [
-    "jurassicrevived:albertosaurus_dna",
     "jurassicrevived:apatosaurus_dna",
+    "jurassicrevived:albertosaurus_dna",
     "jurassicrevived:brachiosaurus_dna",
     "jurassicrevived:ceratosaurus_dna",
     "jurassicrevived:compsognathus_dna",
@@ -14,6 +14,23 @@
     "jurassicrevived:spinosaurus_dna",
     "jurassicrevived:triceratops_dna",
     "jurassicrevived:tyrannosaurus_rex_dna",
-    "jurassicrevived:velociraptor_dna"
+    "jurassicrevived:velociraptor_dna",
+    "jurassicrevived:baryonyx_dna",
+    "jurassicrevived:carnotaurus_dna",
+    "jurassicrevived:concavenator_dna",
+    "jurassicrevived:deinonychus_dna",
+    "jurassicrevived:edmontosaurus_dna",
+    "jurassicrevived:giganotosaurus_dna",
+    "jurassicrevived:guanlong_dna",
+    "jurassicrevived:herrerasaurus_dna",
+    "jurassicrevived:majungasaurus_dna",
+    "jurassicrevived:procompsognathus_dna",
+    "jurassicrevived:protoceratops_dna",
+    "jurassicrevived:rugops_dna",
+    "jurassicrevived:shantungosaurus_dna",
+    "jurassicrevived:stegosaurus_dna",
+    "jurassicrevived:styracosaurus_dna",
+    "jurassicrevived:therizinosaurus_dna",
+    "jurassicrevived:distortus_rex_dna"
   ]
 }

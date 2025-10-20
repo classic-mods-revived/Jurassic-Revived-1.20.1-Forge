@@ -1,0 +1,35 @@
+{
+  "parent": "jurassicrevived:recipes/root",
+  "criteria": {
+    "has_test_tube": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jurassicrevived:test_tube"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "jurassicrevived:shantungosaurus_dna_from_dna_extracting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_test_tube",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "jurassicrevived:shantungosaurus_dna_from_dna_extracting"
+    ]
+  },
+  "sends_telemetry_event": true
+}

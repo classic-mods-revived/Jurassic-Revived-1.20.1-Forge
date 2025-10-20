@@ -80,13 +80,13 @@ public class IndominusRexEntity extends Animal implements GeoEntity {
 
     public static AttributeSupplier.Builder createAttributes() {
         return Animal.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 800D)
+                .add(Attributes.MAX_HEALTH, 90D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
                 .add(Attributes.ARMOR, 0D)
                 .add(Attributes.FOLLOW_RANGE, 32D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0D)
                 .add(Attributes.ATTACK_KNOCKBACK, 0D)
-                .add(Attributes.ATTACK_DAMAGE, 45D);
+                .add(Attributes.ATTACK_DAMAGE, 25D);
     }
 
     @Override
@@ -97,7 +97,12 @@ public class IndominusRexEntity extends Animal implements GeoEntity {
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
-        return ModEntities.INDOMINUS_REX.get().create(pLevel);
+        AgeableMob child = ModEntities.INDOMINUS_REX.get().create(pLevel);
+        if (child instanceof IndominusRexEntity baby) {
+            IndominusRexVariant randomVariant = Util.getRandom(IndominusRexVariant.values(), this.random);
+            baby.setVariant(randomVariant);
+        }
+        return child;
     }
 
     @Override
@@ -122,6 +127,9 @@ public class IndominusRexEntity extends Animal implements GeoEntity {
 
         controllers.add(new AnimationController<>(this, "attackController", state -> PlayState.STOP)
                 .triggerableAnim("attack", RawAnimation.begin().then("anim.indominus_rex.attack", Animation.LoopType.PLAY_ONCE)));
+
+        controllers.add(new AnimationController<>(this, "mouthController", state -> PlayState.STOP)
+                .triggerableAnim("mouth", RawAnimation.begin().then("anim.indominus_rex.mouth", Animation.LoopType.PLAY_ONCE)));
     }
 
     private float getSignedTurnDelta() {
@@ -129,9 +137,22 @@ public class IndominusRexEntity extends Animal implements GeoEntity {
         return Mth.wrapDegrees(this.yBodyRot - this.yBodyRotO);
     }
 
+    private int mouthAnimCooldown = 0;
+
     @Override
     public void tick() {
         super.tick();
+
+        if (!level().isClientSide) {
+            if (mouthAnimCooldown > 0) {
+                mouthAnimCooldown--;
+            } else {
+                this.triggerAnim("mouthController", "mouth");
+                // 30s–60s in ticks
+                mouthAnimCooldown = this.random.nextInt(1200 - 600 + 1) + 600;
+            }
+        }
+
         if (level().isClientSide) {
             // Capture previous for smooth interpolation between ticks
             this.tailSwayPrev = this.tailSwayOffset;

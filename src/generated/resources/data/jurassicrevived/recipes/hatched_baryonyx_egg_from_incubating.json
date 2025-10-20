@@ -1,0 +1,11 @@
+{
+  "type": "jurassicrevived:incubating",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:baryonyx_egg"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:hatched_baryonyx_egg"
+  }
+}

@@ -1,18 +1,34 @@
 {
   "values": [
-    "jurassicrevived:albertosaurus_skull_fossil",
     "jurassicrevived:apatosaurus_skull_fossil",
+    "jurassicrevived:albertosaurus_skull_fossil",
     "jurassicrevived:brachiosaurus_skull_fossil",
     "jurassicrevived:ceratosaurus_skull_fossil",
     "jurassicrevived:compsognathus_skull_fossil",
     "jurassicrevived:dilophosaurus_skull_fossil",
     "jurassicrevived:diplodocus_skull_fossil",
     "jurassicrevived:gallimimus_skull_fossil",
-    "jurassicrevived:ouranosaurus_skull_fossil",
     "jurassicrevived:parasaurolophus_skull_fossil",
+    "jurassicrevived:ouranosaurus_skull_fossil",
     "jurassicrevived:spinosaurus_skull_fossil",
     "jurassicrevived:triceratops_skull_fossil",
     "jurassicrevived:tyrannosaurus_rex_skull_fossil",
-    "jurassicrevived:velociraptor_skull_fossil"
+    "jurassicrevived:velociraptor_skull_fossil",
+    "jurassicrevived:baryonyx_skull_fossil",
+    "jurassicrevived:carnotaurus_skull_fossil",
+    "jurassicrevived:concavenator_skull_fossil",
+    "jurassicrevived:deinonychus_skull_fossil",
+    "jurassicrevived:edmontosaurus_skull_fossil",
+    "jurassicrevived:giganotosaurus_skull_fossil",
+    "jurassicrevived:guanlong_skull_fossil",
+    "jurassicrevived:herrerasaurus_skull_fossil",
+    "jurassicrevived:majungasaurus_skull_fossil",
+    "jurassicrevived:procompsognathus_skull_fossil",
+    "jurassicrevived:protoceratops_skull_fossil",
+    "jurassicrevived:rugops_skull_fossil",
+    "jurassicrevived:shantungosaurus_skull_fossil",
+    "jurassicrevived:stegosaurus_skull_fossil",
+    "jurassicrevived:styracosaurus_skull_fossil",
+    "jurassicrevived:therizinosaurus_skull_fossil"
   ]
 }

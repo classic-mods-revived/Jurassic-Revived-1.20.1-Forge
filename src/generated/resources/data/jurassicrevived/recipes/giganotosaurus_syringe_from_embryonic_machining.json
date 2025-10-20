@@ -1,0 +1,14 @@
+{
+  "type": "jurassicrevived:embryonic_machining",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:syringe"
+    },
+    {
+      "item": "jurassicrevived:giganotosaurus_dna"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:giganotosaurus_syringe"
+  }
+}

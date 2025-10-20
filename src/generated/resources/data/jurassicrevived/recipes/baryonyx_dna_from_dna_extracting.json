@@ -1,0 +1,14 @@
+{
+  "type": "jurassicrevived:dna_extracting",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:test_tube"
+    },
+    {
+      "item": "jurassicrevived:baryonyx_tissue"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:baryonyx_dna"
+  }
+}

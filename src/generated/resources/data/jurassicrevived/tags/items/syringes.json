@@ -1,7 +1,7 @@
 {
   "values": [
-    "jurassicrevived:albertosaurus_syringe",
     "jurassicrevived:apatosaurus_syringe",
+    "jurassicrevived:albertosaurus_syringe",
     "jurassicrevived:brachiosaurus_syringe",
     "jurassicrevived:ceratosaurus_syringe",
     "jurassicrevived:compsognathus_syringe",
@@ -14,6 +14,23 @@
     "jurassicrevived:spinosaurus_syringe",
     "jurassicrevived:triceratops_syringe",
     "jurassicrevived:tyrannosaurus_rex_syringe",
-    "jurassicrevived:velociraptor_syringe"
+    "jurassicrevived:velociraptor_syringe",
+    "jurassicrevived:baryonyx_syringe",
+    "jurassicrevived:carnotaurus_syringe",
+    "jurassicrevived:concavenator_syringe",
+    "jurassicrevived:deinonychus_syringe",
+    "jurassicrevived:edmontosaurus_syringe",
+    "jurassicrevived:giganotosaurus_syringe",
+    "jurassicrevived:guanlong_syringe",
+    "jurassicrevived:herrerasaurus_syringe",
+    "jurassicrevived:majungasaurus_syringe",
+    "jurassicrevived:procompsognathus_syringe",
+    "jurassicrevived:protoceratops_syringe",
+    "jurassicrevived:rugops_syringe",
+    "jurassicrevived:shantungosaurus_syringe",
+    "jurassicrevived:stegosaurus_syringe",
+    "jurassicrevived:styracosaurus_syringe",
+    "jurassicrevived:therizinosaurus_syringe",
+    "jurassicrevived:distortus_rex_syringe"
   ]
 }

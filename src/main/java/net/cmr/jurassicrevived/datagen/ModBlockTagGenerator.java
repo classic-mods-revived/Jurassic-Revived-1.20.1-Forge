@@ -26,6 +26,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocks.GYPSUM_STONE.get())
                 .add(ModBlocks.GYPSUM_COBBLESTONE.get())
                 .add(ModBlocks.GYPSUM_STONE_BRICKS.get())
+                .add(ModBlocks.SMOOTH_GYPSUM_STONE.get())
                 .add(ModBlocks.REINFORCED_STONE.get())
                 .add(ModBlocks.REINFORCED_STONE_BRICKS.get())
                 .add(ModBlocks.STONE_FOSSIL.get())
@@ -60,7 +61,25 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocks.HATCHED_CERATOSAURUS_EGG.get())
                 .add(ModBlocks.HATCHED_BRACHIOSAURUS_EGG.get())
                 .add(ModBlocks.HATCHED_APATOSAURUS_EGG.get())
-                .add(ModBlocks.HATCHED_ALBERTOSAURUS_EGG.get());
+                .add(ModBlocks.HATCHED_ALBERTOSAURUS_EGG.get())
+                .add(ModBlocks.HATCHED_APATOSAURUS_EGG.get())
+                .add(ModBlocks.HATCHED_BARYONYX_EGG.get())
+                .add(ModBlocks.HATCHED_CARNOTAURUS_EGG.get())
+                .add(ModBlocks.HATCHED_CONCAVENATOR_EGG.get())
+                .add(ModBlocks.HATCHED_DEINONYCHUS_EGG.get())
+                .add(ModBlocks.HATCHED_EDMONTOSAURUS_EGG.get())
+                .add(ModBlocks.HATCHED_GIGANOTOSAURUS_EGG.get())
+                .add(ModBlocks.HATCHED_GUANLONG_EGG.get())
+                .add(ModBlocks.HATCHED_HERRERASAURUS_EGG.get())
+                .add(ModBlocks.HATCHED_MAJUNGASAURUS_EGG.get())
+                .add(ModBlocks.HATCHED_PROCOMPSOGNATHUS_EGG.get())
+                .add(ModBlocks.HATCHED_PROTOCERATOPS_EGG.get())
+                .add(ModBlocks.HATCHED_RUGOPS_EGG.get())
+                .add(ModBlocks.HATCHED_SHANTUNGOSAURUS_EGG.get())
+                .add(ModBlocks.HATCHED_STEGOSAURUS_EGG.get())
+                .add(ModBlocks.HATCHED_STYRACOSAURUS_EGG.get())
+                .add(ModBlocks.HATCHED_THERIZINOSAURUS_EGG.get())
+                .add(ModBlocks.HATCHED_DISTORTUS_REX_EGG.get());
 
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL);
                 //.add(ModBlocks.hq_ORE.get());

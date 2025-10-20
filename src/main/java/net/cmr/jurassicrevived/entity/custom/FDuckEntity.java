@@ -1,7 +1,8 @@
 package net.cmr.jurassicrevived.entity.custom;
 
 import net.cmr.jurassicrevived.entity.ModEntities;
-import net.cmr.jurassicrevived.entity.variant.CeratosaurusVariant;
+import net.cmr.jurassicrevived.entity.variant.FDuckVariant;
+import net.cmr.jurassicrevived.item.ModItems;
 import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -36,7 +37,7 @@ public class FDuckEntity extends Animal implements GeoEntity {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
     private static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT =
-            SynchedEntityData.defineId(CeratosaurusEntity.class, EntityDataSerializers.INT);
+            SynchedEntityData.defineId(FDuckEntity.class, EntityDataSerializers.INT);
 
     // Procedural tail sway state (client-side use for rendering)
     private float tailSwayOffset;   // Smoothed offset in range roughly [-1, 1]
@@ -90,13 +91,18 @@ public class FDuckEntity extends Animal implements GeoEntity {
 
     @Override
     public boolean isFood(ItemStack pStack) {
-        return pStack.is(Items.BEEF);
+        return pStack.is(ModItems.MAC_N_CHEESE.get());
     }
 
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
-        return ModEntities.FDUCK.get().create(pLevel);
+        AgeableMob child = ModEntities.FDUCK.get().create(pLevel);
+        if (child instanceof FDuckEntity baby) {
+            FDuckVariant randomVariant = Util.getRandom(FDuckVariant.values(), this.random);
+            baby.setVariant(randomVariant);
+        }
+        return child;
     }
 
     @Override
@@ -121,6 +127,9 @@ public class FDuckEntity extends Animal implements GeoEntity {
 
         controllers.add(new AnimationController<>(this, "attackController", state -> PlayState.STOP)
                 .triggerableAnim("attack", RawAnimation.begin().then("anim.fduck.attack", Animation.LoopType.PLAY_ONCE)));
+
+        controllers.add(new AnimationController<>(this, "mouthController", state -> PlayState.STOP)
+                .triggerableAnim("mouth", RawAnimation.begin().then("anim.fduck.mouth", Animation.LoopType.PLAY_ONCE)));
     }
 
     private float getSignedTurnDelta() {
@@ -128,9 +137,22 @@ public class FDuckEntity extends Animal implements GeoEntity {
         return Mth.wrapDegrees(this.yBodyRot - this.yBodyRotO);
     }
 
+    private int mouthAnimCooldown = 0;
+
     @Override
     public void tick() {
         super.tick();
+
+        if (!level().isClientSide) {
+            if (mouthAnimCooldown > 0) {
+                mouthAnimCooldown--;
+            } else {
+                this.triggerAnim("mouthController", "mouth");
+                // 30s–60s in ticks
+                mouthAnimCooldown = this.random.nextInt(1200 - 600 + 1) + 600;
+            }
+        }
+
         if (level().isClientSide) {
             // Capture previous for smooth interpolation between ticks
             this.tailSwayPrev = this.tailSwayOffset;
@@ -185,14 +207,14 @@ public class FDuckEntity extends Animal implements GeoEntity {
         this.entityData.define(DATA_ID_TYPE_VARIANT, 0);
     }
 
-    public CeratosaurusVariant getVariant() {
-        return CeratosaurusVariant.byId(this.getTypeVariant() & 255);
+    public FDuckVariant getVariant() {
+        return FDuckVariant.byId(this.getTypeVariant() & 255);
     }
     public int getTypeVariant() {
         return this.entityData.get(DATA_ID_TYPE_VARIANT);
     }
 
-    private void setVariant(CeratosaurusVariant variant) {
+    private void setVariant(FDuckVariant variant) {
         this.entityData.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255);
     }
 
@@ -205,7 +227,7 @@ public class FDuckEntity extends Animal implements GeoEntity {
 
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
-        CeratosaurusVariant variant = Util.getRandom(CeratosaurusVariant.values(), this.random);
+        FDuckVariant variant = Util.getRandom(FDuckVariant.values(), this.random);
         this.setVariant(variant);
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
     }

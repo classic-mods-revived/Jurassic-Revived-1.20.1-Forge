@@ -1,0 +1,11 @@
+{
+  "type": "jurassicrevived:incubating",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:carnotaurus_egg"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:hatched_carnotaurus_egg"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "jurassicrevived:fossil_grinding",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:concavenator_skull_fossil"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "jurassicrevived:concavenator_tissue"
+  },
+  "weighted_outputs": {
+    "jurassicrevived:concavenator_tissue": 10,
+    "jurassicrevived:crushed_fossil": 30,
+    "minecraft:bone_meal": 30,
+    "minecraft:flint": 30
+  }
+}

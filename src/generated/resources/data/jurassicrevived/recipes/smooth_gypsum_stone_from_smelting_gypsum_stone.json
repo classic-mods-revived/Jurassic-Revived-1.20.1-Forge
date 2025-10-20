@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "blocks",
+  "cookingtime": 200,
+  "experience": 0.25,
+  "group": "smooth_gypsum_stone",
+  "ingredient": {
+    "item": "jurassicrevived:gypsum_stone"
+  },
+  "result": "jurassicrevived:smooth_gypsum_stone"
+}

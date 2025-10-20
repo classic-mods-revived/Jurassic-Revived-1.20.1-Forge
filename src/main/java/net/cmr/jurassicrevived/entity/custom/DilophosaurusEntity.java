@@ -1,7 +1,7 @@
 package net.cmr.jurassicrevived.entity.custom;
 
 import net.cmr.jurassicrevived.entity.ModEntities;
-import net.cmr.jurassicrevived.entity.variant.CeratosaurusVariant;
+import net.cmr.jurassicrevived.entity.variant.DilophosaurusVariant;
 import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -36,7 +36,7 @@ public class DilophosaurusEntity extends Animal implements GeoEntity {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
     private static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT =
-            SynchedEntityData.defineId(CeratosaurusEntity.class, EntityDataSerializers.INT);
+            SynchedEntityData.defineId(DilophosaurusEntity.class, EntityDataSerializers.INT);
 
     // Procedural tail sway state (client-side use for rendering)
     private float tailSwayOffset;   // Smoothed offset in range roughly [-1, 1]
@@ -85,7 +85,7 @@ public class DilophosaurusEntity extends Animal implements GeoEntity {
                 .add(Attributes.FOLLOW_RANGE, 32D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.3D)
                 .add(Attributes.ATTACK_KNOCKBACK, 0D)
-                .add(Attributes.ATTACK_DAMAGE, 8D);
+                .add(Attributes.ATTACK_DAMAGE, 5D);
     }
 
     @Override
@@ -96,7 +96,12 @@ public class DilophosaurusEntity extends Animal implements GeoEntity {
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
-        return ModEntities.DILOPHOSAURUS.get().create(pLevel);
+        AgeableMob child = ModEntities.DILOPHOSAURUS.get().create(pLevel);
+        if (child instanceof DilophosaurusEntity baby) {
+            DilophosaurusVariant randomVariant = Util.getRandom(DilophosaurusVariant.values(), this.random);
+            baby.setVariant(randomVariant);
+        }
+        return child;
     }
 
     @Override
@@ -121,6 +126,9 @@ public class DilophosaurusEntity extends Animal implements GeoEntity {
 
         controllers.add(new AnimationController<>(this, "attackController", state -> PlayState.STOP)
                 .triggerableAnim("attack", RawAnimation.begin().then("anim.dilophosaurus.attack", Animation.LoopType.PLAY_ONCE)));
+
+        controllers.add(new AnimationController<>(this, "mouthController", state -> PlayState.STOP)
+                .triggerableAnim("mouth", RawAnimation.begin().then("anim.dilophosaurus.mouth", Animation.LoopType.PLAY_ONCE)));
     }
 
     private float getSignedTurnDelta() {
@@ -128,9 +136,22 @@ public class DilophosaurusEntity extends Animal implements GeoEntity {
         return Mth.wrapDegrees(this.yBodyRot - this.yBodyRotO);
     }
 
+    private int mouthAnimCooldown = 0;
+
     @Override
     public void tick() {
         super.tick();
+
+        if (!level().isClientSide) {
+            if (mouthAnimCooldown > 0) {
+                mouthAnimCooldown--;
+            } else {
+                this.triggerAnim("mouthController", "mouth");
+                // 30s–60s in ticks
+                mouthAnimCooldown = this.random.nextInt(1200 - 600 + 1) + 600;
+            }
+        }
+
         if (level().isClientSide) {
             // Capture previous for smooth interpolation between ticks
             this.tailSwayPrev = this.tailSwayOffset;
@@ -185,14 +206,14 @@ public class DilophosaurusEntity extends Animal implements GeoEntity {
         this.entityData.define(DATA_ID_TYPE_VARIANT, 0);
     }
 
-    public CeratosaurusVariant getVariant() {
-        return CeratosaurusVariant.byId(this.getTypeVariant() & 255);
+    public DilophosaurusVariant getVariant() {
+        return DilophosaurusVariant.byId(this.getTypeVariant() & 255);
     }
     public int getTypeVariant() {
         return this.entityData.get(DATA_ID_TYPE_VARIANT);
     }
 
-    private void setVariant(CeratosaurusVariant variant) {
+    private void setVariant(DilophosaurusVariant variant) {
         this.entityData.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255);
     }
 
@@ -205,7 +226,7 @@ public class DilophosaurusEntity extends Animal implements GeoEntity {
 
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
-        CeratosaurusVariant variant = Util.getRandom(CeratosaurusVariant.values(), this.random);
+        DilophosaurusVariant variant = Util.getRandom(DilophosaurusVariant.values(), this.random);
         this.setVariant(variant);
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
     }

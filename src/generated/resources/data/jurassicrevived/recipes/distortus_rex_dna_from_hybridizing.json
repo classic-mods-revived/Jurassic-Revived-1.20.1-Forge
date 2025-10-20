@@ -1,0 +1,17 @@
+{
+  "type": "jurassicrevived:dna_hybridizing",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:tyrannosaurus_rex_dna"
+    },
+    {
+      "item": "jurassicrevived:brachiosaurus_dna"
+    },
+    {
+      "item": "jurassicrevived:velociraptor_dna"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:distortus_rex_dna"
+  }
+}

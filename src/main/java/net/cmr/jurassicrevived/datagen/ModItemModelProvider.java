@@ -37,6 +37,24 @@ public class ModItemModelProvider extends ItemModelProvider {
         withExistingParent(ModItems.TYRANNOSAURUS_REX_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.VELOCIRAPTOR_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
+        withExistingParent(ModItems.BARYONYX_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.CARNOTAURUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.CONCAVENATOR_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.DEINONYCHUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.DISTORTUS_REX_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.EDMONTOSAURUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.GIGANOTOSAURUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.GUANLONG_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.HERRERASAURUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.MAJUNGASAURUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.PROCOMPSOGNATHUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.PROTOCERATOPS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.RUGOPS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.SHANTUNGOSAURUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.STEGOSAURUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.STYRACOSAURUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.THERIZINOSAURUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+
         basicItem(ModItems.TEST_TUBE.get());
         basicItem(ModItems.SYRINGE.get());
         basicItem(ModItems.CRUSHED_FOSSIL.get());
@@ -66,6 +84,24 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.TRICERATOPS_SKULL_FOSSIL.get());
         basicItem(ModItems.TYRANNOSAURUS_REX_SKULL_FOSSIL.get());
         basicItem(ModItems.VELOCIRAPTOR_SKULL_FOSSIL.get());
+        basicItem(ModItems.BARYONYX_SKULL_FOSSIL.get());
+        basicItem(ModItems.CARNOTAURUS_SKULL_FOSSIL.get());
+        basicItem(ModItems.CONCAVENATOR_SKULL_FOSSIL.get());
+        basicItem(ModItems.DEINONYCHUS_SKULL_FOSSIL.get());
+        basicItem(ModItems.EDMONTOSAURUS_SKULL_FOSSIL.get());
+        basicItem(ModItems.GIGANOTOSAURUS_SKULL_FOSSIL.get());
+        basicItem(ModItems.GUANLONG_SKULL_FOSSIL.get());
+        basicItem(ModItems.HERRERASAURUS_SKULL_FOSSIL.get());
+        basicItem(ModItems.MAJUNGASAURUS_SKULL_FOSSIL.get());
+        basicItem(ModItems.PROCOMPSOGNATHUS_SKULL_FOSSIL.get());
+        basicItem(ModItems.PROTOCERATOPS_SKULL_FOSSIL.get());
+        basicItem(ModItems.RUGOPS_SKULL_FOSSIL.get());
+        basicItem(ModItems.SHANTUNGOSAURUS_SKULL_FOSSIL.get());
+        basicItem(ModItems.STEGOSAURUS_SKULL_FOSSIL.get());
+        basicItem(ModItems.STYRACOSAURUS_SKULL_FOSSIL.get());
+        basicItem(ModItems.THERIZINOSAURUS_SKULL_FOSSIL.get());
+
+
 
         basicItem(ModItems.FRESH_APATOSAURUS_SKULL.get());
         basicItem(ModItems.FRESH_ALBERTOSAURUS_SKULL.get());
@@ -82,6 +118,23 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.FRESH_TRICERATOPS_SKULL.get());
         basicItem(ModItems.FRESH_TYRANNOSAURUS_REX_SKULL.get());
         basicItem(ModItems.FRESH_VELOCIRAPTOR_SKULL.get());
+        basicItem(ModItems.FRESH_BARYONYX_SKULL.get());
+        basicItem(ModItems.FRESH_CARNOTAURUS_SKULL.get());
+        basicItem(ModItems.FRESH_CONCAVENATOR_SKULL.get());
+        basicItem(ModItems.FRESH_DEINONYCHUS_SKULL.get());
+        basicItem(ModItems.FRESH_EDMONTOSAURUS_SKULL.get());
+        basicItem(ModItems.FRESH_GIGANOTOSAURUS_SKULL.get());
+        basicItem(ModItems.FRESH_GUANLONG_SKULL.get());
+        basicItem(ModItems.FRESH_HERRERASAURUS_SKULL.get());
+        basicItem(ModItems.FRESH_MAJUNGASAURUS_SKULL.get());
+        basicItem(ModItems.FRESH_PROCOMPSOGNATHUS_SKULL.get());
+        basicItem(ModItems.FRESH_PROTOCERATOPS_SKULL.get());
+        basicItem(ModItems.FRESH_RUGOPS_SKULL.get());
+        basicItem(ModItems.FRESH_SHANTUNGOSAURUS_SKULL.get());
+        basicItem(ModItems.FRESH_STEGOSAURUS_SKULL.get());
+        basicItem(ModItems.FRESH_STYRACOSAURUS_SKULL.get());
+        basicItem(ModItems.FRESH_THERIZINOSAURUS_SKULL.get());
+        basicItem(ModItems.FRESH_DISTORTUS_REX_SKULL.get());
 
         basicItem(ModItems.APATOSAURUS_TISSUE.get());
         basicItem(ModItems.ALBERTOSAURUS_TISSUE.get());
@@ -98,6 +151,23 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.TRICERATOPS_TISSUE.get());
         basicItem(ModItems.TYRANNOSAURUS_REX_TISSUE.get());
         basicItem(ModItems.VELOCIRAPTOR_TISSUE.get());
+        basicItem(ModItems.BARYONYX_TISSUE.get());
+        basicItem(ModItems.CARNOTAURUS_TISSUE.get());
+        basicItem(ModItems.CONCAVENATOR_TISSUE.get());
+        basicItem(ModItems.DEINONYCHUS_TISSUE.get());
+        basicItem(ModItems.EDMONTOSAURUS_TISSUE.get());
+        basicItem(ModItems.GIGANOTOSAURUS_TISSUE.get());
+        basicItem(ModItems.GUANLONG_TISSUE.get());
+        basicItem(ModItems.HERRERASAURUS_TISSUE.get());
+        basicItem(ModItems.MAJUNGASAURUS_TISSUE.get());
+        basicItem(ModItems.PROCOMPSOGNATHUS_TISSUE.get());
+        basicItem(ModItems.PROTOCERATOPS_TISSUE.get());
+        basicItem(ModItems.RUGOPS_TISSUE.get());
+        basicItem(ModItems.SHANTUNGOSAURUS_TISSUE.get());
+        basicItem(ModItems.STEGOSAURUS_TISSUE.get());
+        basicItem(ModItems.STYRACOSAURUS_TISSUE.get());
+        basicItem(ModItems.THERIZINOSAURUS_TISSUE.get());
+        basicItem(ModItems.DISTORTUS_REX_TISSUE.get());
 
         basicItem(ModItems.ALBERTOSAURUS_DNA.get());
         basicItem(ModItems.APATOSAURUS_DNA.get());
@@ -114,6 +184,23 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.TRICERATOPS_DNA.get());
         basicItem(ModItems.TYRANNOSAURUS_REX_DNA.get());
         basicItem(ModItems.VELOCIRAPTOR_DNA.get());
+        basicItem(ModItems.BARYONYX_DNA.get());
+        basicItem(ModItems.CARNOTAURUS_DNA.get());
+        basicItem(ModItems.CONCAVENATOR_DNA.get());
+        basicItem(ModItems.DEINONYCHUS_DNA.get());
+        basicItem(ModItems.EDMONTOSAURUS_DNA.get());
+        basicItem(ModItems.GIGANOTOSAURUS_DNA.get());
+        basicItem(ModItems.GUANLONG_DNA.get());
+        basicItem(ModItems.HERRERASAURUS_DNA.get());
+        basicItem(ModItems.MAJUNGASAURUS_DNA.get());
+        basicItem(ModItems.PROCOMPSOGNATHUS_DNA.get());
+        basicItem(ModItems.PROTOCERATOPS_DNA.get());
+        basicItem(ModItems.RUGOPS_DNA.get());
+        basicItem(ModItems.SHANTUNGOSAURUS_DNA.get());
+        basicItem(ModItems.STEGOSAURUS_DNA.get());
+        basicItem(ModItems.STYRACOSAURUS_DNA.get());
+        basicItem(ModItems.THERIZINOSAURUS_DNA.get());
+        basicItem(ModItems.DISTORTUS_REX_DNA.get());
 
         basicItem(ModItems.ALBERTOSAURUS_SYRINGE.get());
         basicItem(ModItems.APATOSAURUS_SYRINGE.get());
@@ -130,6 +217,23 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.TRICERATOPS_SYRINGE.get());
         basicItem(ModItems.TYRANNOSAURUS_REX_SYRINGE.get());
         basicItem(ModItems.VELOCIRAPTOR_SYRINGE.get());
+        basicItem(ModItems.BARYONYX_SYRINGE.get());
+        basicItem(ModItems.CARNOTAURUS_SYRINGE.get());
+        basicItem(ModItems.CONCAVENATOR_SYRINGE.get());
+        basicItem(ModItems.DEINONYCHUS_SYRINGE.get());
+        basicItem(ModItems.EDMONTOSAURUS_SYRINGE.get());
+        basicItem(ModItems.GIGANOTOSAURUS_SYRINGE.get());
+        basicItem(ModItems.GUANLONG_SYRINGE.get());
+        basicItem(ModItems.HERRERASAURUS_SYRINGE.get());
+        basicItem(ModItems.MAJUNGASAURUS_SYRINGE.get());
+        basicItem(ModItems.PROCOMPSOGNATHUS_SYRINGE.get());
+        basicItem(ModItems.PROTOCERATOPS_SYRINGE.get());
+        basicItem(ModItems.RUGOPS_SYRINGE.get());
+        basicItem(ModItems.SHANTUNGOSAURUS_SYRINGE.get());
+        basicItem(ModItems.STEGOSAURUS_SYRINGE.get());
+        basicItem(ModItems.STYRACOSAURUS_SYRINGE.get());
+        basicItem(ModItems.THERIZINOSAURUS_SYRINGE.get());
+        basicItem(ModItems.DISTORTUS_REX_SYRINGE.get());
 
         basicItem(ModItems.ALBERTOSAURUS_EGG.get());
         basicItem(ModItems.APATOSAURUS_EGG.get());
@@ -146,6 +250,23 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.TRICERATOPS_EGG.get());
         basicItem(ModItems.TYRANNOSAURUS_REX_EGG.get());
         basicItem(ModItems.VELOCIRAPTOR_EGG.get());
+        basicItem(ModItems.BARYONYX_EGG.get());
+        basicItem(ModItems.CARNOTAURUS_EGG.get());
+        basicItem(ModItems.CONCAVENATOR_EGG.get());
+        basicItem(ModItems.DEINONYCHUS_EGG.get());
+        basicItem(ModItems.EDMONTOSAURUS_EGG.get());
+        basicItem(ModItems.GIGANOTOSAURUS_EGG.get());
+        basicItem(ModItems.GUANLONG_EGG.get());
+        basicItem(ModItems.HERRERASAURUS_EGG.get());
+        basicItem(ModItems.MAJUNGASAURUS_EGG.get());
+        basicItem(ModItems.PROCOMPSOGNATHUS_EGG.get());
+        basicItem(ModItems.PROTOCERATOPS_EGG.get());
+        basicItem(ModItems.RUGOPS_EGG.get());
+        basicItem(ModItems.SHANTUNGOSAURUS_EGG.get());
+        basicItem(ModItems.STEGOSAURUS_EGG.get());
+        basicItem(ModItems.STYRACOSAURUS_EGG.get());
+        basicItem(ModItems.THERIZINOSAURUS_EGG.get());
+        basicItem(ModItems.DISTORTUS_REX_EGG.get());
 
         basicItem(ModBlocks.LOW_SECURITY_FENCE_POLE.get().asItem());
         basicItem(ModBlocks.LOW_SECURITY_FENCE_WIRE.get().asItem());
@@ -167,6 +288,23 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleBlockItemBlockTexture(ModBlocks.HATCHED_TRICERATOPS_EGG);
         simpleBlockItemBlockTexture(ModBlocks.HATCHED_TYRANNOSAURUS_REX_EGG);
         simpleBlockItemBlockTexture(ModBlocks.HATCHED_VELOCIRAPTOR_EGG);
+        simpleBlockItemBlockTexture(ModBlocks.HATCHED_BARYONYX_EGG);
+        simpleBlockItemBlockTexture(ModBlocks.HATCHED_CARNOTAURUS_EGG);
+        simpleBlockItemBlockTexture(ModBlocks.HATCHED_CONCAVENATOR_EGG);
+        simpleBlockItemBlockTexture(ModBlocks.HATCHED_DEINONYCHUS_EGG);
+        simpleBlockItemBlockTexture(ModBlocks.HATCHED_EDMONTOSAURUS_EGG);
+        simpleBlockItemBlockTexture(ModBlocks.HATCHED_GIGANOTOSAURUS_EGG);
+        simpleBlockItemBlockTexture(ModBlocks.HATCHED_GUANLONG_EGG);
+        simpleBlockItemBlockTexture(ModBlocks.HATCHED_HERRERASAURUS_EGG);
+        simpleBlockItemBlockTexture(ModBlocks.HATCHED_MAJUNGASAURUS_EGG);
+        simpleBlockItemBlockTexture(ModBlocks.HATCHED_PROCOMPSOGNATHUS_EGG);
+        simpleBlockItemBlockTexture(ModBlocks.HATCHED_PROTOCERATOPS_EGG);
+        simpleBlockItemBlockTexture(ModBlocks.HATCHED_RUGOPS_EGG);
+        simpleBlockItemBlockTexture(ModBlocks.HATCHED_SHANTUNGOSAURUS_EGG);
+        simpleBlockItemBlockTexture(ModBlocks.HATCHED_STEGOSAURUS_EGG);
+        simpleBlockItemBlockTexture(ModBlocks.HATCHED_STYRACOSAURUS_EGG);
+        simpleBlockItemBlockTexture(ModBlocks.HATCHED_THERIZINOSAURUS_EGG);
+        simpleBlockItemBlockTexture(ModBlocks.HATCHED_DISTORTUS_REX_EGG);
 
         simpleBlockItemBlockTexture(ModBlocks.ROYAL_FERN);
         simpleBlockItemBlockTexture(ModBlocks.HORSETAIL_FERN);

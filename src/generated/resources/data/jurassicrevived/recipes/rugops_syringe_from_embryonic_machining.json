@@ -1,0 +1,14 @@
+{
+  "type": "jurassicrevived:embryonic_machining",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:syringe"
+    },
+    {
+      "item": "jurassicrevived:rugops_dna"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:rugops_syringe"
+  }
+}

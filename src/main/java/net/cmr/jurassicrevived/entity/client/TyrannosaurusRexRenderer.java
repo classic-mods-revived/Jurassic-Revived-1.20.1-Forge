@@ -16,7 +16,7 @@ public class TyrannosaurusRexRenderer extends GeoEntityRenderer<TyrannosaurusRex
     @Override
     public void render(TyrannosaurusRexEntity entity, float entityYaw, float partialTick, PoseStack poseStack,
                        MultiBufferSource bufferSource, int packedLight) {
-        poseStack.scale(2F, 2F, 2F);
+        poseStack.scale(2.5F, 2.5F, 2.5F);
         if(entity.isBaby()) {
             poseStack.scale(0.4F, 0.4F, 0.4F);
         }

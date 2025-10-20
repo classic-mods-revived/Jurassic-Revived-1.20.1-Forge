@@ -1,0 +1,18 @@
+{
+  "type": "jurassicrevived:fossil_grinding",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:herrerasaurus_skull_fossil"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "jurassicrevived:herrerasaurus_tissue"
+  },
+  "weighted_outputs": {
+    "jurassicrevived:crushed_fossil": 30,
+    "jurassicrevived:herrerasaurus_tissue": 10,
+    "minecraft:bone_meal": 30,
+    "minecraft:flint": 30
+  }
+}

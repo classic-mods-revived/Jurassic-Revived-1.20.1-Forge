@@ -1,0 +1,12 @@
+{
+  "type": "jurassicrevived:fossil_grinding",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:fresh_baryonyx_skull"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "jurassicrevived:baryonyx_tissue"
+  }
+}

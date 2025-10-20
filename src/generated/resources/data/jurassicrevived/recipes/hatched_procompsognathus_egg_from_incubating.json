@@ -1,0 +1,11 @@
+{
+  "type": "jurassicrevived:incubating",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:procompsognathus_egg"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:hatched_procompsognathus_egg"
+  }
+}

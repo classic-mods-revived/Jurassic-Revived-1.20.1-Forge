@@ -1,7 +1,7 @@
 {
   "values": [
-    "jurassicrevived:fresh_albertosaurus_skull",
     "jurassicrevived:fresh_apatosaurus_skull",
+    "jurassicrevived:fresh_albertosaurus_skull",
     "jurassicrevived:fresh_brachiosaurus_skull",
     "jurassicrevived:fresh_ceratosaurus_skull",
     "jurassicrevived:fresh_compsognathus_skull",
@@ -9,11 +9,28 @@
     "jurassicrevived:fresh_diplodocus_skull",
     "jurassicrevived:fresh_gallimimus_skull",
     "jurassicrevived:fresh_indominus_rex_skull",
-    "jurassicrevived:fresh_ouranosaurus_skull",
     "jurassicrevived:fresh_parasaurolophus_skull",
+    "jurassicrevived:fresh_ouranosaurus_skull",
     "jurassicrevived:fresh_spinosaurus_skull",
     "jurassicrevived:fresh_triceratops_skull",
     "jurassicrevived:fresh_tyrannosaurus_rex_skull",
-    "jurassicrevived:fresh_velociraptor_skull"
+    "jurassicrevived:fresh_velociraptor_skull",
+    "jurassicrevived:fresh_baryonyx_skull",
+    "jurassicrevived:fresh_carnotaurus_skull",
+    "jurassicrevived:fresh_concavenator_skull",
+    "jurassicrevived:fresh_deinonychus_skull",
+    "jurassicrevived:fresh_edmontosaurus_skull",
+    "jurassicrevived:fresh_giganotosaurus_skull",
+    "jurassicrevived:fresh_guanlong_skull",
+    "jurassicrevived:fresh_herrerasaurus_skull",
+    "jurassicrevived:fresh_majungasaurus_skull",
+    "jurassicrevived:fresh_procompsognathus_skull",
+    "jurassicrevived:fresh_protoceratops_skull",
+    "jurassicrevived:fresh_rugops_skull",
+    "jurassicrevived:fresh_shantungosaurus_skull",
+    "jurassicrevived:fresh_stegosaurus_skull",
+    "jurassicrevived:fresh_styracosaurus_skull",
+    "jurassicrevived:fresh_therizinosaurus_skull",
+    "jurassicrevived:fresh_distortus_rex_skull"
   ]
 }

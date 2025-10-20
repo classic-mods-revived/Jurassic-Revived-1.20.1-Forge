@@ -1,0 +1,14 @@
+{
+  "type": "jurassicrevived:dna_extracting",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:test_tube"
+    },
+    {
+      "item": "jurassicrevived:herrerasaurus_tissue"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:herrerasaurus_dna"
+  }
+}

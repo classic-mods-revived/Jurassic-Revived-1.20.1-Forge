@@ -47,6 +47,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.GYPSUM_STONE);
         blockWithItem(ModBlocks.GYPSUM_COBBLESTONE);
         blockWithItem(ModBlocks.GYPSUM_STONE_BRICKS);
+        blockWithItem(ModBlocks.SMOOTH_GYPSUM_STONE);
 
         blockWithItem(ModBlocks.STONE_FOSSIL);
         blockWithItem(ModBlocks.DEEPSLATE_FOSSIL);
@@ -82,6 +83,23 @@ public class ModBlockStateProvider extends BlockStateProvider {
         eggLike(ModBlocks.HATCHED_BRACHIOSAURUS_EGG);
         eggLike(ModBlocks.HATCHED_APATOSAURUS_EGG);
         eggLike(ModBlocks.HATCHED_ALBERTOSAURUS_EGG);
+        eggLike(ModBlocks.HATCHED_BARYONYX_EGG);
+        eggLike(ModBlocks.HATCHED_CARNOTAURUS_EGG);
+        eggLike(ModBlocks.HATCHED_CONCAVENATOR_EGG);
+        eggLike(ModBlocks.HATCHED_DEINONYCHUS_EGG);
+        eggLike(ModBlocks.HATCHED_EDMONTOSAURUS_EGG);
+        eggLike(ModBlocks.HATCHED_GIGANOTOSAURUS_EGG);
+        eggLike(ModBlocks.HATCHED_GUANLONG_EGG);
+        eggLike(ModBlocks.HATCHED_HERRERASAURUS_EGG);
+        eggLike(ModBlocks.HATCHED_MAJUNGASAURUS_EGG);
+        eggLike(ModBlocks.HATCHED_PROCOMPSOGNATHUS_EGG);
+        eggLike(ModBlocks.HATCHED_PROTOCERATOPS_EGG);
+        eggLike(ModBlocks.HATCHED_RUGOPS_EGG);
+        eggLike(ModBlocks.HATCHED_SHANTUNGOSAURUS_EGG);
+        eggLike(ModBlocks.HATCHED_STEGOSAURUS_EGG);
+        eggLike(ModBlocks.HATCHED_STYRACOSAURUS_EGG);
+        eggLike(ModBlocks.HATCHED_THERIZINOSAURUS_EGG);
+        eggLike(ModBlocks.HATCHED_DISTORTUS_REX_EGG);
 
         customFenceMultipart(
                 ModBlocks.LOW_SECURITY_FENCE_POLE,

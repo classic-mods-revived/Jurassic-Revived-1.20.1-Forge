@@ -1,0 +1,14 @@
+{
+  "type": "jurassicrevived:embryonic_machining",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:syringe"
+    },
+    {
+      "item": "jurassicrevived:shantungosaurus_dna"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:shantungosaurus_syringe"
+  }
+}

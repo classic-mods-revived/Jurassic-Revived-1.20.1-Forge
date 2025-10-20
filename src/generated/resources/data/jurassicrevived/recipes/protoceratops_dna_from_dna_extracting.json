@@ -1,0 +1,14 @@
+{
+  "type": "jurassicrevived:dna_extracting",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:test_tube"
+    },
+    {
+      "item": "jurassicrevived:protoceratops_tissue"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:protoceratops_dna"
+  }
+}

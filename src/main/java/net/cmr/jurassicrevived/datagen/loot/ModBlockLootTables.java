@@ -19,6 +19,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.CAT_PLUSHIE.get());
         this.dropSelf(ModBlocks.GYPSUM_COBBLESTONE.get());
         this.dropSelf(ModBlocks.GYPSUM_STONE_BRICKS.get());
+        this.dropSelf(ModBlocks.SMOOTH_GYPSUM_STONE.get());
         this.dropSelf(ModBlocks.STONE_FOSSIL.get());
         this.dropSelf(ModBlocks.DEEPSLATE_FOSSIL.get());
         this.dropSelf(ModBlocks.LOW_SECURITY_FENCE_POLE.get());
@@ -55,6 +56,23 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.HATCHED_TRICERATOPS_EGG.get());
         this.dropSelf(ModBlocks.HATCHED_TYRANNOSAURUS_REX_EGG.get());
         this.dropSelf(ModBlocks.HATCHED_VELOCIRAPTOR_EGG.get());
+        this.dropSelf(ModBlocks.HATCHED_BARYONYX_EGG.get());
+        this.dropSelf(ModBlocks.HATCHED_CARNOTAURUS_EGG.get());
+        this.dropSelf(ModBlocks.HATCHED_CONCAVENATOR_EGG.get());
+        this.dropSelf(ModBlocks.HATCHED_DEINONYCHUS_EGG.get());
+        this.dropSelf(ModBlocks.HATCHED_EDMONTOSAURUS_EGG.get());
+        this.dropSelf(ModBlocks.HATCHED_GIGANOTOSAURUS_EGG.get());
+        this.dropSelf(ModBlocks.HATCHED_GUANLONG_EGG.get());
+        this.dropSelf(ModBlocks.HATCHED_HERRERASAURUS_EGG.get());
+        this.dropSelf(ModBlocks.HATCHED_MAJUNGASAURUS_EGG.get());
+        this.dropSelf(ModBlocks.HATCHED_PROCOMPSOGNATHUS_EGG.get());
+        this.dropSelf(ModBlocks.HATCHED_PROTOCERATOPS_EGG.get());
+        this.dropSelf(ModBlocks.HATCHED_RUGOPS_EGG.get());
+        this.dropSelf(ModBlocks.HATCHED_SHANTUNGOSAURUS_EGG.get());
+        this.dropSelf(ModBlocks.HATCHED_STEGOSAURUS_EGG.get());
+        this.dropSelf(ModBlocks.HATCHED_STYRACOSAURUS_EGG.get());
+        this.dropSelf(ModBlocks.HATCHED_THERIZINOSAURUS_EGG.get());
+        this.dropSelf(ModBlocks.HATCHED_DISTORTUS_REX_EGG.get());
 
         this.dropSelf(ModBlocks.ROYAL_FERN.get());
         this.add(ModBlocks.POTTED_ROYAL_FERN.get(), createPotFlowerItemTable(ModBlocks.ROYAL_FERN.get()));
