@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:white_embryo_calcification_machine"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:embryo_calcification_machine"
+  }
+}

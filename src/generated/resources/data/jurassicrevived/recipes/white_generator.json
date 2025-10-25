@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:generator"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:white_generator"
+  }
+}

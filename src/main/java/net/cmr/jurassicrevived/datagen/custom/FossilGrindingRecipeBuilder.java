@@ -43,10 +43,9 @@ public class FossilGrindingRecipeBuilder implements RecipeBuilder {
     public static FossilGrindingRecipeBuilder fossilWeighted(ItemLike fossilInput, ItemLike tissueOutput) {
         FossilGrindingRecipeBuilder b = new FossilGrindingRecipeBuilder(Ingredient.of(fossilInput), tissueOutput, 1);
         // Weighted outputs
-        b.addWeightedOutput(Items.BONE_MEAL, 30);
-        b.addWeightedOutput(Items.FLINT, 30);
-        b.addWeightedOutput(ModItems.CRUSHED_FOSSIL.get(), 30);
-        b.addWeightedOutput(tissueOutput.asItem(), 10);
+        b.addWeightedOutput(Items.BONE_MEAL, 40);
+        b.addWeightedOutput(ModItems.CRUSHED_FOSSIL.get(), 40);
+        b.addWeightedOutput(tissueOutput.asItem(), 20);
         return b;
     }
 

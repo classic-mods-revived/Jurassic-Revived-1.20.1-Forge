@@ -100,6 +100,15 @@
   "block.jurassicrevived.embryo_calcification_machine": "Embryo Calcification Machine",
   "block.jurassicrevived.incubator": "Incubator",
 
+  "block.jurassicrevived.white_generator": "White Generator",
+  "block.jurassicrevived.white_dna_extractor": "White DNA Extractor",
+  "block.jurassicrevived.white_fossil_grinder": "White Fossil Grinder",
+  "block.jurassicrevived.white_fossil_cleaner": "White Fossil Cleaner",
+  "block.jurassicrevived.white_dna_hybridizer": "White DNA Hybridizer",
+  "block.jurassicrevived.white_embryonic_machine": "White Embryonic Machine",
+  "block.jurassicrevived.white_embryo_calcification_machine": "White Embryo Calcification Machine",
+  "block.jurassicrevived.white_incubator": "White Incubator",
+
   "block.jurassicrevived.stone_fossil": "Stone Fossil",
   "block.jurassicrevived.deepslate_fossil": "Deepslate Fossil",
   "block.jurassicrevived.amber_ore": "Amber Ore",

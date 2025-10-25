@@ -1,0 +1,266 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"render_type": "cutout",
+	"texture_size": [128, 128],
+	"textures": {
+		"0": "jurassicrevived:block/white_dna_extractor",
+		"particle": "jurassicrevived:block/white_dna_extractor"
+	},
+	"elements": [
+		{
+			"name": "Keyboard",
+			"from": [0, -0.05957, 0.77211],
+			"to": [7, 0.94043, 5.77211],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [0, 0.2, -0.3]},
+			"faces": {
+				"north": {"uv": [4.625, 3.375, 5.5, 3.5], "texture": "#0"},
+				"east": {"uv": [4, 3.375, 4.625, 3.5], "texture": "#0"},
+				"south": {"uv": [6.125, 3.375, 7, 3.5], "texture": "#0"},
+				"west": {"uv": [5.5, 3.375, 6.125, 3.5], "texture": "#0"},
+				"up": {"uv": [5.5, 3.375, 4.625, 2.75], "texture": "#0"},
+				"down": {"uv": [6.375, 2.75, 5.5, 3.375], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Keyboard back",
+			"from": [0.5, 0, 4.5],
+			"to": [6.5, 3, 5.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0.7, 8]},
+			"faces": {
+				"north": {"uv": [0.125, 6.5, 0.875, 6.875], "texture": "#0"},
+				"east": {"uv": [0, 6.5, 0.125, 6.875], "texture": "#0"},
+				"south": {"uv": [1, 6.5, 1.75, 6.875], "texture": "#0"},
+				"west": {"uv": [0.875, 6.5, 1, 6.875], "texture": "#0"},
+				"up": {"uv": [0.875, 6.5, 0.125, 6.375], "texture": "#0"},
+				"down": {"uv": [1.625, 6.375, 0.875, 6.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Screen",
+			"from": [0, 8.78296, -1.62498],
+			"to": [7, 17.78296, -0.62498],
+			"rotation": {"angle": 22.5, "axis": "x", "origin": [0, 0, 0]},
+			"faces": {
+				"north": {"uv": [5.375, 3.625, 6.25, 4.75], "texture": "#0"},
+				"east": {"uv": [5.25, 3.625, 5.375, 4.75], "texture": "#0"},
+				"south": {"uv": [6.375, 3.625, 7.25, 4.75], "texture": "#0"},
+				"west": {"uv": [6.25, 3.625, 6.375, 4.75], "texture": "#0"},
+				"up": {"uv": [6.25, 3.625, 5.375, 3.5], "texture": "#0"},
+				"down": {"uv": [7.125, 3.5, 6.25, 3.625], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Screen attachment",
+			"from": [0.5, 6.14588, 9.25832],
+			"to": [3.5, 11.14588, 10.25832],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [0, 0, 0]},
+			"faces": {
+				"north": {"uv": [4.125, 5.375, 4.5, 6], "texture": "#0"},
+				"east": {"uv": [4, 5.375, 4.125, 6], "texture": "#0"},
+				"south": {"uv": [4.625, 5.375, 5, 6], "texture": "#0"},
+				"west": {"uv": [4.5, 5.375, 4.625, 6], "texture": "#0"},
+				"up": {"uv": [4.5, 5.375, 4.125, 5.25], "texture": "#0"},
+				"down": {"uv": [4.875, 5.25, 4.5, 5.375], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Sequencing chamber 3",
+			"from": [7.1, 1.1, 7],
+			"to": [14.1, 5.1, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7.5, 0, 8]},
+			"faces": {
+				"north": {"uv": [4.875, 2.25, 5.75, 2.75], "texture": "#0"},
+				"east": {"uv": [4, 2.25, 4.875, 2.75], "texture": "#0"},
+				"south": {"uv": [6.625, 2.25, 7.5, 2.75], "texture": "#0"},
+				"west": {"uv": [5.75, 2.25, 6.625, 2.75], "texture": "#0"},
+				"up": {"uv": [5.75, 2.25, 4.875, 1.375], "texture": "#0"},
+				"down": {"uv": [6.625, 1.375, 5.75, 2.25], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Sequencing chamber 2",
+			"from": [7.1, 5.4, 7],
+			"to": [14.1, 9.4, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7.5, 0, 8]},
+			"faces": {
+				"north": {"uv": [4.875, 2.25, 5.75, 2.75], "texture": "#0"},
+				"east": {"uv": [4, 2.25, 4.875, 2.75], "texture": "#0"},
+				"south": {"uv": [6.625, 2.25, 7.5, 2.75], "texture": "#0"},
+				"west": {"uv": [5.75, 2.25, 6.625, 2.75], "texture": "#0"},
+				"up": {"uv": [5.75, 2.25, 4.875, 1.375], "texture": "#0"},
+				"down": {"uv": [6.625, 1.375, 5.75, 2.25], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Sequencing chamber 1",
+			"from": [7.1, 9.7, 7],
+			"to": [14.1, 13.7, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7.5, 0, 8]},
+			"faces": {
+				"north": {"uv": [4.875, 2.25, 5.75, 2.75], "texture": "#0"},
+				"east": {"uv": [4, 2.25, 4.875, 2.75], "texture": "#0"},
+				"south": {"uv": [6.625, 2.25, 7.5, 2.75], "texture": "#0"},
+				"west": {"uv": [5.75, 2.25, 6.625, 2.75], "texture": "#0"},
+				"up": {"uv": [5.75, 2.25, 4.875, 1.375], "texture": "#0"},
+				"down": {"uv": [6.625, 1.375, 5.75, 2.25], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Sequencing attachment base",
+			"from": [4.1, 0.15, 6.5],
+			"to": [7.1, 14.15, 14.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7.5, 0.15, 8]},
+			"faces": {
+				"north": {"uv": [1, 4.625, 1.375, 6.375], "texture": "#0"},
+				"east": {"uv": [0, 4.625, 1, 6.375], "texture": "#0"},
+				"south": {"uv": [2.375, 4.625, 2.75, 6.375], "texture": "#0"},
+				"west": {"uv": [1.375, 4.625, 2.375, 6.375], "texture": "#0"},
+				"up": {"uv": [1.375, 4.625, 1, 3.625], "texture": "#0"},
+				"down": {"uv": [1.75, 3.625, 1.375, 4.625], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Hard Drive",
+			"from": [0, 1, 6],
+			"to": [7, 10, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8.4, 0, 8]},
+			"faces": {
+				"north": {"uv": [1.125, 2.5, 2, 3.625], "texture": "#0"},
+				"east": {"uv": [0, 2.5, 1.125, 3.625], "texture": "#0"},
+				"south": {"uv": [3.125, 2.5, 4, 3.625], "texture": "#0"},
+				"west": {"uv": [2, 2.5, 3.125, 3.625], "texture": "#0"},
+				"up": {"uv": [2, 2.5, 1.125, 1.375], "texture": "#0"},
+				"down": {"uv": [2.875, 1.375, 2, 2.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Sequencing attachment end",
+			"from": [13.9, 0.15, 6.5],
+			"to": [15.9, 14.15, 14.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7.5, 0.15, 8]},
+			"faces": {
+				"north": {"uv": [3.75, 4.625, 4, 6.375], "texture": "#0"},
+				"east": {"uv": [2.75, 4.625, 3.75, 6.375], "texture": "#0"},
+				"south": {"uv": [5, 4.625, 5.25, 6.375], "texture": "#0"},
+				"west": {"uv": [4, 4.625, 5, 6.375], "texture": "#0"},
+				"up": {"uv": [4, 4.625, 3.75, 3.625], "texture": "#0"},
+				"down": {"uv": [4.25, 3.625, 4, 4.625], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Base",
+			"from": [0, 0, 5.5],
+			"to": [16, 1, 15.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8.5, 0, 8]},
+			"faces": {
+				"north": {"uv": [1.25, 1.25, 3.25, 1.375], "texture": "#0"},
+				"east": {"uv": [0, 1.25, 1.25, 1.375], "texture": "#0"},
+				"south": {"uv": [4.5, 1.25, 6.5, 1.375], "texture": "#0"},
+				"west": {"uv": [3.25, 1.25, 4.5, 1.375], "texture": "#0"},
+				"up": {"uv": [3.25, 1.25, 1.25, 0], "texture": "#0"},
+				"down": {"uv": [5.25, 0, 3.25, 1.25], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"gui": {
+			"rotation": [30, -135, 0],
+			"scale": [0.625, 0.625, 0.625]
+		}
+	},
+	"groups": [
+		{
+			"name": "root",
+			"origin": [0, 24, 0],
+			"color": 0,
+			"children": [
+				{
+					"name": "Base",
+					"origin": [0, 0.5, 1.5],
+					"color": 0,
+					"children": [
+						{
+							"name": "Keyboardback",
+							"origin": [-4.5, 0.5, -2.5],
+							"color": 0,
+							"children": [
+								{
+									"name": "Keyboard",
+									"origin": [-4.5, 0.8, -5],
+									"rotation": [-20.87, 0, 0],
+									"color": 0,
+									"children": [0]
+								},
+								1
+							]
+						},
+						{
+							"name": "HardDrive",
+							"origin": [-4.9, 0, 1.5],
+							"color": 0,
+							"children": [
+								{
+									"name": "Screenattachment",
+									"origin": [-6, 9.5, -0.5],
+									"rotation": [-36.52, 0, 0],
+									"color": 0,
+									"children": [
+										{
+											"name": "Screen",
+											"origin": [-6, 12.9, -0.5],
+											"rotation": [52.17, 0, 0],
+											"color": 0,
+											"children": [2]
+										},
+										3
+									]
+								},
+								{
+									"name": "Sequencingattachmentbase",
+									"origin": [-1.9, 0, 2.5],
+									"color": 0,
+									"children": [
+										{
+											"name": "Sequencingchamber3",
+											"origin": [-0.4, 3.1, 2.5],
+											"color": 0,
+											"children": [4]
+										},
+										{
+											"name": "Sequencingchamber2",
+											"origin": [-0.4, 7.4, 2.5],
+											"color": 0,
+											"children": [5]
+										},
+										{
+											"name": "Sequencingchamber1",
+											"origin": [-0.4, 11.7, 2.5],
+											"color": 0,
+											"children": [6]
+										},
+										7
+									]
+								},
+								8
+							]
+						},
+						{
+							"name": "Sequencingattachmentend",
+							"origin": [7.4, 0, 2.5],
+							"color": 0,
+							"children": [9]
+						},
+						10
+					]
+				}
+			]
+		}
+	]
+}

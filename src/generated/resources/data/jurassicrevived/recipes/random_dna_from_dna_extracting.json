@@ -1,6 +1,7 @@
 {
   "type": "jurassicrevived:dna_extracting",
   "dna_weights": {
+    "jurassicrevived:distortus_rex_dna": 0,
     "jurassicrevived:indominus_rex_dna": 0
   },
   "ingredients": [

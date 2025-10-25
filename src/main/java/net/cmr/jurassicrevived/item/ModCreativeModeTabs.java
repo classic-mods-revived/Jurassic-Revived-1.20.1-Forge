@@ -66,6 +66,15 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.EMBRYO_CALCIFICATION_MACHINE.get());
                         output.accept(ModBlocks.INCUBATOR.get());
 
+                        output.accept(ModBlocks.WHITE_GENERATOR.get());
+                        output.accept(ModBlocks.WHITE_DNA_EXTRACTOR.get());
+                        output.accept(ModBlocks.WHITE_FOSSIL_GRINDER.get());
+                        output.accept(ModBlocks.WHITE_FOSSIL_CLEANER.get());
+                        output.accept(ModBlocks.WHITE_DNA_HYBRIDIZER.get());
+                        output.accept(ModBlocks.WHITE_EMBRYONIC_MACHINE.get());
+                        output.accept(ModBlocks.WHITE_EMBRYO_CALCIFICATION_MACHINE.get());
+                        output.accept(ModBlocks.WHITE_INCUBATOR.get());
+
                         output.accept(ModBlocks.STONE_FOSSIL.get());
                         output.accept(ModBlocks.DEEPSLATE_FOSSIL.get());
                         output.accept(ModBlocks.AMBER_ORE.get());

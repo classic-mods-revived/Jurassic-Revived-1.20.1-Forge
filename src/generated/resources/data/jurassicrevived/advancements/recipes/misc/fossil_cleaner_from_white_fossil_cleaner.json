@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "jurassicrevived:fossil_cleaner_from_white_fossil_cleaner"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_white_fossil_cleaner": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jurassicrevived:white_fossil_cleaner"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_white_fossil_cleaner",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "jurassicrevived:fossil_cleaner_from_white_fossil_cleaner"
+    ]
+  },
+  "sends_telemetry_event": false
+}

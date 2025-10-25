@@ -1,6 +1,7 @@
 package net.cmr.jurassicrevived.entity.custom;
 
 import net.cmr.jurassicrevived.entity.ModEntities;
+import net.cmr.jurassicrevived.entity.ai.SprintingMeleeAttackGoal;
 import net.cmr.jurassicrevived.entity.variant.CeratosaurusVariant;
 import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
@@ -55,7 +56,7 @@ public class CeratosaurusEntity extends Animal implements GeoEntity {
         this.goalSelector.addGoal(5, new AvoidEntityGoal<>(this, TyrannosaurusRexEntity.class, (float) 20, 1.2, 1.2));
         this.goalSelector.addGoal(6, new AvoidEntityGoal<>(this, BrachiosaurusEntity.class, (float) 20, 1, 1));
 
-        this.goalSelector.addGoal(7, new MeleeAttackGoal(this, 1, false) {
+        this.goalSelector.addGoal(7, new SprintingMeleeAttackGoal(this, 1.25, false) {
             @Override
             protected double getAttackReachSqr(LivingEntity entity) {
                 return 9;

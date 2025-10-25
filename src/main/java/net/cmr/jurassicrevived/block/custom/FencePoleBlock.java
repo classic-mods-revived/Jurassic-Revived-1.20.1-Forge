@@ -205,16 +205,16 @@ public class FencePoleBlock extends Block implements SimpleWaterloggedBlock {
         return 1.0F;
     }
 
-    private static final VoxelShape POST = Block.box(6.0, 0.0, 6.0, 10.0, 16.0, 10.0);
+    private static final VoxelShape POST = Block.box(6.5, 0.0, 6.5, 9.5, 16.0, 9.5);
 
-    private static final VoxelShape ARM_NORTH = Block.box(7.5, 3.5, 0.0, 8.5, 12.5, 8.0);
-    private static final VoxelShape ARM_SOUTH = Block.box(7.5, 3.5, 8.0, 8.5, 12.5, 16.0);
-    private static final VoxelShape ARM_WEST  = Block.box(0.0, 3.5, 7.5, 8.0, 12.5, 8.5);
-    private static final VoxelShape ARM_EAST  = Block.box(8.0, 3.5, 7.5, 16.0, 12.5, 8.5);
+    private static final VoxelShape ARM_NORTH = Block.box(7.5, 2.5, 0.0, 8.5, 13.5, 8.0);
+    private static final VoxelShape ARM_SOUTH = Block.box(7.5, 2.5, 8.0, 8.5, 13.5, 16.0);
+    private static final VoxelShape ARM_WEST  = Block.box(0.0, 2.5, 7.5, 8.0, 13.5, 8.5);
+    private static final VoxelShape ARM_EAST  = Block.box(8.0, 2.5, 7.5, 16.0, 13.5, 8.5);
 
     private static VoxelShape buildDiagonal(boolean east, boolean south) {
         VoxelShape shape = Shapes.empty();
-        double y1 = 3.5, y2 = 12.5;
+        double y1 = 2.5, y2 = 13.5;
         for (int i = 0; i < 8; i++) {
             double off = i;
             double x1 = east ? 16 - (off + 1) : 0 + off;

@@ -17,10 +17,10 @@ import net.cmr.jurassicrevived.recipe.DNAHybridizerRecipe;
 import net.cmr.jurassicrevived.util.ModTags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -66,7 +66,7 @@ public class DNAHybridizerRecipeCategory implements IRecipeCategory<DNAHybridize
     @Override
     public void draw(DNAHybridizerRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         background.draw(guiGraphics);
-        guiGraphics.blit(ARROW_TEXTURE,  76, 35, 0, 0, 24, 16, 24, 16);
+        guiGraphics.blit(ARROW_TEXTURE,  93, 35, 0, 0, 24, 16, 24, 16);
         if (Config.REQUIRE_POWER) {
             guiGraphics.blit(POWER_BAR_TEXTURE,  159, 10, 0, 0, 10, 66, 10, 66);
             // Fill amount for JEI: show total required energy (2000 FE) relative to 16000 FE capacity
@@ -82,7 +82,7 @@ public class DNAHybridizerRecipeCategory implements IRecipeCategory<DNAHybridize
             int arrowPixels = 24;
             int progFilled = progress * arrowPixels / maxTicks;
             if (progFilled > 0) {
-                guiGraphics.blit(WHITE_ARROW_TEXTURE, 76, 35, 0, 0, progFilled, 16, 24, 16);
+                guiGraphics.blit(WHITE_ARROW_TEXTURE, 93, 35, 0, 0, progFilled, 16, 24, 16);
             }
 
             int requiredFE = 2000;
@@ -91,11 +91,11 @@ public class DNAHybridizerRecipeCategory implements IRecipeCategory<DNAHybridize
             // Render red fill similar to EnergyDisplayTooltipArea
             guiGraphics.fillGradient(barX, barY + (barH - filled), barX + barW, barY + barH, 0xffb51500, 0xff600b00);
 
-            // Tooltip "(2000 / 16000 FE)" on hover over the energy area
+            // Tooltip "2000 / 16000 FE" on hover over the energy area
             int mx = (int) mouseX;
             int my = (int) mouseY;
             if (mx >= barX && mx < barX + barW && my >= barY && my < barY + barH) {
-                List<Component> tips = java.util.List.of(Component.literal("2000 / 16000 FE"));
+                List<Component> tips = List.of(Component.literal("2000 / 16000 FE"));
                 guiGraphics.renderTooltip(Minecraft.getInstance().font, tips, java.util.Optional.empty(), mx, my);
             }
         }
@@ -109,13 +109,21 @@ public class DNAHybridizerRecipeCategory implements IRecipeCategory<DNAHybridize
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, DNAHybridizerRecipe recipe, IFocusGroup focuses) {
 
-        builder.addSlot(RecipeIngredientRole.INPUT, 57, 26).addIngredients(recipe.getIngredients().get(0));
-        builder.addSlot(RecipeIngredientRole.INPUT, 57, 44).addIngredients(recipe.getIngredients().get(1));
-// ... existing code ...
-        // Add third input slot visually under the first two (adjust coordinates as per your GUI)
-        builder.addSlot(RecipeIngredientRole.INPUT, 57, 62).addIngredients(recipe.getIngredients().get(2));
+        // Place up to 9 inputs in a 3x3 grid; skip indices beyond recipe size or empty ingredients
+        int[][] coords = {
+                {38, 16}, {57, 16}, {76, 16},
+                {38, 35}, {57, 35}, {76, 35},
+                {38, 54}, {57, 54}, {76, 54}
+        };
 
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 103, 35).addItemStack(recipe.getResultItem(null));
+        for (int i = 0; i < Math.min(9, recipe.getIngredients().size()); i++) {
+            var ing = recipe.getIngredients().get(i);
+            if (ing.isEmpty()) continue;
+            int x = coords[i][0];
+            int y = coords[i][1];
+            builder.addSlot(RecipeIngredientRole.INPUT, x, y).addIngredients(ing);
+        }
+
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 118, 35).addItemStack(recipe.getResultItem(null));
     }
-
 }

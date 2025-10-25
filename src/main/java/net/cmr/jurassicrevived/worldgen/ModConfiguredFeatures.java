@@ -53,10 +53,10 @@ public class ModConfiguredFeatures {
         //);
 
         register(context, OVERWORLD_GYPSUM_STONE_KEY, Feature.ORE, new OreConfiguration(overworldGypsumStoneOres, 20));
-        register(context, OVERWORLD_STONE_FOSSIL_KEY, Feature.ORE, new OreConfiguration(overworldStoneFossilOres, 6));
-        register(context, OVERWORLD_DEEPSLATE_FOSSIL_KEY, Feature.ORE, new OreConfiguration(overworldDeepslateFossilOres, 6));
-        register(context, OVERWORLD_AMBER_ORE_KEY, Feature.ORE, new OreConfiguration(overworldAmberOres, 3));
-        register(context, OVERWORLD_DEEPSLATE_ICE_SHARD_ORE_KEY, Feature.ORE, new OreConfiguration(overworldDeepslateIceShardOres, 3));
+        register(context, OVERWORLD_STONE_FOSSIL_KEY, Feature.ORE, new OreConfiguration(overworldStoneFossilOres, 12));
+        register(context, OVERWORLD_DEEPSLATE_FOSSIL_KEY, Feature.ORE, new OreConfiguration(overworldDeepslateFossilOres, 12));
+        register(context, OVERWORLD_AMBER_ORE_KEY, Feature.ORE, new OreConfiguration(overworldAmberOres, 6));
+        register(context, OVERWORLD_DEEPSLATE_ICE_SHARD_ORE_KEY, Feature.ORE, new OreConfiguration(overworldDeepslateIceShardOres, 6));
         //register(context, OVERWORLD_hq_ORE_KEY, Feature.ORE, new OreConfiguration(overworldhqOres, 3));
     }
 

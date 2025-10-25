@@ -42,7 +42,7 @@
     },
     {
       "apply": {
-        "model": "jurassicrevived:block/low_security_fence_pole_diagonal_part",
+        "model": "jurassicrevived:block/low_security_fence_pole_diag_part",
         "y": 90
       },
       "when": {
@@ -51,7 +51,7 @@
     },
     {
       "apply": {
-        "model": "jurassicrevived:block/low_security_fence_pole_diagonal_part",
+        "model": "jurassicrevived:block/low_security_fence_pole_diag_part",
         "y": 180
       },
       "when": {
@@ -60,7 +60,7 @@
     },
     {
       "apply": {
-        "model": "jurassicrevived:block/low_security_fence_pole_diagonal_part",
+        "model": "jurassicrevived:block/low_security_fence_pole_diag_part",
         "y": 270
       },
       "when": {
@@ -69,7 +69,7 @@
     },
     {
       "apply": {
-        "model": "jurassicrevived:block/low_security_fence_pole_diagonal_part"
+        "model": "jurassicrevived:block/low_security_fence_pole_diag_part"
       },
       "when": {
         "nw": "true"

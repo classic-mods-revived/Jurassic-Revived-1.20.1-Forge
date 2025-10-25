@@ -302,6 +302,62 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .generateAdvancement()
                 .build(pWriter, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "power_pipe_with_power_req"));
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.WHITE_GENERATOR.get(), 1)
+                .requires(ModBlocks.GENERATOR.get()).unlockedBy("has_generator", has(ModBlocks.GENERATOR.get()))
+                .save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.GENERATOR.get(), 1)
+                .requires(ModBlocks.WHITE_GENERATOR.get()).unlockedBy("has_white_generator", has(ModBlocks.WHITE_GENERATOR.get()))
+                .save(pWriter, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "generator_from_white_generator"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.WHITE_DNA_EXTRACTOR.get(), 1)
+                .requires(ModBlocks.DNA_EXTRACTOR.get()).unlockedBy("has_dna_extractor", has(ModBlocks.DNA_EXTRACTOR.get()))
+                .save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.DNA_EXTRACTOR.get(), 1)
+                .requires(ModBlocks.WHITE_DNA_EXTRACTOR.get()).unlockedBy("has_white_dna_extractor", has(ModBlocks.WHITE_DNA_EXTRACTOR.get()))
+                .save(pWriter, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "dna_extractor_from_white_dna_extractor"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.WHITE_FOSSIL_GRINDER.get(), 1)
+                .requires(ModBlocks.FOSSIL_GRINDER.get()).unlockedBy("has_fossil_grinder", has(ModBlocks.FOSSIL_GRINDER.get()))
+                .save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.FOSSIL_GRINDER.get(), 1)
+                .requires(ModBlocks.WHITE_FOSSIL_GRINDER.get()).unlockedBy("has_white_fossil_grinder", has(ModBlocks.WHITE_FOSSIL_GRINDER.get()))
+                .save(pWriter, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "fossil_grinder_from_white_fossil_grinder"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.WHITE_FOSSIL_CLEANER.get(), 1)
+                .requires(ModBlocks.FOSSIL_CLEANER.get()).unlockedBy("has_fossil_cleaner", has(ModBlocks.FOSSIL_CLEANER.get()))
+                .save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.FOSSIL_CLEANER.get(), 1)
+                .requires(ModBlocks.WHITE_FOSSIL_CLEANER.get()).unlockedBy("has_white_fossil_cleaner", has(ModBlocks.WHITE_FOSSIL_CLEANER.get()))
+                .save(pWriter, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "fossil_cleaner_from_white_fossil_cleaner"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.WHITE_DNA_HYBRIDIZER.get(), 1)
+                .requires(ModBlocks.DNA_HYBRIDIZER.get()).unlockedBy("has_dna_hybridizer", has(ModBlocks.DNA_HYBRIDIZER.get()))
+                .save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.DNA_HYBRIDIZER.get(), 1)
+                .requires(ModBlocks.WHITE_DNA_HYBRIDIZER.get()).unlockedBy("has_white_dna_hybridizer", has(ModBlocks.WHITE_FOSSIL_CLEANER.get()))
+                .save(pWriter, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "dna_hybridizer_from_white_dna_hybridizer"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.WHITE_EMBRYONIC_MACHINE.get(), 1)
+                .requires(ModBlocks.EMBRYONIC_MACHINE.get()).unlockedBy("has_embryonic_machine", has(ModBlocks.EMBRYONIC_MACHINE.get()))
+                .save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.EMBRYONIC_MACHINE.get(), 1)
+                .requires(ModBlocks.WHITE_EMBRYONIC_MACHINE.get()).unlockedBy("has_white_embryonic_machine", has(ModBlocks.WHITE_EMBRYONIC_MACHINE.get()))
+                .save(pWriter, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "embryonic_machine_from_white_embryonic_machine"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.WHITE_EMBRYO_CALCIFICATION_MACHINE.get(), 1)
+                .requires(ModBlocks.EMBRYO_CALCIFICATION_MACHINE.get()).unlockedBy("has_embryo_calcification_machine", has(ModBlocks.EMBRYO_CALCIFICATION_MACHINE.get()))
+                .save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.EMBRYO_CALCIFICATION_MACHINE.get(), 1)
+                .requires(ModBlocks.WHITE_EMBRYO_CALCIFICATION_MACHINE.get()).unlockedBy("has_white_embryo_calcification_machine", has(ModBlocks.WHITE_EMBRYO_CALCIFICATION_MACHINE.get()))
+                .save(pWriter, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "embryo_calcification_machine_from_white_embryo_calcification_machine"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.WHITE_INCUBATOR.get(), 1)
+                .requires(ModBlocks.INCUBATOR.get()).unlockedBy("has_incubator", has(ModBlocks.INCUBATOR.get()))
+                .save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.INCUBATOR.get(), 1)
+                .requires(ModBlocks.WHITE_INCUBATOR.get()).unlockedBy("has_white_incubator", has(ModBlocks.WHITE_INCUBATOR.get()))
+                .save(pWriter, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "incubator_from_white_incubator"));
+
         new DNAExtractingRecipeBuilder(ModItems.TEST_TUBE.get(), ModItems.ALBERTOSAURUS_TISSUE.get(), ModItems.ALBERTOSAURUS_DNA.get(), 1)
                 .unlockedBy("has_TEST_TUBE", has(ModItems.TEST_TUBE.get())).save(pWriter);
         new DNAExtractingRecipeBuilder(ModItems.TEST_TUBE.get(), ModItems.APATOSAURUS_TISSUE.get(), ModItems.APATOSAURUS_DNA.get(), 1)
@@ -372,6 +428,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                         ModItems.TEST_TUBE.get(),
                         ModItems.MOSQUITO_IN_AMBER.get(),
                         ModItems.BRACHIOSAURUS_DNA.get(), 1).addDNAWeight(ModItems.INDOMINUS_REX_DNA.get(), 0)
+                .addDNAWeight(ModItems.DISTORTUS_REX_DNA.get(), 0)
                 .unlockedBy("has_TEST_TUBE", has(ModItems.MOSQUITO_IN_AMBER.get()))
                 .save(pWriter, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "random_dna"));
 
@@ -508,22 +565,21 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         FossilCleaningRecipeBuilder.randomFossil(ModBlocks.DEEPSLATE_FOSSIL.get(), ModItems.VELOCIRAPTOR_SKULL_FOSSIL.get(), 1)
                 .unlockedBy("has_deepslate_fossil_block", has(ModBlocks.DEEPSLATE_FOSSIL.get())).save(pWriter, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "random_fossil_from_deepslate_fossil_from_fossil_cleaning"));
 
-        new DNAHybridizingRecipeBuilder(
-                ModItems.TYRANNOSAURUS_REX_DNA.get(),
-                ModItems.VELOCIRAPTOR_DNA.get(),
-                ModItems.CERATOSAURUS_DNA.get(),
-                ModItems.INDOMINUS_REX_DNA.get(), 1)
-                .unlockedBy("has_dna", has(ModTags.Items.DNA))
-                .save(pWriter, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "indominus_rex_dna_from_hybridizing"));
+        new DNAHybridizingRecipeBuilder(ModItems.INDOMINUS_REX_DNA.get(), 1)
+                .addIngredient(ModItems.TYRANNOSAURUS_REX_DNA.get())
+                .addIngredient(ModItems.VELOCIRAPTOR_DNA.get())
+                .addIngredient(ModItems.CARNOTAURUS_DNA.get())
+                .addIngredient(ModItems.THERIZINOSAURUS_DNA.get())
+                .addIngredient(ModItems.MAJUNGASAURUS_DNA.get())
+                .addIngredient(ModItems.RUGOPS_DNA.get())
+                .addIngredient(ModItems.GIGANOTOSAURUS_DNA.get())
+                .unlockedBy("has_dna", has(ModTags.Items.DNA)).save(pWriter);
 
-        new DNAHybridizingRecipeBuilder(
-                ModItems.TYRANNOSAURUS_REX_DNA.get(),
-                ModItems.BRACHIOSAURUS_DNA.get(),
-                ModItems.VELOCIRAPTOR_DNA.get(),
-                ModItems.DISTORTUS_REX_DNA.get(), 1)
-                .unlockedBy("has_dna", has(ModTags.Items.DNA))
-                .save(pWriter, ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "distortus_rex_dna_from_hybridizing"));
-
+        new DNAHybridizingRecipeBuilder(ModItems.DISTORTUS_REX_DNA.get(), 1)
+                .addIngredient(ModItems.TYRANNOSAURUS_REX_DNA.get())
+                .addIngredient(ModItems.BRACHIOSAURUS_DNA.get())
+                .addIngredient(ModItems.VELOCIRAPTOR_DNA.get())
+                .unlockedBy("has_dna", has(ModTags.Items.DNA)).save(pWriter);
         new EmbryonicMachiningRecipeBuilder(ModItems.SYRINGE.get(), ModItems.ALBERTOSAURUS_DNA.get(), ModItems.ALBERTOSAURUS_SYRINGE.get(), 1)
                 .unlockedBy("has_syringe", has(ModItems.SYRINGE.get())).save(pWriter);
         new EmbryonicMachiningRecipeBuilder(ModItems.SYRINGE.get(), ModItems.APATOSAURUS_DNA.get(), ModItems.APATOSAURUS_SYRINGE.get(), 1)

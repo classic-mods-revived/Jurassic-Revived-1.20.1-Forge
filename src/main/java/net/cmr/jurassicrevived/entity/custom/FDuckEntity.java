@@ -1,6 +1,7 @@
 package net.cmr.jurassicrevived.entity.custom;
 
 import net.cmr.jurassicrevived.entity.ModEntities;
+import net.cmr.jurassicrevived.entity.ai.SprintingMeleeAttackGoal;
 import net.cmr.jurassicrevived.entity.variant.FDuckVariant;
 import net.cmr.jurassicrevived.item.ModItems;
 import net.minecraft.Util;
@@ -59,7 +60,7 @@ public class FDuckEntity extends Animal implements GeoEntity {
         this.goalSelector.addGoal(7, new AvoidEntityGoal<>(this, CeratosaurusEntity.class, (float) 20, 1, 1));
         this.goalSelector.addGoal(8, new AvoidEntityGoal<>(this, TriceratopsEntity.class, (float) 20, 1, 1));
         this.goalSelector.addGoal(9, new AvoidEntityGoal<>(this, BrachiosaurusEntity.class, (float) 20, 1, 1));
-        this.goalSelector.addGoal(10, new MeleeAttackGoal(this, 1, false) {
+        this.goalSelector.addGoal(10, new SprintingMeleeAttackGoal(this, 1.25, false) {
             @Override
             protected double getAttackReachSqr(LivingEntity entity) {
                 return 4;

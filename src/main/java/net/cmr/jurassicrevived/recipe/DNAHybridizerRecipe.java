@@ -1,6 +1,7 @@
 package net.cmr.jurassicrevived.recipe;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.cmr.jurassicrevived.JRMod;
 import net.minecraft.core.NonNullList;
@@ -18,6 +19,8 @@ import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.Level;
 
 public class DNAHybridizerRecipe implements Recipe<SimpleContainer> {
+    private static final int MAX_INPUT_SLOTS = 9;
+
     private final NonNullList<Ingredient> inputItems;
     private final ItemStack output;
     private final ResourceLocation id;
@@ -31,9 +34,39 @@ public class DNAHybridizerRecipe implements Recipe<SimpleContainer> {
     @Override
     public boolean matches(SimpleContainer container, Level level) {
         if (level.isClientSide()) return false;
-        return inputItems.get(0).test(container.getItem(0))
-                && inputItems.get(1).test(container.getItem(1))
-                && inputItems.get(2).test(container.getItem(2));
+
+        // Build list of required ingredients (skip Ingredient.EMPTY placeholders)
+        java.util.List<Ingredient> required = new java.util.ArrayList<>();
+        for (Ingredient ing : inputItems) {
+            if (!ing.isEmpty()) required.add(ing);
+        }
+
+        // Collect inputs from the first 9 slots (0..8)
+        java.util.List<ItemStack> inputs = new java.util.ArrayList<>(9);
+        for (int i = 0; i < Math.min(9, container.getContainerSize()); i++) {
+            ItemStack s = container.getItem(i);
+            if (!s.isEmpty()) inputs.add(s);
+        }
+
+        // Quick size check: extra items present => fail; fewer items than required => fail
+        if (inputs.size() != required.size()) return false;
+
+        // Greedy multiset matching: each input must match a distinct required Ingredient
+        boolean[] used = new boolean[required.size()];
+        for (ItemStack in : inputs) {
+            boolean matched = false;
+            for (int i = 0; i < required.size(); i++) {
+                if (!used[i] && required.get(i).test(in)) {
+                    used[i] = true;
+                    matched = true;
+                    break;
+                }
+            }
+            if (!matched) return false; // input not acceptable for any remaining ingredient
+        }
+
+        // All inputs matched exactly one required ingredient; success
+        return true;
     }
 
     @Override
@@ -73,18 +106,24 @@ public class DNAHybridizerRecipe implements Recipe<SimpleContainer> {
         public DNAHybridizerRecipe fromJson(ResourceLocation id, JsonObject json) {
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
 
-            JsonArray ingredients = GsonHelper.getAsJsonArray(json, "ingredients");
-            NonNullList<Ingredient> inputs = NonNullList.withSize(3, Ingredient.EMPTY);
-            for (int i = 0; i < 3; i++) {
-                inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
+            JsonArray ingredientsJson = GsonHelper.getAsJsonArray(json, "ingredients");
+            // Support 1..9 ingredients; pad to 9 with Ingredient.EMPTY to mark optional/unused slots
+            int count = Math.min(ingredientsJson.size(), MAX_INPUT_SLOTS);
+            NonNullList<Ingredient> inputs = NonNullList.withSize(MAX_INPUT_SLOTS, Ingredient.EMPTY);
+            for (int i = 0; i < count; i++) {
+                JsonElement el = ingredientsJson.get(i);
+                // Allow explicit null/empty entries to mark optional slots in data if desired
+                if (!el.isJsonNull()) {
+                    inputs.set(i, Ingredient.fromJson(el));
+                }
             }
             return new DNAHybridizerRecipe(id, output, inputs);
         }
 
         @Override
         public DNAHybridizerRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
-            int size = buf.readInt();
-            NonNullList<Ingredient> inputs = NonNullList.withSize(size, Ingredient.EMPTY);
+            int size = buf.readVarInt(); // number of slots serialized (should be <= 9)
+            NonNullList<Ingredient> inputs = NonNullList.withSize(MAX_INPUT_SLOTS, Ingredient.EMPTY);
             for (int i = 0; i < size; i++) {
                 inputs.set(i, Ingredient.fromNetwork(buf));
             }
@@ -94,9 +133,11 @@ public class DNAHybridizerRecipe implements Recipe<SimpleContainer> {
 
         @Override
         public void toNetwork(FriendlyByteBuf buf, DNAHybridizerRecipe recipe) {
-            buf.writeInt(recipe.getIngredients().size());
-            for (Ingredient ing : recipe.getIngredients()) {
-                ing.toNetwork(buf);
+            // Write only up to MAX_INPUT_SLOTS for safety
+            int size = Math.min(recipe.getIngredients().size(), MAX_INPUT_SLOTS);
+            buf.writeVarInt(size);
+            for (int i = 0; i < size; i++) {
+                recipe.getIngredients().get(i).toNetwork(buf);
             }
             buf.writeItemStack(recipe.getResultItem(null), false);
         }

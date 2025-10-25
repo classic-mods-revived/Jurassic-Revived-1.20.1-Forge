@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "jurassicrevived:dna_hybridizer_from_white_dna_hybridizer"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_white_dna_hybridizer": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jurassicrevived:white_fossil_cleaner"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_white_dna_hybridizer",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "jurassicrevived:dna_hybridizer_from_white_dna_hybridizer"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,29 @@
+{
+  "type": "jurassicrevived:dna_hybridizing",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:tyrannosaurus_rex_dna"
+    },
+    {
+      "item": "jurassicrevived:velociraptor_dna"
+    },
+    {
+      "item": "jurassicrevived:carnotaurus_dna"
+    },
+    {
+      "item": "jurassicrevived:therizinosaurus_dna"
+    },
+    {
+      "item": "jurassicrevived:majungasaurus_dna"
+    },
+    {
+      "item": "jurassicrevived:rugops_dna"
+    },
+    {
+      "item": "jurassicrevived:giganotosaurus_dna"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:indominus_rex_dna"
+  }
+}

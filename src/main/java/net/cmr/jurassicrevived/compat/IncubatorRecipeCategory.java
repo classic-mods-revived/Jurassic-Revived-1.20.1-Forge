@@ -28,8 +28,6 @@ public class IncubatorRecipeCategory implements IRecipeCategory<IncubatorRecipe>
     public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/incubator/incubator_gui.png");
     private static final ResourceLocation LIT_PROGRESS_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID,"textures/gui/generic/lit_progress.png");
-    private static final ResourceLocation HAY_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/incubator/hay.png");
     private static final ResourceLocation POWER_BAR_TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/power_bar.png");
 
     public static final RecipeType<IncubatorRecipe> INCUBATING_RECIPE_RECIPE_TYPE =
@@ -67,11 +65,6 @@ public class IncubatorRecipeCategory implements IRecipeCategory<IncubatorRecipe>
     @Override
     public void draw(IncubatorRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics g, double mouseX, double mouseY) {
         background.draw(g);
-        // base visuals
-        g.blit(HAY_TEXTURE,  46, 31, 0, 0, 24, 24, 24, 24);
-        g.blit(HAY_TEXTURE,  76, 31, 0, 0, 24, 24, 24, 24);
-        g.blit(HAY_TEXTURE,  106, 31, 0, 0, 24, 24, 24, 24);
-
         // Rising flame indicator on all three slots
         renderRisingFlame(g, 50);
         renderRisingFlame(g, 80);

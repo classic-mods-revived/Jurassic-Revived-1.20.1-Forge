@@ -21,6 +21,14 @@
     "jurassicrevived:embryonic_machine",
     "jurassicrevived:embryo_calcification_machine",
     "jurassicrevived:incubator",
+    "jurassicrevived:white_generator",
+    "jurassicrevived:white_dna_extractor",
+    "jurassicrevived:white_fossil_grinder",
+    "jurassicrevived:white_fossil_cleaner",
+    "jurassicrevived:white_dna_hybridizer",
+    "jurassicrevived:white_embryonic_machine",
+    "jurassicrevived:white_embryo_calcification_machine",
+    "jurassicrevived:white_incubator",
     "jurassicrevived:medium_security_fence_pole",
     "jurassicrevived:medium_security_fence_wire"
   ]

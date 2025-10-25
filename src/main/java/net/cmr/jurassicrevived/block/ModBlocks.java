@@ -59,6 +59,22 @@ public class ModBlocks {
             () -> new EmbryoCalcificationMachineBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
     public static final RegistryObject<Block> INCUBATOR = registerBlock("incubator",
             () -> new IncubatorBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
+    public static final RegistryObject<Block> WHITE_GENERATOR = registerBlock("white_generator",
+            () -> new GeneratorBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
+    public static final RegistryObject<Block> WHITE_DNA_EXTRACTOR = registerBlock("white_dna_extractor",
+            () -> new DNAExtractorBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
+    public static final RegistryObject<Block> WHITE_FOSSIL_GRINDER = registerBlock("white_fossil_grinder",
+            () -> new FossilGrinderBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
+    public static final RegistryObject<Block> WHITE_FOSSIL_CLEANER = registerBlock("white_fossil_cleaner",
+            () -> new FossilCleanerBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
+    public static final RegistryObject<Block> WHITE_DNA_HYBRIDIZER = registerBlock("white_dna_hybridizer",
+            () -> new DNAHybridizerBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
+    public static final RegistryObject<Block> WHITE_EMBRYONIC_MACHINE = registerBlock("white_embryonic_machine",
+            () -> new EmbryonicMachineBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
+    public static final RegistryObject<Block> WHITE_EMBRYO_CALCIFICATION_MACHINE = registerBlock("white_embryo_calcification_machine",
+            () -> new EmbryoCalcificationMachineBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
+    public static final RegistryObject<Block> WHITE_INCUBATOR = registerBlock("white_incubator",
+            () -> new IncubatorBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
 
     public static final RegistryObject<Block> ROYAL_FERN = registerBlock("royal_fern",
             () -> new FlowerBlock(MobEffects.UNLUCK, 0, BlockBehaviour.Properties.copy(Blocks.ALLIUM)));

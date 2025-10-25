@@ -22,18 +22,32 @@ import java.util.function.Consumer;
 
 public class DNAHybridizingRecipeBuilder implements RecipeBuilder {
     private final Item result;
-    private final Ingredient ingredientA;
-    private final Ingredient ingredientB;
-    private final Ingredient ingredientC;
+    private final java.util.List<Ingredient> ingredients = new java.util.ArrayList<>(9);
     private final int count;
     private final Advancement.Builder advancement = Advancement.Builder.advancement();
 
-    public DNAHybridizingRecipeBuilder(ItemLike a, ItemLike b, ItemLike c, ItemLike result, int count) {
-        this.ingredientA = Ingredient.of(a);
-        this.ingredientB = Ingredient.of(b);
-        this.ingredientC = Ingredient.of(c);
+    // New ctor: result-first, 1..n ingredients will be added via addIngredient
+    public DNAHybridizingRecipeBuilder(ItemLike result, int count) {
         this.result = result.asItem();
         this.count = count;
+    }
+
+    // Fluent method to add up to 9 ingredients
+    public DNAHybridizingRecipeBuilder addIngredient(ItemLike itemLike) {
+        if (this.ingredients.size() >= 9) {
+            throw new IllegalStateException("DNA hybridizing supports at most 9 ingredients");
+        }
+        this.ingredients.add(Ingredient.of(itemLike));
+        return this;
+    }
+
+    // Optional: explicitly add an empty slot (skippable position)
+    public DNAHybridizingRecipeBuilder addEmptyIngredient() {
+        if (this.ingredients.size() >= 9) {
+            throw new IllegalStateException("DNA hybridizing supports at most 9 ingredients");
+        }
+        this.ingredients.add(Ingredient.EMPTY);
+        return this;
     }
 
     @Override
@@ -50,6 +64,9 @@ public class DNAHybridizingRecipeBuilder implements RecipeBuilder {
 
     @Override
     public void save(Consumer<FinishedRecipe> out, ResourceLocation id) {
+        if (this.ingredients.isEmpty()) {
+            throw new IllegalStateException("DNA hybridizing recipe must have at least 1 ingredient");
+        }
         this.advancement.parent(ResourceLocation.fromNamespaceAndPath("jurassicrevived", "recipes/root"))
                 .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id))
                 .rewards(AdvancementRewards.Builder.recipe(id))
@@ -59,9 +76,7 @@ public class DNAHybridizingRecipeBuilder implements RecipeBuilder {
                 id,
                 this.result,
                 this.count,
-                this.ingredientA,
-                this.ingredientB,
-                this.ingredientC,
+                new java.util.ArrayList<>(this.ingredients),
                 this.advancement,
                 ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "recipes/" + id.getPath())
         ));
@@ -70,27 +85,21 @@ public class DNAHybridizingRecipeBuilder implements RecipeBuilder {
     public static class Result implements FinishedRecipe {
         private final ResourceLocation id;
         private final Item result;
-        private final Ingredient a;
-        private final Ingredient b;
-        private final Ingredient c;
         private final int count;
+        private final java.util.List<Ingredient> ingredients;
         private final Advancement.Builder advancement;
         private final ResourceLocation advancementId;
 
         public Result(ResourceLocation id,
                       Item result,
                       int count,
-                      Ingredient a,
-                      Ingredient b,
-                      Ingredient c,
+                      java.util.List<Ingredient> ingredients,
                       Advancement.Builder advancement,
                       ResourceLocation advancementId) {
             this.id = id;
             this.result = result;
             this.count = count;
-            this.a = a;
-            this.b = b;
-            this.c = c;
+            this.ingredients = ingredients;
             this.advancement = advancement;
             this.advancementId = advancementId;
         }
@@ -99,17 +108,20 @@ public class DNAHybridizingRecipeBuilder implements RecipeBuilder {
         public void serializeRecipeData(JsonObject json) {
             json.addProperty("type", "jurassicrevived:dna_hybridizing");
 
-            JsonArray ingredients = new JsonArray();
-            ingredients.add(a.toJson());
-            ingredients.add(b.toJson());
-            ingredients.add(c.toJson());
-            json.add("ingredients", ingredients);
+            JsonArray ingredientsArr = new JsonArray();
+            // Write provided ingredients in order; omit trailing empty slots
+            for (Ingredient ing : ingredients) {
+                if (ing == Ingredient.EMPTY) {
+                    ingredientsArr.add(new JsonObject()); // represents empty/optional slot safely
+                } else {
+                    ingredientsArr.add(ing.toJson());
+                }
+            }
+            json.add("ingredients", ingredientsArr);
 
             JsonObject resultObj = new JsonObject();
             resultObj.addProperty("item", ForgeRegistries.ITEMS.getKey(this.result).toString());
-            if (this.count > 1) {
-                resultObj.addProperty("count", this.count);
-            }
+            if (this.count > 1) resultObj.addProperty("count", this.count);
             json.add("result", resultObj);
         }
 

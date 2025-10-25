@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:fossil_grinder"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:white_fossil_grinder"
+  }
+}

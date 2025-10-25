@@ -1,6 +1,7 @@
 package net.cmr.jurassicrevived.entity.custom;
 
 import net.cmr.jurassicrevived.entity.ModEntities;
+import net.cmr.jurassicrevived.entity.ai.SprintingMeleeAttackGoal;
 import net.cmr.jurassicrevived.entity.variant.ProcompsognathusVariant;
 import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
@@ -53,7 +54,7 @@ public class ProcompsognathusEntity extends Animal implements GeoEntity {
 
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
         this.goalSelector.addGoal(2, new FloatGoal(this));
-        this.goalSelector.addGoal(3, new MeleeAttackGoal(this, 1.2, false) {
+        this.goalSelector.addGoal(3, new SprintingMeleeAttackGoal(this, 1.25, false) {
             @Override
             protected double getAttackReachSqr(LivingEntity entity) {
                 return 4;

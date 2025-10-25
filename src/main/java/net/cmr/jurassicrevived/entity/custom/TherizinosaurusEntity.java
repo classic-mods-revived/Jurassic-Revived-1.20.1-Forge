@@ -1,6 +1,7 @@
 package net.cmr.jurassicrevived.entity.custom;
 
 import net.cmr.jurassicrevived.entity.ModEntities;
+import net.cmr.jurassicrevived.entity.ai.SprintingMeleeAttackGoal;
 import net.cmr.jurassicrevived.entity.variant.TherizinosaurusVariant;
 import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
@@ -53,7 +54,7 @@ public class TherizinosaurusEntity extends Animal implements GeoEntity {
         this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, VelociraptorEntity.class, (float) 20, 0.8, 0.8));
         this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, CeratosaurusEntity.class, (float) 20, 0.8, 0.8));
         this.goalSelector.addGoal(5, new AvoidEntityGoal<>(this, DilophosaurusEntity.class, (float) 20, 0.8, 0.8));
-        this.goalSelector.addGoal(6, new MeleeAttackGoal(this, 1.2, false) {
+        this.goalSelector.addGoal(6, new SprintingMeleeAttackGoal(this, 1.25, false) {
             @Override
             protected double getAttackReachSqr(LivingEntity entity) {
                 return 16;

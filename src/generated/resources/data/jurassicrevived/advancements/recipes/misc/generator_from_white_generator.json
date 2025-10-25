@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "jurassicrevived:generator_from_white_generator"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_white_generator": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jurassicrevived:white_generator"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_white_generator",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "jurassicrevived:generator_from_white_generator"
+    ]
+  },
+  "sends_telemetry_event": false
+}

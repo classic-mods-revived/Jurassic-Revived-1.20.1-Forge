@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:white_fossil_cleaner"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:fossil_cleaner"
+  }
+}

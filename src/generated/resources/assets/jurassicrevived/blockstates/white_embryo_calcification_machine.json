@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "jurassicrevived:block/white_embryo_calcification_machine",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "jurassicrevived:block/white_embryo_calcification_machine"
+    },
+    "facing=south": {
+      "model": "jurassicrevived:block/white_embryo_calcification_machine",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "jurassicrevived:block/white_embryo_calcification_machine",
+      "y": 270
+    }
+  }
+}

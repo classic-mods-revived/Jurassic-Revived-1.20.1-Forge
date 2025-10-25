@@ -38,8 +38,8 @@ public class DNAExtractorBlock extends BaseEntityBlock {
     }
 
     private static final VoxelShape SHAPE_NORTH = Shapes.box(
-            0.5 / 16.0, 0.0 / 16.0, 2.0 / 16.0,
-            15.5 / 16.0, 12.0 / 16.0, 14.0 / 16.0
+            0.0 / 16.0, 0.0 / 16.0, 0.5 / 16.0,
+            16.0 / 16.0, 17.0 / 16.0, 15.5 / 16.0
     );
 
     private static final VoxelShape SHAPE_SOUTH = rotateShapeY(SHAPE_NORTH, 180);

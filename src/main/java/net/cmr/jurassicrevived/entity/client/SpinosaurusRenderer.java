@@ -16,7 +16,7 @@ public class SpinosaurusRenderer extends GeoEntityRenderer<SpinosaurusEntity> {
     @Override
     public void render(SpinosaurusEntity entity, float entityYaw, float partialTick, PoseStack poseStack,
                        MultiBufferSource bufferSource, int packedLight) {
-        poseStack.scale(2F, 2F, 2F);
+        poseStack.scale(2.77F, 2.77F, 2.77F);
         if(entity.isBaby()) {
             poseStack.scale(0.4F, 0.4F, 0.4F);
         }

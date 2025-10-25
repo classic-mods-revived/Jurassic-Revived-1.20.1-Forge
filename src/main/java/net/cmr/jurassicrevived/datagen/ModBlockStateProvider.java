@@ -67,6 +67,14 @@ public class ModBlockStateProvider extends BlockStateProvider {
         horizontalFacingWithItem(ModBlocks.EMBRYONIC_MACHINE);
         horizontalFacingWithItem(ModBlocks.EMBRYO_CALCIFICATION_MACHINE);
         horizontalFacingWithItem(ModBlocks.INCUBATOR);
+        horizontalFacingWithItem(ModBlocks.WHITE_GENERATOR);
+        horizontalFacingWithItem(ModBlocks.WHITE_DNA_EXTRACTOR);
+        horizontalFacingWithItem(ModBlocks.WHITE_FOSSIL_GRINDER);
+        horizontalFacingWithItem(ModBlocks.WHITE_FOSSIL_CLEANER);
+        horizontalFacingWithItem(ModBlocks.WHITE_DNA_HYBRIDIZER);
+        horizontalFacingWithItem(ModBlocks.WHITE_EMBRYONIC_MACHINE);
+        horizontalFacingWithItem(ModBlocks.WHITE_EMBRYO_CALCIFICATION_MACHINE);
+        horizontalFacingWithItem(ModBlocks.WHITE_INCUBATOR);
 
         eggLike(ModBlocks.HATCHED_VELOCIRAPTOR_EGG);
         eggLike(ModBlocks.HATCHED_TYRANNOSAURUS_REX_EGG);
@@ -105,7 +113,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 ModBlocks.LOW_SECURITY_FENCE_POLE,
                 "low_security_fence_pole",
                 "low_security_fence_pole_part",
-                "low_security_fence_pole_diagonal_part",
+                "low_security_fence_pole_diag_part",
                 FencePoleBlock.NE,
                 FencePoleBlock.SE,
                 FencePoleBlock.SW,
@@ -116,7 +124,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 ModBlocks.LOW_SECURITY_FENCE_WIRE,
                 "low_security_fence_wire",
                 "low_security_fence_wire_part",
-                "low_security_fence_wire_diagonal_part",
+                "low_security_fence_wire_diag_part",
                 FenceWireBlock.NE,
                 FenceWireBlock.SE,
                 FenceWireBlock.SW,
@@ -127,7 +135,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 ModBlocks.MEDIUM_SECURITY_FENCE_POLE,
                 "medium_security_fence_pole",
                 "medium_security_fence_pole_part",
-                "medium_security_fence_pole_diagonal_part",
+                "medium_security_fence_pole_diag_part",
                 FencePoleBlock.NE,
                 FencePoleBlock.SE,
                 FencePoleBlock.SW,
@@ -138,7 +146,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 ModBlocks.MEDIUM_SECURITY_FENCE_WIRE,
                 "medium_security_fence_wire",
                 "medium_security_fence_wire_part",
-                "medium_security_fence_wire_diagonal_part",
+                "medium_security_fence_wire_diag_part",
                 FenceWireBlock.NE,
                 FenceWireBlock.SE,
                 FenceWireBlock.SW,

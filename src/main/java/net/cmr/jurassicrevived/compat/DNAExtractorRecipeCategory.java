@@ -117,13 +117,20 @@ public class DNAExtractorRecipeCategory implements IRecipeCategory<DNAExtractorR
         Ingredient second = recipe.getIngredients().size() > 1 ? recipe.getIngredients().get(1) : Ingredient.EMPTY;
         if (!second.isEmpty() && second.test(new ItemStack(ModItems.MOSQUITO_IN_AMBER.get()))) {
             ItemStack[] candidates = Ingredient.of(ModTags.Items.DNA).getItems();
+            java.util.List<ItemStack> filtered = java.util.Arrays.stream(candidates)
+                    .filter(stack -> {
+                        if (!recipe.hasAnyWeightsConfigured()) return true;
+                        int weight = recipe.getWeightOrDefault(stack.getItem(), 1);
+                        return weight > 0;
+                    })
+                    .toList();
             builder.addSlot(RecipeIngredientRole.OUTPUT, 103, 35)
-                    .addItemStacks(java.util.Arrays.asList(candidates))
+                    .addItemStacks(filtered)
                     .addRichTooltipCallback((slotView, tooltip) -> {
                         slotView.getDisplayedIngredient(VanillaTypes.ITEM_STACK).ifPresent(stack -> {
                             if (recipe.hasAnyWeightsConfigured()) {
                                 int weight = recipe.getWeightOrDefault(stack.getItem(), 1);
-                                tooltip.add(Component.literal("Weight: " + weight));
+                                //tooltip.add(Component.literal("Weight: " + weight));
                             }
                         });
                     });

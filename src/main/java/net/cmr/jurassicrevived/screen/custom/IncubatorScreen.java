@@ -22,8 +22,6 @@ public class IncubatorScreen extends AbstractContainerScreen<IncubatorMenu> {
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/power_bar.png");
     private static final ResourceLocation LIT_PROGRESS_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID,"textures/gui/generic/lit_progress.png");
-    private static final ResourceLocation HAY_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/incubator/hay.png");
     private static final ResourceLocation EGG_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/egg.png");
     private EnergyDisplayTooltipArea energyInfoArea;
@@ -73,9 +71,6 @@ public class IncubatorScreen extends AbstractContainerScreen<IncubatorMenu> {
         int y = (this.height - this.imageHeight) /2;
 
         guiGraphics.blit(GUI_TEXTURE, x, y, 0, 0, this.imageWidth, this.imageHeight, 176, 166);
-        guiGraphics.blit(HAY_TEXTURE,  x + 46, y + 31, 0, 0, 24, 24, 24, 24);
-        guiGraphics.blit(HAY_TEXTURE,  x + 76, y + 31, 0, 0, 24, 24, 24, 24);
-        guiGraphics.blit(HAY_TEXTURE,  x + 106, y + 31, 0, 0, 24, 24, 24, 24);
 
         guiGraphics.blit(EGG_TEXTURE,  x + 50, y + 35, 0, 0, 16, 16, 16, 16);
         guiGraphics.blit(EGG_TEXTURE,  x + 80, y + 35, 0, 0, 16, 16, 16, 16);

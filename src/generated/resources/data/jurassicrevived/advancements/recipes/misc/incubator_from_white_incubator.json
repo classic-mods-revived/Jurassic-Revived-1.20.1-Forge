@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "jurassicrevived:incubator_from_white_incubator"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_white_incubator": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jurassicrevived:white_incubator"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_white_incubator",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "jurassicrevived:incubator_from_white_incubator"
+    ]
+  },
+  "sends_telemetry_event": false
+}

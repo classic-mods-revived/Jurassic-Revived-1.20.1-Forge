@@ -27,6 +27,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -43,7 +44,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvider {
-    public final ItemStackHandler itemHandler = new ItemStackHandler(4) {
+    public final ItemStackHandler itemHandler = new ItemStackHandler(10) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
@@ -51,18 +52,18 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
 
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+            // slots 0..8 = inputs (DNA), slot 9 = output
             return switch (slot) {
-                case 0, 1, 2 -> stack.is(net.cmr.jurassicrevived.util.ModTags.Items.DNA);
-                case 3 -> false;
+                case 0, 1, 2, 3, 4, 5, 6, 7, 8 -> stack.is(ModTags.Items.DNA);
+                case 9 -> false;
                 default -> super.isItemValid(slot, stack);
             };
         }
     };
 
-    private static final int DNA_SLOT_1 = 0;
-    private static final int DNA_SLOT_2 = 1;
-    private static final int DNA_SLOT_3 = 2;
-    private static final int OUTPUT   = 3;
+    private static final int OUTPUT = 9;
+    // convenient constants for inputs 0..8
+    private static final int[] INPUT_SLOTS = {0,1,2,3,4,5,6,7,8};
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
@@ -72,9 +73,17 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
                     new InventoryDirectionEntry(Direction.SOUTH, OUTPUT, false),
                     new InventoryDirectionEntry(Direction.EAST, OUTPUT, false),
                     new InventoryDirectionEntry(Direction.WEST, OUTPUT, false),
-                    new InventoryDirectionEntry(Direction.UP, DNA_SLOT_1, true),
-                    new InventoryDirectionEntry(Direction.UP, DNA_SLOT_2, true),
-                    new InventoryDirectionEntry(Direction.UP, DNA_SLOT_3, true)).directionsMap;
+                    // allow insertion to all 9 inputs from top
+                    new InventoryDirectionEntry(Direction.UP, 0, true),
+                    new InventoryDirectionEntry(Direction.UP, 1, true),
+                    new InventoryDirectionEntry(Direction.UP, 2, true),
+                    new InventoryDirectionEntry(Direction.UP, 3, true),
+                    new InventoryDirectionEntry(Direction.UP, 4, true),
+                    new InventoryDirectionEntry(Direction.UP, 5, true),
+                    new InventoryDirectionEntry(Direction.UP, 6, true),
+                    new InventoryDirectionEntry(Direction.UP, 7, true),
+                    new InventoryDirectionEntry(Direction.UP, 8, true)
+            ).directionsMap;
 
 
     protected final ContainerData data;
@@ -86,21 +95,34 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
     private final ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
     private LazyOptional<IEnergyStorage> lazyEnergy = LazyOptional.empty();
 
+    // Expose a receive-only view to neighbors. Internal code uses ENERGY_STORAGE directly.
+    private final IEnergyStorage EXTERNAL_ENERGY_CAP = new IEnergyStorage() {
+        @Override
+        public int receiveEnergy(int maxReceive, boolean simulate) {
+            return ENERGY_STORAGE == null ? 0 : ENERGY_STORAGE.receiveEnergy(maxReceive, simulate);
+        }
+        @Override
+        public int extractEnergy(int maxExtract, boolean simulate) {
+            return 0; // block external pulls
+        }
+        @Override
+        public int getEnergyStored() {
+            return ENERGY_STORAGE == null ? 0 : ENERGY_STORAGE.getEnergyStored();
+        }
+        @Override
+        public int getMaxEnergyStored() {
+            return ENERGY_STORAGE == null ? 0 : ENERGY_STORAGE.getMaxEnergyStored();
+        }
+        @Override
+        public boolean canExtract() { return false; }
+        @Override
+        public boolean canReceive() { return ENERGY_STORAGE != null && ENERGY_STORAGE.canReceive(); }
+    };
+
     private ModEnergyStorage createEnergyStorage() {
         if (Config.REQUIRE_POWER) {
+            // Allow internal extraction; onEnergyChanged keeps client in sync
             return new ModEnergyStorage(16000, (int) ENERGY_TRANSFER_RATE) {
-                @Override
-                public int extractEnergy(int maxExtract, boolean simulate) {
-                    // Disallow sending power out
-                    return 0;
-                }
-
-                @Override
-                public boolean canExtract() {
-                    // Disallow sending power out
-                    return false;
-                }
-
                 @Override
                 public void onEnergyChanged() {
                     setChanged();
@@ -114,8 +136,9 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
     }
 
     public IEnergyStorage getEnergyStorage(@Nullable Direction direction) {
-        if (Config.REQUIRE_POWER) {return this.ENERGY_STORAGE;}
-        return null;
+        if (!Config.REQUIRE_POWER) return null;
+        // Always expose the wrapper so pipes/networks can't pull out
+        return EXTERNAL_ENERGY_CAP;
     }
 
     public DNAHybridizerBlockEntity(BlockPos pPos, BlockState pBlockState) {
@@ -309,18 +332,51 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
     }
 
     private void craftItem() {
-        Optional<DNAHybridizerRecipe> recipe = getCurrentRecipe();
-        if (recipe.isEmpty()) return;
+        Optional<DNAHybridizerRecipe> recipeOpt = getCurrentRecipe();
+        if (recipeOpt.isEmpty()) return;
+        DNAHybridizerRecipe recipe = recipeOpt.get();
 
-        this.itemHandler.extractItem(DNA_SLOT_1, 1, false);
-        this.itemHandler.extractItem(DNA_SLOT_2, 1, false);
-        this.itemHandler.extractItem(DNA_SLOT_3, 1, false);
+        // Consume exactly one from each required ingredient, regardless of which input slot it's in.
+        // Build required list (skip empties), then match against present inputs and extract where matched.
+        java.util.List<Ingredient> required = new java.util.ArrayList<>();
+        for (Ingredient ing : recipe.getIngredients()) {
+            if (!ing.isEmpty()) required.add(ing);
+        }
 
+        // Track which required entries were satisfied by which slot
+        boolean[] used = new boolean[required.size()];
+        java.util.List<Integer> toExtractSlots = new java.util.ArrayList<>();
+
+        // Try to match each non-empty input slot to one remaining required ingredient
+        for (int slot : INPUT_SLOTS) {
+            ItemStack s = itemHandler.getStackInSlot(slot);
+            if (s.isEmpty()) continue;
+
+            for (int i = 0; i < required.size(); i++) {
+                if (!used[i] && required.get(i).test(s)) {
+                    used[i] = true;
+                    toExtractSlots.add(slot);
+                    break;
+                }
+            }
+        }
+
+        // Safety: only proceed if all required ingredients were matched
+        for (boolean u : used) {
+            if (!u) return;
+        }
+
+        // Extract one from each matched input slot
+        for (int slot : toExtractSlots) {
+            this.itemHandler.extractItem(slot, 1, false);
+        }
+
+        // Produce output
         SimpleContainer inv = new SimpleContainer(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
             inv.setItem(i, itemHandler.getStackInSlot(i));
         }
-        ItemStack result = recipe.get().assemble(inv, getLevel().registryAccess());
+        ItemStack result = recipe.assemble(inv, getLevel().registryAccess());
         ItemStack current = this.itemHandler.getStackInSlot(OUTPUT);
         if (current.isEmpty()) {
             this.itemHandler.setStackInSlot(OUTPUT, result.copy());
@@ -343,21 +399,51 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
     }
 
     private boolean hasRecipe() {
-        Optional<DNAHybridizerRecipe> recipe = getCurrentRecipe();
+        Optional<DNAHybridizerRecipe> recipeOpt = getCurrentRecipe();
+        if (recipeOpt.isEmpty()) return false;
+        DNAHybridizerRecipe recipe = recipeOpt.get();
 
-        if (recipe.isEmpty()) return false;
-
-        // Compute dynamic result and check it can be inserted
-        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
-        for (int i = 0; i < itemHandler.getSlots(); i++) {
-            inventory.setItem(i, itemHandler.getStackInSlot(i));
+        // Build required ingredients (skip empties)
+        java.util.List<Ingredient> required = new java.util.ArrayList<>();
+        for (Ingredient ing : recipe.getIngredients()) {
+            if (!ing.isEmpty()) required.add(ing);
         }
-        ItemStack result = recipe.get().assemble(inventory, getLevel().registryAccess());
-        ItemStack out = itemHandler.getStackInSlot(OUTPUT);
-        if (result.isEmpty()) return false;
-        if (out.isEmpty()) return true;
-        if (!ItemStack.isSameItemSameTags(out, result)) return false;
-        return out.getCount() + result.getCount() <= out.getMaxStackSize();
+
+        // Gather current inputs from slots 0..8
+        java.util.List<ItemStack> inputs = new java.util.ArrayList<>(9);
+        for (int i = 0; i < INPUT_SLOTS.length; i++) {
+            ItemStack s = itemHandler.getStackInSlot(INPUT_SLOTS[i]);
+            if (!s.isEmpty()) inputs.add(s);
+        }
+
+        // Enforce exact match count (no extras, no missing)
+        if (inputs.size() != required.size()) return false;
+
+        // Order-independent matching
+        boolean[] used = new boolean[required.size()];
+        for (ItemStack in : inputs) {
+            boolean matched = false;
+            for (int i = 0; i < required.size(); i++) {
+                if (!used[i] && required.get(i).test(in)) {
+                    used[i] = true;
+                    matched = true;
+                    break;
+                }
+            }
+            if (!matched) return false;
+        }
+
+        // Output capacity check using dynamic result
+        SimpleContainer checkInv = new SimpleContainer(itemHandler.getSlots());
+        for (int i = 0; i < itemHandler.getSlots(); i++) {
+            checkInv.setItem(i, itemHandler.getStackInSlot(i));
+        }
+        ItemStack plannedResult = recipe.assemble(checkInv, getLevel().registryAccess());
+        ItemStack currentOut = itemHandler.getStackInSlot(OUTPUT);
+        if (plannedResult.isEmpty()) return false;
+        if (currentOut.isEmpty()) return true;
+        if (!ItemStack.isSameItemSameTags(currentOut, plannedResult)) return false;
+        return currentOut.getCount() + plannedResult.getCount() <= currentOut.getMaxStackSize();
     }
 
     private Optional<DNAHybridizerRecipe> getCurrentRecipe() {

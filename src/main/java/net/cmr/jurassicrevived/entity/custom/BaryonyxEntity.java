@@ -1,6 +1,7 @@
 package net.cmr.jurassicrevived.entity.custom;
 
 import net.cmr.jurassicrevived.entity.ModEntities;
+import net.cmr.jurassicrevived.entity.ai.SprintingMeleeAttackGoal;
 import net.cmr.jurassicrevived.entity.variant.BaryonyxVariant;
 import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
@@ -52,7 +53,7 @@ public class BaryonyxEntity extends Animal implements GeoEntity {
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
         this.goalSelector.addGoal(2, new FloatGoal(this));
         this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, BrachiosaurusEntity.class, (float) 20, 1, 1));
-        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1, false) {
+        this.goalSelector.addGoal(4, new SprintingMeleeAttackGoal(this, 1.25, false) {
             @Override
             protected double getAttackReachSqr(LivingEntity entity) {
                 return 25;

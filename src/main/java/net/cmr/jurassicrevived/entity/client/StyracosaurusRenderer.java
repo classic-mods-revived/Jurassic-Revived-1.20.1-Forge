@@ -16,7 +16,7 @@ public class StyracosaurusRenderer extends GeoEntityRenderer<StyracosaurusEntity
     @Override
     public void render(StyracosaurusEntity entity, float entityYaw, float partialTick, PoseStack poseStack,
                        MultiBufferSource bufferSource, int packedLight) {
-        poseStack.scale(1.5F, 1.5F, 1.5F);
+        poseStack.scale(1.28F, 1.28F, 1.28F);
         if(entity.isBaby()) {
             poseStack.scale(0.4F, 0.4F, 0.4F);
         }

@@ -140,13 +140,20 @@ public class FossilCleanerRecipeCategory implements IRecipeCategory<FossilCleane
 
         // Output cycles all fossils with weight tooltips if present
         ItemStack[] candidates = net.minecraft.world.item.crafting.Ingredient.of(ModTags.Items.FOSSILS).getItems();
+        java.util.List<ItemStack> filtered = java.util.Arrays.stream(candidates)
+                .filter(stack -> {
+                    if (!recipe.hasAnyWeightsConfigured()) return true;
+                    int weight = recipe.getWeightOrDefault(stack.getItem(), 1);
+                    return weight > 0;
+                })
+                .toList();
         builder.addSlot(RecipeIngredientRole.OUTPUT, 103, 35)
-                .addItemStacks(java.util.Arrays.asList(candidates))
+                .addItemStacks(filtered)
                 .addRichTooltipCallback((slotView, tooltip) -> {
                     slotView.getDisplayedIngredient(VanillaTypes.ITEM_STACK).ifPresent(stack -> {
                         if (recipe.hasAnyWeightsConfigured()) {
                             int weight = recipe.getWeightOrDefault(stack.getItem(), 1);
-                            tooltip.add(Component.literal("Weight: " + weight));
+                            //tooltip.add(Component.literal("Weight: " + weight));
                         }
                     });
                 });

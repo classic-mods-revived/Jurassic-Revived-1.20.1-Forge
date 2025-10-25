@@ -10,9 +10,8 @@
     "item": "jurassicrevived:protoceratops_tissue"
   },
   "weighted_outputs": {
-    "jurassicrevived:crushed_fossil": 30,
-    "jurassicrevived:protoceratops_tissue": 10,
-    "minecraft:bone_meal": 30,
-    "minecraft:flint": 30
+    "jurassicrevived:crushed_fossil": 40,
+    "jurassicrevived:protoceratops_tissue": 20,
+    "minecraft:bone_meal": 40
   }
 }
