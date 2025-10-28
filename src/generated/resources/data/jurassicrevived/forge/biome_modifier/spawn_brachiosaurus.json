@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#forge:is_plains",
+  "spawners": {
+    "type": "jurassicrevived:brachiosaurus",
+    "maxCount": 3,
+    "minCount": 1,
+    "weight": 20
+  }
+}

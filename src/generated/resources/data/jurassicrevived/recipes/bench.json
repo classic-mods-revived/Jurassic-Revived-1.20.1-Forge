@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:spruce_planks"
+    },
+    "B": {
+      "item": "jurassicrevived:reinforced_stone_bricks"
+    }
+  },
+  "pattern": [
+    "A  ",
+    "AAA",
+    "BBB"
+  ],
+  "result": {
+    "item": "jurassicrevived:bench"
+  },
+  "show_notification": true
+}

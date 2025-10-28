@@ -14,23 +14,27 @@ public class Config {
             .comment("If true, power systems are enabled. If false, disabled. Requires a restart to take effect")
             .define("requirePower", false);
 
+    private static final ForgeConfigSpec.BooleanValue NATURAL_DINOSAUR_SPAWNING_SPEC = BUILDER
+            .comment("If true, dinosaurs spawn naturally in the world. If false, dinosaurs don't naturally spawn. Requires a restart to take effect, and will not affect existing dinosaurs in the world.")
+            .define("naturalDinoSpawning", false);
+
     // Throughput (per second) with clamped defaults
     private static final int MAX_ITEMS_PER_SEC = 1024;
     private static final int MAX_MB_PER_SEC = 100000;
     private static final int MAX_FE_PER_SEC = 2097152;
 
     private static final ForgeConfigSpec.IntValue ITEMS_PER_SECOND = BUILDER
-            .comment("Max items transferred per second by pipes")
+            .comment("Max items transferred per second by pipes. Requires a restart to take effect")
             .comment("Default: 64")
             .defineInRange("itemsPerSecond", Math.min(64, MAX_ITEMS_PER_SEC), 0, MAX_ITEMS_PER_SEC);
 
     private static final ForgeConfigSpec.IntValue MB_PER_SECOND = BUILDER
-            .comment("Max millibuckets transferred per second by pipes")
+            .comment("Max millibuckets transferred per second by pipes Requires a restart to take effect")
             .comment("Default: 1,000")
             .defineInRange("milliBucketsPerSecond", Math.min(1000, MAX_MB_PER_SEC), 0, MAX_MB_PER_SEC);
 
     private static final ForgeConfigSpec.IntValue FE_PER_SECOND = BUILDER
-            .comment("Max FE transferred per second by pipes")
+            .comment("Max FE transferred per second by pipes. Requires a restart to take effect")
             .comment("Default: 2,048")
             .defineInRange("fePerSecond", Math.min(2048, MAX_FE_PER_SEC), 0, MAX_FE_PER_SEC);
 
@@ -38,6 +42,7 @@ public class Config {
 
     // Cached values
     public static boolean REQUIRE_POWER;
+    public static boolean NATURAL_DINOSAUR_SPAWNING;
     public static int itemsPerSecond;
     public static int milliBucketsPerSecond;
     public static int fePerSecond;
@@ -45,6 +50,7 @@ public class Config {
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event) {
         REQUIRE_POWER = REQUIRE_POWER_SPEC.get();
+        NATURAL_DINOSAUR_SPAWNING = NATURAL_DINOSAUR_SPAWNING_SPEC.get();
         itemsPerSecond = ITEMS_PER_SECOND.get();
         milliBucketsPerSecond = MB_PER_SECOND.get();
         fePerSecond = FE_PER_SECOND.get();
@@ -54,6 +60,11 @@ public class Config {
     public static void setRequirePower(boolean value) {
         REQUIRE_POWER_SPEC.set(value);
         REQUIRE_POWER = value;
+    }
+
+    public static void setNaturalDinosaurSpawning(boolean value) {
+        NATURAL_DINOSAUR_SPAWNING_SPEC.set(value);
+        NATURAL_DINOSAUR_SPAWNING = value;
     }
 
     public static void setItemsPerSecond(int value) {

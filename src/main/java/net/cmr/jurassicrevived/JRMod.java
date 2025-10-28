@@ -17,6 +17,7 @@ import net.cmr.jurassicrevived.util.FenceClimbClientHandler;
 import net.cmr.jurassicrevived.util.FenceClimbHandler;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
@@ -105,6 +106,7 @@ public class JRMod {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
+            EntityRenderers.register(ModEntities.SEAT.get(), NoopRenderer::new);
             EntityRenderers.register(ModEntities.APATOSAURUS.get(), ApatosaurusRenderer::new);
             EntityRenderers.register(ModEntities.ALBERTOSAURUS.get(), AlbertosaurusRenderer::new);
             EntityRenderers.register(ModEntities.BARYONYX.get(), BaryonyxRenderer::new);

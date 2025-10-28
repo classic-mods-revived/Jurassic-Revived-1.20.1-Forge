@@ -48,6 +48,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.GYPSUM_COBBLESTONE);
         blockWithItem(ModBlocks.GYPSUM_STONE_BRICKS);
         blockWithItem(ModBlocks.SMOOTH_GYPSUM_STONE);
+        blockWithItem(ModBlocks.CHISELED_GYPSUM_STONE);
 
         blockWithItem(ModBlocks.STONE_FOSSIL);
         blockWithItem(ModBlocks.DEEPSLATE_FOSSIL);
@@ -56,8 +57,27 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         blockWithItem(ModBlocks.REINFORCED_STONE);
         blockWithItem(ModBlocks.REINFORCED_STONE_BRICKS);
+        blockWithItem(ModBlocks.CHISELED_REINFORCED_STONE);
+
+        stairsBlock(((StairBlock) ModBlocks.REINFORCED_BRICK_STAIRS.get()), blockTexture(ModBlocks.REINFORCED_STONE_BRICKS.get()));
+        slabBlock(((SlabBlock) ModBlocks.REINFORCED_BRICK_SLAB.get()), blockTexture(ModBlocks.REINFORCED_STONE_BRICKS.get()), blockTexture(ModBlocks.REINFORCED_STONE_BRICKS.get()));
+        wallBlock(((WallBlock) ModBlocks.REINFORCED_BRICK_WALL.get()), blockTexture(ModBlocks.REINFORCED_STONE_BRICKS.get()));
+
+        blockItem(ModBlocks.REINFORCED_BRICK_STAIRS);
+        blockItem(ModBlocks.REINFORCED_BRICK_SLAB);
+
+        stairsBlock(((StairBlock) ModBlocks.GYPSUM_BRICK_STAIRS.get()), blockTexture(ModBlocks.GYPSUM_STONE_BRICKS.get()));
+        slabBlock(((SlabBlock) ModBlocks.GYPSUM_BRICK_SLAB.get()), blockTexture(ModBlocks.GYPSUM_STONE_BRICKS.get()), blockTexture(ModBlocks.GYPSUM_STONE_BRICKS.get()));
+        wallBlock(((WallBlock) ModBlocks.GYPSUM_BRICK_WALL.get()), blockTexture(ModBlocks.GYPSUM_STONE_BRICKS.get()));
+
+        blockItem(ModBlocks.GYPSUM_BRICK_STAIRS);
+        blockItem(ModBlocks.GYPSUM_BRICK_SLAB);
 
         horizontalFacingWithItem(ModBlocks.CAT_PLUSHIE);
+        horizontalFacingWithItem(ModBlocks.TRASH_CAN);
+        horizontalFacingWithItem(ModBlocks.BENCH);
+        horizontalFacingWithItem(ModBlocks.FENCE_LIGHT);
+        horizontalFacingWithItem(ModBlocks.LIGHT_POST);
 
         horizontalFacingWithItem(ModBlocks.GENERATOR);
         horizontalFacingWithItem(ModBlocks.DNA_EXTRACTOR);
@@ -199,11 +219,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     private void blockItem(RegistryObject<Block> blockRegistryObject, String appendix) {
-        simpleBlockItem(blockRegistryObject.get(), new ModelFile.UncheckedModelFile("mccourse:block/" + ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath() + appendix));
+        simpleBlockItem(blockRegistryObject.get(), new ModelFile.UncheckedModelFile("jurassicrevived:block/" + ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath() + appendix));
     }
 
     private void blockItem(RegistryObject<Block> blockRegistryObject) {
-        simpleBlockItem(blockRegistryObject.get(), new ModelFile.UncheckedModelFile("mccourse:block/" + ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath()));
+        simpleBlockItem(blockRegistryObject.get(), new ModelFile.UncheckedModelFile("jurassicrevived:block/" + ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath()));
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {

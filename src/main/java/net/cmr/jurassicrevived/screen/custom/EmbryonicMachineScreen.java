@@ -17,10 +17,10 @@ import java.util.Optional;
 public class EmbryonicMachineScreen extends AbstractContainerScreen<EmbryonicMachineMenu> {
     private static final ResourceLocation GUI_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/embryonic_machine/embryonic_machine_gui.png");
-    private static final ResourceLocation ARROW_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/arrow.png");
-    private static final ResourceLocation WHITE_ARROW_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/white_arrow.png");
+    private static final ResourceLocation SYRINGE_BAR_REVERSED_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/syringe_bar_reversed.png");
+    private static final ResourceLocation WHITE_SYRINGE_BAR_REVERSED_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/white_syringe_bar_reversed.png");
     private static final ResourceLocation POWER_BAR_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/power_bar.png");
     private static final ResourceLocation TEST_TUBE_TEXTURE =
@@ -74,7 +74,7 @@ public class EmbryonicMachineScreen extends AbstractContainerScreen<EmbryonicMac
         int y = (this.height - this.imageHeight) /2;
 
         guiGraphics.blit(GUI_TEXTURE, x, y, 0, 0, this.imageWidth, this.imageHeight, 176, 166);
-        guiGraphics.blit(ARROW_TEXTURE,  x + 76, y + 35, 0, 0, 24, 16, 24, 16);
+        guiGraphics.blit(SYRINGE_BAR_REVERSED_TEXTURE,  x + 76, y + 35, 0, 0, 24, 16, 24, 16);
 
         guiGraphics.blit(SYRINGE_TEXTURE, x + 39, y + 35, 0, 0, 16, 16, 16, 16);
         guiGraphics.blit(TEST_TUBE_TEXTURE,  x + 57, y + 35, 0, 0, 16, 16, 16, 16);
@@ -87,7 +87,7 @@ public class EmbryonicMachineScreen extends AbstractContainerScreen<EmbryonicMac
 
     private void RenderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
         if(menu.isCrafting()) {
-            guiGraphics.blit(WHITE_ARROW_TEXTURE, x+76, y + 35, 0, 0, menu.getScaledArrowProgress(), 16, 24, 16);
+            guiGraphics.blit(WHITE_SYRINGE_BAR_REVERSED_TEXTURE, x+76, y + 35, 0, 0, menu.getScaledArrowProgress(), 16, 24, 16);
         }
     }
 

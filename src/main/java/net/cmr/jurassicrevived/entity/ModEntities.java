@@ -10,9 +10,20 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.function.Supplier;
+
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
             DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, JRMod.MOD_ID);
+
+    public static final RegistryObject<EntityType<SeatEntity>> SEAT =
+            ENTITY_TYPES.register("seat", () ->
+                    EntityType.Builder.<SeatEntity>of(SeatEntity::new, MobCategory.MISC)
+                            .sized(0.001f, 0.001f)           // no hitbox
+                            .clientTrackingRange(16)      // optional
+                            .updateInterval(1)           // optional
+                            .build("jurassicrevived:seat")  // your modid:id
+            );
 
     public static final RegistryObject<EntityType<AlbertosaurusEntity>> ALBERTOSAURUS =
             ENTITY_TYPES.register("albertosaurus",

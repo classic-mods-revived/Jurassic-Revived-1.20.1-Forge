@@ -36,9 +36,8 @@ import java.util.List;
 
 public class FossilCleanerRecipeCategory implements IRecipeCategory<FossilCleanerRecipe> {
     public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "fossil_cleaning");
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/fossil_cleaner/fossil_cleaner_gui.png");
-    public static final ResourceLocation ARROW_TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/arrow.png");
-    public static final ResourceLocation WHITE_ARROW_TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/white_arrow.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/fossil_cleaner/fossil_cleaner_gui.png");private static final ResourceLocation BUBBLES_TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/bubbles.png");
+    private static final ResourceLocation WHITE_BUBBLES_TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/white_bubbles.png");
     private static final ResourceLocation POWER_BAR_TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/power_bar.png");
 
     public static final RecipeType<FossilCleanerRecipe> FOSSIL_CLEANING_RECIPE_RECIPE_TYPE =
@@ -81,7 +80,7 @@ public class FossilCleanerRecipeCategory implements IRecipeCategory<FossilCleane
     @Override
     public void draw(FossilCleanerRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         background.draw(guiGraphics);
-        guiGraphics.blit(ARROW_TEXTURE,  76, 35, 0, 0, 24, 16, 24, 16);
+        guiGraphics.blit(BUBBLES_TEXTURE,  73, 37, 0, 0, 29, 12, 29, 12);
         if (Config.REQUIRE_POWER) {
             guiGraphics.blit(POWER_BAR_TEXTURE,  159, 10, 0, 0, 10, 66, 10, 66);
             // Fill amount for JEI: show total required energy (2000 FE) relative to 16000 FE capacity
@@ -94,10 +93,10 @@ public class FossilCleanerRecipeCategory implements IRecipeCategory<FossilCleane
             int maxTicks = 200;
             long now = System.currentTimeMillis();
             int progress = (int)((now / 50L) % maxTicks); // ~20 TPS
-            int arrowPixels = 24;
+            int arrowPixels = 29;
             int progFilled = progress * arrowPixels / maxTicks;
             if (progFilled > 0) {
-                guiGraphics.blit(WHITE_ARROW_TEXTURE, 76, 35, 0, 0, progFilled, 16, 24, 16);
+                guiGraphics.blit(WHITE_BUBBLES_TEXTURE, 73, 37, 0, 0, progFilled, 12, 29, 12);
             }
 
             int requiredFE = 2000;

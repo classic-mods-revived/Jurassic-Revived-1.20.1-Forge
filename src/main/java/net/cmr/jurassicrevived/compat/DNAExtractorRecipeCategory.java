@@ -29,8 +29,7 @@ import java.util.List;
 public class DNAExtractorRecipeCategory implements IRecipeCategory<DNAExtractorRecipe> {
     public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "dna_extracting");
     public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/dna_extractor/dna_extractor_gui.png");
-    public static final ResourceLocation ARROW_TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/arrow.png");
-    public static final ResourceLocation WHITE_ARROW_TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/white_arrow.png");
+    private static final ResourceLocation DNA_TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/dna.png");
     private static final ResourceLocation POWER_BAR_TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/power_bar.png");
 
     public static final RecipeType<DNAExtractorRecipe> DNA_EXTRACTOR_RECIPE_RECIPE_TYPE =
@@ -67,34 +66,44 @@ public class DNAExtractorRecipeCategory implements IRecipeCategory<DNAExtractorR
     @Override
     public void draw(DNAExtractorRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         background.draw(guiGraphics);
-        guiGraphics.blit(ARROW_TEXTURE,  76, 35, 0, 0, 24, 16, 24, 16);
+
         if (Config.REQUIRE_POWER) {
             guiGraphics.blit(POWER_BAR_TEXTURE,  159, 10, 0, 0, 10, 66, 10, 66);
-            // Fill amount for JEI: show total required energy (2000 FE) relative to 16000 FE capacity
-            // Our simple fill is purely visual for JEI, not tied to any BE
-            int barX = 160;
-            int barY = 11;
-            int barW = 8;
-            int barH = 64;
+        }
 
+        {
+            int fullW = 8, fullH = 16;
+            int drawBaseX = 84;
+            int drawBaseY = 38;
+
+            // Loop progress at ~20 TPS over 200 ticks
             int maxTicks = 200;
             long now = System.currentTimeMillis();
-            int progress = (int)((now / 50L) % maxTicks); // ~20 TPS
-            int arrowPixels = 24;
-            int progFilled = progress * arrowPixels / maxTicks;
-            if (progFilled > 0) {
-                guiGraphics.blit(WHITE_ARROW_TEXTURE, 76, 35, 0, 0, progFilled, 16, 24, 16);
-            }
+            int progress = (int) ((now / 50L) % maxTicks);
 
-            int requiredFE = 2000;
-            int capacityFE = 16000;
-            int filled = (int)(barH * (requiredFE / (float)capacityFE));
-            // Render red fill similar to EnergyDisplayTooltipArea
+            // Match the screen’s scale behavior: clamp to fullH (pixels)
+            int visible = Math.min(fullH, Math.max(0, progress * fullH / maxTicks));
+
+            int srcU = 0;
+            int srcV = fullH - visible;
+
+            int drawX = drawBaseX;
+            int drawY = drawBaseY + (fullH - visible);
+
+            if (visible > 0) {
+                guiGraphics.blit(DNA_TEXTURE, drawX, drawY, srcU, srcV, fullW, visible, fullW, fullH);
+            }
+        }
+
+        if (Config.REQUIRE_POWER) {
+            // Simple visual fill to hint energy usage in JEI (not bound to a BE)
+            int barX = 160, barY = 11, barW = 8, barH = 64;
+            int requiredFE = 2000, capacityFE = 16000;
+            int filled = (int) (barH * (requiredFE / (float) capacityFE));
             guiGraphics.fillGradient(barX, barY + (barH - filled), barX + barW, barY + barH, 0xffb51500, 0xff600b00);
 
-            // Tooltip "2000 / 16000 FE" on hover over the energy area
-            int mx = (int) mouseX;
-            int my = (int) mouseY;
+            // Tooltip for the energy bar
+            int mx = (int) mouseX, my = (int) mouseY;
             if (mx >= barX && mx < barX + barW && my >= barY && my < barY + barH) {
                 List<Component> tips = java.util.List.of(Component.literal("2000 / 16000 FE"));
                 guiGraphics.renderTooltip(Minecraft.getInstance().font, tips, java.util.Optional.empty(), mx, my);
@@ -110,8 +119,8 @@ public class DNAExtractorRecipeCategory implements IRecipeCategory<DNAExtractorR
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, DNAExtractorRecipe recipe, IFocusGroup focuses) {
 
-        builder.addSlot(RecipeIngredientRole.INPUT, 39, 35).addIngredients(recipe.getIngredients().get(0));
-        builder.addSlot(RecipeIngredientRole.INPUT, 57, 35).addIngredients(recipe.getIngredients().get(1));
+        builder.addSlot(RecipeIngredientRole.INPUT, 57, 35).addIngredients(recipe.getIngredients().get(0));
+        builder.addSlot(RecipeIngredientRole.INPUT, 80, 7).addIngredients(recipe.getIngredients().get(1));
 
         // If the second ingredient is Mosquito in Amber, cycle all DNA as possible outputs
         Ingredient second = recipe.getIngredients().size() > 1 ? recipe.getIngredients().get(1) : Ingredient.EMPTY;
@@ -135,7 +144,7 @@ public class DNAExtractorRecipeCategory implements IRecipeCategory<DNAExtractorR
                         });
                     });
         } else {
-            builder.addSlot(RecipeIngredientRole.OUTPUT, 103, 35).addItemStack(recipe.getResultItem(null));
+            builder.addSlot(RecipeIngredientRole.OUTPUT, 62, 63).addItemStack(recipe.getResultItem(null));
         }
     }
 

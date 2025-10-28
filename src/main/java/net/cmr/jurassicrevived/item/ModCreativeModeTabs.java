@@ -1,6 +1,5 @@
 package net.cmr.jurassicrevived.item;
 
-import net.cmr.jurassicrevived.Config;
 import net.cmr.jurassicrevived.JRMod;
 import net.cmr.jurassicrevived.block.ModBlocks;
 import net.minecraft.core.registries.Registries;
@@ -40,13 +39,25 @@ public class ModCreativeModeTabs {
                     .title(Component.translatable("creativetab.jurassicrevived_block_tab"))
                     .displayItems((displayParameters, output) -> {
                         output.accept(ModBlocks.CAT_PLUSHIE.get());
+                        output.accept(ModBlocks.TRASH_CAN.get());
+                        output.accept(ModBlocks.BENCH.get());
+                        output.accept(ModBlocks.FENCE_LIGHT.get());
+                        output.accept(ModBlocks.LIGHT_POST.get());
                         output.accept(ModBlocks.GYPSUM_STONE.get());
                         output.accept(ModBlocks.GYPSUM_COBBLESTONE.get());
                         output.accept(ModBlocks.GYPSUM_STONE_BRICKS.get());
                         output.accept(ModBlocks.SMOOTH_GYPSUM_STONE.get());
+                        output.accept(ModBlocks.CHISELED_GYPSUM_STONE.get());
+                        output.accept(ModBlocks.GYPSUM_BRICK_STAIRS.get());
+                        output.accept(ModBlocks.GYPSUM_BRICK_SLAB.get());
+                        output.accept(ModBlocks.GYPSUM_BRICK_WALL.get());
 
                         output.accept(ModBlocks.REINFORCED_STONE.get());
                         output.accept(ModBlocks.REINFORCED_STONE_BRICKS.get());
+                        output.accept(ModBlocks.CHISELED_REINFORCED_STONE.get());
+                        output.accept(ModBlocks.REINFORCED_BRICK_STAIRS.get());
+                        output.accept(ModBlocks.REINFORCED_BRICK_SLAB.get());
+                        output.accept(ModBlocks.REINFORCED_BRICK_WALL.get());
 
                         output.accept(ModBlocks.LOW_SECURITY_FENCE_POLE.get());
                         output.accept(ModBlocks.LOW_SECURITY_FENCE_WIRE.get());

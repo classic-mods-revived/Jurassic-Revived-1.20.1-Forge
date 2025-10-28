@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "jurassicrevived:block/light_post",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "jurassicrevived:block/light_post"
+    },
+    "facing=south": {
+      "model": "jurassicrevived:block/light_post",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "jurassicrevived:block/light_post",
+      "y": 270
+    }
+  }
+}

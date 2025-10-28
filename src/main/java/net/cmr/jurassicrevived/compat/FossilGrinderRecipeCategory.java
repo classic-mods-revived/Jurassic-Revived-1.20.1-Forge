@@ -29,8 +29,7 @@ import net.minecraft.world.item.Item;
 public class FossilGrinderRecipeCategory implements IRecipeCategory<FossilGrinderRecipe> {
     public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "fossil_grinding");
     public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/fossil_grinder/fossil_grinder_gui.png");
-    public static final ResourceLocation ARROW_TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/arrow.png");
-    public static final ResourceLocation WHITE_ARROW_TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/white_arrow.png");
+    private static final ResourceLocation CUTTING_BLADES_TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/cutting_blades.png");
     private static final ResourceLocation POWER_BAR_TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/power_bar.png");
 
     public static final RecipeType<FossilGrinderRecipe> FOSSIL_GRINDING_RECIPE_RECIPE_TYPE =
@@ -67,32 +66,47 @@ public class FossilGrinderRecipeCategory implements IRecipeCategory<FossilGrinde
     @Override
     public void draw(FossilGrinderRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         background.draw(guiGraphics);
-        guiGraphics.blit(ARROW_TEXTURE,  76, 35, 0, 0, 24, 16, 24, 16);
+
+        {
+            final float scale = 1.25f;
+            final int texSize = 16;
+
+            float baseAngle = (System.currentTimeMillis() % 700L) / 700.0f * ((float)Math.PI * 2.0f);
+
+            java.util.function.BiConsumer<int[], Float> drawBlade = (center, ang) -> {
+                guiGraphics.pose().pushPose();
+                guiGraphics.pose().translate(center[0], center[1], 0);
+                guiGraphics.pose().scale(scale, scale, 1.0f);
+                if (ang != null) {
+                    guiGraphics.pose().mulPose(com.mojang.math.Axis.ZP.rotation(-ang));
+                }
+                guiGraphics.pose().translate(-texSize / 2f, -texSize / 2f, 0);
+                guiGraphics.blit(CUTTING_BLADES_TEXTURE, 0, 0, 0, 0, texSize, texSize, texSize, texSize);
+                guiGraphics.pose().popPose();
+            };
+
+            int x = 0;
+            int y = 0;
+            int cx1 = x + 89, cy1 = y + 34;
+            int cx2 = x + 89, cy2 = y + 52;
+
+            drawBlade.accept(new int[]{cx1, cy1}, baseAngle);
+            drawBlade.accept(new int[]{cx2, cy2}, -baseAngle);
+        }
+
         if (Config.REQUIRE_POWER) {
             guiGraphics.blit(POWER_BAR_TEXTURE,  159, 10, 0, 0, 10, 66, 10, 66);
-            // Fill amount for JEI: show total required energy (2000 FE) relative to 16000 FE capacity
-            // Our simple fill is purely visual for JEI, not tied to any BE
             int barX = 160;
             int barY = 11;
             int barW = 8;
             int barH = 64;
 
-            int maxTicks = 200;
-            long now = System.currentTimeMillis();
-            int progress = (int)((now / 50L) % maxTicks); // ~20 TPS
-            int arrowPixels = 24;
-            int progFilled = progress * arrowPixels / maxTicks;
-            if (progFilled > 0) {
-                guiGraphics.blit(WHITE_ARROW_TEXTURE, 76, 35, 0, 0, progFilled, 16, 24, 16);
-            }
 
             int requiredFE = 2000;
             int capacityFE = 16000;
             int filled = (int)(barH * (requiredFE / (float)capacityFE));
-            // Render red fill similar to EnergyDisplayTooltipArea
             guiGraphics.fillGradient(barX, barY + (barH - filled), barX + barW, barY + barH, 0xffb51500, 0xff600b00);
 
-            // Tooltip "(2000 / 16000 FE)" on hover over the energy area
             int mx = (int) mouseX;
             int my = (int) mouseY;
             if (mx >= barX && mx < barX + barW && my >= barY && my < barY + barH) {
@@ -113,14 +127,13 @@ public class FossilGrinderRecipeCategory implements IRecipeCategory<FossilGrinde
         builder.addSlot(RecipeIngredientRole.INPUT, 57, 35).addIngredients(recipe.getIngredients().get(0));
 
         if (recipe.hasAnyWeightsConfigured()) {
-            // Show all possible weighted outputs and a tooltip with the weight value
             Map<Item, Integer> weights = recipe.getWeightedOutputs();
             List<ItemStack> stacks = new ArrayList<>(weights.size());
             for (Map.Entry<Item, Integer> e : weights.entrySet()) {
                 stacks.add(new ItemStack(e.getKey()));
             }
 
-            builder.addSlot(RecipeIngredientRole.OUTPUT, 103, 35)
+            builder.addSlot(RecipeIngredientRole.OUTPUT, 103, 17)
                     .addItemStacks(stacks)
                     .addRichTooltipCallback((slotView, tooltip) -> {
                         slotView.getDisplayedIngredient(VanillaTypes.ITEM_STACK).ifPresent(stack -> {
@@ -129,8 +142,7 @@ public class FossilGrinderRecipeCategory implements IRecipeCategory<FossilGrinde
                         });
                     });
         } else {
-            // Deterministic single result (e.g., skull -> tissue)
-            builder.addSlot(RecipeIngredientRole.OUTPUT, 103, 35).addItemStack(recipe.getResultItem(null));
+            builder.addSlot(RecipeIngredientRole.OUTPUT, 85, 17).addItemStack(recipe.getResultItem(null));
         }
     }
 

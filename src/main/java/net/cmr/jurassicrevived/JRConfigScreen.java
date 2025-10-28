@@ -14,9 +14,11 @@ public class JRConfigScreen extends Screen {
     private EditBox mbBox;
     private EditBox feBox;
     private Button requirePowerButton;
+    private Button naturalDinoSpawningButton; // new
 
     // Values being edited
     private boolean requirePower;
+    private boolean naturalDinoSpawning;
     private int itemsPerSec;
     private int mbPerSec;
     private int fePerSec;
@@ -43,6 +45,7 @@ public class JRConfigScreen extends Screen {
         super(Component.translatable("jurassicrevived.config.title"));
         this.parent = parent;
         this.requirePower = Config.REQUIRE_POWER;
+        this.naturalDinoSpawning = Config.NATURAL_DINOSAUR_SPAWNING;
         this.itemsPerSec = Config.itemsPerSecond;
         this.mbPerSec = Config.milliBucketsPerSecond;
         this.fePerSec = Config.fePerSecond;
@@ -70,7 +73,14 @@ public class JRConfigScreen extends Screen {
         }).bounds(left, y, 200, 20).build();
         addRenderableWidget(requirePowerButton);
 
-        y += 60;
+        y += 30; // shift down less to place second toggle right under it
+        naturalDinoSpawningButton = Button.builder(naturalSpawnLabel(), b -> {
+            naturalDinoSpawning = !naturalDinoSpawning;
+            b.setMessage(naturalSpawnLabel());
+        }).bounds(left, y, 200, 20).build();
+        addRenderableWidget(naturalDinoSpawningButton);
+
+        y += 60; // now proceed with inputs below both toggles
         itemsBox = new EditBox(this.font, left, y, 200, 20, Component.literal("item/sec"));
         itemsBox.setFilter(s -> s.isEmpty() || s.chars().allMatch(Character::isDigit));
         itemsBox.setValue(Integer.toString(itemsPerSec));
@@ -106,6 +116,10 @@ public class JRConfigScreen extends Screen {
         return Component.literal("Require Power: ").append(Component.literal(requirePower ? "Enabled" : "Disabled"));
     }
 
+    private Component naturalSpawnLabel() {
+        return Component.literal("Natural Dino Spawning: ").append(Component.literal(naturalDinoSpawning ? "Enabled" : "Disabled"));
+    }
+
     private static int clamp(int v, int min, int max) {
         return Math.max(min, Math.min(max, v));
     }
@@ -121,6 +135,7 @@ public class JRConfigScreen extends Screen {
             fe = clamp(fe, 0, 2_048_000);
 
             Config.setRequirePower(requirePower);
+            Config.setNaturalDinosaurSpawning(naturalDinoSpawning);
             Config.setItemsPerSecond(items);
             Config.setMilliBucketsPerSecond(mb);
             Config.setFePerSecond(fe);
@@ -179,19 +194,22 @@ public class JRConfigScreen extends Screen {
         // Temporarily position ONLY scrollable widgets
         int dy = scrollAreaTop - scrollY;
         int y0 = requirePowerButton.getY();
+        int yNat = naturalDinoSpawningButton.getY();
         int y1 = itemsBox.getY();
         int y2 = mbBox.getY();
         int y3 = feBox.getY();
 
         requirePowerButton.setY(dy + 0);
-        itemsBox.setY(dy + 60);
-        mbBox.setY(dy + 120);
-        feBox.setY(dy + 180);
+        naturalDinoSpawningButton.setY(dy + 30);
+        itemsBox.setY(dy + 90);
+        mbBox.setY(dy + 150);
+        feBox.setY(dy + 210);
 
         boolean handled = super.mouseClicked(mouseX, mouseY, button);
 
         // Restore
         requirePowerButton.setY(y0);
+        naturalDinoSpawningButton.setY(yNat);
         itemsBox.setY(y1);
         mbBox.setY(y2);
         feBox.setY(y3);
@@ -221,18 +239,21 @@ public class JRConfigScreen extends Screen {
 
         int sy = scrollAreaTop - scrollY;
         int y0 = requirePowerButton.getY();
+        int yNat = naturalDinoSpawningButton.getY();
         int y1 = itemsBox.getY();
         int y2 = mbBox.getY();
         int y3 = feBox.getY();
 
         requirePowerButton.setY(sy + 0);
-        itemsBox.setY(sy + 60);
-        mbBox.setY(sy + 120);
-        feBox.setY(sy + 180);
+        naturalDinoSpawningButton.setY(sy + 30);
+        itemsBox.setY(sy + 90);
+        mbBox.setY(sy + 150);
+        feBox.setY(sy + 210);
 
         boolean handled = super.mouseDragged(mouseX, mouseY, button, dx, dy);
 
         requirePowerButton.setY(y0);
+        naturalDinoSpawningButton.setY(yNat);
         itemsBox.setY(y1);
         mbBox.setY(y2);
         feBox.setY(y3);
@@ -253,18 +274,21 @@ public class JRConfigScreen extends Screen {
 
         int dy = scrollAreaTop - scrollY;
         int y0 = requirePowerButton.getY();
+        int yNat = naturalDinoSpawningButton.getY();
         int y1 = itemsBox.getY();
         int y2 = mbBox.getY();
         int y3 = feBox.getY();
 
         requirePowerButton.setY(dy + 0);
-        itemsBox.setY(dy + 60);
-        mbBox.setY(dy + 120);
-        feBox.setY(dy + 180);
+        naturalDinoSpawningButton.setY(dy + 30);
+        itemsBox.setY(dy + 90);
+        mbBox.setY(dy + 150);
+        feBox.setY(dy + 210);
 
         boolean handled = super.mouseReleased(mouseX, mouseY, button);
 
         requirePowerButton.setY(y0);
+        naturalDinoSpawningButton.setY(yNat);
         itemsBox.setY(y1);
         mbBox.setY(y2);
         feBox.setY(y3);
@@ -286,16 +310,18 @@ public class JRConfigScreen extends Screen {
         int dy = scrollAreaTop - scrollY;
 
         int[] originalYs = new int[] {
-            requirePowerButton.getY(), itemsBox.getY(), mbBox.getY(), feBox.getY()
+            requirePowerButton.getY(), naturalDinoSpawningButton.getY(), itemsBox.getY(), mbBox.getY(), feBox.getY()
         };
 
         requirePowerButton.setY(dy + 0);
-        itemsBox.setY(dy + 60);
-        mbBox.setY(dy + 120);
-        feBox.setY(dy + 180);
+        naturalDinoSpawningButton.setY(dy + 30);
+        itemsBox.setY(dy + 90);
+        mbBox.setY(dy + 150);
+        feBox.setY(dy + 210);
 
         super.render(gfx, mouseX, mouseY, partialTick);
 
+        // helper text stays aligned with inputs
         gfx.drawCenteredString(this.font, "Max items transferred per second by item pipes", cx, itemsBox.getY() - 36, 0xA0A0A0);
         gfx.drawCenteredString(this.font, "Default: 64", cx, itemsBox.getY() - 24, 0xA0A0A0);
         gfx.drawCenteredString(this.font, "Range: 0 ~ 1024", cx, itemsBox.getY() - 12, 0xA0A0A0);
@@ -308,9 +334,10 @@ public class JRConfigScreen extends Screen {
 
         // Restore logical Y
         requirePowerButton.setY(originalYs[0]);
-        itemsBox.setY(originalYs[1]);
-        mbBox.setY(originalYs[2]);
-        feBox.setY(originalYs[3]);
+        naturalDinoSpawningButton.setY(originalYs[1]);
+        itemsBox.setY(originalYs[2]);
+        mbBox.setY(originalYs[3]);
+        feBox.setY(originalYs[4]);
 
         disableScissor(gfx);
 
@@ -410,18 +437,21 @@ public class JRConfigScreen extends Screen {
         // Pinned buttons unaffected by key typing; only adjust scrollable widgets
         int dy = scrollAreaTop - scrollY;
         int y0 = requirePowerButton.getY();
+        int yNat = naturalDinoSpawningButton.getY();
         int y1 = itemsBox.getY();
         int y2 = mbBox.getY();
         int y3 = feBox.getY();
 
         requirePowerButton.setY(dy + 0);
-        itemsBox.setY(dy + 60);
-        mbBox.setY(dy + 120);
-        feBox.setY(dy + 180);
+        naturalDinoSpawningButton.setY(dy + 30);
+        itemsBox.setY(dy + 90);
+        mbBox.setY(dy + 150);
+        feBox.setY(dy + 210);
 
         boolean handled = super.keyPressed(keyCode, scanCode, modifiers);
 
         requirePowerButton.setY(y0);
+        naturalDinoSpawningButton.setY(yNat);
         itemsBox.setY(y1);
         mbBox.setY(y2);
         feBox.setY(y3);
@@ -433,18 +463,21 @@ public class JRConfigScreen extends Screen {
     public boolean charTyped(char codePoint, int modifiers) {
         int dy = scrollAreaTop - scrollY;
         int y0 = requirePowerButton.getY();
+        int yNat = naturalDinoSpawningButton.getY();
         int y1 = itemsBox.getY();
         int y2 = mbBox.getY();
         int y3 = feBox.getY();
 
         requirePowerButton.setY(dy + 0);
-        itemsBox.setY(dy + 60);
-        mbBox.setY(dy + 120);
-        feBox.setY(dy + 180);
+        naturalDinoSpawningButton.setY(dy + 30);
+        itemsBox.setY(dy + 90);
+        mbBox.setY(dy + 150);
+        feBox.setY(dy + 210);
 
         boolean handled = super.charTyped(codePoint, modifiers);
 
         requirePowerButton.setY(y0);
+        naturalDinoSpawningButton.setY(yNat);
         itemsBox.setY(y1);
         mbBox.setY(y2);
         feBox.setY(y3);

@@ -31,7 +31,7 @@ public class DNAHybridizerMenu extends AbstractContainerMenu {
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
 
-        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 0, 38, 16) {
+        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 0, 8, 25) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.is(ModTags.Items.DNA);
@@ -42,7 +42,7 @@ public class DNAHybridizerMenu extends AbstractContainerMenu {
             }
         });
 
-        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 1, 38, 35) {
+        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 1, 26, 25) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.is(ModTags.Items.DNA);
@@ -52,7 +52,7 @@ public class DNAHybridizerMenu extends AbstractContainerMenu {
                 return true; // Explicitly allow players (and JEI) to take items from this slot
             }
         });
-        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 2, 38, 54) {
+        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 2, 44, 25) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.is(ModTags.Items.DNA);
@@ -62,38 +62,7 @@ public class DNAHybridizerMenu extends AbstractContainerMenu {
                 return true; // Explicitly allow players (and JEI) to take items from this slot
             }
         });
-        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 3, 57, 16) {
-            @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(ModTags.Items.DNA);
-            }
-            @Override
-            public boolean mayPickup(Player playerIn) {
-                return true; // Explicitly allow players (and JEI) to take items from this slot
-            }
-        });
-
-        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 4, 57, 35) {
-            @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(ModTags.Items.DNA);
-            }
-            @Override
-            public boolean mayPickup(Player playerIn) {
-                return true; // Explicitly allow players (and JEI) to take items from this slot
-            }
-        });
-        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 5, 57, 54) {
-            @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(ModTags.Items.DNA);
-            }
-            @Override
-            public boolean mayPickup(Player playerIn) {
-                return true; // Explicitly allow players (and JEI) to take items from this slot
-            }
-        });
-        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 6, 76, 16) {
+        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 3, 62, 25) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.is(ModTags.Items.DNA);
@@ -104,7 +73,7 @@ public class DNAHybridizerMenu extends AbstractContainerMenu {
             }
         });
 
-        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 7, 76, 35) {
+        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 4, 8, 43) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.is(ModTags.Items.DNA);
@@ -114,7 +83,7 @@ public class DNAHybridizerMenu extends AbstractContainerMenu {
                 return true; // Explicitly allow players (and JEI) to take items from this slot
             }
         });
-        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 8, 76, 54) {
+        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 5, 26, 43) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.is(ModTags.Items.DNA);
@@ -124,7 +93,38 @@ public class DNAHybridizerMenu extends AbstractContainerMenu {
                 return true; // Explicitly allow players (and JEI) to take items from this slot
             }
         });
-        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 9, 118, 35) {
+        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 6, 44, 43) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return stack.is(ModTags.Items.DNA);
+            }
+            @Override
+            public boolean mayPickup(Player playerIn) {
+                return true; // Explicitly allow players (and JEI) to take items from this slot
+            }
+        });
+
+        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 7, 62, 43) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return stack.is(ModTags.Items.DNA);
+            }
+            @Override
+            public boolean mayPickup(Player playerIn) {
+                return true; // Explicitly allow players (and JEI) to take items from this slot
+            }
+        });
+        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 8, 83, 35) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return false;
+            }
+            @Override
+            public boolean mayPickup(Player playerIn) {
+                return true; // Explicitly allow players (and JEI) to take items from this slot
+            }
+        });
+        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 9, 134, 35) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return false;

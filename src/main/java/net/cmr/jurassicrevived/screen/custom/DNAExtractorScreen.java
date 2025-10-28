@@ -10,6 +10,7 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 
 import java.util.Optional;
@@ -17,10 +18,8 @@ import java.util.Optional;
 public class DNAExtractorScreen extends AbstractContainerScreen<DNAExtractorMenu> {
     private static final ResourceLocation GUI_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/dna_extractor/dna_extractor_gui.png");
-    private static final ResourceLocation ARROW_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/arrow.png");
-    private static final ResourceLocation WHITE_ARROW_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/white_arrow.png");
+    private static final ResourceLocation DNA_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/dna.png");
     private static final ResourceLocation POWER_BAR_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/power_bar.png");
     private static final ResourceLocation TEST_TUBE_TEXTURE =
@@ -74,10 +73,9 @@ public class DNAExtractorScreen extends AbstractContainerScreen<DNAExtractorMenu
         int y = (this.height - this.imageHeight) /2;
 
         guiGraphics.blit(GUI_TEXTURE, x, y, 0, 0, this.imageWidth, this.imageHeight, 176, 166);
-        guiGraphics.blit(ARROW_TEXTURE,  x + 76, y + 35, 0, 0, 24, 16, 24, 16);
 
-        guiGraphics.blit(TEST_TUBE_TEXTURE, x + 39, y + 35, 0, 0, 16, 16, 16, 16);
-        guiGraphics.blit(AMBER_TEXTURE,  x + 57, y + 35, 0, 0, 16, 16, 16, 16);
+        guiGraphics.blit(TEST_TUBE_TEXTURE, x + 57, y + 35, 0, 0, 16, 16, 16, 16);
+        guiGraphics.blit(AMBER_TEXTURE,  x + 80, y + 7, 0, 0, 16, 16, 16, 16);
 
         if (Config.REQUIRE_POWER) {
             guiGraphics.blit(POWER_BAR_TEXTURE, x+159, y+10, 0, 0, 10, 66, 10, 66);
@@ -86,8 +84,17 @@ public class DNAExtractorScreen extends AbstractContainerScreen<DNAExtractorMenu
     }
 
     private void RenderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
-        if(menu.isCrafting()) {
-            guiGraphics.blit(WHITE_ARROW_TEXTURE, x+76, y + 35, 0, 0, menu.getScaledArrowProgress(), 16, 24, 16);
+        if (menu.isCrafting()) {
+            int fullW = 8, fullH = 16;
+            int visible = Mth.clamp(menu.getScaledArrowProgress(), 0, fullH);
+
+            int srcU = 0;
+            int srcV = fullH - visible;
+
+            int drawX = x + 84;
+            int drawY = y + 38 + (fullH - visible);
+
+            guiGraphics.blit(DNA_TEXTURE, drawX, drawY, srcU, srcV, fullW, visible, fullW, fullH);
         }
     }
 

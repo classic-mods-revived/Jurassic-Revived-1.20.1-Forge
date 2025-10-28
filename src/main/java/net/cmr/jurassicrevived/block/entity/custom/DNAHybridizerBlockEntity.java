@@ -54,7 +54,8 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             // slots 0..8 = inputs (DNA), slot 9 = output
             return switch (slot) {
-                case 0, 1, 2, 3, 4, 5, 6, 7, 8 -> stack.is(ModTags.Items.DNA);
+                case 0, 1, 2, 3, 4, 5, 6, 7 -> stack.is(ModTags.Items.DNA);
+                case 8 -> false;
                 case 9 -> false;
                 default -> super.isItemValid(slot, stack);
             };

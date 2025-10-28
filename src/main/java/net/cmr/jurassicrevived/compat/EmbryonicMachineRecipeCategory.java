@@ -25,8 +25,8 @@ import java.util.List;
 public class EmbryonicMachineRecipeCategory implements IRecipeCategory<EmbryonicMachineRecipe> {
     public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "embryonic_machining");
     public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/embryonic_machine/embryonic_machine_gui.png");
-    public static final ResourceLocation ARROW_TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/arrow.png");
-    public static final ResourceLocation WHITE_ARROW_TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/white_arrow.png");
+    private static final ResourceLocation SYRINGE_BAR_REVERSED_TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/syringe_bar_reversed.png");
+    private static final ResourceLocation WHITE_SYRINGE_BAR_REVERSED_TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/white_syringe_bar_reversed.png");
     private static final ResourceLocation POWER_BAR_TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/power_bar.png");
 
     public static final RecipeType<EmbryonicMachineRecipe> EMBRYONIC_MACHINING_RECIPE_RECIPE_TYPE =
@@ -63,7 +63,7 @@ public class EmbryonicMachineRecipeCategory implements IRecipeCategory<Embryonic
     @Override
     public void draw(EmbryonicMachineRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         background.draw(guiGraphics);
-        guiGraphics.blit(ARROW_TEXTURE,  76, 35, 0, 0, 24, 16, 24, 16);
+        guiGraphics.blit(SYRINGE_BAR_REVERSED_TEXTURE,  76, 35, 0, 0, 24, 16, 24, 16);
         if (Config.REQUIRE_POWER) {
             guiGraphics.blit(POWER_BAR_TEXTURE,  159, 10, 0, 0, 10, 66, 10, 66);
             // Fill amount for JEI: show total required energy (2000 FE) relative to 16000 FE capacity
@@ -79,7 +79,7 @@ public class EmbryonicMachineRecipeCategory implements IRecipeCategory<Embryonic
             int arrowPixels = 24;
             int progFilled = progress * arrowPixels / maxTicks;
             if (progFilled > 0) {
-                guiGraphics.blit(WHITE_ARROW_TEXTURE, 76, 35, 0, 0, progFilled, 16, 24, 16);
+                guiGraphics.blit(WHITE_SYRINGE_BAR_REVERSED_TEXTURE, 76, 35, 0, 0, progFilled, 16, 24, 16);
             }
 
             int requiredFE = 2000;

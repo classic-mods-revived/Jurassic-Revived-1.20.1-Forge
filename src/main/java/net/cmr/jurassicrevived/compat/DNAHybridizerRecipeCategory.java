@@ -66,7 +66,7 @@ public class DNAHybridizerRecipeCategory implements IRecipeCategory<DNAHybridize
     @Override
     public void draw(DNAHybridizerRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         background.draw(guiGraphics);
-        guiGraphics.blit(ARROW_TEXTURE,  93, 35, 0, 0, 24, 16, 24, 16);
+        guiGraphics.blit(ARROW_TEXTURE,  105, 35, 0, 0, 24, 16, 24, 16);
         if (Config.REQUIRE_POWER) {
             guiGraphics.blit(POWER_BAR_TEXTURE,  159, 10, 0, 0, 10, 66, 10, 66);
             // Fill amount for JEI: show total required energy (2000 FE) relative to 16000 FE capacity
@@ -82,7 +82,7 @@ public class DNAHybridizerRecipeCategory implements IRecipeCategory<DNAHybridize
             int arrowPixels = 24;
             int progFilled = progress * arrowPixels / maxTicks;
             if (progFilled > 0) {
-                guiGraphics.blit(WHITE_ARROW_TEXTURE, 93, 35, 0, 0, progFilled, 16, 24, 16);
+                guiGraphics.blit(WHITE_ARROW_TEXTURE, 105, 35, 0, 0, progFilled, 16, 24, 16);
             }
 
             int requiredFE = 2000;
@@ -111,9 +111,9 @@ public class DNAHybridizerRecipeCategory implements IRecipeCategory<DNAHybridize
 
         // Place up to 9 inputs in a 3x3 grid; skip indices beyond recipe size or empty ingredients
         int[][] coords = {
-                {38, 16}, {57, 16}, {76, 16},
-                {38, 35}, {57, 35}, {76, 35},
-                {38, 54}, {57, 54}, {76, 54}
+                {8, 25}, {26, 25}, {44, 25},
+                {62, 25}, {8, 43}, {26, 43},
+                {44, 43}, {62, 43}, {83, 35}
         };
 
         for (int i = 0; i < Math.min(9, recipe.getIngredients().size()); i++) {
@@ -124,6 +124,6 @@ public class DNAHybridizerRecipeCategory implements IRecipeCategory<DNAHybridize
             builder.addSlot(RecipeIngredientRole.INPUT, x, y).addIngredients(ing);
         }
 
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 118, 35).addItemStack(recipe.getResultItem(null));
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 134, 35).addItemStack(recipe.getResultItem(null));
     }
 }

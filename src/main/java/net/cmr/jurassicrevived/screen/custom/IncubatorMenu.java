@@ -71,7 +71,7 @@ public class IncubatorMenu extends AbstractContainerMenu {
 
     // Legacy integer width (0..24) if needed
     public int getScaledArrowProgress(int slot) {
-        int width = 24;
+        int width = 16;
         return Math.round(getProgressRatio(slot) * width);
     }
 

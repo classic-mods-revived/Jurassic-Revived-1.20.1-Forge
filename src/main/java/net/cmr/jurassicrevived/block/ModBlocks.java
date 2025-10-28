@@ -33,6 +33,15 @@ public class ModBlocks {
     public static final RegistryObject<Block> CAT_PLUSHIE = registerBlock("cat_plushie",
             () -> new DecoBlock(BlockBehaviour.Properties.of().noOcclusion().sound(SoundType.WOOL)));
 
+    public static final RegistryObject<Block> TRASH_CAN = registerBlock("trash_can",
+            () -> new TrashBlock(BlockBehaviour.Properties.of().noOcclusion()));
+
+    public static final RegistryObject<Block> BENCH = registerBlock("bench",
+            () -> new BenchBlock(BlockBehaviour.Properties.of().noOcclusion()));
+
+    public static final RegistryObject<Block> LIGHT_POST = registerBlock("light_post",
+            () -> new LightPostBlock(BlockBehaviour.Properties.of().strength(1.0F).noOcclusion().lightLevel(state -> 15)));
+
     public static final RegistryObject<Block> ITEM_PIPE = registerBlock("item_pipe",
             () -> new PipeBlock(BlockBehaviour.Properties.of().strength(1.0F).noOcclusion(), PipeBlock.Transport.ITEMS));
 
@@ -99,6 +108,19 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> SMOOTH_GYPSUM_STONE = registerBlock("smooth_gypsum_stone",
             () -> new Block(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> CHISELED_GYPSUM_STONE = registerBlock("chiseled_gypsum_stone",
+            () -> new Block(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<Block> GYPSUM_BRICK_STAIRS = registerBlock("gypsum_brick_stairs",
+            () -> new StairBlock(ModBlocks.GYPSUM_STONE_BRICKS.get().defaultBlockState(),
+                    BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> GYPSUM_BRICK_SLAB = registerBlock("gypsum_brick_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> GYPSUM_BRICK_WALL = registerBlock("gypsum_brick_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<Block> FENCE_LIGHT = registerBlock("fence_light",
+            () -> new FenceLightBlock(BlockBehaviour.Properties.of().strength(1.0F).noOcclusion().lightLevel(state -> 15)));
 
     public static final RegistryObject<Block> LOW_SECURITY_FENCE_POLE = registerBlock("low_security_fence_pole",
             () -> new FencePoleBlock(BlockBehaviour.Properties.of().strength(1.0F).noOcclusion(), FencePoleBlock.Tier.LOW));
@@ -122,6 +144,17 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> REINFORCED_STONE_BRICKS = registerBlock("reinforced_stone_bricks",
             () -> new Block(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> CHISELED_REINFORCED_STONE = registerBlock("chiseled_reinforced_stone",
+            () -> new Block(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<Block> REINFORCED_BRICK_STAIRS = registerBlock("reinforced_brick_stairs",
+            () -> new StairBlock(ModBlocks.REINFORCED_STONE_BRICKS.get().defaultBlockState(),
+                    BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> REINFORCED_BRICK_SLAB = registerBlock("reinforced_brick_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> REINFORCED_BRICK_WALL = registerBlock("reinforced_brick_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops()));
+
 
     public static final RegistryObject<Block> HATCHED_ALBERTOSAURUS_EGG = registerBlock("hatched_albertosaurus_egg",
             () -> new EggBlock(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops(), ModEntities.ALBERTOSAURUS));

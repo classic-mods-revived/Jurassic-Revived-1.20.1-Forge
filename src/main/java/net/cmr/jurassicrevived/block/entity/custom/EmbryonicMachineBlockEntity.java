@@ -54,7 +54,7 @@ public class EmbryonicMachineBlockEntity extends BlockEntity implements MenuProv
             return switch (slot) {
                 case 0 -> stack.getItem() == ModItems.SYRINGE.get();
                 case 1 -> stack.is(ModTags.Items.DNA);
-                case 2, 3, 4 -> true;
+                case 2 -> true;
                 default -> super.isItemValid(slot, stack);
             };
         }
@@ -63,27 +63,15 @@ public class EmbryonicMachineBlockEntity extends BlockEntity implements MenuProv
     private static final int SYRINGE_SLOT = 0;
     private static final int MATERIAL_INPUT = 1;
     private static final int OUTPUT_SLOT_1 = 2;
-    private static final int OUTPUT_SLOT_2 = 3;
-    private static final int OUTPUT_SLOT_3 = 4;
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             new InventoryDirectionWrapper(itemHandler,
                     new InventoryDirectionEntry(Direction.DOWN, OUTPUT_SLOT_1, false),
-                    new InventoryDirectionEntry(Direction.DOWN, OUTPUT_SLOT_2, false),
-                    new InventoryDirectionEntry(Direction.DOWN, OUTPUT_SLOT_3, false),
                     new InventoryDirectionEntry(Direction.NORTH, OUTPUT_SLOT_1, false),
-                    new InventoryDirectionEntry(Direction.NORTH, OUTPUT_SLOT_2, false),
-                    new InventoryDirectionEntry(Direction.NORTH, OUTPUT_SLOT_3, false),
                     new InventoryDirectionEntry(Direction.SOUTH, OUTPUT_SLOT_1, false),
-                    new InventoryDirectionEntry(Direction.SOUTH, OUTPUT_SLOT_2, false),
-                    new InventoryDirectionEntry(Direction.SOUTH, OUTPUT_SLOT_3, false),
                     new InventoryDirectionEntry(Direction.EAST, OUTPUT_SLOT_1, false),
-                    new InventoryDirectionEntry(Direction.EAST, OUTPUT_SLOT_2, false),
-                    new InventoryDirectionEntry(Direction.EAST, OUTPUT_SLOT_3, false),
                     new InventoryDirectionEntry(Direction.WEST, OUTPUT_SLOT_1, false),
-                    new InventoryDirectionEntry(Direction.WEST, OUTPUT_SLOT_2, false),
-                    new InventoryDirectionEntry(Direction.WEST, OUTPUT_SLOT_3, false),
                     new InventoryDirectionEntry(Direction.UP, SYRINGE_SLOT, true),
                     new InventoryDirectionEntry(Direction.UP, MATERIAL_INPUT, true)).directionsMap;
 
@@ -433,7 +421,7 @@ public class EmbryonicMachineBlockEntity extends BlockEntity implements MenuProv
     }
 
     private int getAvailableOutputSlotFor(Item item) {
-        int[] outputs = { OUTPUT_SLOT_1, OUTPUT_SLOT_2, OUTPUT_SLOT_3 };
+        int[] outputs = { OUTPUT_SLOT_1 };
 
         // Prefer merging into existing stacks first
         for (int slot : outputs) {

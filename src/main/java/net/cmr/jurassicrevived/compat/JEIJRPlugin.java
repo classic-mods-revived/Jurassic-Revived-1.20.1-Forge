@@ -70,19 +70,19 @@ public class JEIJRPlugin implements IModPlugin {
 
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
-        registration.addRecipeClickArea(DNAExtractorScreen.class, 76, 35, 24, 16,
+        registration.addRecipeClickArea(DNAExtractorScreen.class, 81, 31, 14, 25,
                 DNAExtractorRecipeCategory.DNA_EXTRACTOR_RECIPE_RECIPE_TYPE);
-        registration.addRecipeClickArea(FossilGrinderScreen.class, 76, 35, 24, 16,
+        registration.addRecipeClickArea(FossilGrinderScreen.class, 80, 25, 18, 36,
                 FossilGrinderRecipeCategory.FOSSIL_GRINDING_RECIPE_RECIPE_TYPE);
-        registration.addRecipeClickArea(FossilCleanerScreen.class, 76, 35, 24, 16,
+        registration.addRecipeClickArea(FossilCleanerScreen.class, 74, 35, 29, 16,
                 FossilCleanerRecipeCategory.FOSSIL_CLEANING_RECIPE_RECIPE_TYPE);
-        registration.addRecipeClickArea(DNAHybridizerScreen.class, 93, 35, 24, 16,
+        registration.addRecipeClickArea(DNAHybridizerScreen.class, 105, 35, 24, 16,
                 DNAHybridizerRecipeCategory.DNA_HYBRIDIZING_RECIPE_RECIPE_TYPE);
         registration.addRecipeClickArea(EmbryonicMachineScreen.class, 76, 35, 24, 16,
                 EmbryonicMachineRecipeCategory.EMBRYONIC_MACHINING_RECIPE_RECIPE_TYPE);
         registration.addRecipeClickArea(EmbryoCalcificationMachineScreen.class, 76, 35, 24, 16,
                 EmbryoCalcificationMachineRecipeCategory.EMBRYO_CALCIFICATION_MACHINING_RECIPE_RECIPE_TYPE);
-        registration.addRecipeClickArea(IncubatorScreen.class, 51, 56, 72, 16,
+        registration.addRecipeClickArea(IncubatorScreen.class, 51, 16, 72, 16,
                 IncubatorRecipeCategory.INCUBATING_RECIPE_RECIPE_TYPE);
     }
 

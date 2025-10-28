@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "jurassicrevived:block/reinforced_brick_slab"
+    },
+    "type=double": {
+      "model": "jurassicrevived:block/reinforced_stone_bricks"
+    },
+    "type=top": {
+      "model": "jurassicrevived:block/reinforced_brick_slab_top"
+    }
+  }
+}

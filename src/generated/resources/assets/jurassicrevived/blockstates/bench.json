@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "jurassicrevived:block/bench",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "jurassicrevived:block/bench"
+    },
+    "facing=south": {
+      "model": "jurassicrevived:block/bench",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "jurassicrevived:block/bench",
+      "y": 270
+    }
+  }
+}

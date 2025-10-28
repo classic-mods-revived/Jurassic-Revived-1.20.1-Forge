@@ -70,7 +70,7 @@ public class DNAHybridizerScreen extends AbstractContainerScreen<DNAHybridizerMe
         int y = (this.height - this.imageHeight) /2;
 
         guiGraphics.blit(GUI_TEXTURE, x, y, 0, 0, this.imageWidth, this.imageHeight, 176, 166);
-        guiGraphics.blit(ARROW_TEXTURE,  x + 93, y + 35, 0, 0, 24, 16, 24, 16);
+        guiGraphics.blit(ARROW_TEXTURE,  x + 104, y + 35, 0, 0, 24, 16, 24, 16);
 
         if (Config.REQUIRE_POWER) {
             guiGraphics.blit(POWER_BAR_TEXTURE, x+159, y+10, 0, 0, 10, 66, 10, 66);
@@ -79,7 +79,7 @@ public class DNAHybridizerScreen extends AbstractContainerScreen<DNAHybridizerMe
 
     private void RenderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
         if(menu.isCrafting()) {
-            guiGraphics.blit(WHITE_ARROW_TEXTURE, x+93, y + 35, 0, 0, menu.getScaledArrowProgress(), 16, 24, 16);
+            guiGraphics.blit(WHITE_ARROW_TEXTURE, x+104, y + 35, 0, 0, menu.getScaledArrowProgress(), 16, 24, 16);
         }
     }
 

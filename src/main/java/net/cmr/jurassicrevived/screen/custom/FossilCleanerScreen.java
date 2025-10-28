@@ -20,10 +20,10 @@ import java.util.Optional;
 public class FossilCleanerScreen extends AbstractContainerScreen<FossilCleanerMenu> {
     private static final ResourceLocation GUI_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/fossil_cleaner/fossil_cleaner_gui.png");
-    private static final ResourceLocation ARROW_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/arrow.png");
-    private static final ResourceLocation WHITE_ARROW_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/white_arrow.png");
+    private static final ResourceLocation BUBBLES_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/bubbles.png");
+    private static final ResourceLocation WHITE_BUBBLES_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/white_bubbles.png");
     private static final ResourceLocation POWER_BAR_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/power_bar.png");
     private static final ResourceLocation SKULL_TEXTURE =
@@ -93,7 +93,7 @@ public class FossilCleanerScreen extends AbstractContainerScreen<FossilCleanerMe
         int y = (this.height - this.imageHeight) /2;
 
         guiGraphics.blit(GUI_TEXTURE, x, y, 0, 0, this.imageWidth, this.imageHeight, 176, 166);
-        guiGraphics.blit(ARROW_TEXTURE,  x + 76, y + 35, 0, 0, 24, 16, 24, 16);
+        guiGraphics.blit(BUBBLES_TEXTURE,  x + 73, y + 37, 0, 0, 29, 12, 29, 12);
 
         guiGraphics.blit(SKULL_TEXTURE,  x + 57, y + 35, 0, 0, 16, 16, 16, 16);
 
@@ -106,7 +106,7 @@ public class FossilCleanerScreen extends AbstractContainerScreen<FossilCleanerMe
 
     private void RenderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
         if(menu.isCrafting()) {
-            guiGraphics.blit(WHITE_ARROW_TEXTURE, x+76, y + 35, 0, 0, menu.getScaledArrowProgress(), 16, 24, 16);
+            guiGraphics.blit(WHITE_BUBBLES_TEXTURE, x+73, y + 37, 0, 0, menu.getScaledArrowProgress(), 12, 29, 12);
         }
     }
 

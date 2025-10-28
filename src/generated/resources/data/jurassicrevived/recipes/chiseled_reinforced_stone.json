@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "jurassicrevived:reinforced_brick_slab"
+    }
+  },
+  "pattern": [
+    "A",
+    "A"
+  ],
+  "result": {
+    "item": "jurassicrevived:chiseled_reinforced_stone"
+  },
+  "show_notification": true
+}

@@ -1,9 +1,14 @@
 package net.cmr.jurassicrevived.event;
 
+import net.cmr.jurassicrevived.Config;
 import net.cmr.jurassicrevived.JRMod;
 import net.cmr.jurassicrevived.entity.ModEntities;
 import net.cmr.jurassicrevived.entity.custom.*;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -47,4 +52,11 @@ public class ModEventBusEvents {
         event.put(ModEntities.VELOCIRAPTOR.get(), VelociraptorEntity.createAttributes().build());
     }
 
+    @SubscribeEvent
+    public static void registerSpawnPlacements (SpawnPlacementRegisterEvent event) {
+        if (!Config.NATURAL_DINOSAUR_SPAWNING) {
+            event.register(ModEntities.BRACHIOSAURUS.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                    Animal::checkAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        }
+    }
 }

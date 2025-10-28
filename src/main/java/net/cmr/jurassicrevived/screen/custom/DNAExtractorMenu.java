@@ -31,7 +31,7 @@ public class DNAExtractorMenu extends AbstractContainerMenu {
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
 
-        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 0, 39, 35) {
+        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 0, 57, 35) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.getItem() == ModItems.TEST_TUBE.get();
@@ -43,7 +43,7 @@ public class DNAExtractorMenu extends AbstractContainerMenu {
         });
 
         // Input: Material slot (only velociraptor tissue may be inserted)
-        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 1, 57, 35) {
+        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 1, 80, 7) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.is(ModTags.Items.TISSUES) || stack.getItem() == ModItems.MOSQUITO_IN_AMBER.get();
@@ -55,19 +55,19 @@ public class DNAExtractorMenu extends AbstractContainerMenu {
         });
 
         // Output slots: cannot insert anything, but can always take out
-        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 2, 103, 35) {
+        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 2, 62, 63) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return false;
             }
         });
-        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 3, 121, 35) {
+        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 3, 80, 63) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return false;
             }
         });
-        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 4, 139, 35) {
+        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 4, 98, 63) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return false;
@@ -88,7 +88,7 @@ public class DNAExtractorMenu extends AbstractContainerMenu {
     public int getScaledArrowProgress() {
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1);
-        int arrowPixelSize = 24;
+        int arrowPixelSize = 18;
 
         return maxProgress != 0 && progress != 0 ? progress * arrowPixelSize / maxProgress : 0;
     }

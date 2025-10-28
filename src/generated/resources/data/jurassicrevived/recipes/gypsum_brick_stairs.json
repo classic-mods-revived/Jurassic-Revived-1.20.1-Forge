@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "jurassicrevived:gypsum_stone_bricks"
+    }
+  },
+  "pattern": [
+    "A  ",
+    "AA ",
+    "AAA"
+  ],
+  "result": {
+    "count": 4,
+    "item": "jurassicrevived:gypsum_brick_stairs"
+  },
+  "show_notification": true
+}

@@ -2,7 +2,7 @@
 	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
-  "render_type": "translucent",
+	"render_type": "translucent",
 	"texture_size": [32, 32],
 	"textures": {
 		"0": "jurassicrevived:block/power_pipe",
@@ -43,10 +43,15 @@
 			"scale": [0.4, 0.4, 0.4]
 		},
 		"ground": {
-			"translation": [0, 3, 0]
+			"translation": [0, 3, 0],
+			"scale": [0.25, 0.25, 0.25]
 		},
 		"gui": {
-			"rotation": [30, -135, 0]
+			"rotation": [30, -135, 0],
+			"scale": [0.625, 0.625, 0.625]
+		},
+		"fixed": {
+			"scale": [0.5, 0.5, 0.5]
 		}
 	},
 	"groups": [

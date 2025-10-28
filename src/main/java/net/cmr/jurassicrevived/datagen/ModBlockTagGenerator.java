@@ -23,12 +23,30 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
     protected void addTags(HolderLookup.Provider pProvider) {
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(ModBlocks.CAT_PLUSHIE.get())
+                .add(ModBlocks.TRASH_CAN.get())
+                .add(ModBlocks.BENCH.get())
+                .add(ModBlocks.FENCE_LIGHT.get())
+                .add(ModBlocks.LIGHT_POST.get())
                 .add(ModBlocks.GYPSUM_STONE.get())
                 .add(ModBlocks.GYPSUM_COBBLESTONE.get())
                 .add(ModBlocks.GYPSUM_STONE_BRICKS.get())
                 .add(ModBlocks.SMOOTH_GYPSUM_STONE.get())
+                .add(ModBlocks.CHISELED_GYPSUM_STONE.get())
+                .add(ModBlocks.GYPSUM_BRICK_STAIRS.get())
+                .add(ModBlocks.GYPSUM_BRICK_SLAB.get())
+                .add(ModBlocks.GYPSUM_BRICK_WALL.get())
+                .add(ModBlocks.GYPSUM_BRICK_STAIRS.get())
+                .add(ModBlocks.GYPSUM_BRICK_SLAB.get())
+                .add(ModBlocks.GYPSUM_BRICK_WALL.get())
                 .add(ModBlocks.REINFORCED_STONE.get())
                 .add(ModBlocks.REINFORCED_STONE_BRICKS.get())
+                .add(ModBlocks.CHISELED_REINFORCED_STONE.get())
+                .add(ModBlocks.REINFORCED_BRICK_STAIRS.get())
+                .add(ModBlocks.REINFORCED_BRICK_SLAB.get())
+                .add(ModBlocks.REINFORCED_BRICK_WALL.get())
+                .add(ModBlocks.REINFORCED_BRICK_STAIRS.get())
+                .add(ModBlocks.REINFORCED_BRICK_SLAB.get())
+                .add(ModBlocks.REINFORCED_BRICK_WALL.get())
                 .add(ModBlocks.STONE_FOSSIL.get())
                 .add(ModBlocks.DEEPSLATE_FOSSIL.get())
                 .add(ModBlocks.AMBER_ORE.get())
@@ -108,6 +126,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(Blocks.DIRT)
                 .add(Blocks.SAND)
                 .add(Blocks.CLAY);
+
+        tag(BlockTags.WALLS).add(ModBlocks.GYPSUM_BRICK_WALL.get());
     }
 
     @Override

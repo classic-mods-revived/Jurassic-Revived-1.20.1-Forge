@@ -20,8 +20,8 @@ public class IncubatorScreen extends AbstractContainerScreen<IncubatorMenu> {
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/incubator/incubator_gui.png");
     private static final ResourceLocation POWER_BAR_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/power_bar.png");
-    private static final ResourceLocation LIT_PROGRESS_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID,"textures/gui/generic/lit_progress.png");
+    private static final ResourceLocation LANTERN_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID,"textures/gui/generic/lantern.png");
     private static final ResourceLocation EGG_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/egg.png");
     private EnergyDisplayTooltipArea energyInfoArea;
@@ -77,9 +77,9 @@ public class IncubatorScreen extends AbstractContainerScreen<IncubatorMenu> {
         guiGraphics.blit(EGG_TEXTURE,  x + 110, y + 35, 0, 0, 16, 16, 16, 16);
 
         // Per-slot progress bars
-        renderProgressBar(guiGraphics, x + 50, y + 55, 0);
-        renderProgressBar(guiGraphics, x + 80, y + 55, 1);
-        renderProgressBar(guiGraphics, x + 110, y + 55, 2);
+        renderProgressBar(guiGraphics, x + 50, y + 16, 0);
+        renderProgressBar(guiGraphics, x + 80, y + 16, 1);
+        renderProgressBar(guiGraphics, x + 110, y + 16, 2);
 
         if (Config.REQUIRE_POWER) {
             guiGraphics.blit(POWER_BAR_TEXTURE, x+159, y+10, 0, 0, 10, 66, 10, 66);
@@ -91,18 +91,18 @@ public class IncubatorScreen extends AbstractContainerScreen<IncubatorMenu> {
         if (menu.isCrafting(slot)) {
             float progress = Mth.clamp(menu.getProgressRatio(slot), 0.0F, 1.0F);
             int minPixels = 2;
-            int visible = Mth.clamp(Mth.ceil(progress * 14.0F), minPixels, 14);
+            int visible = Mth.clamp(Mth.ceil(progress * 16.0F), minPixels, 16);
 
-            int texW = 14, texH = 14;
-            int width = 14, height = visible;
+            int texW = 16, texH = 16;
+            int width = 16, height = visible;
 
             int srcU = 0;
-            int srcV = texH - visible;
+            int srcV = 0;
 
-            int bottomY = topY + 14;
-            int destY = bottomY - visible;
+            int bottomY = topY + 16;
+            int destY = topY;
 
-            gg.blit(LIT_PROGRESS_TEXTURE, destX, destY, srcU, srcV, width, height, texW, texH);
+            gg.blit(LANTERN_TEXTURE, destX, destY, srcU, srcV, width, height, texW, texH);
         }
     }
 

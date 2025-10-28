@@ -31,7 +31,7 @@ public class FossilGrinderMenu extends AbstractContainerMenu {
         addPlayerHotbar(inventory);
 
         // Input: accepts items tagged as fossils or skulls
-        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 0, 57, 35) {
+        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 0, 58, 35) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.is(ModTags.Items.FOSSILS) || stack.is(ModTags.Items.SKULLS);
@@ -43,19 +43,19 @@ public class FossilGrinderMenu extends AbstractContainerMenu {
         });
 
         // Output slots: cannot insert anything, but can always take out
-        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 1, 103, 35) {
+        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 1, 103, 17) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return false;
             }
         });
-        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 2, 121, 35) {
+        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 2, 103, 35) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return false;
             }
         });
-        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 3, 139, 35) {
+        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 3, 103, 53) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return false;
@@ -72,7 +72,7 @@ public class FossilGrinderMenu extends AbstractContainerMenu {
     public int getScaledArrowProgress() {
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1);
-        int arrowPixelSize = 24;
+        int arrowPixelSize = 19;
 
         return maxProgress != 0 && progress != 0 ? progress * arrowPixelSize / maxProgress : 0;
     }
