@@ -381,6 +381,8 @@
   "tooltip.jurassicrevived.gender": "Gender: %s",
   "tooltip.jurassicrevived.gender.hint": "Hint: %s to change",
 
+  "sounds.jurassicrevived.machine_hum": "Machine Humming",
+
   "jurassicrevived.tooltip.liquid.amount.with.capacity": "%s / %s mB",
   "jurassicrevived.tooltip.liquid.amount": "%s mB",
   "jurassicrevived.tooltip.accepts_any_water_container": "Accepts any water container, even one's with more water than the tank can hold.",

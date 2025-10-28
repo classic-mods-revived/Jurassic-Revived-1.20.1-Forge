@@ -5,6 +5,7 @@ import net.cmr.jurassicrevived.block.ModBlocks;
 import net.cmr.jurassicrevived.block.custom.FencePoleBlock;
 import net.cmr.jurassicrevived.block.custom.FenceWireBlock;
 import net.cmr.jurassicrevived.block.custom.PipeBlock;
+import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
@@ -79,22 +80,22 @@ public class ModBlockStateProvider extends BlockStateProvider {
         horizontalFacingWithItem(ModBlocks.FENCE_LIGHT);
         horizontalFacingWithItem(ModBlocks.LIGHT_POST);
 
-        horizontalFacingWithItem(ModBlocks.GENERATOR);
-        horizontalFacingWithItem(ModBlocks.DNA_EXTRACTOR);
-        horizontalFacingWithItem(ModBlocks.FOSSIL_GRINDER);
-        horizontalFacingWithItem(ModBlocks.FOSSIL_CLEANER);
-        horizontalFacingWithItem(ModBlocks.DNA_HYBRIDIZER);
-        horizontalFacingWithItem(ModBlocks.EMBRYONIC_MACHINE);
-        horizontalFacingWithItem(ModBlocks.EMBRYO_CALCIFICATION_MACHINE);
-        horizontalFacingWithItem(ModBlocks.INCUBATOR);
-        horizontalFacingWithItem(ModBlocks.WHITE_GENERATOR);
-        horizontalFacingWithItem(ModBlocks.WHITE_DNA_EXTRACTOR);
-        horizontalFacingWithItem(ModBlocks.WHITE_FOSSIL_GRINDER);
-        horizontalFacingWithItem(ModBlocks.WHITE_FOSSIL_CLEANER);
-        horizontalFacingWithItem(ModBlocks.WHITE_DNA_HYBRIDIZER);
-        horizontalFacingWithItem(ModBlocks.WHITE_EMBRYONIC_MACHINE);
-        horizontalFacingWithItem(ModBlocks.WHITE_EMBRYO_CALCIFICATION_MACHINE);
-        horizontalFacingWithItem(ModBlocks.WHITE_INCUBATOR);
+        horizontalFacingLitNoBlockstateWithItem(ModBlocks.GENERATOR);
+        horizontalFacingLitNoBlockstateWithItem(ModBlocks.DNA_EXTRACTOR);
+        horizontalFacingLitNoBlockstateWithItem(ModBlocks.FOSSIL_GRINDER);
+        horizontalFacingLitNoBlockstateWithItem(ModBlocks.FOSSIL_CLEANER);
+        horizontalFacingLitNoBlockstateWithItem(ModBlocks.DNA_HYBRIDIZER);
+        horizontalFacingLitNoBlockstateWithItem(ModBlocks.EMBRYONIC_MACHINE);
+        horizontalFacingLitNoBlockstateWithItem(ModBlocks.EMBRYO_CALCIFICATION_MACHINE);
+        horizontalFacingLitWithItem(ModBlocks.INCUBATOR);
+        horizontalFacingLitNoBlockstateWithItem(ModBlocks.WHITE_GENERATOR);
+        horizontalFacingLitNoBlockstateWithItem(ModBlocks.WHITE_DNA_EXTRACTOR);
+        horizontalFacingLitNoBlockstateWithItem(ModBlocks.WHITE_FOSSIL_GRINDER);
+        horizontalFacingLitNoBlockstateWithItem(ModBlocks.WHITE_FOSSIL_CLEANER);
+        horizontalFacingLitNoBlockstateWithItem(ModBlocks.WHITE_DNA_HYBRIDIZER);
+        horizontalFacingLitNoBlockstateWithItem(ModBlocks.WHITE_EMBRYONIC_MACHINE);
+        horizontalFacingLitNoBlockstateWithItem(ModBlocks.WHITE_EMBRYO_CALCIFICATION_MACHINE);
+        horizontalFacingLitWithItem(ModBlocks.WHITE_INCUBATOR);
 
         eggLike(ModBlocks.HATCHED_VELOCIRAPTOR_EGG);
         eggLike(ModBlocks.HATCHED_TYRANNOSAURUS_REX_EGG);
@@ -234,6 +235,65 @@ public class ModBlockStateProvider extends BlockStateProvider {
         ModelFile model = new ModelFile.UncheckedModelFile(modLoc("block/" + block.getId().getPath()));
         horizontalBlock(block.get(), model);
         simpleBlockItem(block.get(), model);
+    }
+
+    // Like horizontalFacingWithItem, but supports a LIT boolean property by swapping models.
+    // Expects two block models to exist:
+    // - block/<name>          (unlit)
+    // - block/<name>_lit      (lit)
+    private void horizontalFacingLitWithItem(RegistryObject<Block> block) {
+        String base = block.getId().getPath();
+        ModelFile unlit = new ModelFile.UncheckedModelFile(modLoc("block/" + base));
+        ModelFile lit   = new ModelFile.UncheckedModelFile(modLoc("block/" + base + "_lit"));
+
+        // Generate variants for both LIT=false and LIT=true with horizontal facing
+        getVariantBuilder(block.get())
+                .partialState().with(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH).with(BlockStateProperties.LIT, false)
+                .modelForState().modelFile(unlit).rotationY(180).addModel()
+                .partialState().with(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH).with(BlockStateProperties.LIT, false)
+                .modelForState().modelFile(unlit).rotationY(0).addModel()
+                .partialState().with(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST).with(BlockStateProperties.LIT, false)
+                .modelForState().modelFile(unlit).rotationY(90).addModel()
+                .partialState().with(BlockStateProperties.HORIZONTAL_FACING, Direction.EAST).with(BlockStateProperties.LIT, false)
+                .modelForState().modelFile(unlit).rotationY(270).addModel()
+                .partialState().with(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH).with(BlockStateProperties.LIT, true)
+                .modelForState().modelFile(lit).rotationY(180).addModel()
+                .partialState().with(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH).with(BlockStateProperties.LIT, true)
+                .modelForState().modelFile(lit).rotationY(0).addModel()
+                .partialState().with(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST).with(BlockStateProperties.LIT, true)
+                .modelForState().modelFile(lit).rotationY(90).addModel()
+                .partialState().with(BlockStateProperties.HORIZONTAL_FACING, Direction.EAST).with(BlockStateProperties.LIT, true)
+                .modelForState().modelFile(lit).rotationY(270).addModel();
+
+        // Use the unlit model for the item (or change to lit if you prefer)
+        simpleBlockItem(block.get(), unlit);
+    }
+
+    // Like horizontalFacingLitWithItem, but supports a LIT boolean property by swapping models.
+    // Expects only one model to exist
+    private void horizontalFacingLitNoBlockstateWithItem(RegistryObject<Block> block) {
+        String base = block.getId().getPath();
+        ModelFile unlit = new ModelFile.UncheckedModelFile(modLoc("block/" + base));
+        ModelFile lit   = new ModelFile.UncheckedModelFile(modLoc("block/" + base + "_lit"));
+
+        getVariantBuilder(block.get())
+                .partialState().with(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH).with(BlockStateProperties.LIT, false)
+                .modelForState().modelFile(unlit).rotationY(180).addModel()
+                .partialState().with(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH).with(BlockStateProperties.LIT, false)
+                .modelForState().modelFile(unlit).rotationY(0).addModel()
+                .partialState().with(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST).with(BlockStateProperties.LIT, false)
+                .modelForState().modelFile(unlit).rotationY(90).addModel()
+                .partialState().with(BlockStateProperties.HORIZONTAL_FACING, Direction.EAST).with(BlockStateProperties.LIT, false)
+                .modelForState().modelFile(unlit).rotationY(270).addModel()
+                .partialState().with(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH).with(BlockStateProperties.LIT, true)
+                .modelForState().modelFile(unlit).rotationY(180).addModel()
+                .partialState().with(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH).with(BlockStateProperties.LIT, true)
+                .modelForState().modelFile(unlit).rotationY(0).addModel()
+                .partialState().with(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST).with(BlockStateProperties.LIT, true)
+                .modelForState().modelFile(unlit).rotationY(90).addModel()
+                .partialState().with(BlockStateProperties.HORIZONTAL_FACING, Direction.EAST).with(BlockStateProperties.LIT, true)
+                .modelForState().modelFile(unlit).rotationY(270).addModel();
+        simpleBlockItem(block.get(), unlit);
     }
 
     private void eggLike(RegistryObject<Block> block) {

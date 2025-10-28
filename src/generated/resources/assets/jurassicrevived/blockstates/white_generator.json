@@ -1,19 +1,34 @@
 {
   "variants": {
-    "facing=east": {
+    "facing=east,lit=false": {
       "model": "jurassicrevived:block/white_generator",
-      "y": 90
+      "y": 270
     },
-    "facing=north": {
-      "model": "jurassicrevived:block/white_generator"
+    "facing=east,lit=true": {
+      "model": "jurassicrevived:block/white_generator",
+      "y": 270
     },
-    "facing=south": {
+    "facing=north,lit=false": {
       "model": "jurassicrevived:block/white_generator",
       "y": 180
     },
-    "facing=west": {
+    "facing=north,lit=true": {
       "model": "jurassicrevived:block/white_generator",
-      "y": 270
+      "y": 180
+    },
+    "facing=south,lit=false": {
+      "model": "jurassicrevived:block/white_generator"
+    },
+    "facing=south,lit=true": {
+      "model": "jurassicrevived:block/white_generator"
+    },
+    "facing=west,lit=false": {
+      "model": "jurassicrevived:block/white_generator",
+      "y": 90
+    },
+    "facing=west,lit=true": {
+      "model": "jurassicrevived:block/white_generator",
+      "y": 90
     }
   }
 }

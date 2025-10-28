@@ -13,6 +13,7 @@ import net.cmr.jurassicrevived.loot.ModLootProviders;
 import net.cmr.jurassicrevived.recipe.ModRecipes;
 import net.cmr.jurassicrevived.screen.ModMenuTypes;
 import net.cmr.jurassicrevived.screen.custom.*;
+import net.cmr.jurassicrevived.sounds.ModSounds;
 import net.cmr.jurassicrevived.util.FenceClimbClientHandler;
 import net.cmr.jurassicrevived.util.FenceClimbHandler;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -60,6 +61,8 @@ public class JRMod {
         ModRecipes.register(modEventBus);
 
         ModLootProviders.register(modEventBus);
+
+        ModSounds.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 

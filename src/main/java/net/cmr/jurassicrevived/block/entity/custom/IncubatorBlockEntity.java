@@ -1,14 +1,17 @@
 package net.cmr.jurassicrevived.block.entity.custom;
 
 import net.cmr.jurassicrevived.Config;
+import net.cmr.jurassicrevived.block.custom.DNAHybridizerBlock;
 import net.cmr.jurassicrevived.block.custom.IncubatorBlock;
 import net.cmr.jurassicrevived.block.entity.energy.ModEnergyStorage;
 import net.cmr.jurassicrevived.recipe.IncubatorRecipe;
 import net.cmr.jurassicrevived.screen.custom.IncubatorMenu;
+import net.cmr.jurassicrevived.sounds.MachineHumLoopSound;
 import net.cmr.jurassicrevived.util.InventoryDirectionEntry;
 import net.cmr.jurassicrevived.util.InventoryDirectionWrapper;
 import net.cmr.jurassicrevived.util.ModTags;
 import net.cmr.jurassicrevived.util.WrappedHandler;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -43,6 +46,27 @@ import java.util.Map;
 import java.util.Optional;
 
 public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
+    private @Nullable MachineHumLoopSound humSound;
+
+    public static void clientTick(Level level, BlockPos pos, BlockState state, IncubatorBlockEntity be) {
+        if (!level.isClientSide) return;
+
+        boolean lit = state.hasProperty(IncubatorBlock.LIT)
+                && state.getValue(IncubatorBlock.LIT);
+
+        if (lit) {
+            if (be.humSound == null || be.humSound.isStopped()) {
+                be.humSound = new MachineHumLoopSound(level, pos);
+                Minecraft.getInstance().getSoundManager().play(be.humSound);
+            }
+        } else {
+            if (be.humSound != null && !be.humSound.isStopped()) {
+                be.humSound.stopPlaying();
+            }
+            be.humSound = null;
+        }
+    }
+
     public final ItemStackHandler itemHandler = new ItemStackHandler(3) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -286,6 +310,10 @@ public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
             }
         }
 
+        // update block lit state once per tick based on activity
+        if (state.getValue(IncubatorBlock.LIT) != anyActive) {
+            level.setBlockAndUpdate(pos, state.setValue(IncubatorBlock.LIT, anyActive));
+        }
         // Consume energy once per tick if any slot is active
         if (Config.REQUIRE_POWER && anyActive) {
             if (!consumeEnergyPerTick(10)) {

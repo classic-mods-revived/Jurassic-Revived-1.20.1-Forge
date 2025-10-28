@@ -1,14 +1,18 @@
 package net.cmr.jurassicrevived.block.custom;
 
 import net.cmr.jurassicrevived.Config;
+import net.cmr.jurassicrevived.block.entity.custom.DNAExtractorBlockEntity;
 import net.cmr.jurassicrevived.block.entity.custom.GeneratorBlockEntity;
 import net.cmr.jurassicrevived.block.entity.custom.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ItemParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
@@ -24,6 +28,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -34,6 +39,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class GeneratorBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final BooleanProperty LIT = BlockStateProperties.LIT;
     // Remove MapCodec for Forge 1.20.1
     // public static final MapCodec<GeneratorBlock> CODEC = simpleCodec(GeneratorBlock::new);
 
@@ -89,12 +95,12 @@ public class GeneratorBlock extends BaseEntityBlock {
 
     @Override
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite().getOpposite()).setValue(LIT, false);
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
+        builder.add(FACING, LIT);
     }
 
     @Override
@@ -182,11 +188,40 @@ public class GeneratorBlock extends BaseEntityBlock {
 
     @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+        if (blockEntityType != ModBlockEntities.GENERATOR_BE.get()) return null;
+
         if (level.isClientSide) {
-            return null;
+            // Client ticker: start/stop looping hum
+            return (lvl, pos, st, be) -> {
+                if (be instanceof GeneratorBlockEntity extractor) {
+                    GeneratorBlockEntity.clientTick(lvl, pos, st, extractor);
+                }
+            };
+        } else {
+            // Server ticker: existing logic
+            return createTickerHelper(blockEntityType, ModBlockEntities.GENERATOR_BE.get(),
+                    (level1, blockPos, blockState, generatorBlockEntity) -> generatorBlockEntity.tick(level1, blockPos, blockState));
+        }
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (!state.getValue(LIT)) {
+            return;
         }
 
-        return createTickerHelper(blockEntityType, ModBlockEntities.GENERATOR_BE.get(),
-                (level1, blockPos, blockState, generatorBlockEntity) -> generatorBlockEntity.tick(level1, blockPos, blockState));
+        double xPos = (double)pos.getX() + 0.5;
+        double yPos = pos.getY();
+        double zPos = (double)pos.getZ() + 0.5;
+
+        Direction direction = state.getValue(FACING).getOpposite();
+        Direction.Axis axis = direction.getAxis();
+
+        double defaultOffset = random.nextDouble() * 0.6 - 0.3;
+        double xOffsets = axis == Direction.Axis.X ? (double)direction.getStepX() * 0.52 : defaultOffset;
+        double yOffset = random.nextDouble() * 6.0 / 8.0;
+        double zOffset = axis == Direction.Axis.Z ? (double)direction.getStepZ() * 0.52 : defaultOffset;
+
+        level.addParticle(ParticleTypes.SMOKE, xPos + xOffsets, yPos + yOffset, zPos + zOffset, 0.0, 0.0, 0.0);
+        }
     }
-}
