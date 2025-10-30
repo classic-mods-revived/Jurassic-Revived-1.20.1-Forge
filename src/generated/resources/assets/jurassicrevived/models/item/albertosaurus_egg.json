@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "jurassicrevived:item/albertosaurus_egg"
+    "layer0": "jurassicrevived:block/albertosaurus_egg"
   }
 }

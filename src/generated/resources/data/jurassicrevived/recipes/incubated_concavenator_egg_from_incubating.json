@@ -1,0 +1,11 @@
+{
+  "type": "jurassicrevived:incubating",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:concavenator_egg"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:incubated_concavenator_egg"
+  }
+}

@@ -28,7 +28,7 @@ public class ModTags {
 
     public static class Blocks {
         public static final TagKey<Block> AQUATIC_PLACEMENT_REPLACEABLES = tag("aquatic_placement_replaceables");
-        public static final TagKey<Block> HATCHED_EGGS = tag("hatched_eggs");
+        public static final TagKey<Block> INCUBATED_EGGS = tag("incubated_eggs");
 
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, name));

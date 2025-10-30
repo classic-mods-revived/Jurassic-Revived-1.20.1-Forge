@@ -1,0 +1,11 @@
+{
+  "type": "jurassicrevived:incubating",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:distortus_rex_egg"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:incubated_distortus_rex_egg"
+  }
+}

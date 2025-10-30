@@ -266,42 +266,6 @@ public class ModItems {
     public static final RegistryObject<Item> THERIZINOSAURUS_SYRINGE = ITEMS.register("therizinosaurus_syringe", () -> new Item(new Item.Properties().stacksTo(8).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> DISTORTUS_REX_SYRINGE = ITEMS.register("distortus_rex_syringe", () -> new Item(new Item.Properties().stacksTo(8).rarity(Rarity.UNCOMMON)));
 
-
-    public static final RegistryObject<Item> APATOSAURUS_EGG = ITEMS.register("apatosaurus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> ALBERTOSAURUS_EGG = ITEMS.register("albertosaurus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> BRACHIOSAURUS_EGG = ITEMS.register("brachiosaurus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> CERATOSAURUS_EGG = ITEMS.register("ceratosaurus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> COMPSOGNATHUS_EGG = ITEMS.register("compsognathus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> DILOPHOSAURUS_EGG = ITEMS.register("dilophosaurus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> DIPLODOCUS_EGG = ITEMS.register("diplodocus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> GALLIMIMUS_EGG = ITEMS.register("gallimimus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> INDOMINUS_REX_EGG = ITEMS.register("indominus_rex_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> OURANOSAURUS_EGG = ITEMS.register("ouranosaurus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> PARASAUROLOPHUS_EGG = ITEMS.register("parasaurolophus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> SPINOSAURUS_EGG = ITEMS.register("spinosaurus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> TRICERATOPS_EGG = ITEMS.register("triceratops_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> TYRANNOSAURUS_REX_EGG = ITEMS.register("tyrannosaurus_rex_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> VELOCIRAPTOR_EGG = ITEMS.register("velociraptor_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> BARYONYX_EGG = ITEMS.register("baryonyx_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> CARNOTAURUS_EGG = ITEMS.register("carnotaurus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> CONCAVENATOR_EGG = ITEMS.register("concavenator_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> DEINONYCHUS_EGG = ITEMS.register("deinonychus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> EDMONTOSAURUS_EGG = ITEMS.register("edmontosaurus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> GIGANOTOSAURUS_EGG = ITEMS.register("giganotosaurus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> GUANLONG_EGG = ITEMS.register("guanlong_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> HERRERASAURUS_EGG = ITEMS.register("herrerasaurus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> MAJUNGASAURUS_EGG = ITEMS.register("majungasaurus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> PROCOMPSOGNATHUS_EGG = ITEMS.register("procompsognathus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> PROTOCERATOPS_EGG = ITEMS.register("protoceratops_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> RUGOPS_EGG = ITEMS.register("rugops_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> SHANTUNGOSAURUS_EGG = ITEMS.register("shantungosaurus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> STEGOSAURUS_EGG = ITEMS.register("stegosaurus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> STYRACOSAURUS_EGG = ITEMS.register("styracosaurus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> THERIZINOSAURUS_EGG = ITEMS.register("therizinosaurus_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> DISTORTUS_REX_EGG = ITEMS.register("distortus_rex_egg", () -> new Item(new Item.Properties().stacksTo(1)));
-
-
-
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

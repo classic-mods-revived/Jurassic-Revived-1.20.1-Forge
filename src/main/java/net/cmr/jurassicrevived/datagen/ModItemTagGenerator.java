@@ -1,11 +1,13 @@
 package net.cmr.jurassicrevived.datagen;
 
 import net.cmr.jurassicrevived.JRMod;
+import net.cmr.jurassicrevived.block.ModBlocks;
 import net.cmr.jurassicrevived.item.ModItems;
 import net.cmr.jurassicrevived.util.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
@@ -121,38 +123,38 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModItems.THERIZINOSAURUS_SYRINGE.get())
                 .add(ModItems.DISTORTUS_REX_SYRINGE.get());
         this.tag(ModTags.Items.EGGS)
-                .add(ModItems.APATOSAURUS_EGG.get())
-                .add(ModItems.ALBERTOSAURUS_EGG.get())
-                .add(ModItems.BRACHIOSAURUS_EGG.get())
-                .add(ModItems.CERATOSAURUS_EGG.get())
-                .add(ModItems.COMPSOGNATHUS_EGG.get())
-                .add(ModItems.DILOPHOSAURUS_EGG.get())
-                .add(ModItems.DIPLODOCUS_EGG.get())
-                .add(ModItems.GALLIMIMUS_EGG.get())
-                .add(ModItems.INDOMINUS_REX_EGG.get())
-                .add(ModItems.OURANOSAURUS_EGG.get())
-                .add(ModItems.PARASAUROLOPHUS_EGG.get())
-                .add(ModItems.SPINOSAURUS_EGG.get())
-                .add(ModItems.TRICERATOPS_EGG.get())
-                .add(ModItems.TYRANNOSAURUS_REX_EGG.get())
-                .add(ModItems.VELOCIRAPTOR_EGG.get())
-                .add(ModItems.BARYONYX_EGG.get())
-                .add(ModItems.CARNOTAURUS_EGG.get())
-                .add(ModItems.CONCAVENATOR_EGG.get())
-                .add(ModItems.DEINONYCHUS_EGG.get())
-                .add(ModItems.EDMONTOSAURUS_EGG.get())
-                .add(ModItems.GIGANOTOSAURUS_EGG.get())
-                .add(ModItems.GUANLONG_EGG.get())
-                .add(ModItems.HERRERASAURUS_EGG.get())
-                .add(ModItems.MAJUNGASAURUS_EGG.get())
-                .add(ModItems.PROCOMPSOGNATHUS_EGG.get())
-                .add(ModItems.PROTOCERATOPS_EGG.get())
-                .add(ModItems.RUGOPS_EGG.get())
-                .add(ModItems.SHANTUNGOSAURUS_EGG.get())
-                .add(ModItems.STEGOSAURUS_EGG.get())
-                .add(ModItems.STYRACOSAURUS_EGG.get())
-                .add(ModItems.THERIZINOSAURUS_EGG.get())
-                .add(ModItems.DISTORTUS_REX_EGG.get());
+                .add(Item.byBlock(ModBlocks.APATOSAURUS_EGG.get()))
+                .add(Item.byBlock(ModBlocks.ALBERTOSAURUS_EGG.get()))
+                .add(Item.byBlock(ModBlocks.BRACHIOSAURUS_EGG.get()))
+                .add(Item.byBlock(ModBlocks.CERATOSAURUS_EGG.get()))
+                .add(Item.byBlock(ModBlocks.COMPSOGNATHUS_EGG.get()))
+                .add(Item.byBlock(ModBlocks.DILOPHOSAURUS_EGG.get()))
+                .add(Item.byBlock(ModBlocks.DIPLODOCUS_EGG.get()))
+                .add(Item.byBlock(ModBlocks.GALLIMIMUS_EGG.get()))
+                .add(Item.byBlock(ModBlocks.INDOMINUS_REX_EGG.get()))
+                .add(Item.byBlock(ModBlocks.OURANOSAURUS_EGG.get()))
+                .add(Item.byBlock(ModBlocks.PARASAUROLOPHUS_EGG.get()))
+                .add(Item.byBlock(ModBlocks.SPINOSAURUS_EGG.get()))
+                .add(Item.byBlock(ModBlocks.TRICERATOPS_EGG.get()))
+                .add(Item.byBlock(ModBlocks.TYRANNOSAURUS_REX_EGG.get()))
+                .add(Item.byBlock(ModBlocks.VELOCIRAPTOR_EGG.get()))
+                .add(Item.byBlock(ModBlocks.BARYONYX_EGG.get()))
+                .add(Item.byBlock(ModBlocks.CARNOTAURUS_EGG.get()))
+                .add(Item.byBlock(ModBlocks.CONCAVENATOR_EGG.get()))
+                .add(Item.byBlock(ModBlocks.DEINONYCHUS_EGG.get()))
+                .add(Item.byBlock(ModBlocks.EDMONTOSAURUS_EGG.get()))
+                .add(Item.byBlock(ModBlocks.GIGANOTOSAURUS_EGG.get()))
+                .add(Item.byBlock(ModBlocks.GUANLONG_EGG.get()))
+                .add(Item.byBlock(ModBlocks.HERRERASAURUS_EGG.get()))
+                .add(Item.byBlock(ModBlocks.MAJUNGASAURUS_EGG.get()))
+                .add(Item.byBlock(ModBlocks.PROCOMPSOGNATHUS_EGG.get()))
+                .add(Item.byBlock(ModBlocks.PROTOCERATOPS_EGG.get()))
+                .add(Item.byBlock(ModBlocks.RUGOPS_EGG.get()))
+                .add(Item.byBlock(ModBlocks.SHANTUNGOSAURUS_EGG.get()))
+                .add(Item.byBlock(ModBlocks.STEGOSAURUS_EGG.get()))
+                .add(Item.byBlock(ModBlocks.STYRACOSAURUS_EGG.get()))
+                .add(Item.byBlock(ModBlocks.THERIZINOSAURUS_EGG.get()))
+                .add(Item.byBlock(ModBlocks.DISTORTUS_REX_EGG.get()));
         this.tag(ModTags.Items.FOSSILS)
                 .add(ModItems.APATOSAURUS_SKULL_FOSSIL.get())
                 .add(ModItems.ALBERTOSAURUS_SKULL_FOSSIL.get())

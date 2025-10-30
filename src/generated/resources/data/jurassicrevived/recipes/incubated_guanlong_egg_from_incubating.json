@@ -1,0 +1,11 @@
+{
+  "type": "jurassicrevived:incubating",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:guanlong_egg"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:incubated_guanlong_egg"
+  }
+}

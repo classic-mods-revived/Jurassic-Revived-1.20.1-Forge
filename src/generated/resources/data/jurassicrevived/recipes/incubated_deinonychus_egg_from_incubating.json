@@ -1,0 +1,11 @@
+{
+  "type": "jurassicrevived:incubating",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:deinonychus_egg"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:incubated_deinonychus_egg"
+  }
+}

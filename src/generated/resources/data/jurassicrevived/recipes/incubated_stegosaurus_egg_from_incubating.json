@@ -1,0 +1,11 @@
+{
+  "type": "jurassicrevived:incubating",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:stegosaurus_egg"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:incubated_stegosaurus_egg"
+  }
+}

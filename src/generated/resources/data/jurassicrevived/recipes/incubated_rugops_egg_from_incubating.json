@@ -1,0 +1,11 @@
+{
+  "type": "jurassicrevived:incubating",
+  "ingredients": [
+    {
+      "item": "jurassicrevived:rugops_egg"
+    }
+  ],
+  "result": {
+    "item": "jurassicrevived:incubated_rugops_egg"
+  }
+}

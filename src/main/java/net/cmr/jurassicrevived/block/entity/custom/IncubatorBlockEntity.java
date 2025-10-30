@@ -76,7 +76,7 @@ public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             // 3 independent egg slots
-            return slot >= 0 && slot < 3 && stack.is(net.cmr.jurassicrevived.util.ModTags.Items.EGGS);
+            return slot >= 0 && slot < 3 && stack.is(ModTags.Items.EGGS);
         }
     };
 

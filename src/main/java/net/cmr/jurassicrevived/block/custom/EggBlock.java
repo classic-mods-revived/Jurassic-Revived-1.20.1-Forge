@@ -5,14 +5,14 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -28,6 +28,7 @@ import java.util.function.Supplier;
 public class EggBlock extends Block implements EntityBlock {
 
     private final Supplier<? extends EntityType<? extends Mob>> toSpawn;
+    private final int hatchSeconds = 1200; // keep Egg as 5s, or make constructor param if desired
 
     public EggBlock(Properties pProperties, Supplier<? extends EntityType<? extends Mob>> toSpawn) {
         super(pProperties);
@@ -54,16 +55,24 @@ public class EggBlock extends Block implements EntityBlock {
         if (!level.isClientSide) {
             BlockEntity be = level.getBlockEntity(pos);
             if (be instanceof EggBlockEntity eggBE) {
-                eggBE.setPlacedAt(level.getGameTime());
+                // Hard reset for a fresh countdown
+                eggBE.resetForNewPlacement(level, hatchSeconds);
             }
-            // 20 ticks ≈ 1 second, schedule a single hatch in 5 seconds
-            level.scheduleTick(pos, this, 20 * 5);
+            level.scheduleTick(pos, this, hatchSeconds * 20);
         }
     }
 
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        super.tick(state, level, pos, random);
+        BlockEntity be = level.getBlockEntity(pos);
+        if (!(be instanceof EggBlockEntity eggBE)) return;
+        if (eggBE.getSecondsRemaining(level) <= 0) {
+            super.tick(state, level, pos, random);
+        } else {
+            // Not due (could be a stray old tick), reschedule correctly
+            level.scheduleTick(pos, this, eggBE.getSecondsRemaining(level) * 20);
+            return;
+        }
         EntityType<? extends Mob> type = toSpawn.get();
         if (type != null) {
             Mob mob = type.create(level);
@@ -86,6 +95,17 @@ public class EggBlock extends Block implements EntityBlock {
         level.removeBlock(pos, false);
     }
 
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (!level.isClientSide && state.getBlock() != newState.getBlock()) {
+            BlockEntity be = level.getBlockEntity(pos);
+            if (be instanceof EggBlockEntity eggBE) {
+                eggBE.invalidateTimer();
+            }
+        }
+        super.onRemove(state, level, pos, newState, isMoving);
+    }
+
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
@@ -95,6 +115,6 @@ public class EggBlock extends Block implements EntityBlock {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable BlockGetter level, List<Component> tooltip, TooltipFlag flag) {
         // Item tooltip (when in inventory). No timing info available here; show static hint.
-        tooltip.add(Component.translatable("tooltip.jurassicrevived.egg.hatches_in", 5));
+        tooltip.add(Component.translatable("tooltip.jurassicrevived.egg.hatches_in", hatchSeconds));
     }
 }
