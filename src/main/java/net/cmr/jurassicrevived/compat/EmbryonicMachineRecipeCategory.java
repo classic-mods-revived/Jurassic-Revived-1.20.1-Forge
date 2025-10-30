@@ -66,7 +66,7 @@ public class EmbryonicMachineRecipeCategory implements IRecipeCategory<Embryonic
         guiGraphics.blit(SYRINGE_BAR_REVERSED_TEXTURE,  76, 35, 0, 0, 24, 16, 24, 16);
         if (Config.REQUIRE_POWER) {
             guiGraphics.blit(POWER_BAR_TEXTURE,  159, 10, 0, 0, 10, 66, 10, 66);
-            // Fill amount for JEI: show total required energy (2000 FE) relative to 16000 FE capacity
+            // Fill amount for JEI: show total required energy (2000 FE) relative to 64000 FE capacity
             // Our simple fill is purely visual for JEI, not tied to any BE
             int barX = 160;
             int barY = 11;
@@ -83,16 +83,16 @@ public class EmbryonicMachineRecipeCategory implements IRecipeCategory<Embryonic
             }
 
             int requiredFE = 2000;
-            int capacityFE = 16000;
+            int capacityFE = 64000;
             int filled = (int)(barH * (requiredFE / (float)capacityFE));
             // Render red fill similar to EnergyDisplayTooltipArea
             guiGraphics.fillGradient(barX, barY + (barH - filled), barX + barW, barY + barH, 0xffb51500, 0xff600b00);
 
-            // Tooltip "2000 / 16000 FE" on hover over the energy area
+            // Tooltip "2000 / 64000 FE" on hover over the energy area
             int mx = (int) mouseX;
             int my = (int) mouseY;
             if (mx >= barX && mx < barX + barW && my >= barY && my < barY + barH) {
-                List<Component> tips = List.of(Component.literal("2000 / 16000 FE"));
+                List<Component> tips = List.of(Component.literal("2000 / 64000 FE"));
                 guiGraphics.renderTooltip(Minecraft.getInstance().font, tips, java.util.Optional.empty(), mx, my);
             }
         }

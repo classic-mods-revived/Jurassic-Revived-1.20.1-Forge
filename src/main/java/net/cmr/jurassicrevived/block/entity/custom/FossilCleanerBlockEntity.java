@@ -167,7 +167,7 @@ public class FossilCleanerBlockEntity extends BlockEntity implements MenuProvide
     private ModEnergyStorage createEnergyStorage() {
         if (Config.REQUIRE_POWER) {
             // Allow internal extraction; onEnergyChanged keeps client in sync
-            return new ModEnergyStorage(16000, (int) ENERGY_TRANSFER_RATE) {
+            return new ModEnergyStorage(64000, (int) ENERGY_TRANSFER_RATE) {
                 @Override
                 public void onEnergyChanged() {
                     setChanged();
@@ -230,7 +230,7 @@ public class FossilCleanerBlockEntity extends BlockEntity implements MenuProvide
         }
     };
     private FluidTank createFluidTank() {
-        return new FluidTank(16000) {
+        return new FluidTank(64000) {
             @Override
             protected void onContentsChanged() {
                 setChanged();

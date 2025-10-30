@@ -87,13 +87,13 @@ public class IncubatorRecipeCategory implements IRecipeCategory<IncubatorRecipe>
         if (Config.REQUIRE_POWER) {
             g.blit(POWER_BAR_TEXTURE,  159, 10, 0, 0, 10, 66, 10, 66);
             int barX = 160, barY = 11, barW = 8, barH = 64;
-            int requiredFE = 2000, capacityFE = 16000;
+            int requiredFE = 2000, capacityFE = 64000;
             int filled = (int)(barH * (requiredFE / (float)capacityFE));
             g.fillGradient(barX, barY + (barH - filled), barX + barW, barY + barH, 0xffb51500, 0xff600b00);
 
             int mx = (int) mouseX, my = (int) mouseY;
             if (mx >= barX && mx < barX + barW && my >= barY && my < barY + barH) {
-                List<Component> tips = List.of(Component.literal("2000 / 16000 FE"));
+                List<Component> tips = List.of(Component.literal("2000 / 64000 FE"));
                 g.renderTooltip(Minecraft.getInstance().font, tips, java.util.Optional.empty(), mx, my);
             }
         }

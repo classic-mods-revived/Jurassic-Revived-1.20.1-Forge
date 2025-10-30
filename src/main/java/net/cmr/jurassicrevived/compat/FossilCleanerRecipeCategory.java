@@ -51,7 +51,7 @@ public class FossilCleanerRecipeCategory implements IRecipeCategory<FossilCleane
     public FossilCleanerRecipeCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.drawableBuilder(TEXTURE, 0, 0, 176, 80).setTextureSize(176, 166).build();
         this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.FOSSIL_CLEANER.get()));
-        this.fluidRenderer = new FluidTankRenderer(16000, true, 16, 50);
+        this.fluidRenderer = new FluidTankRenderer(64000, true, 16, 50);
         if (WATER_CONTAINERS_CACHE == null) {
             WATER_CONTAINERS_CACHE = buildWaterContainersList();
         }
@@ -83,7 +83,7 @@ public class FossilCleanerRecipeCategory implements IRecipeCategory<FossilCleane
         guiGraphics.blit(BUBBLES_TEXTURE,  73, 37, 0, 0, 29, 12, 29, 12);
         if (Config.REQUIRE_POWER) {
             guiGraphics.blit(POWER_BAR_TEXTURE,  159, 10, 0, 0, 10, 66, 10, 66);
-            // Fill amount for JEI: show total required energy (2000 FE) relative to 16000 FE capacity
+            // Fill amount for JEI: show total required energy (2000 FE) relative to 64000 FE capacity
             // Our simple fill is purely visual for JEI, not tied to any BE
             int barX = 160;
             int barY = 11;
@@ -100,16 +100,16 @@ public class FossilCleanerRecipeCategory implements IRecipeCategory<FossilCleane
             }
 
             int requiredFE = 2000;
-            int capacityFE = 16000;
+            int capacityFE = 64000;
             int filled = (int)(barH * (requiredFE / (float)capacityFE));
             // Render red fill similar to EnergyDisplayTooltipArea
             guiGraphics.fillGradient(barX, barY + (barH - filled), barX + barW, barY + barH, 0xffb51500, 0xff600b00);
 
-            // Tooltip "(2000 / 16000 FE)" on hover over the energy area
+            // Tooltip "(2000 / 64000 FE)" on hover over the energy area
             int mx = (int) mouseX;
             int my = (int) mouseY;
             if (mx >= barX && mx < barX + barW && my >= barY && my < barY + barH) {
-                List<Component> tips = java.util.List.of(Component.literal("2000 / 16000 FE"));
+                List<Component> tips = java.util.List.of(Component.literal("2000 / 64000 FE"));
                 guiGraphics.renderTooltip(Minecraft.getInstance().font, tips, java.util.Optional.empty(), mx, my);
             }
         }

@@ -103,14 +103,14 @@ public class FossilGrinderRecipeCategory implements IRecipeCategory<FossilGrinde
 
 
             int requiredFE = 2000;
-            int capacityFE = 16000;
+            int capacityFE = 64000;
             int filled = (int)(barH * (requiredFE / (float)capacityFE));
             guiGraphics.fillGradient(barX, barY + (barH - filled), barX + barW, barY + barH, 0xffb51500, 0xff600b00);
 
             int mx = (int) mouseX;
             int my = (int) mouseY;
             if (mx >= barX && mx < barX + barW && my >= barY && my < barY + barH) {
-                List<Component> tips = java.util.List.of(Component.literal("2000 / 16000 FE"));
+                List<Component> tips = java.util.List.of(Component.literal("2000 / 64000 FE"));
                 guiGraphics.renderTooltip(Minecraft.getInstance().font, tips, java.util.Optional.empty(), mx, my);
             }
         }
