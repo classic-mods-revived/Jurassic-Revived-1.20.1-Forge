@@ -98,14 +98,14 @@ public class DNAExtractorRecipeCategory implements IRecipeCategory<DNAExtractorR
         if (Config.REQUIRE_POWER) {
             // Simple visual fill to hint energy usage in JEI (not bound to a BE)
             int barX = 160, barY = 11, barW = 8, barH = 64;
-            int requiredFE = 2000, capacityFE = 64000;
+            int requiredFE = 6000, capacityFE = 64000;
             int filled = (int) (barH * (requiredFE / (float) capacityFE));
             guiGraphics.fillGradient(barX, barY + (barH - filled), barX + barW, barY + barH, 0xffb51500, 0xff600b00);
 
             // Tooltip for the energy bar
             int mx = (int) mouseX, my = (int) mouseY;
             if (mx >= barX && mx < barX + barW && my >= barY && my < barY + barH) {
-                List<Component> tips = java.util.List.of(Component.literal("2000 / 64000 FE"));
+                List<Component> tips = java.util.List.of(Component.literal("6000 / 64000 FE"));
                 guiGraphics.renderTooltip(Minecraft.getInstance().font, tips, java.util.Optional.empty(), mx, my);
             }
         }

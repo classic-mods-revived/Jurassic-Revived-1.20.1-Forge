@@ -103,7 +103,7 @@ public class EmbryoCalcificationMachineBlockEntity extends BlockEntity implement
 
     protected final ContainerData data;
     private int progress = 0;
-    private int maxProgress = 200;
+    private int maxProgress = 600;
 
     private static final float ENERGY_TRANSFER_RATE = (float) Config.fePerSecond / 20f;
 

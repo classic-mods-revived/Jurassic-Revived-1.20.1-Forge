@@ -108,7 +108,7 @@ public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
     protected final ContainerData data;
     // Per-slot progress
     private final int[] progress = new int[SLOT_COUNT];
-    private final int[] maxProgress = new int[]{200, 200, 200};
+    private final int[] maxProgress = new int[]{4800, 4800, 4800};
 
     private static final float ENERGY_TRANSFER_RATE = (float) Config.fePerSecond / 20f;
 

@@ -84,7 +84,7 @@ public class EmbryoCalcificationMachineRecipeCategory implements IRecipeCategory
                 guiGraphics.blit(WHITE_SYRINGE_BAR_TEXTURE, 76, 35, 0, 0, progFilled, 16, 24, 16);
             }
 
-            int requiredFE = 2000;
+            int requiredFE = 6000;
             int capacityFE = 64000;
             int filled = (int)(barH * (requiredFE / (float)capacityFE));
             // Render red fill similar to EnergyDisplayTooltipArea
@@ -94,7 +94,7 @@ public class EmbryoCalcificationMachineRecipeCategory implements IRecipeCategory
             int mx = (int) mouseX;
             int my = (int) mouseY;
             if (mx >= barX && mx < barX + barW && my >= barY && my < barY + barH) {
-                List<Component> tips = List.of(Component.literal("2000 / 64000 FE"));
+                List<Component> tips = List.of(Component.literal("6000 / 64000 FE"));
                 guiGraphics.renderTooltip(Minecraft.getInstance().font, tips, java.util.Optional.empty(), mx, my);
             }
         }

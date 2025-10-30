@@ -43,8 +43,8 @@ public class EmbryoCalcificationMachineBlock extends BaseEntityBlock {
     }
 
     private static final VoxelShape SHAPE_NORTH = Shapes.box(
-            1.0 / 16.0, 0.0 / 16.0, 2.0 / 16.0,
-            15.0 / 16.0, 17.0 / 16.0, 12.0 / 16.0
+            1.0 / 16.0, 0.0 / 16.0, 4.0 / 16.0,
+            15.0 / 16.0, 17.0 / 16.0, 14.0 / 16.0
     );
 
     private static final VoxelShape SHAPE_SOUTH = rotateShapeY(SHAPE_NORTH, 180);

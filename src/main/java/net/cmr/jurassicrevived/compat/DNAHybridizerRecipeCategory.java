@@ -85,7 +85,7 @@ public class DNAHybridizerRecipeCategory implements IRecipeCategory<DNAHybridize
                 guiGraphics.blit(WHITE_ARROW_TEXTURE, 105, 35, 0, 0, progFilled, 16, 24, 16);
             }
 
-            int requiredFE = 2000;
+            int requiredFE = 60000;
             int capacityFE = 64000;
             int filled = (int)(barH * (requiredFE / (float)capacityFE));
             // Render red fill similar to EnergyDisplayTooltipArea
@@ -95,7 +95,7 @@ public class DNAHybridizerRecipeCategory implements IRecipeCategory<DNAHybridize
             int mx = (int) mouseX;
             int my = (int) mouseY;
             if (mx >= barX && mx < barX + barW && my >= barY && my < barY + barH) {
-                List<Component> tips = List.of(Component.literal("2000 / 64000 FE"));
+                List<Component> tips = List.of(Component.literal("60000 / 64000 FE"));
                 guiGraphics.renderTooltip(Minecraft.getInstance().font, tips, java.util.Optional.empty(), mx, my);
             }
         }

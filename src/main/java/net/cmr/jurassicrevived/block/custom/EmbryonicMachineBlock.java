@@ -43,8 +43,8 @@ public class EmbryonicMachineBlock extends BaseEntityBlock {
     }
 
     private static final VoxelShape SHAPE_NORTH = Shapes.box(
-            1.0 / 16.0, 0.0 / 16.0, 1.0 / 16.0,
-            15.0 / 16.0, 5.0 / 16.0, 16.0 / 16.0
+            1.0 / 16.0, 0.0 / 16.0, 0.0 / 16.0,
+            15.0 / 16.0, 5.0 / 16.0, 15.0 / 16.0
     );
 
     private static final VoxelShape SHAPE_SOUTH = rotateShapeY(SHAPE_NORTH, 180);

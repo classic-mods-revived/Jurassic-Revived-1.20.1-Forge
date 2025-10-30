@@ -43,8 +43,8 @@ public class DNAHybridizerBlock extends BaseEntityBlock {
     }
 
     private static final VoxelShape SHAPE_NORTH = Shapes.box(
-            0.0 / 16.0, 0.0 / 16.0, 2.5 / 16.0,
-            16.0 / 16.0, 16.0 / 16.0, 16.0 / 16.0
+            0.0 / 16.0, 0.0 / 16.0, 0.0 / 16.0,
+            16.0 / 16.0, 16.0 / 16.0, 13.5 / 16.0
     );
 
     private static final VoxelShape SHAPE_SOUTH = rotateShapeY(SHAPE_NORTH, 180);
