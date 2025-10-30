@@ -38,6 +38,7 @@
   "item.jurassicrevived.styracosaurus_spawn_egg": "Styracosaurus Spawn Egg",
   "item.jurassicrevived.therizinosaurus_spawn_egg": "Therizinosaurus Spawn Egg",
   "item.jurassicrevived.distortus_rex_spawn_egg": "Distortus Rex Spawn Egg",
+  "item.jurassicrevived.chickenosaurus_spawn_egg": "Chickenosaurus Spawn Egg",
 
   "entity.jurassicrevived.apatosaurus": "Apatosaurus",
   "entity.jurassicrevived.albertosaurus": "Albertosaurus",
@@ -72,6 +73,7 @@
   "entity.jurassicrevived.styracosaurus": "Styracosaurus",
   "entity.jurassicrevived.therizinosaurus": "Therizinosaurus",
   "entity.jurassicrevived.distortus_rex": "Distortus Rex",
+  "entity.jurassicrevived.chickenosaurus": "Chickenosaurus",
 
   "block.jurassicrevived.cat_plushie": "Cat Plushie",
   "block.jurassicrevived.trash_can": "Trash Can",
@@ -387,5 +389,10 @@
   "jurassicrevived.tooltip.liquid.amount": "%s mB",
   "jurassicrevived.tooltip.accepts_any_water_container": "Accepts any water container, even one's with more water than the tank can hold.",
 
-  "jurassicrevived.config.title": "Jurassic Revived Config"
+  "jurassicrevived.config.title": "Jurassic Revived Config",
+
+  "config.jade.plugin_jurassicrevived.egg": "Jurassic Revived Egg Configuration",
+
+  "tooltip.jurassicrevived.egg.hatches_in_seconds": "Hatches in %s seconds",
+  "tooltip.jurassicrevived.egg.hatches_in": "Hatches in %s seconds"
 }

@@ -12,6 +12,43 @@ public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, JRMod.MOD_ID);
 
+    public static final RegistryObject<BlockEntityType<EggBlockEntity>> EGG_BE =
+            BLOCK_ENTITIES.register("egg_be", () ->
+                    BlockEntityType.Builder.of(EggBlockEntity::new,
+                            ModBlocks.HATCHED_APATOSAURUS_EGG.get(),
+                            ModBlocks.HATCHED_ALBERTOSAURUS_EGG.get(),
+                            ModBlocks.HATCHED_VELOCIRAPTOR_EGG.get(),
+                            ModBlocks.HATCHED_TYRANNOSAURUS_REX_EGG.get(),
+                            ModBlocks.HATCHED_TRICERATOPS_EGG.get(),
+                            ModBlocks.HATCHED_SPINOSAURUS_EGG.get(),
+                            ModBlocks.HATCHED_PARASAUROLOPHUS_EGG.get(),
+                            ModBlocks.HATCHED_INDOMINUS_REX_EGG.get(),
+                            ModBlocks.HATCHED_GALLIMIMUS_EGG.get(),
+                            ModBlocks.HATCHED_DIPLODOCUS_EGG.get(),
+                            ModBlocks.HATCHED_OURANOSAURUS_EGG.get(),
+                            ModBlocks.HATCHED_DILOPHOSAURUS_EGG.get(),
+                            ModBlocks.HATCHED_COMPSOGNATHUS_EGG.get(),
+                            ModBlocks.HATCHED_CERATOSAURUS_EGG.get(),
+                            ModBlocks.HATCHED_BRACHIOSAURUS_EGG.get(),
+                            ModBlocks.HATCHED_BARYONYX_EGG.get(),
+                            ModBlocks.HATCHED_CARNOTAURUS_EGG.get(),
+                            ModBlocks.HATCHED_CONCAVENATOR_EGG.get(),
+                            ModBlocks.HATCHED_DEINONYCHUS_EGG.get(),
+                            ModBlocks.HATCHED_EDMONTOSAURUS_EGG.get(),
+                            ModBlocks.HATCHED_GIGANOTOSAURUS_EGG.get(),
+                            ModBlocks.HATCHED_GUANLONG_EGG.get(),
+                            ModBlocks.HATCHED_HERRERASAURUS_EGG.get(),
+                            ModBlocks.HATCHED_MAJUNGASAURUS_EGG.get(),
+                            ModBlocks.HATCHED_PROCOMPSOGNATHUS_EGG.get(),
+                            ModBlocks.HATCHED_PROTOCERATOPS_EGG.get(),
+                            ModBlocks.HATCHED_RUGOPS_EGG.get(),
+                            ModBlocks.HATCHED_SHANTUNGOSAURUS_EGG.get(),
+                            ModBlocks.HATCHED_STEGOSAURUS_EGG.get(),
+                            ModBlocks.HATCHED_STYRACOSAURUS_EGG.get(),
+                            ModBlocks.HATCHED_THERIZINOSAURUS_EGG.get(),
+                            ModBlocks.HATCHED_DISTORTUS_REX_EGG.get()
+                            ).build(null));
+
     public static final RegistryObject<BlockEntityType<DNAExtractorBlockEntity>> DNA_EXTRACTOR_BE =
             BLOCK_ENTITIES.register("dna_extractor_be", () ->
                     BlockEntityType.Builder.of(DNAExtractorBlockEntity::new,

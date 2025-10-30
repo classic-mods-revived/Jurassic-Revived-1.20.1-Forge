@@ -223,6 +223,12 @@ public class ModEntities {
                             .sized(1.875f, 2.375f)
                             .build(ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "distortus_rex").toString()));
 
+    public static final RegistryObject<EntityType<ChickenosaurusEntity>> CHICKENOSAURUS =
+            ENTITY_TYPES.register("chickenosaurus",
+                    () -> EntityType.Builder.of(ChickenosaurusEntity::new, MobCategory.CREATURE)
+                            .sized(1.875f, 2.375f)
+                            .build(ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "chickenosaurus").toString()));
+
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
     }

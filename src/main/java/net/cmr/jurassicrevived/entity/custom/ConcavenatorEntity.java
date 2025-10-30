@@ -59,6 +59,10 @@ public class ConcavenatorEntity extends Animal implements GeoEntity {
         this.goalSelector.addGoal(7, new AvoidEntityGoal<>(this, BrachiosaurusEntity.class, (float) 20, 1, 1));
         this.goalSelector.addGoal(8, new SprintingMeleeAttackGoal(this, 1.25, false) {
             @Override
+            public boolean canUse() {
+                return !ConcavenatorEntity.this.isBaby() && super.canUse();
+            }
+            @Override
             protected double getAttackReachSqr(LivingEntity entity) {
                 return 4;
             }
@@ -143,6 +147,19 @@ public class ConcavenatorEntity extends Animal implements GeoEntity {
     @Override
     public void tick() {
         super.tick();
+        if (!level().isClientSide) {
+            var maxHealthAttr = getAttribute(Attributes.MAX_HEALTH);
+            if (maxHealthAttr != null) {
+                double baseAdult = 45;
+                double desired = this.isBaby() ? baseAdult * 0.10D : baseAdult;
+                if (maxHealthAttr.getBaseValue() != desired) {
+                    double oldMax = maxHealthAttr.getBaseValue();
+                    double healthRatio = this.getHealth() / (float) oldMax;
+                    maxHealthAttr.setBaseValue(desired);
+                    this.setHealth((float) (desired * Mth.clamp(healthRatio, 0.0F, 1.0F)));
+                }
+            }
+        }
 
         if (!level().isClientSide) {
             if (mouthAnimCooldown > 0) {

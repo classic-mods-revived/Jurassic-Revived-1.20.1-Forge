@@ -50,6 +50,7 @@ public class ModEventBusEvents {
         event.put(ModEntities.TRICERATOPS.get(), TriceratopsEntity.createAttributes().build());
         event.put(ModEntities.TYRANNOSAURUS_REX.get(), TyrannosaurusRexEntity.createAttributes().build());
         event.put(ModEntities.VELOCIRAPTOR.get(), VelociraptorEntity.createAttributes().build());
+        event.put(ModEntities.CHICKENOSAURUS.get(), ChickenosaurusEntity.createAttributes().build());
     }
 
     @SubscribeEvent

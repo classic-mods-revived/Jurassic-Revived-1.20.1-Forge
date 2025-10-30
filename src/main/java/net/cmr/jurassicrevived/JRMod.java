@@ -143,6 +143,7 @@ public class JRMod {
             EntityRenderers.register(ModEntities.TRICERATOPS.get(), TriceratopsRenderer::new);
             EntityRenderers.register(ModEntities.TYRANNOSAURUS_REX.get(), TyrannosaurusRexRenderer::new);
             EntityRenderers.register(ModEntities.VELOCIRAPTOR.get(), VelociraptorRenderer::new);
+            EntityRenderers.register(ModEntities.CHICKENOSAURUS.get(), ChickenosaurusRenderer::new);
             // Config screen is registered in ClientConfigScreenBinder
 
             FenceClimbClientHandler.register();

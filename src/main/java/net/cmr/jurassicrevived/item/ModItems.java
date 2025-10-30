@@ -85,6 +85,8 @@ public class ModItems {
             () -> new CustomGenderedSpawnEggItem(ModEntities.STYRACOSAURUS, 0x813b2b, 0x6a342c, new Item.Properties()));
     public static final RegistryObject<Item> THERIZINOSAURUS_SPAWN_EGG = ITEMS.register("therizinosaurus_spawn_egg",
             () -> new CustomGenderedSpawnEggItem(ModEntities.THERIZINOSAURUS, 0x787878, 0x454545, new Item.Properties()));
+    public static final RegistryObject<Item> CHICKENOSAURUS_SPAWN_EGG = ITEMS.register("chickenosaurus_spawn_egg",
+            () -> new CustomGenderedSpawnEggItem(ModEntities.CHICKENOSAURUS, 0x5d3c11, 0x3a2934, new Item.Properties()));
 
     public static final RegistryObject<Item> TEST_TUBE = ITEMS.register("test_tube", () -> new Item(new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> SYRINGE = ITEMS.register("syringe", () -> new Item(new Item.Properties().stacksTo(16)));

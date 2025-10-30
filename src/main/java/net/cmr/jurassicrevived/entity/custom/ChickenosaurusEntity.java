@@ -1,7 +1,9 @@
 package net.cmr.jurassicrevived.entity.custom;
 
 import net.cmr.jurassicrevived.entity.ModEntities;
-import net.cmr.jurassicrevived.entity.variant.EdmontosaurusVariant;
+import net.cmr.jurassicrevived.entity.ai.SprintingMeleeAttackGoal;
+import net.cmr.jurassicrevived.entity.variant.ChickenosaurusVariant;
+import net.cmr.jurassicrevived.item.ModItems;
 import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -14,10 +16,11 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.Nullable;
@@ -30,60 +33,77 @@ import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 
-public class EdmontosaurusEntity extends Animal implements GeoEntity {
+public class ChickenosaurusEntity extends Animal implements GeoEntity {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
     private static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT =
-            SynchedEntityData.defineId(EdmontosaurusEntity.class, EntityDataSerializers.INT);
+            SynchedEntityData.defineId(ChickenosaurusEntity.class, EntityDataSerializers.INT);
 
     // Procedural tail sway state (client-side use for rendering)
     private float tailSwayOffset;   // Smoothed offset in range roughly [-1, 1]
     private float tailSwayVelocity; // Internal velocity for spring-damper
     private float tailSwayPrev;     // Previous frame value for interpolation
 
-    public EdmontosaurusEntity(EntityType<? extends Animal> pEntityType, Level pLevel) {
+    public ChickenosaurusEntity(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new PanicGoal(this, 1.4));
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
         this.goalSelector.addGoal(2, new FloatGoal(this));
-        this.goalSelector.addGoal(3, new BreedGoal(this, 1.0));
-        this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25));
-        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0));
-        this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
-        this.goalSelector.addGoal(7, new FollowMobGoal(this, 1, (float) 20, (float) 10));
-        this.goalSelector.addGoal(8, new AvoidEntityGoal<>(this, DilophosaurusEntity.class, (float) 20, 1.2, 1.2));
-        this.goalSelector.addGoal(9, new AvoidEntityGoal<>(this, VelociraptorEntity.class, (float) 20, 1.2, 1.2));
-        this.goalSelector.addGoal(10, new AvoidEntityGoal<>(this, CeratosaurusEntity.class, (float) 20, 1.2, 1.2));
-        this.goalSelector.addGoal(11, new AvoidEntityGoal<>(this, SpinosaurusEntity.class, (float) 20, 1.2, 1.2));
-        this.goalSelector.addGoal(12, new AvoidEntityGoal<>(this, TyrannosaurusRexEntity.class, (float) 20, 1.2, 1.2));
-        this.goalSelector.addGoal(13, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, SpinosaurusEntity.class, (float) 20, 1, 1));
+        this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, TyrannosaurusRexEntity.class, (float) 20, 1.2, 1.2));
+        this.goalSelector.addGoal(5, new AvoidEntityGoal<>(this, VelociraptorEntity.class, (float) 20, 1, 1));
+        this.goalSelector.addGoal(6, new AvoidEntityGoal<>(this, ParasaurolophusEntity.class, (float) 20, 1, 1));
+        this.goalSelector.addGoal(7, new AvoidEntityGoal<>(this, CeratosaurusEntity.class, (float) 20, 1, 1));
+        this.goalSelector.addGoal(8, new AvoidEntityGoal<>(this, TriceratopsEntity.class, (float) 20, 1, 1));
+        this.goalSelector.addGoal(9, new AvoidEntityGoal<>(this, BrachiosaurusEntity.class, (float) 20, 1, 1));
+        this.goalSelector.addGoal(10, new SprintingMeleeAttackGoal(this, 1.25, false) {
+            @Override
+            public boolean canUse() {
+                return !ChickenosaurusEntity.this.isBaby() && super.canUse();
+            }
+            @Override
+            protected double getAttackReachSqr(LivingEntity entity) {
+                return 4;
+            }
+        });
+        this.goalSelector.addGoal(11, new BreedGoal(this, 1.0));
+        this.goalSelector.addGoal(12, new FollowParentGoal(this, 1.25));
+        this.goalSelector.addGoal(13, new WaterAvoidingRandomStrollGoal(this, 1.0));
+        this.goalSelector.addGoal(14, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(15, new FollowMobGoal(this, 1, (float) 20, (float) 10));
+        this.targetSelector.addGoal(16, new NearestAttackableTargetGoal<>(this, Animal.class, 10, false, false,
+                target -> target.getType() != this.getType()));
+        //this.targetSelector.addGoal(17, new NearestAttackableTargetGoal(this, GallimimusEntity.class, false, false));
+        this.targetSelector.addGoal(18, new NearestAttackableTargetGoal(this, Player.class, false, false));
+        this.targetSelector.addGoal(19, new NearestAttackableTargetGoal(this, CompsognathusEntity.class, false, false));
+        this.goalSelector.addGoal(20, new RandomLookAroundGoal(this));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
         return Animal.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 60D)
+                .add(Attributes.MAX_HEALTH, 30D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
                 .add(Attributes.ARMOR, 0D)
                 .add(Attributes.FOLLOW_RANGE, 32D)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.3D)
                 .add(Attributes.ATTACK_KNOCKBACK, 0D)
-                .add(Attributes.ATTACK_DAMAGE, 12D);
+                .add(Attributes.ATTACK_DAMAGE, 8D);
     }
 
     @Override
     public boolean isFood(ItemStack pStack) {
-        return pStack.is(Items.KELP);
+        return pStack.is(ModItems.MAC_N_CHEESE.get());
     }
 
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
-        AgeableMob child = ModEntities.EDMONTOSAURUS.get().create(pLevel);
-        if (child instanceof EdmontosaurusEntity baby) {
-            EdmontosaurusVariant randomVariant = Util.getRandom(EdmontosaurusVariant.values(), this.random);
+        AgeableMob child = ModEntities.CHICKENOSAURUS.get().create(pLevel);
+        if (child instanceof ChickenosaurusEntity baby) {
+            ChickenosaurusVariant randomVariant = Util.getRandom(ChickenosaurusVariant.values(), this.random);
             baby.setVariant(randomVariant);
         }
         return child;
@@ -104,16 +124,16 @@ public class EdmontosaurusEntity extends Animal implements GeoEntity {
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "Walk/Run/Idle", state -> {
             if (state.isMoving())
-                return state.setAndContinue(EdmontosaurusEntity.this.isSprinting() ? RawAnimation.begin().then("anim.edmontosaurus.run", Animation.LoopType.LOOP) : RawAnimation.begin().then("anim.edmontosaurus.walk", Animation.LoopType.LOOP));
+                return state.setAndContinue(ChickenosaurusEntity.this.isSprinting() ? RawAnimation.begin().then("anim.chickenosaurus.walk", Animation.LoopType.LOOP) : RawAnimation.begin().then("anim.chickenosaurus.walk", Animation.LoopType.LOOP));
 
-            return state.setAndContinue(RawAnimation.begin().then("anim.edmontosaurus.idle", Animation.LoopType.LOOP));
+            return state.setAndContinue(RawAnimation.begin().then("anim.chickenosaurus.idle", Animation.LoopType.LOOP));
         }));
 
         controllers.add(new AnimationController<>(this, "attackController", state -> PlayState.STOP)
-                .triggerableAnim("attack", RawAnimation.begin().then("anim.edmontosaurus.attack", Animation.LoopType.PLAY_ONCE)));
+                .triggerableAnim("attack", RawAnimation.begin().then("anim.chickenosaurus.attack", Animation.LoopType.PLAY_ONCE)));
 
         controllers.add(new AnimationController<>(this, "mouthController", state -> PlayState.STOP)
-                .triggerableAnim("mouth", RawAnimation.begin().then("anim.edmontosaurus.mouth", Animation.LoopType.PLAY_ONCE)));
+                .triggerableAnim("mouth", RawAnimation.begin().then("anim.chickenosaurus.mouth", Animation.LoopType.PLAY_ONCE)));
     }
 
     private float getSignedTurnDelta() {
@@ -129,7 +149,7 @@ public class EdmontosaurusEntity extends Animal implements GeoEntity {
         if (!level().isClientSide) {
             var maxHealthAttr = getAttribute(Attributes.MAX_HEALTH);
             if (maxHealthAttr != null) {
-                double baseAdult = 60;
+                double baseAdult = 30.0D;
                 double desired = this.isBaby() ? baseAdult * 0.10D : baseAdult;
                 if (maxHealthAttr.getBaseValue() != desired) {
                     double oldMax = maxHealthAttr.getBaseValue();
@@ -204,27 +224,27 @@ public class EdmontosaurusEntity extends Animal implements GeoEntity {
         this.entityData.define(DATA_ID_TYPE_VARIANT, 0);
     }
 
-    public EdmontosaurusVariant getVariant() {
-        return EdmontosaurusVariant.byId(this.getTypeVariant() & 255);
+    public ChickenosaurusVariant getVariant() {
+        return ChickenosaurusVariant.byId(this.getTypeVariant() & 255);
     }
     public int getTypeVariant() {
         return this.entityData.get(DATA_ID_TYPE_VARIANT);
     }
 
-    private void setVariant(EdmontosaurusVariant variant) {
+    private void setVariant(ChickenosaurusVariant variant) {
         this.entityData.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255);
     }
 
     @Override
     public boolean canMate(Animal other) {
         if (!super.canMate(other)) return false;
-        if (!(other instanceof EdmontosaurusEntity that)) return false;
+        if (!(other instanceof ChickenosaurusEntity that)) return false;
         return this.getVariant() != that.getVariant();
     }
 
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
-        EdmontosaurusVariant variant = Util.getRandom(EdmontosaurusVariant.values(), this.random);
+        ChickenosaurusVariant variant = Util.getRandom(ChickenosaurusVariant.values(), this.random);
         this.setVariant(variant);
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
     }
