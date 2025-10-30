@@ -392,6 +392,7 @@
   "jurassicrevived.config.title": "Jurassic Revived Config",
 
   "config.jade.plugin_jurassicrevived.egg": "Jurassic Revived Egg Configuration",
+  "config.jade.plugin_jurassicrevived.machine_progress": "Jurassic Revived Machine Configuration",
 
   "tooltip.jurassicrevived.egg.hatches_in_seconds": "Hatches in %s seconds",
   "tooltip.jurassicrevived.egg.hatches_in": "Hatches in %s seconds"
