@@ -107,6 +107,7 @@
 
   "block.jurassicrevived.generator": "Generator",
   "block.jurassicrevived.dna_extractor": "DNA Extractor",
+  "block.jurassicrevived.dna_analyzer": "DNA Analyzer",
   "block.jurassicrevived.fossil_grinder": "Fossil Grinder",
   "block.jurassicrevived.fossil_cleaner": "Fossil Cleaner",
   "block.jurassicrevived.dna_hybridizer": "DNA Hybridizer",
@@ -116,6 +117,7 @@
 
   "block.jurassicrevived.white_generator": "White Generator",
   "block.jurassicrevived.white_dna_extractor": "White DNA Extractor",
+  "block.jurassicrevived.white_dna_analyzer": "White DNA Analyzer",
   "block.jurassicrevived.white_fossil_grinder": "White Fossil Grinder",
   "block.jurassicrevived.white_fossil_cleaner": "White Fossil Cleaner",
   "block.jurassicrevived.white_dna_hybridizer": "White DNA Hybridizer",
@@ -134,6 +136,9 @@
   "block.jurassicrevived.potted_horse_tail_fern": "Potted Horsetail Fern",
   "block.jurassicrevived.western_sword_fern": "Western Sword Fern",
   "block.jurassicrevived.potted_western_sword_fern": "Potted Western Sword Fern",
+
+  "item.jurassicrevived.frog_material": "Frog Material",
+  "item.jurassicrevived.frog_dna": "Frog DNA",
 
   "item.jurassicrevived.velociraptor_skull_fossil": "Velociraptor Skull Fossil",
   "item.jurassicrevived.tyrannosaurus_rex_skull_fossil": "Tyrannosaurus Rex Skull Fossil",

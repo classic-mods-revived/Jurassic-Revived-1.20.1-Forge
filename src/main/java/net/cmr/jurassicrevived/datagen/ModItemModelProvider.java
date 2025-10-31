@@ -56,6 +56,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         withExistingParent(ModItems.THERIZINOSAURUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.CHICKENOSAURUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
+        basicItem(ModItems.FROG_MATERIAL.get());
+        basicItem(ModItems.FROG_DNA.get());
+
         basicItem(ModItems.TEST_TUBE.get());
         basicItem(ModItems.SYRINGE.get());
         basicItem(ModItems.CRUSHED_FOSSIL.get());

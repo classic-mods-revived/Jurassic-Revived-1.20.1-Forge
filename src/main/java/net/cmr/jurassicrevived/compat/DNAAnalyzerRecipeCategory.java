@@ -1,56 +1,55 @@
 package net.cmr.jurassicrevived.compat;
 
-import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-import mezz.jei.api.recipe.IFocusGroup;
-import mezz.jei.api.recipe.RecipeIngredientRole;
-import net.cmr.jurassicrevived.Config;
-import net.cmr.jurassicrevived.item.ModItems;
-import net.cmr.jurassicrevived.recipe.DNAExtractorRecipe;
-import net.cmr.jurassicrevived.screen.renderer.EnergyDisplayTooltipArea;
-import net.cmr.jurassicrevived.util.ModTags;
-import net.minecraft.client.Minecraft;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import mezz.jei.api.constants.VanillaTypes;
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.recipe.IFocusGroup;
+import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.cmr.jurassicrevived.Config;
 import net.cmr.jurassicrevived.JRMod;
 import net.cmr.jurassicrevived.block.ModBlocks;
+import net.cmr.jurassicrevived.item.ModItems;
+import net.cmr.jurassicrevived.recipe.DNAAnalyzerRecipe;
+import net.cmr.jurassicrevived.util.ModTags;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class DNAExtractorRecipeCategory implements IRecipeCategory<DNAExtractorRecipe> {
-    public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "dna_extracting");
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/dna_extractor/dna_extractor_gui.png");
-    private static final ResourceLocation DNA_TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/dna.png");
+public class DNAAnalyzerRecipeCategory implements IRecipeCategory<DNAAnalyzerRecipe> {
+    public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "dna_analyzing");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/dna_analyzer/dna_analyzer_gui.png");
+    private static final ResourceLocation DNA_TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/syringe_dna.png");
     private static final ResourceLocation POWER_BAR_TEXTURE = ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "textures/gui/generic/power_bar.png");
 
-    public static final RecipeType<DNAExtractorRecipe> DNA_EXTRACTOR_RECIPE_RECIPE_TYPE =
-            new RecipeType<>(UID, DNAExtractorRecipe.class);
+    public static final RecipeType<DNAAnalyzerRecipe> DNA_ANALYZER_RECIPE_RECIPE_TYPE =
+            new RecipeType<>(UID, DNAAnalyzerRecipe.class);
 
     private final IDrawable background;
     private final IDrawable icon;
 
-    public DNAExtractorRecipeCategory(IGuiHelper guiHelper) {
+    public DNAAnalyzerRecipeCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.drawableBuilder(TEXTURE, 0, 0, 176, 80).setTextureSize(176, 166).build();
-        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.DNA_EXTRACTOR.get()));
+        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.DNA_ANALYZER.get()));
     }
 
     @Override
-    public RecipeType<DNAExtractorRecipe> getRecipeType() {
-        return DNA_EXTRACTOR_RECIPE_RECIPE_TYPE;
+    public RecipeType<DNAAnalyzerRecipe> getRecipeType() {
+        return DNA_ANALYZER_RECIPE_RECIPE_TYPE;
     }
 
     @Override
     public Component getTitle() {
-        return Component.translatable("block.jurassicrevived.dna_extractor");
+        return Component.translatable("block.jurassicrevived.dna_analyzer");
     }
 
     @Override
@@ -64,7 +63,7 @@ public class DNAExtractorRecipeCategory implements IRecipeCategory<DNAExtractorR
     }
 
     @Override
-    public void draw(DNAExtractorRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    public void draw(DNAAnalyzerRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         background.draw(guiGraphics);
 
         if (Config.REQUIRE_POWER) {
@@ -72,8 +71,8 @@ public class DNAExtractorRecipeCategory implements IRecipeCategory<DNAExtractorR
         }
 
         {
-            int fullW = 8, fullH = 16;
-            int drawBaseX = 84;
+            int fullW = 6, fullH = 16;
+            int drawBaseX = 85;
             int drawBaseY = 38;
 
             // Loop progress at ~20 TPS over 200 ticks
@@ -105,7 +104,7 @@ public class DNAExtractorRecipeCategory implements IRecipeCategory<DNAExtractorR
             // Tooltip for the energy bar
             int mx = (int) mouseX, my = (int) mouseY;
             if (mx >= barX && mx < barX + barW && my >= barY && my < barY + barH) {
-                List<Component> tips = java.util.List.of(Component.literal("6000 / 64000 FE"));
+                List<Component> tips = List.of(Component.literal("6000 / 64000 FE"));
                 guiGraphics.renderTooltip(Minecraft.getInstance().font, tips, java.util.Optional.empty(), mx, my);
             }
         }
@@ -117,7 +116,7 @@ public class DNAExtractorRecipeCategory implements IRecipeCategory<DNAExtractorR
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, DNAExtractorRecipe recipe, IFocusGroup focuses) {
+    public void setRecipe(IRecipeLayoutBuilder builder, DNAAnalyzerRecipe recipe, IFocusGroup focuses) {
 
         builder.addSlot(RecipeIngredientRole.INPUT, 57, 35).addIngredients(recipe.getIngredients().get(0));
         builder.addSlot(RecipeIngredientRole.INPUT, 80, 7).addIngredients(recipe.getIngredients().get(1));
@@ -126,14 +125,14 @@ public class DNAExtractorRecipeCategory implements IRecipeCategory<DNAExtractorR
         Ingredient second = recipe.getIngredients().size() > 1 ? recipe.getIngredients().get(1) : Ingredient.EMPTY;
         if (!second.isEmpty() && second.test(new ItemStack(ModItems.MOSQUITO_IN_AMBER.get()))) {
             ItemStack[] candidates = Ingredient.of(ModTags.Items.DNA).getItems();
-            java.util.List<ItemStack> filtered = java.util.Arrays.stream(candidates)
+            List<ItemStack> filtered = java.util.Arrays.stream(candidates)
                     .filter(stack -> {
                         if (!recipe.hasAnyWeightsConfigured()) return true;
                         int weight = recipe.getWeightOrDefault(stack.getItem(), 1);
                         return weight > 0;
                     })
                     .toList();
-            builder.addSlot(RecipeIngredientRole.OUTPUT, 62, 63)
+            builder.addSlot(RecipeIngredientRole.OUTPUT, 80, 63)
                     .addItemStacks(filtered)
                     .addRichTooltipCallback((slotView, tooltip) -> {
                         slotView.getDisplayedIngredient(VanillaTypes.ITEM_STACK).ifPresent(stack -> {
@@ -144,7 +143,7 @@ public class DNAExtractorRecipeCategory implements IRecipeCategory<DNAExtractorR
                         });
                     });
         } else {
-            builder.addSlot(RecipeIngredientRole.OUTPUT, 62, 63).addItemStack(recipe.getResultItem(null));
+            builder.addSlot(RecipeIngredientRole.OUTPUT, 80, 63).addItemStack(recipe.getResultItem(null));
         }
     }
 

@@ -1,12 +1,11 @@
 package net.cmr.jurassicrevived.block.entity.custom;
 
 import net.cmr.jurassicrevived.Config;
-import net.cmr.jurassicrevived.block.custom.DNAExtractorBlock;
-import net.cmr.jurassicrevived.block.custom.DNAHybridizerBlock;
+import net.cmr.jurassicrevived.block.custom.DNAAnalyzerBlock;
 import net.cmr.jurassicrevived.block.entity.energy.ModEnergyStorage;
 import net.cmr.jurassicrevived.item.ModItems;
-import net.cmr.jurassicrevived.recipe.DNAHybridizerRecipe;
-import net.cmr.jurassicrevived.screen.custom.DNAHybridizerMenu;
+import net.cmr.jurassicrevived.recipe.DNAAnalyzerRecipe;
+import net.cmr.jurassicrevived.screen.custom.DNAAnalyzerMenu;
 import net.cmr.jurassicrevived.sounds.MachineHumLoopSound;
 import net.cmr.jurassicrevived.util.InventoryDirectionEntry;
 import net.cmr.jurassicrevived.util.InventoryDirectionWrapper;
@@ -30,7 +29,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -46,14 +44,14 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Map;
 import java.util.Optional;
 
-public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvider {
+public class DNAAnalyzerBlockEntity extends BlockEntity implements MenuProvider {// client-only handle to the looping sound
     private @Nullable MachineHumLoopSound humSound;
 
-    public static void clientTick(Level level, BlockPos pos, BlockState state, DNAHybridizerBlockEntity be) {
+    public static void clientTick(Level level, BlockPos pos, BlockState state, DNAAnalyzerBlockEntity be) {
         if (!level.isClientSide) return;
 
-        boolean lit = state.hasProperty(DNAHybridizerBlock.LIT)
-                && state.getValue(DNAHybridizerBlock.LIT);
+        boolean lit = state.hasProperty(DNAAnalyzerBlock.LIT)
+                && state.getValue(DNAAnalyzerBlock.LIT);
 
         if (lit) {
             if (be.humSound == null || be.humSound.isStopped()) {
@@ -68,7 +66,16 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
         }
     }
 
-    public final ItemStackHandler itemHandler = new ItemStackHandler(10) {
+    @Override
+    public void setRemoved() {
+        super.setRemoved();
+        if (level != null && level.isClientSide && humSound != null && !humSound.isStopped()) {
+            humSound.stopPlaying();
+        }
+        humSound = null;
+    }
+
+    public final ItemStackHandler itemHandler = new ItemStackHandler(5) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
@@ -76,44 +83,34 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
 
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            // slots 0..8 = inputs (DNA), slot 9 = output
             return switch (slot) {
-                case 0, 1, 2, 3, 4, 5, 6, 7 -> stack.is(ModTags.Items.DNA);
-                case 8 -> stack.getItem() == ModItems.FROG_DNA.get();
-                case 9 -> false;
+                case 0 -> stack.getItem() == ModItems.TEST_TUBE.get();
+                case 1 -> stack.getItem() == ModItems.FROG_MATERIAL.get();
+                case 2, 3, 4 -> true;
                 default -> super.isItemValid(slot, stack);
             };
         }
     };
 
-    private static final int OUTPUT = 9;
-    // convenient constants for inputs 0..8
-    private static final int[] INPUT_SLOTS = {0,1,2,3,4,5,6,7,8};
+    private static final int TEST_TUBE_SLOT = 0;
+    private static final int MATERIAL_INPUT = 1;
+    private static final int OUTPUT_SLOT_1 = 2;
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             new InventoryDirectionWrapper(itemHandler,
-                    new InventoryDirectionEntry(Direction.DOWN, OUTPUT, false),
-                    new InventoryDirectionEntry(Direction.NORTH, OUTPUT, false),
-                    new InventoryDirectionEntry(Direction.SOUTH, OUTPUT, false),
-                    new InventoryDirectionEntry(Direction.EAST, OUTPUT, false),
-                    new InventoryDirectionEntry(Direction.WEST, OUTPUT, false),
-                    // allow insertion to all 9 inputs from top
-                    new InventoryDirectionEntry(Direction.UP, 0, true),
-                    new InventoryDirectionEntry(Direction.UP, 1, true),
-                    new InventoryDirectionEntry(Direction.UP, 2, true),
-                    new InventoryDirectionEntry(Direction.UP, 3, true),
-                    new InventoryDirectionEntry(Direction.UP, 4, true),
-                    new InventoryDirectionEntry(Direction.UP, 5, true),
-                    new InventoryDirectionEntry(Direction.UP, 6, true),
-                    new InventoryDirectionEntry(Direction.UP, 7, true),
-                    new InventoryDirectionEntry(Direction.UP, 8, true)
-            ).directionsMap;
+                    new InventoryDirectionEntry(Direction.DOWN, OUTPUT_SLOT_1, false),
+                    new InventoryDirectionEntry(Direction.NORTH, OUTPUT_SLOT_1, false),
+                    new InventoryDirectionEntry(Direction.SOUTH, OUTPUT_SLOT_1, false),
+                    new InventoryDirectionEntry(Direction.EAST, OUTPUT_SLOT_1, false),
+                    new InventoryDirectionEntry(Direction.WEST, OUTPUT_SLOT_1, false),
+                    new InventoryDirectionEntry(Direction.UP, TEST_TUBE_SLOT, true),
+                    new InventoryDirectionEntry(Direction.UP, MATERIAL_INPUT, true)).directionsMap;
 
 
     protected final ContainerData data;
     private int progress = 0;
-    private int maxProgress = 3000;
+    private int maxProgress = 600;
 
     private static final float ENERGY_TRANSFER_RATE = (float) Config.fePerSecond / 20f;
 
@@ -166,14 +163,14 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
         return EXTERNAL_ENERGY_CAP;
     }
 
-    public DNAHybridizerBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntities.DNA_HYBRIDIZER_BE.get(), pPos, pBlockState);
+    public DNAAnalyzerBlockEntity(BlockPos pPos, BlockState pBlockState) {
+        super(ModBlockEntities.DNA_ANALYZER_BE.get(), pPos, pBlockState);
         this.data = new ContainerData() {
             @Override
             public int get(int pIndex) {
                 return switch (pIndex) {
-                    case 0 -> DNAHybridizerBlockEntity.this.progress;
-                    case 1 -> DNAHybridizerBlockEntity.this.maxProgress;
+                    case 0 -> DNAAnalyzerBlockEntity.this.progress;
+                    case 1 -> DNAAnalyzerBlockEntity.this.maxProgress;
                     default -> 0;
                 };
             }
@@ -181,8 +178,8 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
             @Override
             public void set(int pIndex, int pValue) {
                 switch (pIndex) {
-                    case 0 -> DNAHybridizerBlockEntity.this.progress = pValue;
-                    case 1 -> DNAHybridizerBlockEntity.this.maxProgress = pValue;
+                    case 0 -> DNAAnalyzerBlockEntity.this.progress = pValue;
+                    case 1 -> DNAAnalyzerBlockEntity.this.maxProgress = pValue;
                 }
             }
 
@@ -213,13 +210,13 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
 
     @Override
     public Component getDisplayName() {
-        return Component.translatable("block.jurassicrevived.dna_hybridizer");
+        return Component.translatable("block.jurassicrevived.dna_analyzer");
     }
 
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
-        return new DNAHybridizerMenu(pContainerId, pPlayerInventory, this, this.data);
+        return new DNAAnalyzerMenu(pContainerId, pPlayerInventory, this, this.data);
     }
 
     @Override
@@ -229,7 +226,7 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
                 return lazyItemHandler.cast();
             }
             if (directionWrappedHandlerMap.containsKey(side)) {
-                Direction localDirection = this.getBlockState().getValue(DNAHybridizerBlock.FACING);
+                Direction localDirection = this.getBlockState().getValue(DNAAnalyzerBlock.FACING);
                 if (side == Direction.DOWN || side == Direction.UP) {
                     return directionWrappedHandlerMap.get(side).cast();
                 }
@@ -252,6 +249,7 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
             }
             return LazyOptional.empty();
         }
+
         return super.getCapability(cap, side);
     }
 
@@ -259,7 +257,6 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
     public void onLoad() {
         super.onLoad();
         lazyItemHandler = LazyOptional.of(() -> itemHandler);
-        // Only create a non-empty LazyOptional if storage exists
         if (Config.REQUIRE_POWER && ENERGY_STORAGE != null) {
             lazyEnergy = LazyOptional.of(() -> ENERGY_STORAGE);
         } else {
@@ -277,9 +274,9 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory", itemHandler.serializeNBT());
-        pTag.putInt("dna_hybridizer.progress", progress);
+        pTag.putInt("dna_analyzer.progress", progress);
         if (Config.REQUIRE_POWER) {
-            pTag.putInt("dna_hybridizer.energy", this.ENERGY_STORAGE.getEnergyStored());
+            pTag.putInt("dna_analyzer.energy", this.ENERGY_STORAGE.getEnergyStored());
         }
         super.saveAdditional(pTag);
     }
@@ -288,9 +285,9 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
     public void load(CompoundTag pTag) {
         super.load(pTag);
         itemHandler.deserializeNBT(pTag.getCompound("inventory"));
-        progress = pTag.getInt("dna_hybridizer.progress");
+        progress = pTag.getInt("dna_analyzer.progress");
         if (Config.REQUIRE_POWER) {
-            this.ENERGY_STORAGE.setEnergy(pTag.getInt("dna_hybridizer.energy"));
+            this.ENERGY_STORAGE.setEnergy(pTag.getInt("dna_analyzer.energy"));
         }
     }
 
@@ -306,17 +303,17 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
                 return;
             }
             increaseCraftingProcess();
-            level.setBlockAndUpdate(pPos, pState.setValue(DNAHybridizerBlock.LIT, true));
+            level.setBlockAndUpdate(pPos, pState.setValue(DNAAnalyzerBlock.LIT, true));
             setChanged(level, pPos, pState);
 
             if (hasProgressFinished()) {
                 craftItem();
                 resetProgress();
-                level.setBlockAndUpdate(pPos, pState.setValue(DNAHybridizerBlock.LIT, false));
+                level.setBlockAndUpdate(pPos, pState.setValue(DNAAnalyzerBlock.LIT, false));
             }
         } else {
             resetProgress();
-            level.setBlockAndUpdate(pPos, pState.setValue(DNAHybridizerBlock.LIT, false));
+            level.setBlockAndUpdate(pPos, pState.setValue(DNAAnalyzerBlock.LIT, false));
         }
     }
 
@@ -360,57 +357,50 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
     }
 
     private void craftItem() {
-        Optional<DNAHybridizerRecipe> recipeOpt = getCurrentRecipe();
-        if (recipeOpt.isEmpty()) return;
-        DNAHybridizerRecipe recipe = recipeOpt.get();
+        Optional<DNAAnalyzerRecipe> recipe = getCurrentRecipe();
 
-        // Consume exactly one from each required ingredient, regardless of which input slot it's in.
-        // Build required list (skip empties), then match against present inputs and extract where matched.
-        java.util.List<Ingredient> required = new java.util.ArrayList<>();
-        for (Ingredient ing : recipe.getIngredients()) {
-            if (!ing.isEmpty()) required.add(ing);
+        this.itemHandler.extractItem(TEST_TUBE_SLOT, 1, false);
+        this.itemHandler.extractItem(MATERIAL_INPUT, 1, false);
+
+        // Use dynamic assemble result based on current inventory (supports random dna for amber)
+        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
+        for (int i = 0; i < itemHandler.getSlots(); i++) {
+            inventory.setItem(i, itemHandler.getStackInSlot(i));
         }
+        ItemStack result = recipe.get().assemble(inventory, getLevel().registryAccess());
+        Item resultItem = result.getItem();
+        int resultCount = result.getCount();
 
-        // Track which required entries were satisfied by which slot
-        boolean[] used = new boolean[required.size()];
-        java.util.List<Integer> toExtractSlots = new java.util.ArrayList<>();
+        int targetSlot = getAvailableOutputSlotFor(resultItem);
+        if (targetSlot != -1) {
+            ItemStack current = this.itemHandler.getStackInSlot(targetSlot);
 
-        // Try to match each non-empty input slot to one remaining required ingredient
-        for (int slot : INPUT_SLOTS) {
-            ItemStack s = itemHandler.getStackInSlot(slot);
-            if (s.isEmpty()) continue;
+            if (current.isEmpty()) {
+                this.itemHandler.setStackInSlot(targetSlot, result.copy());
+            } else {
+                int existing = current.getCount();
+                int max = current.getMaxStackSize();
+                int toPlace = Math.min(existing + resultCount, max);
+                int remainder = (existing + resultCount) - toPlace;
 
-            for (int i = 0; i < required.size(); i++) {
-                if (!used[i] && required.get(i).test(s)) {
-                    used[i] = true;
-                    toExtractSlots.add(slot);
-                    break;
+                current.setCount(toPlace);
+                this.itemHandler.setStackInSlot(targetSlot, current);
+
+                if (remainder > 0) {
+                    int nextSlot = getAvailableOutputSlotFor(resultItem);
+                    if (nextSlot != -1) {
+                        ItemStack next = this.itemHandler.getStackInSlot(nextSlot);
+                        if (next.isEmpty()) {
+                            this.itemHandler.setStackInSlot(nextSlot, new ItemStack(resultItem, remainder));
+                        } else {
+                            int existing2 = next.getCount();
+                            int toPlace2 = Math.min(existing2 + remainder, next.getMaxStackSize());
+                            next.setCount(toPlace2);
+                            this.itemHandler.setStackInSlot(nextSlot, next);
+                        }
+                    }
                 }
             }
-        }
-
-        // Safety: only proceed if all required ingredients were matched
-        for (boolean u : used) {
-            if (!u) return;
-        }
-
-        // Extract one from each matched input slot
-        for (int slot : toExtractSlots) {
-            this.itemHandler.extractItem(slot, 1, false);
-        }
-
-        // Produce output
-        SimpleContainer inv = new SimpleContainer(itemHandler.getSlots());
-        for (int i = 0; i < itemHandler.getSlots(); i++) {
-            inv.setItem(i, itemHandler.getStackInSlot(i));
-        }
-        ItemStack result = recipe.assemble(inv, getLevel().registryAccess());
-        ItemStack current = this.itemHandler.getStackInSlot(OUTPUT);
-        if (current.isEmpty()) {
-            this.itemHandler.setStackInSlot(OUTPUT, result.copy());
-        } else if (ItemStack.isSameItemSameTags(current, result) && current.getCount() < current.getMaxStackSize()) {
-            current.grow(Math.min(result.getCount(), current.getMaxStackSize() - current.getCount()));
-            this.itemHandler.setStackInSlot(OUTPUT, current);
         }
     }
 
@@ -427,64 +417,30 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
     }
 
     private boolean hasRecipe() {
-        Optional<DNAHybridizerRecipe> recipeOpt = getCurrentRecipe();
-        if (recipeOpt.isEmpty()) return false;
-        DNAHybridizerRecipe recipe = recipeOpt.get();
+        Optional<DNAAnalyzerRecipe> recipe = getCurrentRecipe();
 
-        // Build required ingredients (skip empties)
-        java.util.List<Ingredient> required = new java.util.ArrayList<>();
-        for (Ingredient ing : recipe.getIngredients()) {
-            if (!ing.isEmpty()) required.add(ing);
-        }
+        if (recipe.isEmpty()) return false;
 
-        // Gather current inputs from slots 0..8
-        java.util.List<ItemStack> inputs = new java.util.ArrayList<>(9);
-        for (int i = 0; i < INPUT_SLOTS.length; i++) {
-            ItemStack s = itemHandler.getStackInSlot(INPUT_SLOTS[i]);
-            if (!s.isEmpty()) inputs.add(s);
-        }
-
-        // Enforce exact match count (no extras, no missing)
-        if (inputs.size() != required.size()) return false;
-
-        // Order-independent matching
-        boolean[] used = new boolean[required.size()];
-        for (ItemStack in : inputs) {
-            boolean matched = false;
-            for (int i = 0; i < required.size(); i++) {
-                if (!used[i] && required.get(i).test(in)) {
-                    used[i] = true;
-                    matched = true;
-                    break;
-                }
-            }
-            if (!matched) return false;
-        }
-
-        // Output capacity check using dynamic result
-        SimpleContainer checkInv = new SimpleContainer(itemHandler.getSlots());
+        // Compute dynamic result and check it can be inserted
+        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
-            checkInv.setItem(i, itemHandler.getStackInSlot(i));
+            inventory.setItem(i, itemHandler.getStackInSlot(i));
         }
-        ItemStack plannedResult = recipe.assemble(checkInv, getLevel().registryAccess());
-        ItemStack currentOut = itemHandler.getStackInSlot(OUTPUT);
-        if (plannedResult.isEmpty()) return false;
-        if (currentOut.isEmpty()) return true;
-        if (!ItemStack.isSameItemSameTags(currentOut, plannedResult)) return false;
-        return currentOut.getCount() + plannedResult.getCount() <= currentOut.getMaxStackSize();
+        ItemStack dynamicResult = recipe.get().assemble(inventory, getLevel().registryAccess());
+        return !dynamicResult.isEmpty() && canInsertOneIntoAnyOutput(dynamicResult.getItem());
     }
 
-    private Optional<DNAHybridizerRecipe> getCurrentRecipe() {
+    private Optional<DNAAnalyzerRecipe> getCurrentRecipe() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
         for(int i = 0; i < itemHandler.getSlots(); i++) {
             inventory.setItem(i, itemHandler.getStackInSlot(i));
         }
-        return this.level.getRecipeManager().getRecipeFor(DNAHybridizerRecipe.Type.INSTANCE, inventory, this.level);
+        return this.level.getRecipeManager().getRecipeFor(DNAAnalyzerRecipe.Type.INSTANCE, inventory, this.level);
     }
 
     private boolean isOutputSlotEmptyOrReceivable() {
         // Use the current recipe’s dynamic output rather than a fixed result item
-        Optional<DNAHybridizerRecipe> recipe = getCurrentRecipe();
+        Optional<DNAAnalyzerRecipe> recipe = getCurrentRecipe();
         if (recipe.isEmpty()) return false;
 
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
@@ -500,7 +456,7 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
     }
 
     private int getAvailableOutputSlotFor(Item item) {
-        int[] outputs = { OUTPUT };
+        int[] outputs = { OUTPUT_SLOT_1 };
 
         // Prefer merging into existing stacks first
         for (int slot : outputs) {

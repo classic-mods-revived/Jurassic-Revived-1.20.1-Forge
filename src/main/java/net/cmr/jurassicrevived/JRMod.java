@@ -150,6 +150,7 @@ public class JRMod {
 
             MenuScreens.register(ModMenuTypes.GENERATOR_MENU.get(), GeneratorScreen::new);
             MenuScreens.register(ModMenuTypes.DNA_EXTRACTOR_MENU.get(), DNAExtractorScreen::new);
+            MenuScreens.register(ModMenuTypes.DNA_ANALYZER_MENU.get(), DNAAnalyzerScreen::new);
             MenuScreens.register(ModMenuTypes.FOSSIL_GRINDER_MENU.get(), FossilGrinderScreen::new);
             MenuScreens.register(ModMenuTypes.FOSSIL_CLEANER_MENU.get(), FossilCleanerScreen::new);
             MenuScreens.register(ModMenuTypes.DNA_HYBRIDIZER_MENU.get(), DNAHybridizerScreen::new);

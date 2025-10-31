@@ -82,6 +82,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         horizontalFacingLitNoBlockstateWithItem(ModBlocks.GENERATOR);
         horizontalFacingLitNoBlockstateWithItem(ModBlocks.DNA_EXTRACTOR);
+        horizontalFacingLitNoBlockstateWithItem(ModBlocks.DNA_ANALYZER);
         horizontalFacingLitNoBlockstateWithItem(ModBlocks.FOSSIL_GRINDER);
         horizontalFacingLitNoBlockstateWithItem(ModBlocks.FOSSIL_CLEANER);
         horizontalFacingLitNoBlockstateWithItem(ModBlocks.DNA_HYBRIDIZER);
@@ -90,6 +91,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         horizontalFacingLitWithItem(ModBlocks.INCUBATOR);
         horizontalFacingLitNoBlockstateWithItem(ModBlocks.WHITE_GENERATOR);
         horizontalFacingLitNoBlockstateWithItem(ModBlocks.WHITE_DNA_EXTRACTOR);
+        horizontalFacingLitNoBlockstateWithItem(ModBlocks.WHITE_DNA_ANALYZER);
         horizontalFacingLitNoBlockstateWithItem(ModBlocks.WHITE_FOSSIL_GRINDER);
         horizontalFacingLitNoBlockstateWithItem(ModBlocks.WHITE_FOSSIL_CLEANER);
         horizontalFacingLitNoBlockstateWithItem(ModBlocks.WHITE_DNA_HYBRIDIZER);

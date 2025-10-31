@@ -18,6 +18,8 @@ public class ModCreativeModeTabs {
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.MOSQUITO_IN_AMBER.get()))
                     .title(Component.translatable("creativetab.jurassicrevived_item_tab"))
                     .displayItems((displayParameters, output) -> {
+                        output.accept(ModItems.FROG_MATERIAL.get());
+                        output.accept(ModItems.FROG_DNA.get());
                         output.accept(ModItems.TEST_TUBE.get());
                         output.accept(ModItems.SYRINGE.get());
                         output.accept(ModItems.CRUSHED_FOSSIL.get());
@@ -70,6 +72,7 @@ public class ModCreativeModeTabs {
 
                         output.accept(ModBlocks.GENERATOR.get());
                         output.accept(ModBlocks.DNA_EXTRACTOR.get());
+                        output.accept(ModBlocks.DNA_ANALYZER.get());
                         output.accept(ModBlocks.FOSSIL_GRINDER.get());
                         output.accept(ModBlocks.FOSSIL_CLEANER.get());
                         output.accept(ModBlocks.DNA_HYBRIDIZER.get());
@@ -79,6 +82,7 @@ public class ModCreativeModeTabs {
 
                         output.accept(ModBlocks.WHITE_GENERATOR.get());
                         output.accept(ModBlocks.WHITE_DNA_EXTRACTOR.get());
+                        output.accept(ModBlocks.WHITE_DNA_ANALYZER.get());
                         output.accept(ModBlocks.WHITE_FOSSIL_GRINDER.get());
                         output.accept(ModBlocks.WHITE_FOSSIL_CLEANER.get());
                         output.accept(ModBlocks.WHITE_DNA_HYBRIDIZER.get());

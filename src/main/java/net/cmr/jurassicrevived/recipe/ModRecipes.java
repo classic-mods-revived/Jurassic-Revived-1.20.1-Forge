@@ -11,6 +11,8 @@ public class ModRecipes {
     public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS =
             DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, JRMod.MOD_ID);
 
+    public static final RegistryObject<RecipeSerializer<DNAAnalyzerRecipe>> DNA_ANALYZER_SERIALIZER =
+            SERIALIZERS.register("dna_analyzing", () -> DNAAnalyzerRecipe.Serializer.INSTANCE);
     public static final RegistryObject<RecipeSerializer<DNAExtractorRecipe>> DNA_EXTRACTOR_SERIALIZER =
             SERIALIZERS.register("dna_extracting", () -> DNAExtractorRecipe.Serializer.INSTANCE);
     public static final RegistryObject<RecipeSerializer<FossilGrinderRecipe>> FOSSIL_GRINDER_SERIALIZER =

@@ -246,6 +246,19 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_medium_security_fence_wire_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(Items.IRON_INGOT, Items.REDSTONE).build())).save(pWriter);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.CAT_PLUSHIE.get(), 1)
+                .pattern("ABA")
+                .pattern("CBD")
+                .pattern("BBA")
+                .define('A', Blocks.BLACK_WOOL)
+                .define('B', Blocks.WHITE_WOOL)
+                .define('C', Blocks.GREEN_WOOL)
+                .define('D', Blocks.GRAY_WOOL)
+                .unlockedBy("has_black_wool", has(Blocks.BLACK_WOOL))
+                .unlockedBy("has_white_wool", has(Blocks.WHITE_WOOL))
+                .unlockedBy("has_green_wool", has(Blocks.GREEN_WOOL))
+                .unlockedBy("has_gray_wool", has(Blocks.GRAY_WOOL)).save(pWriter);
+
         ConditionalRecipe.builder()
                 .addCondition(requirePowerCondition)
                 .addRecipe(
@@ -273,6 +286,21 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('D', ModItems.PROCESSOR.get())
                 .unlockedBy("has_dna_extractor_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(Items.LAPIS_LAZULI, ModItems.SCREEN.get(), ModItems.CABLE.get(), ModItems.PROCESSOR.get()).build())).save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.DNA_ANALYZER.get(), 1)
+                .pattern("AAA")
+                .pattern("BCD")
+                .pattern("EEE")
+                .define('A', ModItems.TEST_TUBE.get())
+                .define('B', ModItems.SCREEN.get())
+                .define('C', ModItems.CABLE.get())
+                .define('D', ModItems.PROCESSOR.get())
+                .define('E', ModItems.SYRINGE.get())
+                .unlockedBy("has_test_tube", has(ModItems.TEST_TUBE.get()))
+                .unlockedBy("has_screen", has(ModItems.SCREEN.get()))
+                .unlockedBy("has_cable", has(ModItems.CABLE.get()))
+                .unlockedBy("has_processor", has(ModItems.PROCESSOR.get()))
+                .unlockedBy("has_syringe", has(ModItems.SYRINGE.get())).save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.FOSSIL_GRINDER.get(), 1)
                 .pattern("ABA")
@@ -501,6 +529,9 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         new DNAExtractingRecipeBuilder(ModItems.TEST_TUBE.get(), ModItems.THERIZINOSAURUS_TISSUE.get(), ModItems.THERIZINOSAURUS_DNA.get(), 1)
                 .unlockedBy("has_test_tube", has(ModItems.TEST_TUBE.get())).save(pWriter);
         new DNAExtractingRecipeBuilder(ModItems.TEST_TUBE.get(), ModItems.DISTORTUS_REX_TISSUE.get(), ModItems.DISTORTUS_REX_DNA.get(), 1)
+                .unlockedBy("has_test_tube", has(ModItems.TEST_TUBE.get())).save(pWriter);
+
+        new DNAAnalyzingRecipeBuilder(ModItems.TEST_TUBE.get(), ModItems.FROG_MATERIAL.get(), ModItems.FROG_DNA.get(), 1)
                 .unlockedBy("has_test_tube", has(ModItems.TEST_TUBE.get())).save(pWriter);
 
         DNAExtractingRecipeBuilder

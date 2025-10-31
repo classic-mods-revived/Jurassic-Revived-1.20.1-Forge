@@ -19,6 +19,8 @@ public class ModMenuTypes {
             registerMenuType(GeneratorMenu::new, "generator_menu");
     public static final RegistryObject<MenuType<DNAExtractorMenu>> DNA_EXTRACTOR_MENU =
             registerMenuType(DNAExtractorMenu::new, "dna_extractor_menu");
+    public static final RegistryObject<MenuType<DNAAnalyzerMenu>> DNA_ANALYZER_MENU =
+            registerMenuType(DNAAnalyzerMenu::new, "dna_analyzer_menu");
     public static final RegistryObject<MenuType<FossilGrinderMenu>> FOSSIL_GRINDER_MENU =
             registerMenuType(FossilGrinderMenu::new, "fossil_grinder_menu");
     public static final RegistryObject<MenuType<FossilCleanerMenu>> FOSSIL_CLEANER_MENU =

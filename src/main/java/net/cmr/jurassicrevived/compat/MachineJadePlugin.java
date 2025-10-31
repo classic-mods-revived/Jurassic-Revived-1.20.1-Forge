@@ -55,6 +55,7 @@ public class MachineJadePlugin implements IWailaPlugin {
         };
 
         reg.registerBlockComponent(provider, DNAExtractorBlock.class);
+        reg.registerBlockComponent(provider, DNAAnalyzerBlock.class);
         reg.registerBlockComponent(provider, DNAHybridizerBlock.class);
         reg.registerBlockComponent(provider, EmbryoCalcificationMachineBlock.class);
         reg.registerBlockComponent(provider, EmbryonicMachineBlock.class);
@@ -99,6 +100,7 @@ public class MachineJadePlugin implements IWailaPlugin {
         };
 
         reg.registerBlockDataProvider(server, DNAExtractorBlockEntity.class);
+        reg.registerBlockDataProvider(server, DNAAnalyzerBlockEntity.class);
         reg.registerBlockDataProvider(server, DNAHybridizerBlockEntity.class);
         reg.registerBlockDataProvider(server, EmbryoCalcificationMachineBlockEntity.class);
         reg.registerBlockDataProvider(server, EmbryonicMachineBlockEntity.class);

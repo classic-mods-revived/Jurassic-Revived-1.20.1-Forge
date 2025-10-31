@@ -39,6 +39,7 @@ public class JEIJRPlugin implements IModPlugin {
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
         registration.addRecipeCategories(new DNAExtractorRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new DNAAnalyzerRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new FossilGrinderRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new FossilCleanerRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new DNAHybridizerRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
@@ -52,6 +53,7 @@ public class JEIJRPlugin implements IModPlugin {
         RecipeManager recipeManager = Minecraft.getInstance().level.getRecipeManager();
 
         List<DNAExtractorRecipe> dnaExtractorRecipes = recipeManager.getAllRecipesFor(DNAExtractorRecipe.Type.INSTANCE);
+        List<DNAAnalyzerRecipe> dnaAnalyzerRecipes = recipeManager.getAllRecipesFor(DNAAnalyzerRecipe.Type.INSTANCE);
         List<FossilGrinderRecipe> fossilGrinderRecipes = recipeManager.getAllRecipesFor(FossilGrinderRecipe.Type.INSTANCE);
         List<FossilCleanerRecipe> fossilCleanerRecipes = recipeManager.getAllRecipesFor(FossilCleanerRecipe.Type.INSTANCE);
         List<DNAHybridizerRecipe> dnaHybridizerRecipes = recipeManager.getAllRecipesFor(DNAHybridizerRecipe.Type.INSTANCE);
@@ -60,6 +62,7 @@ public class JEIJRPlugin implements IModPlugin {
         List<IncubatorRecipe> incubatorRecipes = recipeManager.getAllRecipesFor(IncubatorRecipe.Type.INSTANCE);
 
         registration.addRecipes(DNAExtractorRecipeCategory.DNA_EXTRACTOR_RECIPE_RECIPE_TYPE, dnaExtractorRecipes);
+        registration.addRecipes(DNAAnalyzerRecipeCategory.DNA_ANALYZER_RECIPE_RECIPE_TYPE, dnaAnalyzerRecipes);
         registration.addRecipes(FossilGrinderRecipeCategory.FOSSIL_GRINDING_RECIPE_RECIPE_TYPE, fossilGrinderRecipes);
         registration.addRecipes(FossilCleanerRecipeCategory.FOSSIL_CLEANING_RECIPE_RECIPE_TYPE, fossilCleanerRecipes);
         registration.addRecipes(DNAHybridizerRecipeCategory.DNA_HYBRIDIZING_RECIPE_RECIPE_TYPE, dnaHybridizerRecipes);
@@ -72,6 +75,8 @@ public class JEIJRPlugin implements IModPlugin {
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
         registration.addRecipeClickArea(DNAExtractorScreen.class, 81, 31, 14, 25,
                 DNAExtractorRecipeCategory.DNA_EXTRACTOR_RECIPE_RECIPE_TYPE);
+        registration.addRecipeClickArea(DNAAnalyzerScreen.class, 81, 31, 14, 25,
+                DNAAnalyzerRecipeCategory.DNA_ANALYZER_RECIPE_RECIPE_TYPE);
         registration.addRecipeClickArea(FossilGrinderScreen.class, 80, 25, 18, 36,
                 FossilGrinderRecipeCategory.FOSSIL_GRINDING_RECIPE_RECIPE_TYPE);
         registration.addRecipeClickArea(FossilCleanerScreen.class, 74, 35, 29, 16,
@@ -89,6 +94,7 @@ public class JEIJRPlugin implements IModPlugin {
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.DNA_EXTRACTOR.get()), DNAExtractorRecipeCategory.DNA_EXTRACTOR_RECIPE_RECIPE_TYPE);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.DNA_ANALYZER.get()), DNAAnalyzerRecipeCategory.DNA_ANALYZER_RECIPE_RECIPE_TYPE);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.FOSSIL_GRINDER.get()), FossilGrinderRecipeCategory.FOSSIL_GRINDING_RECIPE_RECIPE_TYPE);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.FOSSIL_CLEANER.get()), FossilCleanerRecipeCategory.FOSSIL_CLEANING_RECIPE_RECIPE_TYPE);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.DNA_HYBRIDIZER.get()), DNAHybridizerRecipeCategory.DNA_HYBRIDIZING_RECIPE_RECIPE_TYPE);
@@ -96,6 +102,7 @@ public class JEIJRPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.EMBRYO_CALCIFICATION_MACHINE.get()), EmbryoCalcificationMachineRecipeCategory.EMBRYO_CALCIFICATION_MACHINING_RECIPE_RECIPE_TYPE);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.INCUBATOR.get()), IncubatorRecipeCategory.INCUBATING_RECIPE_RECIPE_TYPE);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.WHITE_DNA_EXTRACTOR.get()), DNAExtractorRecipeCategory.DNA_EXTRACTOR_RECIPE_RECIPE_TYPE);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.WHITE_DNA_ANALYZER.get()), DNAAnalyzerRecipeCategory.DNA_ANALYZER_RECIPE_RECIPE_TYPE);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.WHITE_FOSSIL_GRINDER.get()), FossilGrinderRecipeCategory.FOSSIL_GRINDING_RECIPE_RECIPE_TYPE);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.WHITE_FOSSIL_CLEANER.get()), FossilCleanerRecipeCategory.FOSSIL_CLEANING_RECIPE_RECIPE_TYPE);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.WHITE_DNA_HYBRIDIZER.get()), DNAHybridizerRecipeCategory.DNA_HYBRIDIZING_RECIPE_RECIPE_TYPE);
@@ -110,6 +117,15 @@ public class JEIJRPlugin implements IModPlugin {
                 DNAExtractorMenu.class,
                 ModMenuTypes.DNA_EXTRACTOR_MENU.get(),
                 DNAExtractorRecipeCategory.DNA_EXTRACTOR_RECIPE_RECIPE_TYPE,
+                36, // The index of the FIRST recipe input slot in your Menu (slot 36)
+                2,  // The NUMBER of recipe input slots (slots 36, 37)
+                0,  // The index where the player inventory slots START (slot 0)
+                36  // The NUMBER of player inventory slots to check (slots 0-35)
+        );
+        registration.addRecipeTransferHandler(
+                DNAAnalyzerMenu.class,
+                ModMenuTypes.DNA_ANALYZER_MENU.get(),
+                DNAAnalyzerRecipeCategory.DNA_ANALYZER_RECIPE_RECIPE_TYPE,
                 36, // The index of the FIRST recipe input slot in your Menu (slot 36)
                 2,  // The NUMBER of recipe input slots (slots 36, 37)
                 0,  // The index where the player inventory slots START (slot 0)

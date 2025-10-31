@@ -56,6 +56,8 @@ public class ModBlocks {
             () -> new GeneratorBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
     public static final RegistryObject<Block> DNA_EXTRACTOR = registerBlock("dna_extractor",
             () -> new DNAExtractorBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
+    public static final RegistryObject<Block> DNA_ANALYZER = registerBlock("dna_analyzer",
+            () -> new DNAAnalyzerBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
     public static final RegistryObject<Block> FOSSIL_GRINDER = registerBlock("fossil_grinder",
             () -> new FossilGrinderBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
     public static final RegistryObject<Block> FOSSIL_CLEANER = registerBlock("fossil_cleaner",
@@ -72,6 +74,8 @@ public class ModBlocks {
             () -> new GeneratorBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
     public static final RegistryObject<Block> WHITE_DNA_EXTRACTOR = registerBlock("white_dna_extractor",
             () -> new DNAExtractorBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
+    public static final RegistryObject<Block> WHITE_DNA_ANALYZER = registerBlock("white_dna_analyzer",
+            () -> new DNAAnalyzerBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
     public static final RegistryObject<Block> WHITE_FOSSIL_GRINDER = registerBlock("white_fossil_grinder",
             () -> new FossilGrinderBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
     public static final RegistryObject<Block> WHITE_FOSSIL_CLEANER = registerBlock("white_fossil_cleaner",

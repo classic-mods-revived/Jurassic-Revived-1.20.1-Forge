@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:black_wool"
+    },
+    "B": {
+      "item": "minecraft:white_wool"
+    },
+    "C": {
+      "item": "minecraft:green_wool"
+    },
+    "D": {
+      "item": "minecraft:gray_wool"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "CBD",
+    "BBA"
+  ],
+  "result": {
+    "item": "jurassicrevived:dna_analyzer"
+  },
+  "show_notification": true
+}
