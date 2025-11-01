@@ -49,7 +49,8 @@ public class EmbryonicMachineRecipe implements Recipe<SimpleContainer> {
 
         boolean testtubeslot = inputItems.get(0).test(pContainer.getItem(0));
         boolean materialslot = inputItems.get(1).test(pContainer.getItem(1));
-        return testtubeslot && materialslot;
+        boolean frogslot = inputItems.size() > 2 && inputItems.get(2).test(pContainer.getItem(2));
+        return testtubeslot && materialslot && frogslot;
     }
 
     @Override
@@ -103,7 +104,7 @@ public class EmbryonicMachineRecipe implements Recipe<SimpleContainer> {
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
 
             JsonArray ingredients = GsonHelper.getAsJsonArray(json, "ingredients");
-            NonNullList<Ingredient> inputs = NonNullList.withSize(2, Ingredient.EMPTY);
+            NonNullList<Ingredient> inputs = NonNullList.withSize(3, Ingredient.EMPTY);
 
             for (int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));

@@ -42,7 +42,7 @@ public class EmbryonicMachineMenu extends AbstractContainerMenu {
             }
         });
 
-        // Input: Material slot (only velociraptor tissue may be inserted)
+        // Input: Material slot
         this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 1, 57, 35) {
             @Override
             public boolean mayPlace(ItemStack stack) {
@@ -54,8 +54,20 @@ public class EmbryonicMachineMenu extends AbstractContainerMenu {
             }
         });
 
+        // Input: Frog DNA slot
+        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 2, 48, 53) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return stack.is(ModItems.FROG_DNA.get());
+            }
+            @Override
+            public boolean mayPickup(Player playerIn) {
+                return true; // Explicitly allow players (and JEI) to take items from this slot
+            }
+        });
+
         // Output slots: cannot insert anything, but can always take out
-        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 2, 103, 35) {
+        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 3, 103, 35) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return false;

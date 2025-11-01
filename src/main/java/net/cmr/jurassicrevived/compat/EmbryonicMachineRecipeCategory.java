@@ -108,6 +108,10 @@ public class EmbryonicMachineRecipeCategory implements IRecipeCategory<Embryonic
 
         builder.addSlot(RecipeIngredientRole.INPUT, 39, 35).addIngredients(recipe.getIngredients().get(0));
         builder.addSlot(RecipeIngredientRole.INPUT, 57, 35).addIngredients(recipe.getIngredients().get(1));
+        // Frog DNA required input (rendered at 48,53 to match the menu)
+        if (recipe.getIngredients().size() > 2) {
+            builder.addSlot(RecipeIngredientRole.INPUT, 48, 53).addIngredients(recipe.getIngredients().get(2));
+        }
 
         builder.addSlot(RecipeIngredientRole.OUTPUT, 103, 35).addItemStack(recipe.getResultItem(null));
 

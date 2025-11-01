@@ -3,22 +3,25 @@
   "category": "misc",
   "key": {
     "A": {
-      "item": "minecraft:black_wool"
+      "item": "jurassicrevived:test_tube"
     },
     "B": {
-      "item": "minecraft:white_wool"
+      "item": "jurassicrevived:screen"
     },
     "C": {
-      "item": "minecraft:green_wool"
+      "item": "jurassicrevived:cable"
     },
     "D": {
-      "item": "minecraft:gray_wool"
+      "item": "jurassicrevived:processor"
+    },
+    "E": {
+      "item": "jurassicrevived:syringe"
     }
   },
   "pattern": [
-    "ABA",
-    "CBD",
-    "BBA"
+    "AAA",
+    "BCD",
+    "EEE"
   ],
   "result": {
     "item": "jurassicrevived:dna_analyzer"

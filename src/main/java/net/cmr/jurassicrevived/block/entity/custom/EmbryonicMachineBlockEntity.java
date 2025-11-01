@@ -79,7 +79,8 @@ public class EmbryonicMachineBlockEntity extends BlockEntity implements MenuProv
             return switch (slot) {
                 case 0 -> stack.getItem() == ModItems.SYRINGE.get();
                 case 1 -> stack.is(ModTags.Items.DNA);
-                case 2 -> true;
+                case 2 -> stack.is(ModItems.FROG_DNA.get());
+                case 3 -> true;
                 default -> super.isItemValid(slot, stack);
             };
         }
@@ -87,7 +88,8 @@ public class EmbryonicMachineBlockEntity extends BlockEntity implements MenuProv
 
     private static final int SYRINGE_SLOT = 0;
     private static final int MATERIAL_INPUT = 1;
-    private static final int OUTPUT_SLOT_1 = 2;
+    private static final int FROG_INPUT = 2;
+    private static final int OUTPUT_SLOT_1 = 3;
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
@@ -98,6 +100,7 @@ public class EmbryonicMachineBlockEntity extends BlockEntity implements MenuProv
                     new InventoryDirectionEntry(Direction.EAST, OUTPUT_SLOT_1, false),
                     new InventoryDirectionEntry(Direction.WEST, OUTPUT_SLOT_1, false),
                     new InventoryDirectionEntry(Direction.UP, SYRINGE_SLOT, true),
+                    new InventoryDirectionEntry(Direction.UP, FROG_INPUT, true),
                     new InventoryDirectionEntry(Direction.UP, MATERIAL_INPUT, true)).directionsMap;
 
 

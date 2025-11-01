@@ -26,15 +26,17 @@ public class EmbryonicMachiningRecipeBuilder implements RecipeBuilder {
     private final Item result;
     private final Ingredient ingredient;
     private final Ingredient secondIngredient;
+    private final Ingredient frogIngredient; // new required input
     private final int count;
     private final Advancement.Builder advancement = Advancement.Builder.advancement();
 
     // Optional weights for Amber -> DNA randomization
     // private final java.util.Map<ResourceLocation, Integer> dnaWeights = new java.util.HashMap<>();
 
-    public EmbryonicMachiningRecipeBuilder(ItemLike ingredient, ItemLike secondIngredient, ItemLike result, int count) {
+    public EmbryonicMachiningRecipeBuilder(ItemLike ingredient, ItemLike secondIngredient, ItemLike frogIngredient, ItemLike result, int count) {
         this.ingredient = Ingredient.of(ingredient);
         this.secondIngredient = Ingredient.of(secondIngredient);
+        this.frogIngredient = Ingredient.of(frogIngredient);
         this.result = result.asItem();
         this.count = count;
     }
@@ -74,6 +76,7 @@ public class EmbryonicMachiningRecipeBuilder implements RecipeBuilder {
                 this.count,
                 this.ingredient,
                 this.secondIngredient,
+                this.frogIngredient,
                 this.advancement,
                 ResourceLocation.fromNamespaceAndPath(finalId.getNamespace(), "recipes/" + finalId.getPath())
         ));
@@ -90,6 +93,7 @@ public class EmbryonicMachiningRecipeBuilder implements RecipeBuilder {
         private final Item result;
         private final Ingredient ingredient;
         private final Ingredient secondIngredient;
+        private final Ingredient frogIngredient;
         private final int count;
         // private final java.util.Map<ResourceLocation, Integer> dnaWeights;
         private final Advancement.Builder advancement;
@@ -100,6 +104,7 @@ public class EmbryonicMachiningRecipeBuilder implements RecipeBuilder {
                       int pCount,
                       Ingredient ingredient,
                       Ingredient secondIngredient,
+                      Ingredient frogIngredient,
                       Advancement.Builder pAdvancement,
                       ResourceLocation pAdvancementId) {
             this.id = pId;
@@ -107,6 +112,7 @@ public class EmbryonicMachiningRecipeBuilder implements RecipeBuilder {
             this.count = pCount;
             this.ingredient = ingredient;
             this.secondIngredient = secondIngredient;
+            this.frogIngredient = frogIngredient;
             this.advancement = pAdvancement;
             this.advancementId = pAdvancementId;
         }
@@ -116,6 +122,7 @@ public class EmbryonicMachiningRecipeBuilder implements RecipeBuilder {
             JsonArray jsonarray = new JsonArray();
             jsonarray.add(ingredient.toJson());
             jsonarray.add(secondIngredient.toJson());
+            jsonarray.add(frogIngredient.toJson());
             pJson.add("ingredients", jsonarray);
             JsonObject jsonobject = new JsonObject();
             jsonobject.addProperty("item", ForgeRegistries.ITEMS.getKey(this.result).toString());
