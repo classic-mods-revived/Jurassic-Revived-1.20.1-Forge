@@ -1,5 +1,8 @@
 {
   "type": "jurassicrevived:dna_hybridizing",
+  "catalyst": {
+    "item": "jurassicrevived:frog_dna"
+  },
   "ingredients": [
     {
       "item": "jurassicrevived:tyrannosaurus_rex_dna"

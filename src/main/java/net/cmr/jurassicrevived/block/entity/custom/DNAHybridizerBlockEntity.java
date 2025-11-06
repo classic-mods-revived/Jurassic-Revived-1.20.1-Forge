@@ -15,6 +15,7 @@ import net.cmr.jurassicrevived.util.WrappedHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
@@ -364,18 +365,21 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
         if (recipeOpt.isEmpty()) return;
         DNAHybridizerRecipe recipe = recipeOpt.get();
 
-        // Consume exactly one from each required ingredient, regardless of which input slot it's in.
-        // Build required list (skip empties), then match against present inputs and extract where matched.
+        // Build required list: normals (0..7) + catalyst if present
         java.util.List<Ingredient> required = new java.util.ArrayList<>();
-        for (Ingredient ing : recipe.getIngredients()) {
+        NonNullList<Ingredient> normals = recipe.getIngredients();
+        for (int i = 0; i < Math.min(8, normals.size()); i++) {
+            Ingredient ing = normals.get(i);
             if (!ing.isEmpty()) required.add(ing);
         }
+        if (recipe.getCatalyst() != null && !recipe.getCatalyst().isEmpty()) {
+            required.add(recipe.getCatalyst());
+        }
 
-        // Track which required entries were satisfied by which slot
+        // Track matches -> slots to extract
         boolean[] used = new boolean[required.size()];
         java.util.List<Integer> toExtractSlots = new java.util.ArrayList<>();
 
-        // Try to match each non-empty input slot to one remaining required ingredient
         for (int slot : INPUT_SLOTS) {
             ItemStack s = itemHandler.getStackInSlot(slot);
             if (s.isEmpty()) continue;
@@ -389,17 +393,14 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
             }
         }
 
-        // Safety: only proceed if all required ingredients were matched
         for (boolean u : used) {
-            if (!u) return;
+            if (!u) return; // missing one of the required ingredients/catalyst
         }
 
-        // Extract one from each matched input slot
         for (int slot : toExtractSlots) {
             this.itemHandler.extractItem(slot, 1, false);
         }
 
-        // Produce output
         SimpleContainer inv = new SimpleContainer(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
             inv.setItem(i, itemHandler.getStackInSlot(i));
@@ -431,23 +432,26 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
         if (recipeOpt.isEmpty()) return false;
         DNAHybridizerRecipe recipe = recipeOpt.get();
 
-        // Build required ingredients (skip empties)
+        // Build required list: normals (0..7) + catalyst if present
         java.util.List<Ingredient> required = new java.util.ArrayList<>();
-        for (Ingredient ing : recipe.getIngredients()) {
+        NonNullList<Ingredient> normals = recipe.getIngredients();
+        for (int i = 0; i < Math.min(8, normals.size()); i++) {
+            Ingredient ing = normals.get(i);
             if (!ing.isEmpty()) required.add(ing);
         }
+        if (recipe.getCatalyst() != null && !recipe.getCatalyst().isEmpty()) {
+            required.add(recipe.getCatalyst());
+        }
 
-        // Gather current inputs from slots 0..8
+        // Gather current inputs
         java.util.List<ItemStack> inputs = new java.util.ArrayList<>(9);
-        for (int i = 0; i < INPUT_SLOTS.length; i++) {
-            ItemStack s = itemHandler.getStackInSlot(INPUT_SLOTS[i]);
+        for (int slot : INPUT_SLOTS) {
+            ItemStack s = itemHandler.getStackInSlot(slot);
             if (!s.isEmpty()) inputs.add(s);
         }
 
-        // Enforce exact match count (no extras, no missing)
         if (inputs.size() != required.size()) return false;
 
-        // Order-independent matching
         boolean[] used = new boolean[required.size()];
         for (ItemStack in : inputs) {
             boolean matched = false;
@@ -461,7 +465,7 @@ public class DNAHybridizerBlockEntity extends BlockEntity implements MenuProvide
             if (!matched) return false;
         }
 
-        // Output capacity check using dynamic result
+        // Output capacity check
         SimpleContainer checkInv = new SimpleContainer(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
             checkInv.setItem(i, itemHandler.getStackInSlot(i));

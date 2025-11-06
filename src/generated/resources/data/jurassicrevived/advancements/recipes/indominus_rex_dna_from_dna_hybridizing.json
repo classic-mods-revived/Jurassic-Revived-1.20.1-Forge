@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "jurassicrevived:distortus_rex_dna"
+        "recipe": "jurassicrevived:indominus_rex_dna_from_dna_hybridizing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "jurassicrevived:distortus_rex_dna"
+      "jurassicrevived:indominus_rex_dna_from_dna_hybridizing"
     ]
   },
   "sends_telemetry_event": true

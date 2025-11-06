@@ -109,19 +109,22 @@ public class DNAHybridizerRecipeCategory implements IRecipeCategory<DNAHybridize
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, DNAHybridizerRecipe recipe, IFocusGroup focuses) {
 
-        // Place up to 9 inputs in a 3x3 grid; skip indices beyond recipe size or empty ingredients
         int[][] coords = {
                 {8, 25}, {26, 25}, {44, 25},
                 {62, 25}, {8, 43}, {26, 43},
                 {44, 43}, {62, 43}, {83, 35}
         };
 
+        // Slot 8: show the catalyst ingredient from the recipe
+        builder.addSlot(RecipeIngredientRole.INPUT, coords[8][0], coords[8][1])
+                   .addIngredients(recipe.getCatalyst());
+
+        // Other slots from recipe; skip 8
         for (int i = 0; i < Math.min(9, recipe.getIngredients().size()); i++) {
+            if (i == 8) continue;
             var ing = recipe.getIngredients().get(i);
             if (ing.isEmpty()) continue;
-            int x = coords[i][0];
-            int y = coords[i][1];
-            builder.addSlot(RecipeIngredientRole.INPUT, x, y).addIngredients(ing);
+            builder.addSlot(RecipeIngredientRole.INPUT, coords[i][0], coords[i][1]).addIngredients(ing);
         }
 
         builder.addSlot(RecipeIngredientRole.OUTPUT, 134, 35).addItemStack(recipe.getResultItem(null));

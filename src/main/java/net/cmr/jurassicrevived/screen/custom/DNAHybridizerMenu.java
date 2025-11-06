@@ -107,7 +107,7 @@ public class DNAHybridizerMenu extends AbstractContainerMenu {
         this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 7, 62, 43) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.getItem() == ModItems.FROG_DNA.get();
+                return stack.is(ModTags.Items.DNA);
             }
             @Override
             public boolean mayPickup(Player playerIn) {
@@ -117,7 +117,7 @@ public class DNAHybridizerMenu extends AbstractContainerMenu {
         this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 8, 83, 35) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return false;
+                return stack.getItem() == ModItems.FROG_DNA.get();
             }
             @Override
             public boolean mayPickup(Player playerIn) {

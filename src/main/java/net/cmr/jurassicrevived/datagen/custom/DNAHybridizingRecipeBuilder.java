@@ -18,6 +18,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class DNAHybridizingRecipeBuilder implements RecipeBuilder {
@@ -34,10 +35,19 @@ public class DNAHybridizingRecipeBuilder implements RecipeBuilder {
 
     // Fluent method to add up to 9 ingredients
     public DNAHybridizingRecipeBuilder addIngredient(ItemLike itemLike) {
-        if (this.ingredients.size() >= 9) {
-            throw new IllegalStateException("DNA hybridizing supports at most 9 ingredients");
+        if (this.ingredients.size() >= 8) {
+            // Reserve slot 8 for catalyst; only 8 normal ingredients allowed
+            throw new IllegalStateException("DNA hybridizing supports at most 8 normal ingredients (slot 8 is reserved for catalyst)");
         }
         this.ingredients.add(Ingredient.of(itemLike));
+        return this;
+    }
+
+    // New: explicitly set the catalyst that will be placed into slot index 8
+    private Ingredient catalyst = Ingredient.EMPTY;
+
+    public DNAHybridizingRecipeBuilder setCatalyst(ItemLike itemLike) {
+        this.catalyst = Ingredient.of(itemLike);
         return this;
     }
 
@@ -67,18 +77,26 @@ public class DNAHybridizingRecipeBuilder implements RecipeBuilder {
         if (this.ingredients.isEmpty()) {
             throw new IllegalStateException("DNA hybridizing recipe must have at least 1 ingredient");
         }
+
+        // Ensure recipe ids end with "_from_dna_hybridizing"
+        String suffix = "_from_dna_hybridizing";
+        ResourceLocation fixedId = id.getPath().endsWith(suffix)
+                ? id
+                : ResourceLocation.fromNamespaceAndPath(id.getNamespace(), id.getPath() + suffix);
+
         this.advancement.parent(ResourceLocation.fromNamespaceAndPath("jurassicrevived", "recipes/root"))
-                .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id))
-                .rewards(AdvancementRewards.Builder.recipe(id))
+                .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(fixedId))
+                .rewards(AdvancementRewards.Builder.recipe(fixedId))
                 .requirements(RequirementsStrategy.OR);
 
         out.accept(new Result(
-                id,
+                fixedId,
                 this.result,
                 this.count,
                 new java.util.ArrayList<>(this.ingredients),
+                this.catalyst, // may be Ingredient.EMPTY
                 this.advancement,
-                ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "recipes/" + id.getPath())
+                ResourceLocation.fromNamespaceAndPath(fixedId.getNamespace(), "recipes/" + fixedId.getPath())
         ));
     }
 
@@ -87,19 +105,22 @@ public class DNAHybridizingRecipeBuilder implements RecipeBuilder {
         private final Item result;
         private final int count;
         private final java.util.List<Ingredient> ingredients;
+        private final Ingredient catalyst;
         private final Advancement.Builder advancement;
         private final ResourceLocation advancementId;
 
         public Result(ResourceLocation id,
                       Item result,
                       int count,
-                      java.util.List<Ingredient> ingredients,
+                      List<Ingredient> ingredients,
+                      Ingredient catalyst,
                       Advancement.Builder advancement,
                       ResourceLocation advancementId) {
             this.id = id;
             this.result = result;
             this.count = count;
             this.ingredients = ingredients;
+            this.catalyst = catalyst;
             this.advancement = advancement;
             this.advancementId = advancementId;
         }
@@ -109,15 +130,19 @@ public class DNAHybridizingRecipeBuilder implements RecipeBuilder {
             json.addProperty("type", "jurassicrevived:dna_hybridizing");
 
             JsonArray ingredientsArr = new JsonArray();
-            // Write provided ingredients in order; omit trailing empty slots
             for (Ingredient ing : ingredients) {
                 if (ing == Ingredient.EMPTY) {
-                    ingredientsArr.add(new JsonObject()); // represents empty/optional slot safely
+                    ingredientsArr.add(new JsonObject());
                 } else {
                     ingredientsArr.add(ing.toJson());
                 }
             }
             json.add("ingredients", ingredientsArr);
+
+            // Only write "catalyst" if provided
+            if (catalyst != null && !catalyst.isEmpty()) {
+                json.add("catalyst", catalyst.toJson());
+            }
 
             JsonObject resultObj = new JsonObject();
             resultObj.addProperty("item", ForgeRegistries.ITEMS.getKey(this.result).toString());
