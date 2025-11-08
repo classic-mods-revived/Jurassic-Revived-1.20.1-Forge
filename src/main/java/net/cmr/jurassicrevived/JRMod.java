@@ -16,6 +16,7 @@ import net.cmr.jurassicrevived.screen.custom.*;
 import net.cmr.jurassicrevived.sounds.ModSounds;
 import net.cmr.jurassicrevived.util.FenceClimbClientHandler;
 import net.cmr.jurassicrevived.util.FenceClimbHandler;
+import net.cmr.jurassicrevived.worldgen.ConditionalAddSpawns;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.NoopRenderer;
@@ -69,6 +70,7 @@ public class JRMod {
         FenceClimbHandler.register();
 
         ConfigCondition.register(modEventBus);
+        ConditionalAddSpawns.SERIALIZERS.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
