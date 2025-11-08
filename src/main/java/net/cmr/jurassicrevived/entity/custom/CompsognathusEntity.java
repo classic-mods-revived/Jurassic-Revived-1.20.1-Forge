@@ -2,6 +2,7 @@ package net.cmr.jurassicrevived.entity.custom;
 
 import net.cmr.jurassicrevived.entity.ModEntities;
 import net.cmr.jurassicrevived.entity.ai.SprintingMeleeAttackGoal;
+import net.cmr.jurassicrevived.entity.ai.SprintingPanicGoal;
 import net.cmr.jurassicrevived.entity.variant.CompsognathusVariant;
 import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
@@ -50,11 +51,15 @@ public class CompsognathusEntity extends Animal implements GeoEntity {
 
     @Override
     protected void registerGoals() {
-
-
+        this.goalSelector.addGoal(1, new SprintingPanicGoal(this, 1.15) {
+            @Override
+            public boolean canUse() {
+                return CompsognathusEntity.this.isBaby() && super.canUse();
+            }
+        });
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
         this.goalSelector.addGoal(2, new FloatGoal(this));
-        this.goalSelector.addGoal(3, new SprintingMeleeAttackGoal(this, 1.25, false) {
+        this.goalSelector.addGoal(3, new SprintingMeleeAttackGoal(this, 1.1, false) {
             @Override
             public boolean canUse() {
                 return !CompsognathusEntity.this.isBaby() && super.canUse();
@@ -64,15 +69,12 @@ public class CompsognathusEntity extends Animal implements GeoEntity {
                 return 4;
             }
         });
-        this.targetSelector.addGoal(11, new NearestAttackableTargetGoal<>(this, Animal.class, 10, false, false,
-                target -> target.getType() != this.getType()));
-        this.goalSelector.addGoal(5, new BreedGoal(this, 1.0));
-        this.goalSelector.addGoal(6, new FollowParentGoal(this, 1.25));
-        this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0));
-        this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 6.0F));
-        this.goalSelector.addGoal(9, new FollowMobGoal(this, 1, (float) 20, (float) 10));
-        this.goalSelector.addGoal(10, new AvoidEntityGoal<>(this, LivingEntity.class, (float) 20, 1, 1));
-        this.goalSelector.addGoal(11, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(4, new BreedGoal(this, 1.0));
+        this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.25));
+        this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 1.0));
+        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(8, new FollowMobGoal(this, 1, (float) 20, (float) 10));
+        this.goalSelector.addGoal(9, new RandomLookAroundGoal(this));
     }
 
     public static AttributeSupplier.Builder createAttributes() {

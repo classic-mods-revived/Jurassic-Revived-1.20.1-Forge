@@ -45,6 +45,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlock(ModBlocks.POTTED_WESTERN_SWORD_FERN.get(), models().singleTexture("potted_western_sword_fern", ResourceLocation.parse("flower_pot_cross"), "plant",
                 blockTexture(ModBlocks.WESTERN_SWORD_FERN.get())).renderType("cutout"));
 
+        simpleBlock(ModBlocks.ONYCHIOPSIS.get(),
+                models().cross(blockTexture(ModBlocks.ONYCHIOPSIS.get()).getPath(), blockTexture(ModBlocks.ONYCHIOPSIS.get())).renderType("cutout"));
+        simpleBlock(ModBlocks.POTTED_ONYCHIOPSIS.get(), models().singleTexture("potted_onychiopsis", ResourceLocation.parse("flower_pot_cross"), "plant",
+                blockTexture(ModBlocks.ONYCHIOPSIS.get())).renderType("cutout"));
+
         blockWithItem(ModBlocks.GYPSUM_STONE);
         blockWithItem(ModBlocks.GYPSUM_COBBLESTONE);
         blockWithItem(ModBlocks.GYPSUM_STONE_BRICKS);

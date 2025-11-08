@@ -104,6 +104,11 @@ public class ModBlocks {
     public static final RegistryObject<Block> POTTED_WESTERN_SWORD_FERN = BLOCKS.register("potted_western_sword_fern",
             () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT), WESTERN_SWORD_FERN, BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM)));
 
+    public static final RegistryObject<Block> ONYCHIOPSIS = registerBlock("onychiopsis",
+            () -> new FlowerBlock(MobEffects.UNLUCK, 0, BlockBehaviour.Properties.copy(Blocks.ALLIUM)));
+    public static final RegistryObject<Block> POTTED_ONYCHIOPSIS = BLOCKS.register("potted_onychiopsis",
+            () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT), ONYCHIOPSIS, BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM)));
+
     public static final RegistryObject<Block> GYPSUM_STONE = registerBlock("gypsum_stone",
             () -> new Block(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> GYPSUM_COBBLESTONE = registerBlock("gypsum_cobblestone",

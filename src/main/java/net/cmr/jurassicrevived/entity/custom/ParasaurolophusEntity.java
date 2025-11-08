@@ -1,6 +1,7 @@
 package net.cmr.jurassicrevived.entity.custom;
 
 import net.cmr.jurassicrevived.entity.ModEntities;
+import net.cmr.jurassicrevived.entity.ai.SprintingPanicGoal;
 import net.cmr.jurassicrevived.entity.variant.ParasaurolophusVariant;
 import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
@@ -47,7 +48,7 @@ public class ParasaurolophusEntity extends Animal implements GeoEntity {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new PanicGoal(this, 1.4));
+        this.goalSelector.addGoal(1, new SprintingPanicGoal(this, 2.5));
         this.goalSelector.addGoal(2, new FloatGoal(this));
         this.goalSelector.addGoal(3, new BreedGoal(this, 1.0));
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25));

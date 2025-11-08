@@ -59,7 +59,7 @@ public class ModBiomeModifiers {
 
         context.register(SPAWN_BRACHIOSAURUS, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
                 biomes.getOrThrow(Tags.Biomes.IS_PLAINS),
-                List.of(new MobSpawnSettings.SpawnerData(ModEntities.BRACHIOSAURUS.get(), 20, 1, 3))));
+                List.of(new MobSpawnSettings.SpawnerData(ModEntities.BRACHIOSAURUS.get(), 10, 1, 3))));
 
     }
 

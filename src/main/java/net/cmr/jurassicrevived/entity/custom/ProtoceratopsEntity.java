@@ -1,6 +1,7 @@
 package net.cmr.jurassicrevived.entity.custom;
 
 import net.cmr.jurassicrevived.entity.ModEntities;
+import net.cmr.jurassicrevived.entity.ai.SprintingPanicGoal;
 import net.cmr.jurassicrevived.entity.variant.ProtoceratopsVariant;
 import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
@@ -48,6 +49,12 @@ public class ProtoceratopsEntity extends Animal implements GeoEntity {
 
     @Override
     protected void registerGoals() {
+        this.goalSelector.addGoal(1, new SprintingPanicGoal(this, 1.15) {
+            @Override
+            public boolean canUse() {
+                return ProtoceratopsEntity.this.isBaby() && super.canUse();
+            }
+        });
         this.goalSelector.addGoal(1, new FloatGoal(this));
         this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, VelociraptorEntity.class, (float) 20, 0.8, 0.8));
         this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, CeratosaurusEntity.class, (float) 20, 0.8, 0.8));

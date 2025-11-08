@@ -2,6 +2,7 @@ package net.cmr.jurassicrevived.entity.custom;
 
 import net.cmr.jurassicrevived.entity.ModEntities;
 import net.cmr.jurassicrevived.entity.ai.SprintingMeleeAttackGoal;
+import net.cmr.jurassicrevived.entity.ai.SprintingPanicGoal;
 import net.cmr.jurassicrevived.entity.variant.ApatosaurusVariant;
 import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
@@ -49,6 +50,12 @@ public class ApatosaurusEntity extends Animal implements GeoEntity {
 
     @Override
     protected void registerGoals() {
+        this.goalSelector.addGoal(1, new SprintingPanicGoal(this, 1.15) {
+            @Override
+            public boolean canUse() {
+                return ApatosaurusEntity.this.isBaby() && super.canUse();
+            }
+        });
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
         this.goalSelector.addGoal(2, new FloatGoal(this));
         this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, DilophosaurusEntity.class, (float) 20, 1, 1));
@@ -56,7 +63,7 @@ public class ApatosaurusEntity extends Animal implements GeoEntity {
         this.goalSelector.addGoal(5, new AvoidEntityGoal<>(this, CeratosaurusEntity.class, (float) 20, 1, 1));
         this.goalSelector.addGoal(6, new AvoidEntityGoal<>(this, SpinosaurusEntity.class, (float) 20, 1, 1));
         this.goalSelector.addGoal(7, new AvoidEntityGoal<>(this, TyrannosaurusRexEntity.class, (float) 20, 1, 1));
-        this.goalSelector.addGoal(8, new SprintingMeleeAttackGoal(this, 1.25, false) {
+        this.goalSelector.addGoal(8, new SprintingMeleeAttackGoal(this, 1.1, false) {
             @Override
             public boolean canUse() {
                 return !ApatosaurusEntity.this.isBaby() && super.canUse();

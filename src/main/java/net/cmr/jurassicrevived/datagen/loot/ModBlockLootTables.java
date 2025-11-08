@@ -127,6 +127,9 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
         this.dropSelf(ModBlocks.WESTERN_SWORD_FERN.get());
         this.add(ModBlocks.POTTED_WESTERN_SWORD_FERN.get(), createPotFlowerItemTable(ModBlocks.WESTERN_SWORD_FERN.get()));
+
+        this.dropSelf(ModBlocks.ONYCHIOPSIS.get());
+        this.add(ModBlocks.POTTED_ONYCHIOPSIS.get(), createPotFlowerItemTable(ModBlocks.ONYCHIOPSIS.get()));
     }
 
     @Override

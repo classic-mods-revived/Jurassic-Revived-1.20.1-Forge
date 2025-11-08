@@ -103,6 +103,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.ROYAL_FERN.get());
                         output.accept(ModBlocks.HORSETAIL_FERN.get());
                         output.accept(ModBlocks.WESTERN_SWORD_FERN.get());
+                        output.accept(ModBlocks.ONYCHIOPSIS.get());
                     }).build());
 
     public static final RegistryObject<CreativeModeTab> JR_DNA_TAB = CREATIVE_MODE_TABS.register("jurassicrevived_dna_tab",

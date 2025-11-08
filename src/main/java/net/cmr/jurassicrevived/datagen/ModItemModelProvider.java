@@ -316,6 +316,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleBlockItemBlockTexture(ModBlocks.ROYAL_FERN);
         simpleBlockItemBlockTexture(ModBlocks.HORSETAIL_FERN);
         simpleBlockItemBlockTexture(ModBlocks.WESTERN_SWORD_FERN);
+        simpleBlockItemBlockTexture(ModBlocks.ONYCHIOPSIS);
     }
 
     private ItemModelBuilder saplingItem(RegistryObject<Block> item) {
