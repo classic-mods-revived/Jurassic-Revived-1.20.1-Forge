@@ -18,6 +18,10 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("tank_be", () -> BlockEntityType.Builder.of(
                     TankBlockEntity::new, ModBlocks.TANK.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<PowerCellBlockEntity>> POWER_CELL_BE =
+            BLOCK_ENTITIES.register("power_cell_be", () -> BlockEntityType.Builder.of(
+                    PowerCellBlockEntity::new, ModBlocks.POWER_CELL.get()).build(null));
+
     public static final RegistryObject<BlockEntityType<EggBlockEntity>> EGG_BE =
             BLOCK_ENTITIES.register("egg_be", () ->
                     BlockEntityType.Builder.of(EggBlockEntity::new,

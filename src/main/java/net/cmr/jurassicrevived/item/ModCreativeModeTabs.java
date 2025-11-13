@@ -71,6 +71,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.POWER_PIPE.get());
 
                         output.accept(ModBlocks.TANK.get());
+                        output.accept(ModBlocks.POWER_CELL.get());
 
                         output.accept(ModBlocks.GENERATOR.get());
                         output.accept(ModBlocks.DNA_EXTRACTOR.get());

@@ -163,6 +163,7 @@ public class JRMod {
             MenuScreens.register(ModMenuTypes.EMBRYO_CALCIFICATION_MACHINE_MENU.get(), EmbryoCalcificationMachineScreen::new);
             MenuScreens.register(ModMenuTypes.INCUBATOR_MENU.get(), IncubatorScreen::new);
             MenuScreens.register(ModMenuTypes.TANK_MENU.get(), TankScreen::new);
+            MenuScreens.register(ModMenuTypes.POWER_CELL_MENU.get(), PowerCellScreen::new);
         }
         @SubscribeEvent
         public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {

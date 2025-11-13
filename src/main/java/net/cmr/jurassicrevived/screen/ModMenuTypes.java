@@ -35,6 +35,8 @@ public class ModMenuTypes {
             registerMenuType(IncubatorMenu::new, "incubator_menu");
     public static final RegistryObject<MenuType<TankMenu>> TANK_MENU =
             registerMenuType(TankMenu::new, "tank_menu");
+    public static final RegistryObject<MenuType<PowerCellMenu>> POWER_CELL_MENU =
+            registerMenuType(PowerCellMenu::new, "power_cell_menu");
 
 
     private static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory, String name) {

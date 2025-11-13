@@ -3,20 +3,19 @@
   "category": "misc",
   "key": {
     "A": {
-      "item": "minecraft:iron_nugget"
+      "item": "minecraft:iron_ingot"
     },
     "B": {
-      "item": "minecraft:iron_ingot"
+      "item": "jurassicrevived:power_pipe"
     }
   },
   "pattern": [
+    "AAA",
     "ABA",
-    " B ",
-    "ABA"
+    "AAA"
   ],
   "result": {
-    "count": 8,
-    "item": "jurassicrevived:low_security_fence_pole"
+    "item": "jurassicrevived:power_cell"
   },
   "show_notification": true
 }
