@@ -72,7 +72,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocks.WHITE_EMBRYO_CALCIFICATION_MACHINE.get())
                 .add(ModBlocks.WHITE_INCUBATOR.get())
                 .add(ModBlocks.MEDIUM_SECURITY_FENCE_POLE.get())
-                .add(ModBlocks.MEDIUM_SECURITY_FENCE_WIRE.get());
+                .add(ModBlocks.MEDIUM_SECURITY_FENCE_WIRE.get())
+                .add(ModBlocks.TANK.get());
         this.tag(ModTags.Blocks.INCUBATED_EGGS)
                 .add(ModBlocks.INCUBATED_VELOCIRAPTOR_EGG.get())
                 .add(ModBlocks.INCUBATED_TYRANNOSAURUS_REX_EGG.get())

@@ -33,6 +33,8 @@ public class ModMenuTypes {
             registerMenuType(EmbryoCalcificationMachineMenu::new, "embryo_calcification_machine_menu");
     public static final RegistryObject<MenuType<IncubatorMenu>> INCUBATOR_MENU =
             registerMenuType(IncubatorMenu::new, "incubator_menu");
+    public static final RegistryObject<MenuType<TankMenu>> TANK_MENU =
+            registerMenuType(TankMenu::new, "tank_menu");
 
 
     private static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory, String name) {

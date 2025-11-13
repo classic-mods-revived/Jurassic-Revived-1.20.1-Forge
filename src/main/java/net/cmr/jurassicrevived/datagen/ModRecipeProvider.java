@@ -214,8 +214,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("ABA")
                 .pattern(" B ")
                 .pattern("ABA")
-                .define('A', Items.IRON_INGOT)
-                .define('B', Items.IRON_NUGGET)
+                .define('A', Items.IRON_NUGGET)
+                .define('B', Items.IRON_INGOT)
                 .unlockedBy("has_low_security_fence_pole_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(Items.IRON_INGOT, Items.IRON_NUGGET).build())).save(pWriter);
 
@@ -245,6 +245,15 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', Items.REDSTONE)
                 .unlockedBy("has_medium_security_fence_wire_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(Items.IRON_INGOT, Items.REDSTONE).build())).save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.TANK.get(), 1)
+                .pattern("AAA")
+                .pattern("ABA")
+                .pattern("AAA")
+                .define('A', Items.IRON_INGOT)
+                .define('B', Items.BUCKET)
+                .unlockedBy("has_tank_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                        of(Items.IRON_INGOT, Items.BUCKET).build())).save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.CAT_PLUSHIE.get(), 1)
                 .pattern("ABA")

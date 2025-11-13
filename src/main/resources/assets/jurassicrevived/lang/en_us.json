@@ -105,6 +105,8 @@
   "block.jurassicrevived.fluid_pipe": "Fluid Pipe",
   "block.jurassicrevived.power_pipe": "Power Pipe",
 
+  "block.jurassicrevived.tank": "Tank",
+
   "block.jurassicrevived.generator": "Generator",
   "block.jurassicrevived.dna_extractor": "DNA Extractor",
   "block.jurassicrevived.dna_analyzer": "DNA Analyzer",

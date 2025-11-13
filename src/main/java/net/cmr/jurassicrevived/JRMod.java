@@ -3,6 +3,7 @@ package net.cmr.jurassicrevived;
 import com.mojang.logging.LogUtils;
 import net.cmr.jurassicrevived.block.ModBlocks;
 import net.cmr.jurassicrevived.block.entity.custom.ModBlockEntities;
+import net.cmr.jurassicrevived.block.renderer.TankBlockEntityRenderer;
 import net.cmr.jurassicrevived.datagen.custom.ConfigCondition;
 import net.cmr.jurassicrevived.entity.ModEntities;
 import net.cmr.jurassicrevived.entity.client.*;
@@ -24,6 +25,7 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -160,6 +162,11 @@ public class JRMod {
             MenuScreens.register(ModMenuTypes.EMBRYONIC_MACHINE_MENU.get(), EmbryonicMachineScreen::new);
             MenuScreens.register(ModMenuTypes.EMBRYO_CALCIFICATION_MACHINE_MENU.get(), EmbryoCalcificationMachineScreen::new);
             MenuScreens.register(ModMenuTypes.INCUBATOR_MENU.get(), IncubatorScreen::new);
+            MenuScreens.register(ModMenuTypes.TANK_MENU.get(), TankScreen::new);
+        }
+        @SubscribeEvent
+        public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {
+            event.registerBlockEntityRenderer(ModBlockEntities.TANK_BE.get(), TankBlockEntityRenderer::new);
         }
     }
 }

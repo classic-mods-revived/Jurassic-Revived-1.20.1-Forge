@@ -8,9 +8,15 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.function.Supplier;
+
 public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, JRMod.MOD_ID);
+
+    public static final RegistryObject<BlockEntityType<TankBlockEntity>> TANK_BE =
+            BLOCK_ENTITIES.register("tank_be", () -> BlockEntityType.Builder.of(
+                    TankBlockEntity::new, ModBlocks.TANK.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<EggBlockEntity>> EGG_BE =
             BLOCK_ENTITIES.register("egg_be", () ->

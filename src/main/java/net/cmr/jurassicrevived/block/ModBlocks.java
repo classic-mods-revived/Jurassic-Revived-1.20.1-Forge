@@ -51,6 +51,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> POWER_PIPE = registerBlock("power_pipe",
             () -> new PipeBlock(BlockBehaviour.Properties.of().strength(1.0F).noOcclusion(), PipeBlock.Transport.ENERGY));
 
+    public static final RegistryObject<Block> TANK = registerBlock("tank",
+            () -> new TankBlock(BlockBehaviour.Properties.of().strength(3f).requiresCorrectToolForDrops().noOcclusion().noLootTable()));
+
 
     public static final RegistryObject<Block> GENERATOR = registerBlock("generator",
             () -> new GeneratorBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));
