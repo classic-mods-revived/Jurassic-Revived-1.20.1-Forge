@@ -11,6 +11,7 @@ import net.cmr.jurassicrevived.event.FenceDiagonalUpdateHandler;
 import net.cmr.jurassicrevived.item.ModCreativeModeTabs;
 import net.cmr.jurassicrevived.item.ModItems;
 import net.cmr.jurassicrevived.loot.ModLootProviders;
+import net.cmr.jurassicrevived.painting.ModPaintings;
 import net.cmr.jurassicrevived.recipe.ModRecipes;
 import net.cmr.jurassicrevived.screen.ModMenuTypes;
 import net.cmr.jurassicrevived.screen.custom.*;
@@ -64,6 +65,7 @@ public class JRMod {
         ModRecipes.register(modEventBus);
 
         ModLootProviders.register(modEventBus);
+        ModPaintings.register(modEventBus);
 
         ModSounds.register(modEventBus);
 

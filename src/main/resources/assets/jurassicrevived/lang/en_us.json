@@ -399,6 +399,15 @@
   "jurassicrevived.tooltip.liquid.amount": "%s mB",
   "jurassicrevived.tooltip.accepts_any_water_container": "Accepts any water container, even one's with more water than the tank can hold.",
 
+  "painting.jurassicrevived.chic.title": "Chic",
+  "painting.jurassicrevived.chic.author": "JR",
+  "painting.jurassicrevived.lonely_tree.title": "Lonely Tree",
+  "painting.jurassicrevived.lonely_tree.author": "JR",
+  "painting.jurassicrevived.meg.title": "Meg",
+  "painting.jurassicrevived.meg.author": "JR",
+  "painting.jurassicrevived.seeing_eye.title": "Seeing Eye",
+  "painting.jurassicrevived.seeing_eye.author": "JR",
+
   "jurassicrevived.config.title": "Jurassic Revived Config",
 
   "config.jade.plugin_jurassicrevived.egg": "Jurassic Revived Egg Configuration",

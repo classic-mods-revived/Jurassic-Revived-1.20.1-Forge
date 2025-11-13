@@ -1,15 +1,19 @@
 {
   "values": [
     {
-      "id": "jurassicrevived:saw_them",
+      "id": "jurassicrevived:chic",
       "required": false
     },
     {
-      "id": "jurassicrevived:shrimp",
+      "id": "jurassicrevived:lonely_tree",
       "required": false
     },
     {
-      "id": "jurassicrevived:world",
+      "id": "jurassicrevived:meg",
+      "required": false
+    },
+    {
+      "id": "jurassicrevived:seeing_eye",
       "required": false
     }
   ]

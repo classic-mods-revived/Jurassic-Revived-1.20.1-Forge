@@ -19,8 +19,9 @@ public class ModPaintingVariantTagProvider extends PaintingVariantTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
         this.tag(PaintingVariantTags.PLACEABLE)
-                .addOptional(ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "saw_them"))
-                .addOptional(ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "shrimp"))
-                .addOptional(ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "world"));
+                .addOptional(ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "chic"))
+                .addOptional(ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "lonely_tree"))
+                .addOptional(ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "meg"))
+                .addOptional(ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, "seeing_eye"));
     }
 }
