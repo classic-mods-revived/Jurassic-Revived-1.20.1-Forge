@@ -57,6 +57,10 @@ public class ModBlocks {
     public static final RegistryObject<Block> POWER_CELL = registerBlock("power_cell",
             () -> new PowerCellBlock(BlockBehaviour.Properties.of().strength(3f).requiresCorrectToolForDrops().noOcclusion().noLootTable()));
 
+    public static final RegistryObject<Block> WOOD_CRATE = registerBlock("wood_crate",
+            () -> new CrateBlock(BlockBehaviour.Properties.of().strength(2.0f).noOcclusion().noLootTable().sound(SoundType.WOOD), 9));
+    public static final RegistryObject<Block> IRON_CRATE = registerBlock("iron_crate",
+            () -> new CrateBlock(BlockBehaviour.Properties.of().strength(2.0f).requiresCorrectToolForDrops().noOcclusion().noLootTable(), 18));
 
     public static final RegistryObject<Block> GENERATOR = registerBlock("generator",
             () -> new GeneratorBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(4f).noLootTable()));

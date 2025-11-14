@@ -74,7 +74,12 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocks.MEDIUM_SECURITY_FENCE_POLE.get())
                 .add(ModBlocks.MEDIUM_SECURITY_FENCE_WIRE.get())
                 .add(ModBlocks.TANK.get())
-                .add(ModBlocks.POWER_CELL.get());
+                .add(ModBlocks.POWER_CELL.get())
+                .add(ModBlocks.IRON_CRATE.get());
+
+        this.tag(BlockTags.MINEABLE_WITH_AXE)
+                .add(ModBlocks.WOOD_CRATE.get());
+
         this.tag(ModTags.Blocks.INCUBATED_EGGS)
                 .add(ModBlocks.INCUBATED_VELOCIRAPTOR_EGG.get())
                 .add(ModBlocks.INCUBATED_TYRANNOSAURUS_REX_EGG.get())

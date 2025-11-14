@@ -1,6 +1,6 @@
 package net.cmr.jurassicrevived.block.custom;
 
-import net.cmr.jurassicrevived.block.entity.custom.ModBlockEntities;
+import net.cmr.jurassicrevived.block.entity.ModBlockEntities;
 import net.cmr.jurassicrevived.block.entity.custom.PowerCellBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

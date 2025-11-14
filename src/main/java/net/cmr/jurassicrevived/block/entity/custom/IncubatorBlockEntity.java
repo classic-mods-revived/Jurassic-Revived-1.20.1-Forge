@@ -1,8 +1,8 @@
 package net.cmr.jurassicrevived.block.entity.custom;
 
 import net.cmr.jurassicrevived.Config;
-import net.cmr.jurassicrevived.block.custom.DNAHybridizerBlock;
 import net.cmr.jurassicrevived.block.custom.IncubatorBlock;
+import net.cmr.jurassicrevived.block.entity.ModBlockEntities;
 import net.cmr.jurassicrevived.block.entity.energy.ModEnergyStorage;
 import net.cmr.jurassicrevived.recipe.IncubatorRecipe;
 import net.cmr.jurassicrevived.screen.custom.IncubatorMenu;
@@ -27,9 +27,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -43,7 +41,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
-import java.util.Optional;
 
 public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
     private @Nullable MachineHumLoopSound humSound;

@@ -11,6 +11,7 @@ import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -102,9 +103,9 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("A  ")
                 .pattern("AAA")
                 .pattern("BBB")
-                .define('A', Blocks.SPRUCE_PLANKS)
+                .define('A', ItemTags.PLANKS)
                 .define('B', ModBlocks.REINFORCED_STONE_BRICKS.get())
-                .unlockedBy("has_spruce_planks", has(Blocks.SPRUCE_PLANKS))
+                .unlockedBy("has_planks", has(ItemTags.PLANKS))
                 .unlockedBy("has_reinforced_stone_bricks", has(ModBlocks.REINFORCED_STONE_BRICKS.get())).save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.FENCE_LIGHT.get(), 1)
@@ -264,6 +265,25 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_tank_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(Items.IRON_INGOT, ModBlocks.POWER_PIPE.get()).build())).save(pWriter);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.IRON_CRATE.get(), 1)
+                .pattern("AAA")
+                .pattern("ABA")
+                .pattern("AAA")
+                .define('A', Items.IRON_INGOT)
+                .define('B', Blocks.CHEST)
+                .unlockedBy("has_iron_crate_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
+                        of(Items.IRON_INGOT, Blocks.CHEST).build())).save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.WOOD_CRATE.get(), 1)
+                .pattern("AAA")
+                .pattern("ABA")
+                .pattern("AAA")
+                .define('A', ItemTags.PLANKS)
+                .define('B', Blocks.CHEST)
+                .unlockedBy("has_wood_crate_ingredients", inventoryTrigger(
+                        ItemPredicate.Builder.item().of(ItemTags.PLANKS).build(),
+                        ItemPredicate.Builder.item().of(Blocks.CHEST).build())).save(pWriter);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.CAT_PLUSHIE.get(), 1)
                 .pattern("ABA")
                 .pattern("CBD")
@@ -401,7 +421,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.ITEM_PIPE.get(), 8)
                 .pattern("AAA")
-                .define('A', Items.IRON_INGOT)
+                .define('A', ModItems.CABLE.get())
                 .unlockedBy("has_item_pipe_ingredients", inventoryTrigger(ItemPredicate.Builder.item().
                         of(ModItems.CABLE.get()).build())).save(pWriter);
 

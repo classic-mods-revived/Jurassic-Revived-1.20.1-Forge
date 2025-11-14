@@ -107,6 +107,8 @@
 
   "block.jurassicrevived.tank": "Tank",
   "block.jurassicrevived.power_cell": "Power Cell",
+  "block.jurassicrevived.wood_crate": "Wood Crate",
+  "block.jurassicrevived.iron_crate": "Iron Crate",
 
   "block.jurassicrevived.generator": "Generator",
   "block.jurassicrevived.dna_extractor": "DNA Extractor",

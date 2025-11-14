@@ -2,9 +2,8 @@ package net.cmr.jurassicrevived.block.entity.custom;
 
 import net.cmr.jurassicrevived.Config;
 import net.cmr.jurassicrevived.block.ModBlocks;
-import net.cmr.jurassicrevived.block.custom.DNAHybridizerBlock;
-import net.cmr.jurassicrevived.block.custom.EmbryonicMachineBlock;
 import net.cmr.jurassicrevived.block.custom.FossilCleanerBlock;
+import net.cmr.jurassicrevived.block.entity.ModBlockEntities;
 import net.cmr.jurassicrevived.block.entity.energy.ModEnergyStorage;
 import net.cmr.jurassicrevived.recipe.FossilCleanerRecipe;
 import net.cmr.jurassicrevived.screen.custom.FossilCleanerMenu;

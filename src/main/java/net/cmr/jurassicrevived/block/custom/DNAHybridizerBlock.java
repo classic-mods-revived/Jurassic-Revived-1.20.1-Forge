@@ -1,8 +1,7 @@
 package net.cmr.jurassicrevived.block.custom;
 
-import net.cmr.jurassicrevived.block.entity.custom.DNAExtractorBlockEntity;
 import net.cmr.jurassicrevived.block.entity.custom.DNAHybridizerBlockEntity;
-import net.cmr.jurassicrevived.block.entity.custom.ModBlockEntities;
+import net.cmr.jurassicrevived.block.entity.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ItemParticleOption;

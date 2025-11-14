@@ -1,10 +1,9 @@
 package net.cmr.jurassicrevived.block.entity.custom;
 
 import net.cmr.jurassicrevived.Config;
-import net.cmr.jurassicrevived.block.custom.DNAHybridizerBlock;
 import net.cmr.jurassicrevived.block.custom.EmbryoCalcificationMachineBlock;
+import net.cmr.jurassicrevived.block.entity.ModBlockEntities;
 import net.cmr.jurassicrevived.block.entity.energy.ModEnergyStorage;
-import net.cmr.jurassicrevived.item.ModItems;
 import net.cmr.jurassicrevived.recipe.EmbryoCalcificationMachineRecipe;
 import net.cmr.jurassicrevived.screen.custom.EmbryoCalcificationMachineMenu;
 import net.cmr.jurassicrevived.sounds.MachineHumLoopSound;

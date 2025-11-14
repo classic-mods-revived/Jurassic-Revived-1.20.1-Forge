@@ -1,8 +1,8 @@
 package net.cmr.jurassicrevived.block.entity.custom;
 
 import net.cmr.jurassicrevived.Config;
-import net.cmr.jurassicrevived.block.custom.DNAHybridizerBlock;
 import net.cmr.jurassicrevived.block.custom.GeneratorBlock;
+import net.cmr.jurassicrevived.block.entity.ModBlockEntities;
 import net.cmr.jurassicrevived.block.entity.energy.ModEnergyStorage;
 import net.cmr.jurassicrevived.screen.custom.GeneratorMenu;
 import net.cmr.jurassicrevived.sounds.MachineHumLoopSound;

@@ -4,7 +4,14 @@ import net.cmr.jurassicrevived.block.ModBlocks;
 import net.cmr.jurassicrevived.item.ModItems;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Set;
@@ -40,11 +47,11 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.FLUID_PIPE.get());
 
         this.add(ModBlocks.GYPSUM_STONE.get(),
-                block -> createOreDrop(ModBlocks.GYPSUM_STONE.get(), ModBlocks.GYPSUM_COBBLESTONE.get().asItem()));
+                block -> createMultipleOreDrops(ModBlocks.GYPSUM_STONE.get(), ModBlocks.GYPSUM_COBBLESTONE.get().asItem(), 1, 1));
         this.add(ModBlocks.AMBER_ORE.get(),
-                block -> createOreDrop(ModBlocks.AMBER_ORE.get(), ModItems.MOSQUITO_IN_AMBER.get()));
+                block -> createMultipleOreDrops(ModBlocks.AMBER_ORE.get(), ModItems.MOSQUITO_IN_AMBER.get(), 1, 1));
         this.add(ModBlocks.DEEPSLATE_ICE_SHARD_ORE.get(),
-                block -> createOreDrop(ModBlocks.DEEPSLATE_FOSSIL.get(), ModItems.FROZEN_LEECH.get()));
+                block -> createMultipleOreDrops(ModBlocks.DEEPSLATE_FOSSIL.get(), ModItems.FROZEN_LEECH.get(), 1, 1));
 
         this.dropSelf(ModBlocks.REINFORCED_STONE.get());
         this.dropSelf(ModBlocks.REINFORCED_STONE_BRICKS.get());
@@ -130,6 +137,14 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
         this.dropSelf(ModBlocks.ONYCHIOPSIS.get());
         this.add(ModBlocks.POTTED_ONYCHIOPSIS.get(), createPotFlowerItemTable(ModBlocks.ONYCHIOPSIS.get()));
+    }
+
+    protected LootTable.Builder createMultipleOreDrops(Block block, Item item, float minDrops, float maxDrops) {
+        // Silk touch still makes the block drop itself, otherwise we drop exactly 1 item,
+        // affected only by explosion decay.
+        return this.createSilkTouchDispatchTable(block, this.applyExplosionDecay(block,
+                LootItem.lootTableItem(item)
+                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))));
     }
 
     @Override

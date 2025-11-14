@@ -2,7 +2,7 @@ package net.cmr.jurassicrevived;
 
 import com.mojang.logging.LogUtils;
 import net.cmr.jurassicrevived.block.ModBlocks;
-import net.cmr.jurassicrevived.block.entity.custom.ModBlockEntities;
+import net.cmr.jurassicrevived.block.entity.ModBlockEntities;
 import net.cmr.jurassicrevived.block.renderer.TankBlockEntityRenderer;
 import net.cmr.jurassicrevived.datagen.custom.ConfigCondition;
 import net.cmr.jurassicrevived.entity.ModEntities;
@@ -166,6 +166,8 @@ public class JRMod {
             MenuScreens.register(ModMenuTypes.INCUBATOR_MENU.get(), IncubatorScreen::new);
             MenuScreens.register(ModMenuTypes.TANK_MENU.get(), TankScreen::new);
             MenuScreens.register(ModMenuTypes.POWER_CELL_MENU.get(), PowerCellScreen::new);
+            MenuScreens.register(ModMenuTypes.WOOD_CRATE_MENU.get(), CrateScreen::new);
+            MenuScreens.register(ModMenuTypes.IRON_CRATE_MENU.get(), CrateScreen::new);
         }
         @SubscribeEvent
         public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {

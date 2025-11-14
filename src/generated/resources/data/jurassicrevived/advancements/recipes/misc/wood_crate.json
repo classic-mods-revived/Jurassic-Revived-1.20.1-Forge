@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "jurassicrevived:wood_crate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wood_crate_ingredients": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "minecraft:planks"
+          },
+          {
+            "items": [
+              "minecraft:chest"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_wood_crate_ingredients",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "jurassicrevived:wood_crate"
+    ]
+  },
+  "sends_telemetry_event": false
+}

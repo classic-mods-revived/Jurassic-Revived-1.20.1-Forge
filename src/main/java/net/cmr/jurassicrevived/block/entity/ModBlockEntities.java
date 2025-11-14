@@ -1,18 +1,28 @@
-package net.cmr.jurassicrevived.block.entity.custom;
+package net.cmr.jurassicrevived.block.entity;
 
 import net.cmr.jurassicrevived.JRMod;
 import net.cmr.jurassicrevived.block.ModBlocks;
+import net.cmr.jurassicrevived.block.entity.custom.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.function.Supplier;
-
 public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, JRMod.MOD_ID);
+
+    public static final RegistryObject<BlockEntityType<CrateBlockEntity>> CRATE_BE =
+            BLOCK_ENTITIES.register("crate", () ->
+                    BlockEntityType.Builder.of(
+                            (pos, state) -> {
+                                // size is provided by block when creating BE; here supply a default
+                                return new CrateBlockEntity(pos, state, 9);
+                            },
+                            ModBlocks.WOOD_CRATE.get(), ModBlocks.IRON_CRATE.get()
+                    ).build(null)
+            );
 
     public static final RegistryObject<BlockEntityType<TankBlockEntity>> TANK_BE =
             BLOCK_ENTITIES.register("tank_be", () -> BlockEntityType.Builder.of(

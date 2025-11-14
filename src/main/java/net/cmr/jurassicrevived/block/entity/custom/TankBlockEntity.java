@@ -1,6 +1,6 @@
 package net.cmr.jurassicrevived.block.entity.custom;
 
-import net.cmr.jurassicrevived.screen.custom.TankMenu;
+import net.cmr.jurassicrevived.block.entity.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

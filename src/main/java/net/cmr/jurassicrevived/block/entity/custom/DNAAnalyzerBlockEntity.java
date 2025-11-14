@@ -2,6 +2,7 @@ package net.cmr.jurassicrevived.block.entity.custom;
 
 import net.cmr.jurassicrevived.Config;
 import net.cmr.jurassicrevived.block.custom.DNAAnalyzerBlock;
+import net.cmr.jurassicrevived.block.entity.ModBlockEntities;
 import net.cmr.jurassicrevived.block.entity.energy.ModEnergyStorage;
 import net.cmr.jurassicrevived.item.ModItems;
 import net.cmr.jurassicrevived.recipe.DNAAnalyzerRecipe;
@@ -9,7 +10,6 @@ import net.cmr.jurassicrevived.screen.custom.DNAAnalyzerMenu;
 import net.cmr.jurassicrevived.sounds.MachineHumLoopSound;
 import net.cmr.jurassicrevived.util.InventoryDirectionEntry;
 import net.cmr.jurassicrevived.util.InventoryDirectionWrapper;
-import net.cmr.jurassicrevived.util.ModTags;
 import net.cmr.jurassicrevived.util.WrappedHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
