@@ -163,8 +163,16 @@ public class PipeBlock extends Block implements EntityBlock, SimpleWaterloggedBl
 
     private BlockState setConnectionForDirection(LevelAccessor level, BlockPos pos, BlockState state, Direction dir) {
         EnumProperty<ConnectionType> prop = getProp(dir);
-        ConnectionType connection = determineConnection(level, pos, dir);
-        return state.setValue(prop, connection);
+        ConnectionType old = state.getValue(prop);
+        ConnectionType auto = determineConnection(level, pos, dir);
+
+        // Preserve manual "pull" arms if the neighbor is still a valid connector.
+        ConnectionType result = auto;
+        if (old == ConnectionType.CONNECTOR_PULL && auto == ConnectionType.CONNECTOR) {
+            result = ConnectionType.CONNECTOR_PULL;
+        }
+
+        return state.setValue(prop, result);
     }
 
     private ConnectionType determineConnection(LevelAccessor level, BlockPos pos, Direction dir) {

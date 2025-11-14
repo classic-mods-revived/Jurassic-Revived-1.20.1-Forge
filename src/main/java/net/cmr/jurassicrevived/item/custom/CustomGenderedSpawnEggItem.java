@@ -81,6 +81,9 @@ public class CustomGenderedSpawnEggItem extends ForgeSpawnEggItem {
             return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
         }
 
+        // Not using secondary: we are about to spawn (in air/water), so inject the Variant
+        ensureEntityDataHasVariant(stack);
+
         return super.use(level, player, hand);
     }
 
@@ -95,11 +98,11 @@ public class CustomGenderedSpawnEggItem extends ForgeSpawnEggItem {
                 cycleVariant(context.getItemInHand());
                 // Use notify sound from the server (sends to nearby clients)
                 player.playNotifySound(
-                    SoundEvents.EXPERIENCE_ORB_PICKUP,
-                    SoundSource.PLAYERS,
-                    0.5f, 1.1f
-            );
-        }
+                        SoundEvents.EXPERIENCE_ORB_PICKUP,
+                        SoundSource.PLAYERS,
+                        0.5f, 1.1f
+                );
+            }
             return InteractionResult.sidedSuccess(level.isClientSide());
         }
 
