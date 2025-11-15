@@ -11,12 +11,16 @@ import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
 import net.minecraftforge.common.crafting.conditions.ICondition;
@@ -28,6 +32,7 @@ import java.util.function.Consumer;
 public class ModRecipeProvider extends RecipeProvider implements IConditionBuilder {
     private static final List<ItemLike> GYPSUM_COBBLESTONE_SMELTABLES = List.of(ModBlocks.GYPSUM_COBBLESTONE.get());
     private static final List<ItemLike> GYPSUM_STONE_SMELTABLES = List.of(ModBlocks.GYPSUM_STONE.get());
+    private static final TagKey<Item> CHARRED_TERRACOTTA_SMELTABLES = ItemTags.TERRACOTTA;
 
     public ModRecipeProvider(PackOutput pOutput) {
         super(pOutput);
@@ -43,6 +48,9 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
         oreSmelting(pWriter, GYPSUM_STONE_SMELTABLES, RecipeCategory.MISC, ModBlocks.SMOOTH_GYPSUM_STONE.get(), 0.25f, 200, "smooth_gypsum_stone");
         oreBlasting(pWriter, GYPSUM_STONE_SMELTABLES, RecipeCategory.MISC, ModBlocks.SMOOTH_GYPSUM_STONE.get(), 0.25f, 100, "smooth_gypsum_stone");
+
+        oreSmelting(pWriter, CHARRED_TERRACOTTA_SMELTABLES, RecipeCategory.MISC, ModBlocks.CHARRED_TERRACOTTA.get(), 0.25f, 200, "jr_charred_terracotta");
+        oreBlasting(pWriter, CHARRED_TERRACOTTA_SMELTABLES, RecipeCategory.MISC, ModBlocks.CHARRED_TERRACOTTA.get(), 0.25f, 100, "jr_charred_terracotta");
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.GYPSUM_BRICK_STAIRS.get(), 4)
                 .pattern("A  ")
@@ -935,10 +943,34 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 pExperience, pCookingTIme, pGroup, "_from_smelting");
     }
 
+    protected static void oreSmelting(Consumer<FinishedRecipe> pFinishedRecipeConsumer,
+                                      TagKey<Item> tag, RecipeCategory pCategory,
+                                      ItemLike pResult, float pExperience, int pCookingTime,
+                                      String pGroup) {
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(tag), pCategory, pResult,
+                        pExperience, pCookingTime)
+                .group(pGroup)
+                .unlockedBy("has_" + pGroup, has(tag))
+                .save(pFinishedRecipeConsumer,
+                        ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, pGroup + "_from_smelting"));
+    }
+
     protected static void oreBlasting(Consumer<FinishedRecipe> pFinishedRecipeConsumer, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult,
                                       float pExperience, int pCookingTime, String pGroup) {
         oreCooking(pFinishedRecipeConsumer, RecipeSerializer.BLASTING_RECIPE, pIngredients, pCategory, pResult,
                 pExperience, pCookingTime, pGroup, "_from_blasting");
+    }
+
+    protected static void oreBlasting(Consumer<FinishedRecipe> pFinishedRecipeConsumer,
+                                      TagKey<Item> tag, RecipeCategory pCategory,
+                                      ItemLike pResult, float pExperience, int pCookingTime,
+                                      String pGroup) {
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(tag), pCategory, pResult,
+                        pExperience, pCookingTime)
+                .group(pGroup)
+                .unlockedBy("has_" + pGroup, has(tag))
+                .save(pFinishedRecipeConsumer,
+                        ResourceLocation.fromNamespaceAndPath(JRMod.MOD_ID, pGroup + "_from_blasting"));
     }
 
     protected static void oreCooking(Consumer<FinishedRecipe> pFinishedRecipeConsumer, RecipeSerializer<? extends AbstractCookingRecipe> pCookingSerializer,

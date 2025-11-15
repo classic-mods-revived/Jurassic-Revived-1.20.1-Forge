@@ -6,12 +6,10 @@ import net.cmr.jurassicrevived.block.entity.ModBlockEntities;
 import net.cmr.jurassicrevived.block.entity.energy.ModEnergyStorage;
 import net.cmr.jurassicrevived.recipe.EmbryoCalcificationMachineRecipe;
 import net.cmr.jurassicrevived.screen.custom.EmbryoCalcificationMachineMenu;
-import net.cmr.jurassicrevived.sounds.MachineHumLoopSound;
 import net.cmr.jurassicrevived.util.InventoryDirectionEntry;
 import net.cmr.jurassicrevived.util.InventoryDirectionWrapper;
 import net.cmr.jurassicrevived.util.ModTags;
 import net.cmr.jurassicrevived.util.WrappedHandler;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -46,25 +44,12 @@ import java.util.Map;
 import java.util.Optional;
 
 public class EmbryoCalcificationMachineBlockEntity extends BlockEntity implements MenuProvider {
-    private @Nullable MachineHumLoopSound humSound;
 
     public static void clientTick(Level level, BlockPos pos, BlockState state, EmbryoCalcificationMachineBlockEntity be) {
         if (!level.isClientSide) return;
 
         boolean lit = state.hasProperty(EmbryoCalcificationMachineBlock.LIT)
                 && state.getValue(EmbryoCalcificationMachineBlock.LIT);
-
-        if (lit) {
-            if (be.humSound == null || be.humSound.isStopped()) {
-                be.humSound = new MachineHumLoopSound(level, pos);
-                Minecraft.getInstance().getSoundManager().play(be.humSound);
-            }
-        } else {
-            if (be.humSound != null && !be.humSound.isStopped()) {
-                be.humSound.stopPlaying();
-            }
-            be.humSound = null;
-        }
     }
 
     public final ItemStackHandler itemHandler = new ItemStackHandler(5) {

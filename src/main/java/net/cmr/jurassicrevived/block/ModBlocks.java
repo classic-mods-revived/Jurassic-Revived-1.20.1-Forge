@@ -39,6 +39,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> BENCH = registerBlock("bench",
             () -> new BenchBlock(BlockBehaviour.Properties.of().noOcclusion()));
 
+    public static final RegistryObject<Block> CHARRED_TERRACOTTA = registerBlock("charred_terracotta",
+            () -> new Block(BlockBehaviour.Properties.of().noOcclusion()));
+
     public static final RegistryObject<Block> LIGHT_POST = registerBlock("light_post",
             () -> new LightPostBlock(BlockBehaviour.Properties.of().strength(1.0F).noOcclusion().lightLevel(state -> 15)));
 

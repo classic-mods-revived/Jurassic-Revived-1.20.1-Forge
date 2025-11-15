@@ -43,6 +43,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.CAT_PLUSHIE.get());
                         output.accept(ModBlocks.TRASH_CAN.get());
                         output.accept(ModBlocks.BENCH.get());
+                        output.accept(ModBlocks.CHARRED_TERRACOTTA.get());
                         output.accept(ModBlocks.FENCE_LIGHT.get());
                         output.accept(ModBlocks.LIGHT_POST.get());
                         output.accept(ModBlocks.GYPSUM_STONE.get());

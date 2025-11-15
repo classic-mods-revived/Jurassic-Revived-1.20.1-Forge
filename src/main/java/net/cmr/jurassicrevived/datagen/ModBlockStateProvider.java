@@ -82,6 +82,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         horizontalFacingWithItem(ModBlocks.CAT_PLUSHIE);
         horizontalFacingWithItem(ModBlocks.TRASH_CAN);
         horizontalFacingWithItem(ModBlocks.BENCH);
+        blockWithItem(ModBlocks.CHARRED_TERRACOTTA);
         horizontalFacingWithItem(ModBlocks.FENCE_LIGHT);
         horizontalFacingWithItem(ModBlocks.LIGHT_POST);
 

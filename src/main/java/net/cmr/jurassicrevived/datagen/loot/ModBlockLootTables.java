@@ -26,6 +26,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.CAT_PLUSHIE.get());
         this.dropSelf(ModBlocks.TRASH_CAN.get());
         this.dropSelf(ModBlocks.BENCH.get());
+        this.dropSelf(ModBlocks.CHARRED_TERRACOTTA.get());
         this.dropSelf(ModBlocks.FENCE_LIGHT.get());
         this.dropSelf(ModBlocks.LIGHT_POST.get());
         this.dropSelf(ModBlocks.GYPSUM_COBBLESTONE.get());
