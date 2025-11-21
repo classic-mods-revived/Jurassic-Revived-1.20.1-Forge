@@ -65,10 +65,6 @@ public class ApatosaurusEntity extends Animal implements GeoEntity {
         this.goalSelector.addGoal(7, new AvoidEntityGoal<>(this, TyrannosaurusRexEntity.class, (float) 20, 1, 1));
         this.goalSelector.addGoal(8, new SprintingMeleeAttackGoal(this, 1.1, false) {
             @Override
-            public boolean canUse() {
-                return !ApatosaurusEntity.this.isBaby() && super.canUse();
-            }
-            @Override
             protected double getAttackReachSqr(LivingEntity entity) {
                 return 49;
             }

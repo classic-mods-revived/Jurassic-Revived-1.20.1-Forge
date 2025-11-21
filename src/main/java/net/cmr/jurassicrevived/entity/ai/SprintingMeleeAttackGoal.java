@@ -1,8 +1,11 @@
 package net.cmr.jurassicrevived.entity.ai;
 
+import net.minecraft.world.Difficulty;
+import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.player.Player;
 
 public class SprintingMeleeAttackGoal extends MeleeAttackGoal {
     private final LivingEntity entity;
@@ -10,6 +13,27 @@ public class SprintingMeleeAttackGoal extends MeleeAttackGoal {
     public SprintingMeleeAttackGoal(PathfinderMob pMob, double pSpeedModifier, boolean pCanUnseenMemory) {
         super(pMob, pSpeedModifier, pCanUnseenMemory);
         this.entity = pMob;
+    }
+
+    // Override to prevent attacking players in peaceful difficulty and prevent babies from attacking
+    @Override
+    public boolean canUse() {
+        if (!super.canUse()) {
+            return false;
+        }
+
+        // Prevent baby mobs from attacking
+        if (this.mob instanceof AgeableMob ageableMob && ageableMob.isBaby()) {
+            return false;
+        }
+
+        // Check if target is a player and difficulty is peaceful
+        LivingEntity target = this.mob.getTarget();
+        if (target instanceof Player && this.mob.level().getDifficulty() == Difficulty.PEACEFUL) {
+            return false;
+        }
+
+        return true;
     }
 
     // This method is called to start the goal

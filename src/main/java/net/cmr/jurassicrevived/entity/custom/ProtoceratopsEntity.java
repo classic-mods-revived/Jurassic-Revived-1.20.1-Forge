@@ -1,6 +1,7 @@
 package net.cmr.jurassicrevived.entity.custom;
 
 import net.cmr.jurassicrevived.entity.ModEntities;
+import net.cmr.jurassicrevived.entity.ai.SprintingMeleeAttackGoal;
 import net.cmr.jurassicrevived.entity.ai.SprintingPanicGoal;
 import net.cmr.jurassicrevived.entity.variant.ProtoceratopsVariant;
 import net.minecraft.Util;
@@ -55,20 +56,23 @@ public class ProtoceratopsEntity extends Animal implements GeoEntity {
                 return ProtoceratopsEntity.this.isBaby() && super.canUse();
             }
         });
-        this.goalSelector.addGoal(1, new FloatGoal(this));
-        this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, VelociraptorEntity.class, (float) 20, 0.8, 0.8));
-        this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, CeratosaurusEntity.class, (float) 20, 0.8, 0.8));
-        this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, DilophosaurusEntity.class, (float) 20, 0.8, 0.8));
-        this.goalSelector.addGoal(5, new BreedGoal(this, 1.0));
-        this.goalSelector.addGoal(6, new FollowParentGoal(this, 1.25));
-        this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0));
-        this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 6.0F));
-        this.goalSelector.addGoal(9, new FollowMobGoal(this, 0.8, (float) 20, (float) 10));
-        this.goalSelector.addGoal(10, new AvoidEntityGoal<>(this, SpinosaurusEntity.class, (float) 20, 0.8, 0.8));
-        this.goalSelector.addGoal(11, new AvoidEntityGoal<>(this, TyrannosaurusRexEntity.class, (float) 20, 0.8, 0.8));
-        this.goalSelector.addGoal(12, new AvoidEntityGoal<>(this, IndominusRexEntity.class, (float) 20, 0.8, 0.8));
-        this.goalSelector.addGoal(14, new EatBlockGoal(this));
-        this.goalSelector.addGoal(15, new RandomLookAroundGoal(this));
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
+        this.goalSelector.addGoal(2, new FloatGoal(this));
+        this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, VelociraptorEntity.class, (float) 20, 0.8, 0.8));
+        this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, CeratosaurusEntity.class, (float) 20, 0.8, 0.8));
+        this.goalSelector.addGoal(5, new AvoidEntityGoal<>(this, DilophosaurusEntity.class, (float) 20, 0.8, 0.8));
+        this.goalSelector.addGoal(6, new SprintingMeleeAttackGoal(this, 1.1, false));
+        this.goalSelector.addGoal(7, new BreedGoal(this, 1.0));
+        this.goalSelector.addGoal(8, new FollowParentGoal(this, 1.25));
+        this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 1.0));
+        this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(11, new FollowMobGoal(this, 0.8, (float) 20, (float) 10));
+        this.goalSelector.addGoal(12, new AvoidEntityGoal<>(this, SpinosaurusEntity.class, (float) 20, 0.8, 0.8));
+        this.goalSelector.addGoal(13, new AvoidEntityGoal<>(this, TyrannosaurusRexEntity.class, (float) 20, 0.8, 0.8));
+        this.goalSelector.addGoal(14, new AvoidEntityGoal<>(this, IndominusRexEntity.class, (float) 20, 0.8, 0.8));
+        this.goalSelector.addGoal(15, new EatBlockGoal(this));
+        this.goalSelector.addGoal(16, new RandomLookAroundGoal(this));
+
     }
 
     public static AttributeSupplier.Builder createAttributes() {

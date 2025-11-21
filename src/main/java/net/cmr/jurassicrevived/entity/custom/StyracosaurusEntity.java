@@ -63,10 +63,6 @@ public class StyracosaurusEntity extends Animal implements GeoEntity {
         this.goalSelector.addGoal(5, new AvoidEntityGoal<>(this, DilophosaurusEntity.class, (float) 20, 0.8, 0.8));
         this.goalSelector.addGoal(6, new SprintingMeleeAttackGoal(this, 1.1, false) {
             @Override
-            public boolean canUse() {
-                return !StyracosaurusEntity.this.isBaby() && super.canUse();
-            }
-            @Override
             protected double getAttackReachSqr(LivingEntity entity) {
                 return 16;
             }

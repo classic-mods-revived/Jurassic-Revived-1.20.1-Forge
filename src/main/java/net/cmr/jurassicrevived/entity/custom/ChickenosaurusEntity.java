@@ -68,10 +68,6 @@ public class ChickenosaurusEntity extends Animal implements GeoEntity {
         this.goalSelector.addGoal(9, new AvoidEntityGoal<>(this, BrachiosaurusEntity.class, (float) 20, 1, 1));
         this.goalSelector.addGoal(10, new SprintingMeleeAttackGoal(this, 1.1, false) {
             @Override
-            public boolean canUse() {
-                return !ChickenosaurusEntity.this.isBaby() && super.canUse();
-            }
-            @Override
             protected double getAttackReachSqr(LivingEntity entity) {
                 return 4;
             }

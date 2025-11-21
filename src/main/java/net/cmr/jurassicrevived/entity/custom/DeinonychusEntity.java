@@ -66,10 +66,6 @@ public class DeinonychusEntity extends Animal implements GeoEntity {
         this.goalSelector.addGoal(7, new AvoidEntityGoal<>(this, BrachiosaurusEntity.class, (float) 20, 1, 1));
         this.goalSelector.addGoal(8, new SprintingMeleeAttackGoal(this, 1.1, false) {
             @Override
-            public boolean canUse() {
-                return !DeinonychusEntity.this.isBaby() && super.canUse();
-            }
-            @Override
             protected double getAttackReachSqr(LivingEntity entity) {
                 return 4;
             }

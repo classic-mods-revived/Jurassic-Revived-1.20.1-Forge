@@ -61,10 +61,6 @@ public class CompsognathusEntity extends Animal implements GeoEntity {
         this.goalSelector.addGoal(2, new FloatGoal(this));
         this.goalSelector.addGoal(3, new SprintingMeleeAttackGoal(this, 1.1, false) {
             @Override
-            public boolean canUse() {
-                return !CompsognathusEntity.this.isBaby() && super.canUse();
-            }
-            @Override
             protected double getAttackReachSqr(LivingEntity entity) {
                 return 4;
             }

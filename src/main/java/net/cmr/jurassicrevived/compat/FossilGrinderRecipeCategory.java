@@ -142,7 +142,7 @@ public class FossilGrinderRecipeCategory implements IRecipeCategory<FossilGrinde
                         });
                     });
         } else {
-            builder.addSlot(RecipeIngredientRole.OUTPUT, 85, 17).addItemStack(recipe.getResultItem(null));
+            builder.addSlot(RecipeIngredientRole.OUTPUT, 103, 17).addItemStack(recipe.getResultItem(null));
         }
     }
 

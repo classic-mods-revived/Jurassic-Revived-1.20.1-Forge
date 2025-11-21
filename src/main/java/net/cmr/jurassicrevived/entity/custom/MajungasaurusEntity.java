@@ -63,10 +63,6 @@ public class MajungasaurusEntity extends Animal implements GeoEntity {
         this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, BrachiosaurusEntity.class, (float) 20, 1, 1));
         this.goalSelector.addGoal(4, new SprintingMeleeAttackGoal(this, 1.1, false) {
             @Override
-            public boolean canUse() {
-                return !MajungasaurusEntity.this.isBaby() && super.canUse();
-            }
-            @Override
             protected double getAttackReachSqr(LivingEntity entity) {
                 return 4;
             }
